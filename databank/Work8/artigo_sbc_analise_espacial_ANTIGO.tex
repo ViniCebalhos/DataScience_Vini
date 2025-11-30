@@ -1,0 +1,415 @@
+\documentclass[12pt,a4paper]{article}
+
+% Pacotes básicos
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{setspace}
+
+% Pacotes para PostGIS e análise espacial
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Configurações de página
+\geometry{left=3cm,right=2cm,top=3cm,bottom=2cm}
+\onehalfspacing
+
+% Configurações de hyperlinks
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+% Configurações de código SQL
+\lstset{
+    language=SQL,
+    backgroundcolor=\color{gray!10},
+    basicstyle=\small\ttfamily,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!60!black},
+    stringstyle=\color{red},
+    frame=single,
+    breaklines=true,
+    showstringspaces=false,
+    tabsize=2
+}
+
+\begin{document}
+
+% Título
+\begin{center}
+    {\Large \textbf{Análise Espacial de Acidentes de Trânsito em Rodovias Federais Brasileiras: Uma Abordagem Geoespacial com PostgreSQL/PostGIS}}
+    
+    \vspace{0.5cm}
+    
+    {\large \textbf{Vinícius de Souza Cebalhos}}
+    
+    \vspace{0.3cm}
+    
+    {\small Universidade Tecnológica Federal do Paraná}
+\end{center}
+
+\vspace{1cm}
+
+% Resumo
+\section*{Resumo}
+
+Este trabalho apresenta uma análise espacial de acidentes de trânsito ocorridos em rodovias federais brasileiras durante o ano de 2024, utilizando dados da Polícia Rodoviária Federal (PRF) armazenados em um banco de dados PostgreSQL com extensão PostGIS. A metodologia proposta identifica regiões críticas de acidentes e analisa sua proximidade em relação aos postos da PRF, utilizando funções espaciais para conversão de coordenadas em geometrias, cálculo de distâncias e geração de buffers de 10 km. Os resultados demonstram que aproximadamente 20\% dos acidentes ocorrem dentro do raio de 10 km dos postos PRF, enquanto 80\% ocorrem em áreas com menor cobertura policial direta, evidenciando a importância da análise geoespacial para o entendimento dos padrões de acidentes e para o planejamento estratégico de segurança viária.
+
+\textbf{Palavras-chave:} análise espacial, acidentes de trânsito, PostgreSQL/PostGIS, segurança viária, SIG, proximidade.
+
+% Introdução
+\section{Introdução}
+
+Os acidentes de trânsito representam um dos principais problemas de saúde pública no Brasil, causando milhares de mortes e ferimentos anualmente. Segundo dados da Organização Mundial da Saúde (OMS), o Brasil está entre os países com maior número de mortes no trânsito, com aproximadamente 30 mortes por 100.000 habitantes \cite{oms2018}. As rodovias federais, por serem vias de alta velocidade e grande fluxo de veículos, concentram uma parcela significativa desses acidentes.
+
+A análise espacial de acidentes de trânsito tem se mostrado fundamental para o entendimento dos padrões de ocorrência e para o desenvolvimento de estratégias de prevenção. Diferentemente das análises estatísticas tradicionais, que focam apenas em aspectos temporais e categóricos, a análise espacial permite identificar concentrações geográficas de acidentes, padrões de distribuição e relações com fatores ambientais e infraestruturais.
+
+Este trabalho complementa estudos anteriores sobre análise de acidentes de trânsito \cite{chuerubim2019,dias2023,melo2020}, introduzindo uma abordagem geoespacial que utiliza Sistemas de Informação Geográfica (SIG) e bancos de dados espaciais. A utilização de PostgreSQL com extensão PostGIS permite o processamento eficiente de grandes volumes de dados geográficos e a aplicação de funções espaciais avançadas para análise de proximidade e padrões espaciais.
+
+O objetivo principal desta pesquisa é identificar as regiões críticas de acidentes em rodovias federais brasileiras e analisar sua relação espacial com a localização dos postos da Polícia Rodoviária Federal, contribuindo para o planejamento estratégico de segurança viária e otimização da cobertura policial.
+
+% Trabalhos Relacionados
+\section{Trabalhos Relacionados}
+
+A análise espacial de acidentes de trânsito tem sido amplamente estudada na literatura científica, com diferentes abordagens metodológicas e ferramentas computacionais. Nesta seção, são apresentados trabalhos relevantes que fundamentam a metodologia proposta.
+
+Silva et al. \cite{silva2018} desenvolveram uma metodologia para análise espacial de acidentes de trânsito utilizando técnicas de clusterização espacial e Sistemas de Informação Geográfica. Os autores utilizaram dados de acidentes da cidade de São Paulo e aplicaram algoritmos de agrupamento espacial para identificar hotspots de acidentes. O estudo demonstrou a eficácia da análise espacial para identificar padrões não evidentes em análises estatísticas tradicionais.
+
+Santos e Oliveira \cite{santos2019} apresentaram uma abordagem para análise de proximidade entre acidentes de trânsito e pontos de interesse utilizando PostgreSQL/PostGIS. O trabalho focou na identificação de correlações espaciais entre acidentes e infraestrutura urbana, utilizando funções como \texttt{ST\_Distance} e \texttt{ST\_Buffer} para análise de proximidade. Os resultados mostraram que a utilização de bancos de dados espaciais permite análises mais eficientes e escaláveis.
+
+Costa et al. \cite{costa2020} investigaram a aplicação de funções espaciais em bancos de dados para análise de segurança viária em rodovias. O estudo utilizou dados de acidentes de rodovias federais e aplicou técnicas de análise espacial para identificar segmentos críticos e fatores de risco. A pesquisa demonstrou a importância da integração entre dados tabulares e geográficos para análises de segurança viária.
+
+Chuerubim et al. \cite{chuerubim2019} investigaram as limitações dos modelos de árvore de decisão na classificação da severidade dos acidentes de tráfego, demonstrando que fatores como condições climáticas, tipo de veículo e características da via influenciam significativamente a gravidade dos acidentes. Os autores destacaram a importância de considerar múltiplas variáveis na modelagem preditiva de acidentes.
+
+% Metodologia e Análise Espacial dos Dados
+\section{Metodologia e Análise Espacial dos Dados}
+
+\subsection{Problema Definido}
+
+O problema central desta pesquisa consiste em identificar as regiões críticas de acidentes em rodovias federais brasileiras e analisar sua proximidade em relação aos postos da Polícia Rodoviária Federal. A hipótese principal é que existe uma correlação espacial entre a localização dos postos PRF e a ocorrência de acidentes, sendo que áreas mais próximas aos postos podem apresentar diferentes padrões de acidentes devido à presença policial e infraestrutura associada.
+
+\subsection{Base de Dados}
+
+Os dados utilizados neste estudo foram obtidos da Polícia Rodoviária Federal (PRF) e armazenados em um banco de dados PostgreSQL com extensão PostGIS. A tabela principal, denominada \texttt{especializacao\_vinicius\_acidentes}, contém registros de acidentes ocorridos em rodovias federais durante o ano de 2024, totalizando 73.156 ocorrências.
+
+Os campos principais da base de dados incluem:
+\begin{itemize}
+    \item \texttt{data\_inversa}: Data do acidente
+    \item \texttt{horario}: Horário da ocorrência
+    \item \texttt{causa\_acidente}: Causa principal do acidente
+    \item \texttt{uf}: Unidade Federativa
+    \item \texttt{km}: Quilometragem da rodovia
+    \item \texttt{uop}: Unidade Operacional da PRF
+    \item \texttt{tracado\_via}: Características do traçado da via
+    \item \texttt{latitude} e \texttt{longitude}: Coordenadas geográficas do acidente
+\end{itemize}
+
+Além disso, foram utilizados dados dos postos da PRF obtidos do portal da ANTT (Agência Nacional de Transportes Terrestres), contendo 169 postos ativos georreferenciados com coordenadas de latitude e longitude.
+
+\subsection{Metodologia Espacial}
+
+A metodologia proposta envolve cinco etapas principais de processamento espacial:
+
+\subsubsection{Conversão de Coordenadas para Geometrias}
+
+O primeiro passo consiste na conversão das coordenadas geográficas (latitude e longitude) em geometrias do tipo \texttt{POINT}, utilizando o sistema de referência espacial SIRGAS 2000 (EPSG:4674):
+
+\begin{lstlisting}[language=SQL, caption={Conversão de coordenadas para geometria PostGIS}]
+ALTER TABLE especializacao_vinicius_acidentes
+ADD COLUMN geom geometry(Point, 4674);
+
+UPDATE especializacao_vinicius_acidentes
+SET geom = ST_SetSRID(
+    ST_MakePoint(longitude, latitude), 
+    4674
+)
+WHERE latitude IS NOT NULL 
+  AND longitude IS NOT NULL;
+\end{lstlisting}
+
+\subsubsection{Cálculo de Distâncias}
+
+Para cada acidente, foi calculada a distância até o posto PRF mais próximo utilizando a função \texttt{ST\_Distance}:
+
+\begin{lstlisting}[language=SQL, caption={Cálculo de distância ao posto PRF mais próximo}]
+SELECT 
+    a.id, 
+    p.nome_posto, 
+    ST_Distance(a.geom, p.geom)::numeric(10,2) AS distancia_metros
+FROM especializacao_vinicius_acidentes a
+CROSS JOIN postos_prf p
+WHERE a.geom IS NOT NULL AND p.geom IS NOT NULL
+ORDER BY distancia_metros ASC;
+\end{lstlisting}
+
+\subsubsection{Geração de Buffers}
+
+Foram gerados buffers de 10 km ao redor de cada posto PRF para definir zonas de influência. Este raio foi escolhido por representar uma distância típica de cobertura efetiva para ações policiais de emergência:
+
+\begin{lstlisting}[language=SQL, caption={Criação de buffers de 10 km}]
+CREATE TABLE buffers_postos_prf AS
+SELECT 
+    p.id,
+    p.nome_posto,
+    p.uf,
+    ST_Buffer(p.geom, 10000) AS buffer_geom
+FROM postos_prf p;
+
+CREATE INDEX idx_buffers_geom 
+ON buffers_postos_prf USING GIST (buffer_geom);
+\end{lstlisting}
+
+\subsubsection{Análise de Proximidade}
+
+Utilizando a função \texttt{ST\_Within}, foram identificados os acidentes que ocorreram dentro das zonas de influência dos postos:
+
+\begin{lstlisting}[language=SQL, caption={Contagem de acidentes dentro dos buffers}]
+SELECT 
+    b.nome_posto,
+    b.uf,
+    COUNT(a.id) AS acidentes_dentro_buffer
+FROM buffers_postos_prf b
+LEFT JOIN especializacao_vinicius_acidentes a 
+    ON ST_Within(a.geom, b.buffer_geom)
+GROUP BY b.id, b.nome_posto, b.uf
+ORDER BY acidentes_dentro_buffer DESC;
+\end{lstlisting}
+
+\subsubsection{Visualização dos Resultados}
+
+Para visualização dos resultados, foi gerado um mapa utilizando Python com as bibliotecas GeoPandas e Folium, apresentando pontos de acidentes, buffers de 10 km ao redor dos postos PRF e camada de densidade (heatmap).
+
+\subsection{Resultados da Análise}
+
+A análise espacial revelou os seguintes resultados principais:
+
+\subsubsection{Distribuição Geográfica dos Acidentes}
+
+Os acidentes apresentam distribuição heterogênea ao longo das rodovias federais, com concentrações significativas em regiões metropolitanas e pontos de convergência rodoviária. Os estados com maior número de acidentes são:
+
+\begin{table}[H]
+\centering
+\caption{Top 10 Estados com Maior Número de Acidentes}
+\label{tab:acidentes_estado}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\textbf{Estado} & \textbf{Número de Acidentes} & \textbf{Percentual} \\
+\midrule
+Minas Gerais (MG) & 9.296 & 12,7\% \\
+Santa Catarina (SC) & 8.381 & 11,5\% \\
+Paraná (PR) & 7.576 & 10,4\% \\
+Rio de Janeiro (RJ) & 6.389 & 8,7\% \\
+Rio Grande do Sul (RS) & 5.206 & 7,1\% \\
+São Paulo (SP) & 4.883 & 6,7\% \\
+Bahia (BA) & 4.151 & 5,7\% \\
+Goiás (GO) & 3.305 & 4,5\% \\
+Pernambuco (PE) & 3.230 & 4,4\% \\
+Mato Grosso (MT) & 2.554 & 3,5\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Análise de Proximidade aos Postos PRF}
+
+A análise de proximidade revelou resultados significativos. Em uma amostra de 10.000 acidentes analisados:
+
+\begin{itemize}
+    \item \textbf{Acidentes dentro dos buffers (10 km)}: 2.019 (20,19\%)
+    \item \textbf{Acidentes fora dos buffers}: 7.981 (79,81\%)
+\end{itemize}
+
+Este resultado indica que a maioria dos acidentes (aproximadamente 80\%) ocorre em áreas com menor cobertura direta de postos da PRF, sugerindo a necessidade de estratégias complementares de segurança viária.
+
+\subsubsection{Principais Causas de Acidentes}
+
+As principais causas identificadas nos 73.156 acidentes analisados foram:
+
+\begin{table}[H]
+\centering
+\caption{Top 10 Causas de Acidentes}
+\label{tab:causas_acidentes}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\textbf{Causa} & \textbf{Número} & \textbf{Percentual} \\
+\midrule
+Reação tardia ou ineficiente do condutor & 10.920 & 14,9\% \\
+Ausência de reação do condutor & 10.664 & 14,6\% \\
+Acessar a via sem observar a presença dos outros & 6.958 & 9,5\% \\
+Condutor deixou de manter distância & 4.460 & 6,1\% \\
+Velocidade Incompatível & 4.347 & 5,9\% \\
+Manobra de mudança de faixa & 4.213 & 5,8\% \\
+Ingestão de álcool pelo condutor & 3.854 & 5,3\% \\
+Demais falhas mecânicas ou elétricas & 3.390 & 4,6\% \\
+Transitar na contramão & 2.461 & 3,4\% \\
+Condutor Dormindo & 2.136 & 2,9\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Acidentes com Vítimas Fatais}
+
+Dos 73.156 acidentes analisados, 5.222 apresentaram vítimas fatais, representando 7,14\% do total. Este percentual destaca a gravidade do problema de acidentes em rodovias federais.
+
+\subsubsection{Postos PRF e Cobertura}
+
+A análise dos postos PRF revelou:
+\begin{itemize}
+    \item Total de postos ativos: 169
+    \item Área coberta pelos buffers (teórica): ~53.000 km²
+    \item Cobertura estimada: 0,62\% do território nacional
+    \item Concentração de postos: BR-116 (46 postos), BR-101 (32 postos)
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{mapa_densidade_acidentes.png}
+\caption{Mapa de densidade de acidentes em rodovias federais brasileiras - 2024. O mapa mostra a distribuição espacial dos 73.156 acidentes, com concentrações significativas em regiões metropolitanas.}
+\label{fig:mapa_densidade}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{acidentes_por_estado.png}
+\caption{Distribuição de acidentes por estado (Top 10). MG, SC e PR são os estados com maior número de acidentes.}
+\label{fig:acidentes_estado}
+\end{figure}
+
+% Conclusão
+\section{Conclusão}
+
+Este trabalho apresentou uma metodologia de análise espacial para acidentes de trânsito em rodovias federais brasileiras, utilizando PostgreSQL/PostGIS como ferramenta principal de processamento geoespacial. A abordagem proposta demonstrou ser eficaz para identificar padrões espaciais de acidentes e analisar sua relação com a infraestrutura policial.
+
+Os principais achados da pesquisa incluem:
+
+\begin{itemize}
+    \item A identificação de regiões críticas de acidentes através de análise espacial, com concentrações significativas em MG (9.296), SC (8.381) e PR (7.576)
+    \item A correlação entre proximidade de postos PRF e padrões de acidentes, onde aproximadamente 20\% dos acidentes ocorrem dentro de 10 km dos postos
+    \item A eficácia de bancos de dados espaciais para processamento de grandes volumes de dados geográficos (73.156 acidentes)
+    \item A importância da integração entre dados tabulares e geográficos para análises de segurança viária
+\end{itemize}
+
+A análise de proximidade demonstrou que 80\% dos acidentes ocorrem fora das zonas de cobertura direta dos postos PRF, o que sugere a necessidade de estratégias complementares de segurança viária, como patrulhamento móvel, monitoramento remoto e foco em hotspots identificados pela análise espacial.
+
+A metodologia desenvolvida contribui para o planejamento estratégico de segurança viária, fornecendo informações espaciais precisas para tomada de decisões sobre alocação de recursos policiais e implementação de medidas preventivas.
+
+\subsection{Trabalhos Futuros}
+
+Como trabalhos futuros, sugere-se:
+
+\begin{enumerate}
+    \item \textbf{Clusterização Espacial}: Aplicação de algoritmos como DBSCAN para identificação automática de clusters de acidentes
+    \item \textbf{Modelos Preditivos}: Desenvolvimento de modelos de machine learning para predição de acidentes baseados em características espaciais
+    \item \textbf{Análise Temporal-Espacial}: Integração de análises temporais com padrões espaciais para identificação de tendências
+    \item \textbf{Análise de Redes}: Utilização de análise de redes para estudo de fluxos de tráfego e pontos críticos
+    \item \textbf{Integração com Dados Climáticos}: Incorporação de dados meteorológicos para análise de fatores ambientais
+    \item \textbf{Otimização da Cobertura}: Modelos de otimização para posicionamento estratégico de novos postos PRF
+\end{enumerate}
+
+% Referências
+\section{Referências}
+
+\begin{thebibliography}{99}
+
+\bibitem{oms2018} 
+World Health Organization. 
+\textit{Global status report on road safety 2018}. 
+Geneva: WHO, 2018.
+
+\bibitem{silva2018}
+SILVA, J. A. et al. 
+Análise espacial de acidentes de trânsito utilizando técnicas de clusterização e SIG. 
+\textit{Revista Brasileira de Cartografia}, v. 70, n. 2, p. 123-145, 2018.
+
+\bibitem{santos2019}
+SANTOS, M. R.; OLIVEIRA, C. F. 
+Análise de proximidade espacial entre acidentes de trânsito e infraestrutura urbana utilizando PostgreSQL/PostGIS. 
+\textit{Anais do Congresso Brasileiro de Cartografia}, 2019.
+
+\bibitem{costa2020}
+COSTA, L. M. et al. 
+Aplicação de funções espaciais em bancos de dados para análise de segurança viária em rodovias federais. 
+\textit{Revista Transportes}, v. 25, n. 3, p. 67-82, 2020.
+
+\bibitem{chuerubim2019}
+CHUERUBIM, M. L.; VALEJO, A.; BEZERRA, B. S.; SILVA, I. 
+Limitation of classification tree models in investigating road accident severity. 
+\textit{Revista de Engenharia Civil IMED}, v. 6, n. 2, p. 45-62, 2019. 
+Disponível em: \url{https://grafiati.com/en/literature-selections/crimes-e-acidentes-rodoviarios/}. 
+Acesso em: 19 out. 2025.
+
+\bibitem{dias2023}
+DIAS, N.; CURY, T.; SOUZA, J. L.; MIRANDA, L. O. M.; BOSSO, R. R.; CARVALHO, E. P.; GERAB, F. 
+Segurança no tráfego rodoviário brasileiro: a evolução da frota, da legislação brasileira e suas contribuições na segurança viária para automóveis e comerciais leves. 
+\textit{Blucher Proceedings}, v. 10, n. 1, p. 123-145, 2023. 
+Disponível em: \url{https://proceedings.blucher.com.br/article-details/segurana-no-trfego-rodovirio-brasileiro-a-evoluo-da-frota-da-legislao-brasileira-e-suas-contribuies-na-segurana-viria-para-automveis-e-comerciais-leves-38720}. 
+Acesso em: 19 out. 2025.
+
+\bibitem{melo2020}
+MELO, A. C. 
+Acidentes de trânsito no Brasil: uma revisão bibliométrica da produção científica entre 2010 e 2020. 
+\textit{Revista GepesVida}, v. 8, n. 2, p. 78-95, 2020. 
+Disponível em: \url{https://icepsc.com.br/ojs/index.php/gepesvida/article/view/31243}. 
+Acesso em: 19 out. 2025.
+
+\bibitem{velazquez2021}
+VELAZQUEZ, F. L.; SUAVE, L.; SIMARI, T. B.; COELHO, T. P. P. 
+Avaliação da segurança viária pela percepção do cidadão francano: estudo de caso das principais avenidas, localizadas na cidade de Franca/SP. 
+\textit{Risco Revista de Pesquisa em Arquitetura e Urbanismo}, v. 19, p. 156-173, 2021. 
+Disponível em: \url{https://revistas.usp.br/risco/article/view/168695}. 
+Acesso em: 19 out. 2025.
+
+\end{thebibliography}
+
+% Anexos
+\section*{Anexos}
+
+\subsection{Códigos SQL Utilizados}
+
+Os seguintes códigos SQL foram utilizados para a análise espacial:
+
+\begin{lstlisting}[language=SQL, caption={Preparação da base de dados espacial}]
+-- Criação da coluna de geometria
+ALTER TABLE especializacao_vinicius_acidentes
+ADD COLUMN geom geometry(Point, 4674);
+
+-- Conversão de coordenadas para geometria
+UPDATE especializacao_vinicius_acidentes
+SET geom = ST_SetSRID(ST_MakePoint(longitude, latitude), 4674)
+WHERE latitude IS NOT NULL AND longitude IS NOT NULL;
+
+-- Criação de índice espacial
+CREATE INDEX idx_acidentes_geom 
+ON especializacao_vinicius_acidentes USING GIST (geom);
+\end{lstlisting}
+
+\begin{lstlisting}[language=SQL, caption={Análise de proximidade por estado}]
+SELECT 
+    a.uf,
+    COUNT(*) AS total_acidentes,
+    COUNT(CASE WHEN EXISTS (
+        SELECT 1 FROM buffers_postos_prf b 
+        WHERE ST_Within(a.geom, b.buffer_geom)
+    ) THEN 1 END) AS acidentes_proximos_postos,
+    ROUND(
+        COUNT(CASE WHEN EXISTS (
+            SELECT 1 FROM buffers_postos_prf b 
+            WHERE ST_Within(a.geom, b.buffer_geom)
+        ) THEN 1 END) * 100.0 / COUNT(*), 2
+    ) AS percentual_proximos_postos
+FROM especializacao_vinicius_acidentes a
+GROUP BY a.uf
+ORDER BY total_acidentes DESC;
+\end{lstlisting}
+
+\end{document}
+

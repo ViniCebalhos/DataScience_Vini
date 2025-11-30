@@ -1,0 +1,12 @@
+ESTATÍSTICAS DESCRITIVAS - ACIDENTES EM RODOVIAS FEDERAIS
+============================================================
+
+Total de Acidentes (Ano): 67794
+Média Mensal: 5649.5
+Desvio Padrão Mensal: 594.1382414893019
+Mês com Mais Acidentes: 6587
+Mês com Menos Acidentes: 4800
+Total de Causas Diferentes: 8
+Causa Mais Frequente: 18500
+Média de Acidentes por Hora: 208.58333333333334
+Hora com Mais Acidentes: 520

@@ -1,0 +1,6 @@
+Ajustar um Modelo de Regressão Linear aos dados apresentados no arquivo "Imoveis_Fabro_treino.csv" .
+
+
+Entregar o código/parâmetros de regressão do modelo.
+
+Avaliar o modelo usando os dados do arquivo "Imoveis_Fabro_teste.csv" usando a métrica do "Erro quadrático Médio".

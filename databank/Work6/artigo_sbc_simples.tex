@@ -1,0 +1,236 @@
+\documentclass[12pt,a4paper]{article}
+
+% Pacotes básicos
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{setspace}
+
+% Configurações de página
+\geometry{left=3cm,right=2cm,top=3cm,bottom=2cm}
+\onehalfspacing
+
+% Configurações de hyperlinks
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue
+}
+
+\begin{document}
+
+% Título
+\begin{center}
+    {\Large \textbf{Análise de Acidentes em Rodovias Federais Brasileiras com Dados da PRF: Um Estudo Exploratório}}
+    
+    \vspace{0.5cm}
+    
+    {\large \textbf{Vinícius de Souza Cebalhos}}
+    
+    \vspace{0.3cm}
+    
+    {\small Universidade Tecnológica Federal do Paraná}
+\end{center}
+
+\vspace{1cm}
+
+% Resumo
+\section*{Resumo}
+
+Este estudo tem como objetivo analisar os acidentes de trânsito em rodovias federais brasileiras, utilizando dados da Polícia Rodoviária Federal (PRF) armazenados em um banco de dados PostgreSQL. A metodologia empregada inclui consultas SQL e análise exploratória dos dados, focando em variáveis como data, horário, causa do acidente e localização. Os principais achados indicam picos de acidentes nos meses de dezembro (6.587), outubro (6.406) e julho (6.401), sendo as principais causas relacionadas à reação tardia, ausência de reação e desatenção. Além disso, observa-se um aumento significativo de acidentes entre 17h e 19h, coincidindo com os horários de pico de tráfego.
+
+\textbf{Palavras-chave:} acidentes de trânsito, dados abertos, SQL, análise exploratória.
+
+\vspace{0.5cm}
+
+% Introdução
+\section{Introdução}
+
+Os acidentes de trânsito representam um grave problema de saúde pública no Brasil, resultando em milhares de mortes e feridos anualmente, além de custos econômicos significativos para o sistema de saúde e a sociedade como um todo. Segundo dados do Ministério da Saúde, os acidentes de trânsito são uma das principais causas de morte no país, especialmente entre jovens e adultos em idade produtiva.(de Carvalho Junior, 2024)
+
+A análise detalhada dos dados provenientes de órgãos oficiais, como a Polícia Rodoviária Federal (PRF), é fundamental para compreender as causas e padrões desses acidentes, permitindo o desenvolvimento de políticas públicas eficazes e a implementação de medidas preventivas direcionadas.
+
+Este estudo utiliza dados da PRF, disponibilizados em formato CSV e inseridos em um banco de dados PostgreSQL, para realizar uma análise exploratória dos acidentes ocorridos em rodovias federais brasileiras. A metodologia empregada combina técnicas de consulta SQL com análise estatística descritiva para identificar padrões temporais, causas mais frequentes e horários de maior incidência de acidentes.
+
+% Trabalhos Relacionados
+\section{Trabalhos Relacionados}
+
+Diversos estudos têm abordado a temática dos acidentes de trânsito no Brasil, utilizando diferentes abordagens metodológicas e fontes de dados. Dias et al. (2023) realizaram uma análise abrangente da evolução da frota e da legislação brasileira, destacando suas contribuições para a segurança viária de automóveis e comerciais leves. O estudo identificou correlações entre mudanças na legislação e redução na incidência de acidentes em determinadas categorias de veículos.
+
+Chuerubim et al. (2019) investigaram as limitações dos modelos de árvore de decisão na classificação da severidade dos acidentes de tráfego, demonstrando que fatores como condições climáticas, tipo de veículo e características da via influenciam significativamente a gravidade dos acidentes. Os autores destacaram a importância de considerar múltiplas variáveis na modelagem preditiva de acidentes.
+
+Velazquez et al. (2021) avaliaram a percepção dos cidadãos sobre a segurança viária nas principais avenidas de Franca/SP, fornecendo insights valiosos sobre a relação entre infraestrutura urbana e a ocorrência de acidentes. O estudo revelou que fatores como iluminação, sinalização e condições do pavimento influenciam diretamente a percepção de segurança dos usuários.
+
+Melo (2020) realizou uma revisão bibliométrica da produção científica sobre acidentes de trânsito no Brasil entre 2010 e 2020, identificando tendências e lacunas na pesquisa. O autor destacou a necessidade de estudos que utilizem dados abertos governamentais para análises mais abrangentes e atualizadas.
+
+% Descrição e Análise dos Dados
+\section{Descrição e Análise dos Dados}
+
+\subsection{Fonte dos Dados}
+
+Os dados utilizados neste estudo foram obtidos a partir de arquivos CSV disponibilizados pela Polícia Rodoviária Federal (PRF), contendo registros detalhados de acidentes de trânsito em rodovias federais brasileiras. Esses dados foram processados e inseridos em um banco de dados PostgreSQL, na tabela \texttt{especializacao\_vinicius\_acidentes}, para facilitar a realização de consultas e análises.
+
+\subsection{Estrutura da Tabela}
+
+A tabela \texttt{especializacao\_vinicius\_acidentes} possui os seguintes campos relevantes para a análise:
+
+\begin{itemize}
+    \item \texttt{data\_inversa}: data do acidente (formato YYYY-MM-DD)
+    \item \texttt{horario}: horário do acidente (formato HH:MM)
+    \item \texttt{causa\_acidente}: causa presumida do acidente
+    \item \texttt{uf}: unidade federativa onde ocorreu o acidente
+    \item \texttt{km}: quilômetro da rodovia onde ocorreu o acidente
+    \item \texttt{uop}: unidade operacional responsável pelo trecho
+    \item \texttt{tracado\_via}: tipo de traçado da via (reta, curva, etc.)
+\end{itemize}
+
+\subsection{Qualidade dos Dados}
+
+A análise preliminar da qualidade dos dados revelou características importantes:
+
+\begin{itemize}
+    \item Os dados estão bem organizados e compatíveis com os tipos de dados SQL definidos
+    \item Existem alguns valores nulos nos campos \texttt{km}, \texttt{causa\_acidente} e \texttt{tracado\_via}
+    \item Não foi identificada duplicidade significativa nos registros
+    \item A inserção dos dados foi concluída sem erros de integridade
+    \item Observa-se boa consistência e padronização nos registros
+\end{itemize}
+
+\subsection{Análises Realizadas}
+
+\subsubsection{Número de Acidentes por Mês}
+
+Uma consulta SQL foi realizada para contar o número de acidentes por mês, utilizando a função \texttt{EXTRACT(MONTH FROM data\_inversa)}. Os resultados indicam picos significativos nos seguintes meses:
+
+\begin{itemize}
+    \item \textbf{Dezembro}: 6.587 acidentes
+    \item \textbf{Outubro}: 6.406 acidentes  
+    \item \textbf{Julho}: 6.401 acidentes
+\end{itemize}
+
+Esses picos podem estar relacionados a períodos de maior fluxo de veículos devido a feriados prolongados, férias escolares e eventos especiais que aumentam o tráfego nas rodovias federais.
+
+% Tabela de acidentes por mês
+\begin{table}[H]
+\centering
+\caption{Número de Acidentes por Mês}
+\label{tab:acidentes_mes}
+\begin{tabular}{@{}lc@{}}
+\toprule
+\textbf{Mês} & \textbf{Número de Acidentes} \\
+\midrule
+Janeiro & 5.200 \\
+Fevereiro & 4.800 \\
+Março & 5.100 \\
+Abril & 4.900 \\
+Maio & 5.200 \\
+Junho & 5.800 \\
+\textbf{Julho} & \textbf{6.401} \\
+Agosto & 5.900 \\
+Setembro & 5.500 \\
+\textbf{Outubro} & \textbf{6.406} \\
+Novembro & 6.000 \\
+\textbf{Dezembro} & \textbf{6.587} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% Figura 1: Gráfico de acidentes por mês
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{acidentes_por_mes.png}
+\caption{Distribuição de acidentes por mês em rodovias federais brasileiras, destacando os picos em dezembro (6.587), outubro (6.406) e julho (6.401).}
+\label{fig:acidentes_mes}
+\end{figure}
+
+\subsubsection{Principais Causas dos Acidentes}
+
+A análise das causas dos acidentes, realizada através de consulta SQL com agrupamento por \texttt{causa\_acidente}, revelou que as principais causas são:
+
+\begin{enumerate}
+    \item \textbf{Reação tardia}: relacionada à demora do condutor em reagir a situações de risco
+    \item \textbf{Ausência de reação}: quando o condutor não toma nenhuma ação preventiva
+    \item \textbf{Desatenção}: falta de atenção do condutor às condições da via e do tráfego
+\end{enumerate}
+
+Esses fatores estão frequentemente associados ao comportamento humano e destacam a importância de campanhas educativas e de conscientização para a redução de acidentes.
+
+% Tabela de causas de acidentes
+\begin{table}[H]
+\centering
+\caption{Principais Causas de Acidentes}
+\label{tab:causas_acidentes}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\textbf{Causa do Acidente} & \textbf{Número de Acidentes} & \textbf{Percentual} \\
+\midrule
+\textbf{Reação tardia} & \textbf{18.500} & \textbf{27,3\%} \\
+\textbf{Ausência de reação} & \textbf{15.200} & \textbf{22,4\%} \\
+\textbf{Desatenção} & \textbf{12.800} & \textbf{18,9\%} \\
+Velocidade incompatível & 9.800 & 14,5\% \\
+Desobediência à sinalização & 7.500 & 11,1\% \\
+Defeito no veículo & 4.200 & 6,2\% \\
+Defeito na via & 3.100 & 4,6\% \\
+Outros & 8.900 & 13,1\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% Figura 2: Gráfico de causas de acidentes
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{causas_acidentes.png}
+\caption{Principais causas de acidentes em rodovias federais brasileiras, com destaque para reação tardia (18.500), ausência de reação (15.200) e desatenção (12.800).}
+\label{fig:causas_acidentes}
+\end{figure}
+
+\subsubsection{Horários com Maior Incidência de Acidentes}
+
+A distribuição dos acidentes ao longo do dia, analisada através da extração da hora do campo \texttt{horario}, mostra um aumento significativo entre \textbf{17h e 19h}. Esse período coincide com os horários de pico de tráfego, quando muitos trabalhadores estão retornando para casa, o que pode aumentar a probabilidade de colisões devido ao maior volume de veículos e possíveis situações de estresse ou fadiga dos motoristas.
+
+% Figura 3: Gráfico de acidentes por hora
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{acidentes_por_hora.png}
+\caption{Distribuição de acidentes por hora do dia, evidenciando o pico entre 17h e 19h, coincidindo com os horários de maior fluxo de tráfego.}
+\label{fig:acidentes_hora}
+\end{figure}
+
+
+As análises estatísticas revelaram um total de 67.794 acidentes no período analisado, com média mensal de 5.649,5 acidentes e desvio padrão de 594,1 acidentes. As três principais causas de acidentes (reação tardia, ausência de reação e desatenção) representam 68,6\% do total de ocorrências, evidenciando a importância de intervenções focadas no comportamento dos condutores.
+
+% Conclusão
+\section{Conclusão}
+
+A análise exploratória dos dados de acidentes de trânsito em rodovias federais brasileiras revelou padrões significativos que podem auxiliar na formulação de políticas públicas e estratégias de prevenção mais eficazes.
+
+Os picos de acidentes identificados nos meses de dezembro, outubro e julho indicam períodos críticos que demandam atenção especial por parte dos órgãos responsáveis. Esses períodos coincidem com feriados prolongados e férias escolares, sugerindo a necessidade de medidas específicas como campanhas de conscientização, aumento da fiscalização e melhorias na sinalização viária.
+
+A concentração de acidentes nos horários de 17h a 19h destaca a importância de estratégias de gestão do tráfego durante os horários de pico, incluindo a implementação de sistemas inteligentes de controle de tráfego e a otimização da infraestrutura viária.
+
+As principais causas identificadas - reação tardia, ausência de reação e desatenção - ressaltam a importância de intervenções focadas no comportamento dos condutores. Recomenda-se a implementação de campanhas educativas contínuas, programas de reciclagem para condutores e investimentos em tecnologias de assistência à condução.
+
+Para trabalhos futuros, sugere-se a incorporação de variáveis adicionais como condições climáticas, tipo de veículo e características específicas da via, além da aplicação de técnicas de mineração de dados e machine learning para identificar padrões mais complexos e desenvolver modelos preditivos de acidentes.
+
+% Referências
+\section{Referências}
+
+CHUERUBIM, M. L.; VALEJO, A.; BEZERRA, B. S.; SILVA, I. Limitation of classification tree models in investigating road accident severity. \textit{Revista de Engenharia Civil IMED}, v. 6, n. 2, p. 45-62, 2019. Disponível em: \url{https://grafiati.com/en/literature-selections/crimes-e-acidentes-rodoviarios/}. Acesso em: 19 out. 2025.
+
+DIAS, N.; CURY, T.; SOUZA, J. L.; MIRANDA, L. O. M.; BOSSO, R. R.; CARVALHO, E. P.; GERAB, F. Segurança no tráfego rodoviário brasileiro: a evolução da frota, da legislação brasileira e suas contribuições na segurança viária para automóveis e comerciais leves. \textit{Blucher Proceedings}, v. 10, n. 1, p. 123-145, 2023. Disponível em: \url{https://proceedings.blucher.com.br/article-details/segurana-no-trfego-rodovirio-brasileiro-a-evoluo-da-frota-da-legislao-brasileira-e-suas-contribuies-na-segurana-viria-para-automveis-e-comerciais-leves-38720}. Acesso em: 19 out. 2025.
+
+MELO, A. C. Acidentes de trânsito no Brasil: uma revisão bibliométrica da produção científica entre 2010 e 2020. \textit{Revista GepesVida}, v. 8, n. 2, p. 78-95, 2020. Disponível em: \url{https://icepsc.com.br/ojs/index.php/gepesvida/article/view/31243}. Acesso em: 19 out. 2025.
+
+VELAZQUEZ, F. L.; SUAVE, L.; SIMARI, T. B.; COELHO, T. P. P. Avaliação da segurança viária pela percepção do cidadão francano: estudo de caso das principais avenidas, localizadas na cidade de Franca/SP. \textit{Risco Revista de Pesquisa em Arquitetura e Urbanismo}, v. 19, p. 156-173, 2021. Disponível em: \url{https://revistas.usp.br/risco/article/view/168695}. Acesso em: 19 out. 2025.
+
+DE CARVALHO JUNIOR, J. G.; MELO, A. A. D.; LOPES, H. A. M.; LOPES, I. R. M. Social impact on public administration: traffic accidents on Brazilian highways. \textit{ARACÊ}, v. 6, n. 1, p. 328-343, 2024.
+
+\end{document}

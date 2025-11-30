@@ -1,0 +1,14 @@
+# Arquivos de configuração com informações sensíveis
+.env
+*.env
+
+# Chaves de API
+*_key.txt
+*_secret.txt
+api_key.txt
+
+# Arquivos temporários
+*.pyc
+__pycache__/
+.ipynb_checkpoints/
+

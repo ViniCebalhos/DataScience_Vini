@@ -1,0 +1,47 @@
+=== ESTATÍSTICAS DE ACIDENTES DE TRÂNSITO 2024 ===
+
+Total de acidentes: 73,156
+
+Distribuição por Estado:
+uf
+MG    9296
+SC    8381
+PR    7576
+RJ    6389
+RS    5206
+SP    4883
+BA    4151
+GO    3305
+PE    3230
+MT    2554
+ES    2395
+PB    1920
+MS    1803
+RN    1606
+PI    1520
+CE    1500
+RO    1483
+MA    1138
+DF    1056
+PA     970
+TO     735
+AL     712
+SE     597
+AC     287
+AM     169
+AP     159
+RR     135
+
+Top 10 Causas de Acidentes:
+causa_acidente
+Reação tardia ou ineficiente do condutor                     10920
+Ausência de reação do condutor                               10664
+Acessar a via sem observar a presença dos outros veículos     6958
+Condutor deixou de manter distância do veículo da frente      4460
+Velocidade Incompatível                                       4347
+Manobra de mudança de faixa                                   4213
+Ingestão de álcool pelo condutor                              3854
+Demais falhas mecânicas ou elétricas                          3390
+Transitar na contramão                                        2461
+Condutor Dormindo                                             2136
+

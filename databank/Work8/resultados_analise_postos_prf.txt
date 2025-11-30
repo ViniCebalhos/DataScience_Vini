@@ -1,0 +1,91 @@
+================================================================
+RESULTADOS DA ANÁLISE DE PROXIMIDADE: ACIDENTES E POSTOS PRF
+================================================================
+
+ANÁLISE DE PROXIMIDADE (AMOSTRA DE 10.000 ACIDENTES)
+------------------------------------------------------
+Total de acidentes analisados: 10.000
+Acidentes dentro dos buffers de 10 km: 2.019 (20,19%)
+Acidentes fora dos buffers de 10 km: 7.981 (79,81%)
+
+INTERPRETAÇÃO:
+- Aproximadamente 20% dos acidentes ocorrem dentro de um raio de 10 km
+  de postos da PRF
+- A maioria dos acidentes (80%) ocorre em áreas com menor cobertura direta
+  de postos da PRF
+- Isso sugere a necessidade de estratégias alternativas de segurança viária
+  além da presença de postos fixos
+
+ESTATÍSTICAS DOS POSTOS PRF
+----------------------------
+Total de postos ativos: 169
+Postos únicos: 150
+
+DISTRIBUIÇÃO POR ESTADO (Top 10):
+RJ:  29 postos
+MG:  27 postos
+SP:  26 postos
+PR:  17 postos
+GO:  13 postos
+SC:  12 postos
+RS:  12 postos
+MS:  12 postos
+ES:  10 postos
+MT:   7 postos
+
+OBSERVAÇÃO: Os estados com mais postos são também aqueles com maior
+densidade rodoviária e fluxo de veículos.
+
+TOP 10 RODOVIAS COM MAIS POSTOS:
+BR-116: 46 postos (Principal rodovia norte-sul do país)
+BR-101: 32 postos (Principal rodovia litorânea)
+BR-163: 17 postos
+BR-153: 15 postos
+BR-381:  9 postos
+BR-364:  7 postos
+BR-40:   6 postos
+BR-50:   4 postos
+BR-277:  4 postos
+BR-386:  4 postos
+
+COBERTURA TERRITORIAL
+----------------------
+Área coberta pelos buffers de 10 km: ~53.000 km²
+Área total do Brasil: ~8.500.000 km²
+Cobertura teórica: 0,62% do território nacional
+
+INTERPRETAÇÃO:
+- A cobertura dos postos PRF é limitada em relação à extensão territorial
+- Os postos estão concentrados ao longo das principais rodovias
+- A estratégia atual foca em pontos de alto fluxo
+
+RECOMENDAÇÕES
+-------------
+1. Os resultados mostram que a maioria dos acidentes ocorre fora da
+   zona de cobertura direta dos postos (20% dentro dos 10 km)
+
+2. Estratégias complementares são necessárias:
+   - Patrulhamento móvel entre postos
+   - Equipamentos de monitoramento remoto
+   - Foco em hotspots de acidentes identificados pela análise espacial
+
+3. A análise espacial permite identificar regiões críticas que podem
+   se beneficiar de:
+   - Maior presença policial
+   - Melhorias na infraestrutura viária
+   - Campanhas educativas específicas
+
+METODOLOGIA
+-----------
+- Dados dos postos: Portal ANTT (dados.antt.gov.br)
+- Dados de acidentes: Polícia Rodoviária Federal (datatran2024)
+- Buffer utilizado: 10 km (raio de cobertura estimado)
+- CRS: SIRGAS 2000 (EPSG:4674) para análise espacial
+- CRS: UTM Zone 23S (EPSG:5880) para cálculos de área
+
+================================================================
+Este documento foi gerado automaticamente pelo script de análise
+================================================================
+
+
+

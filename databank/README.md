@@ -1,0 +1,252 @@
+# 🗄️ Banco de Dados - Trabalhos e Projetos
+
+Esta pasta contém todos os trabalhos desenvolvidos na disciplina de **Banco de Dados** da pós-graduação em Ciência de Dados.
+
+---
+
+## 📚 Trabalhos Desenvolvidos
+
+### 📋 [Work 1: Análise de Alvarás de Construção](./Work1/)
+**Objetivo:** Análise exploratória de dados de alvarás de construção usando SQL e Python.
+
+**Tecnologias:**
+- PostgreSQL
+- Python (pandas)
+- SQL para consultas
+
+**Conteúdo:**
+- Carregamento de dados em banco PostgreSQL
+- Consultas SQL para análise exploratória
+- Análise de padrões em alvarás de construção
+- Estatísticas descritivas
+
+**Arquivos principais:**
+- `Work1.ipynb` - Notebook com análises
+- `2023-05-22_Alvaras_-_Dicionario_de_Dados.csv` - Dicionário de dados
+
+---
+
+### 🚗 [Work 2: Análise Exploratória de Acidentes de Trânsito](./Work2/)
+**Objetivo:** Análise exploratória de dados de acidentes de trânsito da PRF.
+
+**Tecnologias:**
+- PostgreSQL
+- Python (pandas, matplotlib, seaborn)
+- SQL para consultas
+
+**Conteúdo:**
+- Análise de acidentes em rodovias federais
+- Estatísticas descritivas
+- Visualizações de padrões temporais
+- Identificação de causas principais
+
+**Dataset:**
+- `datatran2025.csv` - Dados da Polícia Rodoviária Federal
+
+**Arquivos principais:**
+- `Work2.ipynb` - Notebook com análises completas
+
+---
+
+### 📊 [Work 3: Consultas SQL Avançadas](./Work3/)
+**Objetivo:** Aplicar consultas SQL avançadas em dados de acidentes.
+
+**Tecnologias:**
+- PostgreSQL
+- SQL (JOINs, agregações, subconsultas)
+
+**Conteúdo:**
+- Consultas SQL complexas
+- Agregações e agrupamentos
+- Análise de dados de acidentes
+
+**Dataset:**
+- `datatran2024.csv` - Dados da PRF
+
+---
+
+### 📄 [Work 6: Artigo Científico - Análise de Acidentes em Rodovias Federais](./Work6/)
+**Objetivo:** Desenvolver artigo científico completo sobre análise de acidentes de trânsito.
+
+**Resultado:** Artigo científico completo publicado em formato SBC.
+
+**Tecnologias:**
+- PostgreSQL
+- Python (pandas, matplotlib, seaborn)
+- LaTeX para formatação do artigo
+- SQL para consultas
+
+**Conteúdo:**
+- Análise de 67.794 acidentes em rodovias federais
+- Identificação de padrões temporais (mensais e horários)
+- Análise de causas principais
+- Visualizações profissionais
+- Artigo científico completo em LaTeX
+
+**Principais Descobertas:**
+- Picos de acidentes: Dezembro (6.587), Outubro (6.406), Julho (6.401)
+- Horário crítico: 17h-19h
+- Principais causas: Reação tardia (27,3%), Ausência de reação (22,4%), Desatenção (18,9%)
+
+**Arquivos principais:**
+- `artigo_sbc_simples.tex` - Código LaTeX do artigo
+- `artigo_sbc_simples.pdf` - Artigo em PDF
+- `anexos.py` - Script para gerar visualizações
+- `README_compilacao.md` - Guia de compilação
+- Visualizações: `acidentes_por_mes.png`, `causas_acidentes.png`, `acidentes_por_hora.png`
+
+**Como compilar o artigo:**
+```bash
+cd Work6
+chmod +x compilar_simples.sh
+./compilar_simples.sh
+```
+
+---
+
+### 🗺️ [Work 8: Análise Espacial de Acidentes com PostGIS](./Work8/)
+**Objetivo:** Análise geoespacial de acidentes de trânsito usando PostGIS.
+
+**Resultado:** Artigo científico completo com análise espacial.
+
+**Tecnologias:**
+- PostgreSQL + PostGIS
+- Python (geopandas, folium)
+- SQL espacial
+- Visualizações interativas
+
+**Conteúdo:**
+- Análise de 73.156 acidentes em rodovias federais
+- Mapeamento de 169 postos da PRF
+- Análise de proximidade espacial
+- Identificação de áreas críticas
+- Mapas interativos com Folium
+
+**Principais Descobertas:**
+- 80% dos acidentes ocorrem fora da cobertura direta dos postos PRF
+- Identificação de hotspots de acidentes
+- Análise de eficiência da distribuição de postos
+
+**Arquivos principais:**
+- `artigo_sbc_analise_espacial.pdf` - Artigo completo
+- `artigo_sbc_analise_espacial.tex` - Código LaTeX
+- `mapa_acidentes_interativo.html` - Mapa interativo (4.3 MB)
+- `mapa_completo_postos_prf.html` - Mapa com buffers (6.2 MB)
+- `gerar_mapa_analise_espacial.py` - Script de geração de mapas
+- `README_RESULTADOS.md` - Documentação completa
+
+**Metodologia:**
+1. Carregamento de dados de acidentes e postos PRF
+2. Geocodificação e preparação espacial
+3. Análise de proximidade com PostGIS
+4. Geração de visualizações interativas
+5. Análise estatística espacial
+
+---
+
+## 🛠️ Tecnologias e Bibliotecas Utilizadas
+
+### Principais
+- **PostgreSQL** - Banco de dados relacional
+- **PostGIS** - Extensão geoespacial
+- **Python** - Análise e visualização
+- **Pandas** - Manipulação de dados
+- **SQL** - Consultas e análises
+
+### Específicas
+- **Geopandas** - Dados geoespaciais
+- **Folium** - Mapas interativos
+- **Matplotlib/Seaborn** - Visualizações
+- **LaTeX** - Formatação de artigos científicos
+
+---
+
+## 📊 Competências Demonstradas
+
+- ✅ Modelagem de Banco de Dados
+- ✅ Consultas SQL (básicas e avançadas)
+- ✅ SQL Espacial (PostGIS)
+- ✅ Análise Exploratória de Dados
+- ✅ Análise Geoespacial
+- ✅ Visualização de Dados
+- ✅ Redação Científica (LaTeX)
+- ✅ Análise Estatística
+
+---
+
+## 📁 Estrutura de Pastas
+
+```
+databank/
+├── README.md                    # Este arquivo
+├── Work1/                       # Análise de Alvarás
+├── Work2/                       # Análise Exploratória Acidentes
+├── Work3/                       # Consultas SQL Avançadas
+├── Work6/                       # Artigo Científico
+└── Work8/                       # Análise Espacial
+```
+
+---
+
+## 🚀 Como Executar
+
+### Para trabalhos com PostgreSQL:
+
+1. Instale o PostgreSQL e PostGIS:
+```bash
+sudo apt-get install postgresql postgresql-contrib postgis
+```
+
+2. Crie o banco de dados:
+```sql
+CREATE DATABASE seu_banco;
+\c seu_banco
+CREATE EXTENSION postgis;
+```
+
+3. Instale as dependências Python:
+```bash
+pip install pandas psycopg2 geopandas folium matplotlib seaborn
+```
+
+4. Execute os notebooks ou scripts Python
+
+### Para compilar artigos LaTeX:
+
+1. Instale o LaTeX:
+```bash
+sudo apt-get install texlive-latex-extra texlive-fonts-recommended texlive-lang-portuguese
+```
+
+2. Compile o artigo:
+```bash
+cd Work6  # ou Work8
+pdflatex artigo_sbc*.tex
+```
+
+---
+
+## 📝 Notas
+
+- Os datasets podem ser grandes e não estão incluídos no repositório
+- Alguns trabalhos requerem configuração de banco de dados PostgreSQL
+- Os artigos científicos estão em formato LaTeX (padrão SBC)
+- Mapas interativos são gerados em HTML e podem ser visualizados no navegador
+
+---
+
+## 📄 Artigos Científicos
+
+Este repositório contém dois artigos científicos completos:
+
+1. **Work 6:** Análise de Acidentes em Rodovias Federais Brasileiras
+2. **Work 8:** Análise Espacial de Acidentes com PostGIS
+
+Ambos estão formatados conforme padrão SBC e prontos para submissão.
+
+---
+
+**Disciplina:** Banco de Dados  
+**Autor:** Vinícius de Souza Cebalhos  
+**Instituição:** UTFPR
+
