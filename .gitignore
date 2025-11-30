@@ -58,6 +58,7 @@ venv.bak/
 *.hdf5
 *.nc
 *.nc4
+*.zip
 
 # Model files (large)
 *.pkl
