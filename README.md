@@ -1,182 +1,195 @@
-# 📊 Portfólio de Ciência de Dados - Pós-Graduação
+# 📊 Portfólio de Ciência de Dados
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
 ![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange.svg)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-13+-blue.svg)
+![PostGIS](https://img.shields.io/badge/PostGIS-3.0+-green.svg)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-1.2+-green.svg)
 ![Status](https://img.shields.io/badge/status-active-success.svg)
 
 **Autor:** Vinícius de Souza Cebalhos  
+**Formação:** Meteorologista e Cientista de Dados  
 **Instituição:** Universidade Tecnológica Federal do Paraná (UTFPR)  
 **Área:** Especialização em Ciência de Dados
 
 ---
 
-## 🎯 Sobre o Portfólio
+## 👨‍💼 Sobre
 
-Este repositório contém todos os trabalhos desenvolvidos durante a pós-graduação em Ciência de Dados, demonstrando competências em:
-
-- **Análise Exploratória de Dados (EDA)**
-- **Mineração de Dados (Data Mining)**
-- **Banco de Dados e SQL**
-- **Machine Learning e Modelagem Preditiva**
-- **Visualização de Dados**
-- **Análise Estatística**
-- **Análise Geoespacial**
-
----
-
-## 📚 Estrutura do Portfólio
-
-### 🗂️ [Data Mining](./data_mining/)
-Trabalhos de mineração de dados, incluindo:
-- **Work 1:** Web Scraping e Análise de Dados do YouTube
-- **Work 2:** Regressão Linear e Análise de Dados
-- **Work 3:** Classificação e Agrupamento (Clustering)
-- **Work 4:** Regras de Associação e Mineração de Texto
-- **Challenge:** Competição Kaggle - Previsão de Locais Altamente Avaliados (F1-Score: 0.9991)
-
-### 🗄️ [Banco de Dados](./databank/)
-Projetos envolvendo SQL, PostgreSQL e análise de dados:
-- **Work 1:** Análise de Alvarás de Construção
-- **Work 2:** Análise Exploratória de Acidentes de Trânsito
-- **Work 3:** Consultas SQL Avançadas
-- **Work 6:** Artigo Científico - Análise de Acidentes em Rodovias Federais (67.794 acidentes)
-- **Work 8:** Análise Espacial de Acidentes com PostGIS (73.156 acidentes, mapas interativos)
-
-### 🤖 [Machine Learning](./ML/)
-Projetos de aprendizado de máquina:
-- **Work 1:** Regressão Linear - Previsão de Preços de Imóveis
-- **Work 2:** Classificação Multiclasse - Indicadores Sociais Globais
-- **Work 3:** Classificação de Sinais Vitais
-
-### 🏥 [Análise de Dados em Saúde](./Trabalho/)
-Projeto completo de análise de dados do Sistema E-Saúde de Curitiba:
-- Análise temporal de atendimentos (Dez/2024 - Jul/2025)
-- Análise geográfica por bairros
-- Análise de profissionais de saúde
-- Limpeza e preparação de dados (~46.000 registros/mês)
-
-### 📖 [Tutoriais](./tutoriais/)
-Materiais de estudo e tutoriais desenvolvidos durante o curso.
-
-### 📝 [Exercícios](./exercicios/)
-Exercícios práticos e notebooks de estudo.
+Meteorologista com especialização em Ciência de Dados, com experiência em análise de dados, modelagem preditiva, análise geoespacial e visualização de dados. Este portfólio apresenta projetos desenvolvidos durante a pós-graduação, demonstrando competências técnicas em Python, SQL, Machine Learning e análise estatística aplicada a problemas reais.
 
 ---
 
 ## 🏆 Projetos em Destaque
 
-### 1. 🗺️ [Análise Espacial de Acidentes com PostGIS](./databank/Work8/)
-**Tecnologias:** PostgreSQL, PostGIS, Python, Folium, Geopandas  
+### 1. 🗺️ [Análise Espacial de Acidentes com PostGIS](./projects/analise-espacial-acidentes/)
+**Tecnologias:** PostgreSQL, PostGIS, Python, GeoPandas, Folium  
 **Resultado:** Artigo científico completo publicado  
 **Destaque:** 
-- Análise de **73.156 acidentes** em rodovias federais
-- Mapeamento de **169 postos da PRF**
-- Mapas interativos com análise de proximidade espacial
-- Identificação de que 80% dos acidentes ocorrem fora da cobertura direta
+- Análise de **73.156 acidentes** em rodovias federais brasileiras
+- Mapeamento de **169 postos da PRF** com análise de proximidade espacial
+- Mapas interativos profissionais com Folium
+- **Descoberta principal:** 80% dos acidentes ocorrem fora da cobertura direta dos postos PRF
 
-**Impacto:** Metodologia replicável para análise geoespacial de segurança viária.
+**Impacto:** Metodologia replicável para análise geoespacial de segurança viária com aplicação em políticas públicas.
+
+[📖 Ver Projeto](./projects/analise-espacial-acidentes/)
 
 ---
 
-### 2. 🏅 [Competição Kaggle - Previsão de Locais](./data_mining/challenge/)
-**Tecnologias:** Python, scikit-learn, Random Forest, XGBoost  
+### 2. 🏅 [Competição Kaggle - Previsão de Locais Altamente Avaliados](./projects/competicao-kaggle-venues/)
+**Tecnologias:** Python, scikit-learn, Random Forest, XGBoost, Grid Search  
 **Resultado:** **F1-Score de 0.9991** (Top performance)  
 **Destaque:**
-- Random Forest otimizado com Grid Search
-- Validação cruzada estratificada (5-fold)
-- Feature engineering completo
-- Análise comparativa de múltiplos algoritmos
+- Random Forest otimizado com Grid Search e validação cruzada estratificada (5-fold)
+- Feature engineering completo e análise comparativa de múltiplos algoritmos
+- Competição real estilo Kaggle com dataset do Yelp Toronto
 
-**Impacto:** Demonstração de capacidade de modelagem preditiva avançada em competições.
+**Impacto:** Demonstração de capacidade de modelagem preditiva avançada em competições de machine learning.
+
+[📖 Ver Projeto](./projects/competicao-kaggle-venues/)
 
 ---
 
-### 3. 📄 [Análise de Acidentes em Rodovias Federais](./databank/Work6/)
-**Tecnologias:** PostgreSQL, Python, SQL, LaTeX  
+### 3. 📄 [Análise de Acidentes em Rodovias Federais](./projects/analise-acidentes-rodovias/)
+**Tecnologias:** PostgreSQL, Python, SQL, LaTeX, Pandas, Matplotlib  
 **Resultado:** Artigo científico completo (padrão SBC)  
 **Destaque:**
-- Análise de **67.794 acidentes**
+- Análise de **67.794 acidentes** em rodovias federais
 - Identificação de padrões temporais (picos em dezembro, outubro, julho)
-- Horário crítico: 17h-19h
+- Horário crítico identificado: 17h-19h
 - Principais causas: Reação tardia (27,3%), Ausência de reação (22,4%)
 
-**Impacto:** Insights valiosos para políticas públicas de segurança viária.
+**Impacto:** Insights valiosos para políticas públicas de segurança viária com metodologia científica rigorosa.
+
+[📖 Ver Projeto](./projects/analise-acidentes-rodovias/)
 
 ---
 
-### 4. 🏥 [Análise do Sistema E-Saúde de Curitiba](./Trabalho/)
-**Tecnologias:** Python, Pandas, Análise Temporal, Visualização  
+### 4. 🏥 [Análise do Sistema E-Saúde de Curitiba](./projects/analise-esaude-curitiba/)
+**Tecnologias:** Python, Pandas, Análise Temporal, Visualização, Limpeza de Dados  
 **Resultado:** Projeto completo de análise em saúde pública  
 **Destaque:**
-- Processamento de **~46.000 registros mensais**
-- Análise temporal (Dez/2024 - Jul/2025)
-- Análise geográfica por bairros
-- Limpeza e preparação de dados em larga escala
+- Processamento de **~46.000 registros mensais** de atendimentos
+- Análise temporal completa (Dez/2024 - Jul/2025)
+- Análise geográfica por bairros de Curitiba
+- Scripts automatizados de limpeza e consolidação de dados
 
-**Impacto:** Análise completa demonstrando capacidade de trabalhar com dados reais de saúde pública.
+**Impacto:** Análise completa demonstrando capacidade de trabalhar com dados reais de saúde pública em larga escala.
+
+[📖 Ver Projeto](./projects/analise-esaude-curitiba/)
 
 ---
 
-### 5. 💓 [Classificação de Sinais Vitais](./ML/Work3/)
-**Tecnologias:** Python, scikit-learn, Classificação Multiclasse  
-**Resultado:** Análise comparativa de múltiplos modelos  
+### 5. 💓 [Classificação de Sinais Vitais](./projects/classificacao-sinais-vitais/)
+**Tecnologias:** Python, scikit-learn, Classificação Multiclasse, Análise Comparativa  
+**Resultado:** Análise comparativa de múltiplos modelos de classificação  
 **Destaque:**
-- Comparação detalhada de métricas
+- Comparação detalhada de métricas entre modelos
 - Análise de distribuições por classe
-- Visualizações profissionais
-- Feature importance e correlações
+- Visualizações profissionais (matrizes de confusão, correlações)
+- Feature importance e análise de correlações
 
-**Impacto:** Demonstração de capacidade de análise de dados médicos e classificação.
+**Impacto:** Demonstração de capacidade de análise de dados médicos e classificação multiclasse.
+
+[📖 Ver Projeto](./projects/classificacao-sinais-vitais/)
+
+---
+
+## 📚 Estrutura do Portfólio
+
+### 🗂️ [Data Mining](./data-mining/)
+Trabalhos de mineração de dados, incluindo web scraping, regressão linear, clustering e regras de associação.
+
+**Projetos:**
+- Web Scraping e Análise de Dados do YouTube
+- Regressão Linear e Análise de Dados
+- Classificação e Agrupamento (Clustering)
+- Regras de Associação e Mineração de Texto
+
+[📖 Ver Disciplina](./data-mining/)
+
+---
+
+### 🗄️ [Banco de Dados](./banco-dados/)
+Projetos envolvendo SQL, PostgreSQL, PostGIS e análise de dados.
+
+**Projetos:**
+- Análise de Alvarás de Construção
+- Análise Exploratória de Acidentes de Trânsito
+- Consultas SQL Avançadas
+
+[📖 Ver Disciplina](./banco-dados/)
+
+---
+
+### 🤖 [Machine Learning](./machine-learning/)
+Projetos de aprendizado de máquina, incluindo regressão, classificação e otimização de modelos.
+
+**Projetos:**
+- Regressão Linear - Previsão de Preços de Imóveis
+- Classificação Multiclasse - Indicadores Sociais Globais
+
+[📖 Ver Disciplina](./machine-learning/)
+
+---
+
+### 📊 [Estatística](./estatistica/)
+Trabalhos desenvolvidos em R sobre análise estatística e visualização de dados.
+
+[📖 Ver Disciplina](./estatistica/)
 
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
 ### Linguagens e Frameworks
-- **Python** (pandas, numpy, scikit-learn, matplotlib, seaborn)
+- **Python** (pandas, numpy, scikit-learn, matplotlib, seaborn, plotly)
 - **SQL** (PostgreSQL, PostGIS)
+- **R** (análise estatística)
 - **Jupyter Notebooks**
 - **LaTeX** (artigos científicos)
 
 ### Bibliotecas Principais
-- **Machine Learning:** scikit-learn, XGBoost, PyCaret
+- **Machine Learning:** scikit-learn, XGBoost, imbalanced-learn
 - **Visualização:** matplotlib, seaborn, plotly, folium
 - **Análise:** pandas, numpy, scipy, statsmodels
-- **Geoprocessamento:** geopandas, PostGIS
-- **Web Scraping:** google-api-python-client
+- **Geoprocessamento:** geopandas, PostGIS, Shapely
+- **Web Scraping:** google-api-python-client, requests
+- **Processamento de Texto:** nltk, mlxtend
 
 ---
 
 ## 📈 Métricas e Resultados
 
 ### Modelos de Machine Learning
-- **Regressão Linear:** RMSE otimizado para previsão de preços
 - **Classificação:** F1-Score de até **0.9991** em competições
+- **Regressão:** RMSE otimizado para previsão de preços
 - **Clustering:** Análise de padrões em dados não supervisionados
 
 ### Análises Estatísticas
-- Análise de **67.794+ acidentes** de trânsito
-- Processamento de **46.000+ registros mensais** de saúde
+- Análise de **73.156 acidentes** de trânsito (geoespacial)
+- Análise de **67.794 acidentes** de trânsito (temporal)
+- Processamento de **46.000+ registros mensais** de saúde pública
 - Análise temporal de múltiplos períodos
-- Análise geoespacial de **73.156 acidentes**
+- Análise geoespacial com PostGIS
 
 ---
 
 ## 🎓 Competências Demonstradas
 
 ### Técnicas
-- ✅ Pré-processamento e limpeza de dados
-- ✅ Feature Engineering
+- ✅ Pré-processamento e limpeza de dados em larga escala
+- ✅ Feature Engineering e seleção de variáveis
 - ✅ Modelagem preditiva (regressão, classificação, clustering)
 - ✅ Validação cruzada e otimização de hiperparâmetros
-- ✅ Análise exploratória de dados (EDA)
+- ✅ Análise exploratória de dados (EDA) completa
 - ✅ Visualização de dados profissional
 - ✅ Análise estatística descritiva e inferencial
-- ✅ Análise geoespacial com PostGIS
-- ✅ Web Scraping e APIs
-- ✅ Redação científica (LaTeX)
+- ✅ Análise geoespacial com PostGIS e GeoPandas
+- ✅ Web Scraping e integração com APIs
+- ✅ Redação científica (LaTeX, padrão SBC)
+- ✅ SQL avançado e consultas complexas
 
 ### Domínios
 - ✅ Saúde Pública
@@ -184,33 +197,56 @@ Exercícios práticos e notebooks de estudo.
 - ✅ Análise Geoespacial
 - ✅ Análise Temporal
 - ✅ Indicadores Sociais
+- ✅ Dados Governamentais
 
 ---
 
 ## 🚀 Como Navegar
 
-Cada pasta de trabalho contém:
+Cada projeto contém:
 - **README.md** com descrição detalhada do projeto
 - **Notebooks Jupyter** (.ipynb) com análises completas
 - **Scripts Python** (.py) quando aplicável
-- **Dados** (quando permitido) ou instruções para obtenção
+- **Dados** (amostras pequenas) ou instruções para obtenção
 - **Visualizações** e resultados gerados
+- **requirements.txt** com dependências específicas
 
 ---
 
-## 📦 Instalação
+## 📦 Instalação e Uso
 
-### Requisitos
+### Requisitos Gerais
+
 ```bash
 # Instalar dependências Python
 pip install -r requirements.txt
 
 # Para trabalhos com PostgreSQL
-# Instalar PostgreSQL e PostGIS separadamente
 sudo apt-get install postgresql postgresql-contrib postgis
 
 # Para compilar artigos LaTeX
 sudo apt-get install texlive-latex-extra texlive-fonts-recommended texlive-lang-portuguese
+```
+
+### Executar um Projeto
+
+1. Navegue até a pasta do projeto:
+```bash
+cd projects/analise-espacial-acidentes
+```
+
+2. Instale as dependências específicas (se houver):
+```bash
+pip install -r requirements.txt
+```
+
+3. Siga as instruções no README.md do projeto
+
+4. Execute os notebooks ou scripts:
+```bash
+jupyter notebook notebooks/01-exploracao.ipynb
+# ou
+python src/main.py
 ```
 
 ---
@@ -221,57 +257,34 @@ sudo apt-get install texlive-latex-extra texlive-fonts-recommended texlive-lang-
 datascience/
 ├── README.md                    # Este arquivo
 ├── .gitignore                   # Arquivos a ignorar
-├── requirements.txt             # Dependências Python
+├── requirements.txt             # Dependências Python gerais
 │
-├── data_mining/                 # Trabalhos de Data Mining
-│   ├── README.md
-│   ├── work1/                   # Web Scraping YouTube
-│   ├── work2/                   # Regressão Linear
-│   ├── work3/                   # Clustering
-│   ├── work4/                   # Regras de Associação
-│   └── challenge/               # Competição Kaggle
+├── projects/                    # Projetos em destaque
+│   ├── analise-espacial-acidentes/
+│   ├── competicao-kaggle-venues/
+│   ├── analise-acidentes-rodovias/
+│   ├── analise-esaude-curitiba/
+│   └── classificacao-sinais-vitais/
 │
-├── databank/                    # Trabalhos de Banco de Dados
-│   ├── README.md
-│   ├── Work1/                   # Alvarás
-│   ├── Work2/                   # Acidentes Exploratória
-│   ├── Work3/                   # SQL Avançado
-│   ├── Work6/                   # Artigo Científico
-│   └── Work8/                   # Análise Espacial
+├── data-mining/                 # Trabalhos de Data Mining
+├── banco-dados/                 # Trabalhos de Banco de Dados
+├── machine-learning/            # Trabalhos de Machine Learning
+├── estatistica/                 # Trabalhos de Estatística (R)
 │
-├── ML/                          # Trabalhos de Machine Learning
-│   ├── README.md
-│   ├── Work1/                   # Regressão Imóveis
-│   ├── Work2/                   # Classificação Global
-│   └── Work3/                   # Sinais Vitais
-│
-├── Trabalho/                    # Projeto E-Saúde
-│   └── README.md
-│
-├── tutoriais/                   # Materiais de estudo
-│   └── README.md
-│
-└── exercicios/                  # Exercícios práticos
-    └── README.md
+└── _archive/                    # Material de estudo/tutoriais
+    ├── tutoriais-python/
+    └── exercicios/
 ```
 
 ---
 
-## 📧 Contato e Links
+## 📧 Contato
 
 Para dúvidas, sugestões ou oportunidades de trabalho:
 
-- **GitHub:** [@seu-usuario](https://github.com/seu-usuario)
-- **LinkedIn:** [Seu perfil LinkedIn](https://linkedin.com/in/seu-perfil)
-- **Email:** seu.email@exemplo.com
-
----
-
-## 📚 Documentação Adicional
-
-- [Guia Completo do GitHub](./GUIA_GITHUB.md) - Como publicar e organizar no GitHub
-- [Passo a Passo GitHub](./PASSO_A_PASSO_GITHUB.md) - Tutorial detalhado de configuração
-- [Resumo da Organização](./RESUMO_ORGANIZACAO.md) - O que foi organizado no portfólio
+- **LinkedIn:** [Perfil LinkedIn](https://linkedin.com/in/seu-perfil) *(atualizar com link real)*
+- **Email:** contato sob demanda
+- **GitHub:** [@seu-usuario](https://github.com/seu-usuario) *(atualizar com usuário real)*
 
 ---
 
@@ -281,4 +294,13 @@ Este portfólio é de uso educacional e acadêmico. Os dados utilizados são pú
 
 ---
 
-**Última atualização:** 2025
+## 📚 Documentação Adicional
+
+- [Análise e Reestruturação](./ANALISE_E_REESTRUTURACAO.md) - Documento completo de análise e recomendações
+- [Guia do GitHub](./GUIA_GITHUB.md) - Como publicar e organizar no GitHub
+- [Passo a Passo GitHub](./PASSO_A_PASSO_GITHUB.md) - Tutorial detalhado de configuração
+
+---
+
+**Última atualização:** Janeiro 2025
+
