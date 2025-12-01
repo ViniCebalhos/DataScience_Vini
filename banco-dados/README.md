@@ -6,7 +6,7 @@ Esta pasta contém todos os trabalhos desenvolvidos na disciplina de **Banco de 
 
 ## 📚 Trabalhos Desenvolvidos
 
-### 📋 [Work 1: Análise de Alvarás de Construção](./Work1/)
+### 📋 [Análise de Alvarás de Construção](./analise-alvaras/)
 **Objetivo:** Análise exploratória de dados de alvarás de construção usando SQL e Python.
 
 **Tecnologias:**
@@ -26,7 +26,7 @@ Esta pasta contém todos os trabalhos desenvolvidos na disciplina de **Banco de 
 
 ---
 
-### 🚗 [Work 2: Análise Exploratória de Acidentes de Trânsito](./Work2/)
+### 🚗 [Análise Exploratória de Acidentes de Trânsito](./analise-acidentes-eda/)
 **Objetivo:** Análise exploratória de dados de acidentes de trânsito da PRF.
 
 **Tecnologias:**
@@ -48,7 +48,7 @@ Esta pasta contém todos os trabalhos desenvolvidos na disciplina de **Banco de 
 
 ---
 
-### 📊 [Work 3: Consultas SQL Avançadas](./Work3/)
+### 📊 [Consultas SQL Avançadas](./consultas-sql-avancadas/)
 **Objetivo:** Aplicar consultas SQL avançadas em dados de acidentes.
 
 **Tecnologias:**
@@ -65,7 +65,7 @@ Esta pasta contém todos os trabalhos desenvolvidos na disciplina de **Banco de 
 
 ---
 
-### 📄 [Work 6: Artigo Científico - Análise de Acidentes em Rodovias Federais](./Work6/)
+### 📄 [Artigo Científico - Análise de Acidentes em Rodovias Federais](../projects/analise-acidentes-rodovias/)
 **Objetivo:** Desenvolver artigo científico completo sobre análise de acidentes de trânsito.
 
 **Resultado:** Artigo científico completo publicado em formato SBC.
@@ -88,23 +88,11 @@ Esta pasta contém todos os trabalhos desenvolvidos na disciplina de **Banco de 
 - Horário crítico: 17h-19h
 - Principais causas: Reação tardia (27,3%), Ausência de reação (22,4%), Desatenção (18,9%)
 
-**Arquivos principais:**
-- `artigo_sbc_simples.tex` - Código LaTeX do artigo
-- `artigo_sbc_simples.pdf` - Artigo em PDF
-- `anexos.py` - Script para gerar visualizações
-- `README_compilacao.md` - Guia de compilação
-- Visualizações: `acidentes_por_mes.png`, `causas_acidentes.png`, `acidentes_por_hora.png`
-
-**Como compilar o artigo:**
-```bash
-cd Work6
-chmod +x compilar_simples.sh
-./compilar_simples.sh
-```
+**📍 Este projeto está em destaque em [`projects/analise-acidentes-rodovias/`](../projects/analise-acidentes-rodovias/)**
 
 ---
 
-### 🗺️ [Work 8: Análise Espacial de Acidentes com PostGIS](./Work8/)
+### 🗺️ [Análise Espacial de Acidentes com PostGIS](../projects/analise-espacial-acidentes/)
 **Objetivo:** Análise geoespacial de acidentes de trânsito usando PostGIS.
 
 **Resultado:** Artigo científico completo com análise espacial.
@@ -127,20 +115,7 @@ chmod +x compilar_simples.sh
 - Identificação de hotspots de acidentes
 - Análise de eficiência da distribuição de postos
 
-**Arquivos principais:**
-- `artigo_sbc_analise_espacial.pdf` - Artigo completo
-- `artigo_sbc_analise_espacial.tex` - Código LaTeX
-- `mapa_acidentes_interativo.html` - Mapa interativo (4.3 MB)
-- `mapa_completo_postos_prf.html` - Mapa com buffers (6.2 MB)
-- `gerar_mapa_analise_espacial.py` - Script de geração de mapas
-- `README_RESULTADOS.md` - Documentação completa
-
-**Metodologia:**
-1. Carregamento de dados de acidentes e postos PRF
-2. Geocodificação e preparação espacial
-3. Análise de proximidade com PostGIS
-4. Geração de visualizações interativas
-5. Análise estatística espacial
+**📍 Este projeto está em destaque em [`projects/analise-espacial-acidentes/`](../projects/analise-espacial-acidentes/)**
 
 ---
 
@@ -177,13 +152,13 @@ chmod +x compilar_simples.sh
 ## 📁 Estrutura de Pastas
 
 ```
-databank/
+banco-dados/
 ├── README.md                    # Este arquivo
-├── Work1/                       # Análise de Alvarás
-├── Work2/                       # Análise Exploratória Acidentes
-├── Work3/                       # Consultas SQL Avançadas
-├── Work6/                       # Artigo Científico
-└── Work8/                       # Análise Espacial
+├── analise-alvaras/             # Análise de Alvarás
+├── analise-acidentes-eda/       # Análise Exploratória Acidentes
+└── consultas-sql-avancadas/     # Consultas SQL Avançadas
+
+Nota: Os projetos Work6 e Work8 foram movidos para projects/ como projetos em destaque.
 ```
 
 ---

@@ -6,7 +6,7 @@ Esta pasta contém todos os trabalhos desenvolvidos na disciplina de **Machine L
 
 ## 📚 Trabalhos Desenvolvidos
 
-### 🏠 [Work 1: Regressão Linear - Previsão de Preços de Imóveis](./Work1/)
+### 🏠 [Regressão Linear - Previsão de Preços de Imóveis](./regressao-imoveis/)
 **Objetivo:** Ajustar um modelo de regressão linear para prever preços de imóveis.
 
 **Tecnologias:**
@@ -34,7 +34,7 @@ Esta pasta contém todos os trabalhos desenvolvidos na disciplina de **Machine L
 
 ---
 
-### 🌍 [Work 2: Classificação Multiclasse - Indicadores Sociais Globais](./Work2/)
+### 🌍 [Classificação Multiclasse - Indicadores Sociais Globais](./classificacao-indicadores/)
 **Objetivo:** Classificar países em categorias baseadas em indicadores sociais globais.
 
 **Tecnologias:**
@@ -86,7 +86,7 @@ Esta pasta contém todos os trabalhos desenvolvidos na disciplina de **Machine L
 
 ---
 
-### 💓 [Work 3: Classificação de Sinais Vitais](./Work3/)
+### 💓 [Classificação de Sinais Vitais](../projects/classificacao-sinais-vitais/)
 **Objetivo:** Classificar sinais vitais em diferentes categorias usando machine learning.
 
 **Tecnologias:**
@@ -114,10 +114,7 @@ Esta pasta contém todos os trabalhos desenvolvidos na disciplina de **Machine L
 - `Enunciado_Sinais_Vitais_CDA2025.pdf` - Enunciado do trabalho
 - Visualizações: `comparacao_metricas.png`, `correlacao_features.png`, `distribuicoes_por_classe.png`, `matrizes_confusao_comparacao.png`
 
-**Métricas:**
-- Comparação detalhada de performance entre modelos
-- Análise de distribuições por classe
-- Identificação de features mais relevantes
+**📍 Este projeto está em destaque em [`projects/classificacao-sinais-vitais/`](../projects/classificacao-sinais-vitais/)**
 
 ---
 
@@ -155,32 +152,31 @@ Esta pasta contém todos os trabalhos desenvolvidos na disciplina de **Machine L
 ## 📁 Estrutura de Pastas
 
 ```
-ML/
+machine-learning/
 ├── README.md                    # Este arquivo
-├── Work1/                       # Regressão Linear - Imóveis
-├── Work2/                       # Classificação - Indicadores Globais
-└── Work3/                       # Classificação - Sinais Vitais
+├── regressao-imoveis/           # Regressão Linear - Imóveis
+└── classificacao-indicadores/   # Classificação - Indicadores Globais
+
+Nota: O projeto Work3 foi movido para projects/ como projeto em destaque.
 ```
 
 ---
 
 ## 🚀 Como Executar
 
-### Para Work 1 (Regressão Linear):
+### Para Regressão Linear:
 ```bash
-cd Work1
+cd regressao-imoveis
 python regressao_linear_imoveis.py
 ```
 
-### Para Work 2 e Work 3 (Notebooks):
+### Para Classificação de Indicadores:
 ```bash
 # Instale as dependências
 pip install pandas numpy scikit-learn matplotlib seaborn xgboost imbalanced-learn
 
 # Abra o notebook
-jupyter notebook Work2/Vinicius_Cebalhos_classificacao.ipynb
-# ou
-jupyter notebook Work3/Vinicius_Cebalhos_classificacao_sinais_vitais.ipynb
+jupyter notebook classificacao-indicadores/Vinicius_Cebalhos_classificacao.ipynb
 ```
 
 ---
