@@ -6,7 +6,7 @@ Esta pasta contém todos os trabalhos desenvolvidos na disciplina de **Data Mini
 
 ## 📚 Trabalhos Desenvolvidos
 
-### 🔍 [Work 1: Web Scraping e Análise de Dados do YouTube](./work1/)
+### 🔍 [Web Scraping e Análise de Dados do YouTube](./web-scraping-youtube/)
 **Objetivo:** Extrair e analisar dados do YouTube usando a API oficial do Google.
 
 **Tecnologias:**
@@ -25,7 +25,7 @@ Esta pasta contém todos os trabalhos desenvolvidos na disciplina de **Data Mini
 
 ---
 
-### 📈 [Work 2: Regressão Linear e Análise de Dados](./work2/)
+### 📈 [Regressão Linear e Análise de Dados](./regressao-linear/)
 **Objetivo:** Aplicar conceitos fundamentais de dados e regressão linear em datasets reais.
 
 **Tecnologias:**
@@ -50,7 +50,7 @@ Esta pasta contém todos os trabalhos desenvolvidos na disciplina de **Data Mini
 
 ---
 
-### 🎯 [Work 3: Classificação e Agrupamento (Clustering)](./work3/)
+### 🎯 [Classificação e Agrupamento (Clustering)](./clustering-titanic/)
 **Objetivo:** Aplicar técnicas de classificação e clustering em dados do Titanic.
 
 **Tecnologias:**
@@ -69,7 +69,7 @@ Esta pasta contém todos os trabalhos desenvolvidos na disciplina de **Data Mini
 
 ---
 
-### 🔗 [Work 4: Regras de Associação e Mineração de Texto](./work4/)
+### 🔗 [Regras de Associação e Mineração de Texto](./regras-associacao-texto/)
 **Objetivo:** Aplicar técnicas de regras de associação e análise de texto.
 
 **Tecnologias:**
@@ -92,7 +92,7 @@ Esta pasta contém todos os trabalhos desenvolvidos na disciplina de **Data Mini
 
 ---
 
-### 🏆 [Challenge: Competição Kaggle](./challenge/)
+### 🏆 [Competição Kaggle - Previsão de Locais](../projects/competicao-kaggle-venues/)
 **Objetivo:** Prever locais altamente avaliados em Toronto usando dados do Yelp.
 
 **Competição:** Predict Highly Rated Venues CDA UTFPR 2024
@@ -116,10 +116,7 @@ Esta pasta contém todos os trabalhos desenvolvidos na disciplina de **Data Mini
 4. Otimização de hiperparâmetros
 5. Validação cruzada
 
-**Arquivos principais:**
-- `challenge_final.ipynb` - Notebook final com melhor modelo
-- `submission_best_model.csv` - Submissão final
-- Múltiplas submissões testadas com diferentes thresholds
+**📍 Este projeto está em destaque em [`projects/competicao-kaggle-venues/`](../projects/competicao-kaggle-venues/)**
 
 ---
 
@@ -157,15 +154,16 @@ Esta pasta contém todos os trabalhos desenvolvidos na disciplina de **Data Mini
 ## 📁 Estrutura de Pastas
 
 ```
-data_mining/
+data-mining/
 ├── README.md                    # Este arquivo
 ├── Aula3/                       # Exercícios de aula
-├── work1/                       # Web Scraping YouTube
-├── work2/                       # Regressão Linear
-├── work3/                       # Classificação e Clustering
-├── work4/                       # Regras de Associação e Texto
-├── challenge/                   # Competição Kaggle
+├── web-scraping-youtube/        # Web Scraping YouTube
+├── regressao-linear/            # Regressão Linear
+├── clustering-titanic/           # Classificação e Clustering
+├── regras-associacao-texto/     # Regras de Associação e Texto
 └── lib/                         # Bibliotecas auxiliares
+
+Nota: O projeto challenge foi movido para projects/ como projeto em destaque.
 ```
 
 ---
@@ -181,7 +179,7 @@ pip install pandas numpy scikit-learn matplotlib seaborn
 
 2. Abra o notebook desejado:
 ```bash
-jupyter notebook work[N]/[nome_do_notebook].ipynb
+jupyter notebook [nome-do-projeto]/[nome_do_notebook].ipynb
 ```
 
 3. Execute as células sequencialmente
