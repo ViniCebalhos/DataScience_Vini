@@ -1,0 +1,67 @@
+Índice;Bairro;Tamanho;N° de Quartos;Tipo;Vagas de Garagem;Valor de Venda
+1;Batel;75;2;Apartamento;1;900000
+2;Batel;105;3;Apartamento;2;1260000
+3;Batel;150;3;Sobrado;3;1980000
+4;Batel;120;3;Sobrado;2;1584000
+5;Batel;240;4;Casa;4;3456000
+6;Batel;190;4;Casa;3;2736000
+7;Bigorrilho;79;2;Apartamento;1;790000
+8;Bigorrilho;95;3;Apartamento;2;950000
+9;Bigorrilho;135;3;Sobrado;2;1485000
+10;Bigorrilho;160;3;Sobrado;2;1760000
+11;Bigorrilho;200;4;Casa;3;2400000
+12;Bigorrilho;265;4;Casa;4;3180000
+13;Juvevê;68;2;Apartamento;1;612000
+14;Juvevê;90;2;Apartamento;1;810000
+15;Juvevê;120;3;Sobrado;2;1188000
+16;Juvevê;145;3;Sobrado;2;1435500
+17;Juvevê;195;3;Casa;3;2106000
+18;Juvevê;210;4;Casa;4;2268000
+19;Cabral;72;2;Apartamento;1;648000
+20;Cabral;100;3;Apartamento;2;900000
+21;Cabral;120;3;Sobrado;2;1188000
+22;Cabral;140;3;Sobrado;2;1386000
+23;Cabral;195;4;Casa;3;2106000
+24;Cabral;230;4;Casa;4;2484000
+25;Ahú;65;1;Apartamento;1;585000
+26;Ahú;100;2;Apartamento;2;900000
+27;Ahú;130;3;Sobrado;2;1287000
+28;Ahú;155;4;Sobrado;2;1534500
+29;Ahú;170;3;Casa;3;1836000
+30;Ahú;220;4;Casa;4;2376000
+31;Água Verde;80;2;Apartamento;1;680000
+32;Água Verde;92;2;Apartamento;2;782000
+33;Água Verde;105;3;Sobrado;2;981750
+34;Água Verde;130;3;Sobrado;2;1215500
+35;Água Verde;160;3;Casa;3;1632000
+36;Água Verde;200;4;Casa;4;2040000
+37;Centro;58;1;Apartamento;1;435000
+38;Centro;77;2;Apartamento;1;577500
+39;Centro;98;2;Sobrado;1;808500
+40;Centro;127;3;Sobrado;2;1047750
+41;Centro;153;3;Casa;2;1377000
+42;Centro;185;4;Casa;3;1665000
+43;Portão;78;2;Apartamento;1;565500
+44;Portão;99;3;Apartamento;2;717750
+45;Portão;110;3;Sobrado;2;877250
+46;Portão;140;3;Sobrado;2;1116500
+47;Portão;165;3;Casa;3;1435500
+48;Portão;205;4;Casa;4;1783500
+49;Campo Comprido;62;2;Apartamento;1;434000
+50;Campo Comprido;88;3;Apartamento;2;616000
+51;Campo Comprido;100;3;Sobrado;1;770000
+52;Campo Comprido;120;3;Sobrado;2;924000
+53;Campo Comprido;155;3;Casa;3;1302000
+54;Campo Comprido;198;4;Casa;4;1663200
+55;CIC;59;1;Apartamento;1;354000
+56;CIC;59;2;Apartamento;1;354000
+57;CIC;99;2;Sobrado;1;653400
+58;CIC;119;3;Sobrado;2;785400
+59;CIC;129;3;Casa;2;928800
+60;CIC;159;4;Casa;3;1144800
+61;Pilarzinho;67;2;Apartamento;1;435500
+62;Pilarzinho;97;2;Apartamento;2;630500
+63;Pilarzinho;107;3;Sobrado;2;765050
+64;Pilarzinho;128;3;Sobrado;2;915200
+65;Pilarzinho;149;3;Casa;3;1162200
+66;Pilarzinho;189;4;Casa;4;1474200

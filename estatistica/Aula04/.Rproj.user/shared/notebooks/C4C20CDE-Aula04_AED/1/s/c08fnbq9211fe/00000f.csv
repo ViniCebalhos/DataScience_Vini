@@ -1,0 +1,18 @@
+"0","# Diretório do projeto, de onde serão salvos e lidos os arquivos"
+"0","project_root_path <- paste0(getwd())"
+"0",""
+"0","###"
+"0","# Variáveis e definições"
+"0","###"
+"0","source(paste0(project_root_path, ""/definitions.R""))"
+"0",""
+"0","###"
+"0","# Instalando e carregando pacotes "
+"0","###"
+"0","source(paste0(project_root_path, ""/install_load_packages.R""), encoding = encoding)"
+"2","G3;Seu ambiente já tem os pacotes necessários...
+g"
+"2","G3;Seus pacotes estão carregados. Bom trabalho!
+g"
+"0","dados <- read.csv(""dados_exercio.csv"")"
+"0","head(dados)"

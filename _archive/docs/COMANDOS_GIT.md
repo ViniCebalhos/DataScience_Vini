@@ -1,6 +1,6 @@
 # 🔧 Comandos Git Essenciais para o Portfólio
 
-Guia rápido de comandos Git mais usados para gerenciar seu portfólio.
+Guia rápido de comandos Git mais usados para gerenciar o repositório.
 
 ---
 
@@ -276,7 +276,7 @@ git count-objects -vH       # Detalhes dos objetos
 
 ---
 
-## 🎯 Workflow Recomendado para Portfólio
+## 🎯 Workflow Recomendado para repositório
 
 ### 1. Antes de Trabalhar
 ```bash
@@ -325,5 +325,5 @@ git push
 
 ---
 
-**Última atualização:** 2025
+**Última atualização:** 01/12/2025
 
