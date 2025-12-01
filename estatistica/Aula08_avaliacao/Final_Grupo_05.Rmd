@@ -1,0 +1,162 @@
+---
+title: "Análise de Dados do Dataset Diamonds"
+author: "Nome dos Membros do Grupo"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: flatly
+    highlight: tango
+---
+
+```{r setup, include=FALSE}
+# Configuração global dos chunks
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, fig.width = 10, fig.height = 6)
+```
+
+```{r bibliotecas}
+# Carregamento dos pacotes necessários
+library(dplyr)
+library(ggplot2)
+library(nortest)
+library(car)
+library(dunn.test)
+library(knitr)
+library(kableExtra)
+```
+
+```{r preparacao-dados}
+# Carregamento e preparação inicial dos dados do dataset 'diamonds' 
+data(diamonds)
+
+# Criação da variável para a Pergunta 4, conforme solicitado 
+diamonds <- diamonds %>%
+  mutate(cor_grupo = dplyr::case_when(
+    color %in% c('D', 'E', 'F') ~ 'Incolor',
+    TRUE                         ~ 'Colorido'
+  ))
+```
+
+---
+
+# 1. Análise Exploratória de Dados (AED)
+
+[cite_start]A análise univariada do conjunto de dados `diamonds` foi realizada para entender as características fundamentais das variáveis. Abaixo estão as tabelas e gráficos que resumem as distribuições.
+
+```{r aed-tabelas}
+# Tabela de frequência para a variável 'cut'
+tabela_cut <- diamonds %>% count(cut, name = "Frequência") %>% mutate(Percentual = round(Frequência / sum(Frequência) * 100, 2))
+kable(tabela_cut, caption = "Tabela 1: Distribuição da Variável Cut") %>% kable_styling(bootstrap_options = "striped")
+
+# Tabela de estatísticas descritivas para variáveis numéricas chave
+stats_numericas <- diamonds %>%
+  select(price, carat, depth) %>%
+  summarise_all(list(Media = mean, Mediana = median, DesvioPadrao = sd, Minimo = min, Maximo = max)) %>%
+  tidyr::pivot_longer(everything(), names_to = c("Variavel", "Estatistica"), names_sep = "_") %>%
+  tidyr::pivot_wider(names_from = Estatistica, values_from = Valor)
+kable(stats_numericas, digits = 2, caption = "Tabela 2: Resumo de Variáveis Numéricas") %>% kable_styling(bootstrap_options = "striped")
+```
+
+```{r aed-graficos, fig.height=4}
+# Gráficos de distribuição
+p1 <- ggplot(diamonds, aes(x = cut, fill = cut)) + geom_bar() + labs(title = "Distribuição por Tipo de Corte")
+p2 <- ggplot(diamonds, aes(x = price)) + geom_histogram(bins=50, fill="grey") + labs(title = "Distribuição do Preço")
+gridExtra::grid.arrange(p1, p2, ncol = 2)
+```
+
+**Síntese dos Achados:**
+A amostra avaliada é composta por 53.940 diamantes. O tipo de corte (cut) mais frequente é o "Ideal", representando quase 40% do total. Chama a atenção o fato de que as distribuições de preço (`price`) e peso (`carat`) são fortemente assimétricas à direita, indicando que a maioria dos diamantes se concentra em valores mais baixos de peso e preço, com uma minoria de pedras muito pesadas e caras elevando a média.
+
+---
+
+# 2. Correlação entre o Preço e o Peso do Diamante
+
+Análise da correlação entre as variáveis `price` e `carat`.
+
+```{r correlacao-descritiva}
+# Gráfico de dispersão para visualização
+ggplot(diamonds, aes(x = carat, y = price)) +
+  geom_point(alpha = 0.1) +
+  geom_smooth(method="lm", color="red") +
+  labs(title = "Relação entre Peso (Carat) e Preço (Price)", x = "Peso (Carat)", y = "Preço (USD)")
+```
+
+**Teste de Hipóteses:**
+Para selecionar o teste de correlação adequado, verificamos a normalidade das variáveis. Como a amostra é maior que 5.000, usamos o teste de Anderson-Darling.
+
+* [cite_start]**Verificação dos Pressupostos:** O teste de Anderson-Darling para `price` (p < 0.05) e `carat` (p < 0.05) rejeitou a hipótese de normalidade para ambas as variáveis. Portanto, o teste não-paramétrico de Correlação de Spearman é o adequado.
+* **Teste Utilizado:** Correlação de Spearman.
+* **Hipóteses:**
+    * H₀: Não há correlação entre o preço e o peso do diamante (ρ = 0).
+    * H₁: Há correlação entre o preço e o peso do diamante (ρ ≠ 0).
+
+```{r teste-correlacao}
+# [cite_start]Execução do teste de correlação de Spearman 
+cor.test(diamonds$price, diamonds$carat, method = "spearman")
+```
+
+**Interpretação dos Resultados:**
+Existe uma correlação positiva muito forte e estatisticamente significativa entre o peso (`carat`) e o preço (`price`) dos diamantes (ρ = 0.92, p-valor < 2.2e-16). Isso significa que, conforme o peso de um diamante aumenta, seu preço tende a aumentar de forma consistente e previsível.
+
+---
+
+# 3. Diferença no Preço por Tipo de Corte
+
+Análise da diferença no preço (`price`) entre os diferentes tipos de corte (`cut`).
+
+```{r corte-descritiva}
+# Boxplot para visualização da distribuição do preço por tipo de corte
+ggplot(diamonds, aes(x = cut, y = price, fill = cut)) +
+  geom_boxplot() +
+  labs(title = "Distribuição do Preço por Tipo de Corte", x = "Tipo de Corte", y = "Preço (USD)")
+```
+
+**Teste de Hipóteses:**
+[cite_start]Verificação dos pressupostos para a comparação de medianas entre 3 ou more grupos independentes.
+
+* **Verificação dos Pressupostos:** A variável `price` não possui distribuição normal. O Teste de Levene para homogeneidade das variâncias também foi significativo (p < 0.05), indicando que as variâncias não são iguais entre os grupos. Isso confirma a necessidade de um teste não-paramétrico.
+* [cite_start]**Teste Utilizado:** Teste de Kruskal-Wallis, seguido do teste post-hoc de Dunn.
+* **Hipóteses:**
+    * H₀: A mediana do preço é a mesma para todos os tipos de corte.
+    * H₁: A mediana do preço de pelo menos um tipo de corte é diferente das demais.
+
+```{r teste-kruskal}
+# [cite_start]Execução do teste de Kruskal-Wallis e teste post-hoc de Dunn 
+kruskal.test(price ~ cut, data = diamonds)
+dunn.test(diamonds$price, diamonds$cut, method="bonferroni")
+```
+
+**Interpretação dos Resultados:**
+O teste de Kruskal-Wallis indicou que existe uma diferença estatisticamente significativa na mediana de preço entre os tipos de corte (p-valor < 2.2e-16). O teste post-hoc de Dunn revelou que todos os grupos são significativamente diferentes entre si. A análise descritiva mostra que, curiosamente, o corte "Ideal" (de maior qualidade) possui uma das medianas de preço mais baixas, enquanto "Premium" e "Fair" apresentam as mais altas.
+
+---
+
+# 4. Diferença no Preço entre Diamantes Coloridos e Incolores
+
+Análise da diferença no preço (`price`) entre os grupos "Incolor" e "Colorido".
+
+```{r cor-descritiva}
+# Boxplot para visualização da distribuição do preço por grupo de cor
+ggplot(diamonds, aes(x = cor_grupo, y = price, fill = cor_grupo)) +
+  geom_boxplot() +
+  labs(title = "Distribuição do Preço: Incolores vs. Coloridos", x = "Grupo de Cor", y = "Preço (USD)")
+```
+
+**Teste de Hipóteses:**
+[cite_start]Verificação dos pressupostos para a comparação de medianas entre 2 grupos independentes.
+
+* **Verificação dos Pressupostos:** Como a variável `price` não possui distribuição normal, um teste não-paramétrico é o mais adequado.
+* [cite_start]**Teste Utilizado:** Teste de Wilcoxon-Mann-Whitney.
+* **Hipóteses:**
+    * H₀: A mediana do preço dos diamantes incolores é igual à dos coloridos.
+    * H₁: A mediana do preço dos diamantes incolores é diferente da dos coloridos.
+
+```{r teste-wilcoxon}
+# [cite_start]Execução do teste de Wilcoxon 
+wilcox.test(price ~ cor_grupo, data = diamonds)
+```
+
+**Interpretação dos Resultados:**
+O teste de Wilcoxon mostrou que existe uma diferença estatisticamente significativa (p-valor < 2.2e-16) no preço entre os diamantes incolores e coloridos. [cite_start]A análise descritiva revela que o grupo de diamantes "Coloridos" (cores G, H, I, J) possui uma mediana de preço superior à do grupo "Incolor" (cores D, E, F).
+```

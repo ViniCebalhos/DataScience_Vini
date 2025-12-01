@@ -100,6 +100,8 @@ secrets.txt
 .env
 .env.local
 *.env
+api.txts
+
 
 # Large output files
 *.html

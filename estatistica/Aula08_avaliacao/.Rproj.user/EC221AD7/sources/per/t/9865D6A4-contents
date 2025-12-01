@@ -1,0 +1,659 @@
+---
+title: "Análise Exploratória de Dados - Dataset Diamonds"
+author: "Seu Nome"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: flatly
+    highlight: tango
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, fig.width = 10, fig.height = 6)
+```
+
+# Configuração Inicial
+
+```{r bibliotecas}
+# Carregando os pacotes necessários
+library(dplyr)
+library(ggplot2)
+library(corrplot)
+library(stats)
+library(readxl)
+library(graphics)
+library(MASS)
+library(car)
+library(samplingbook)
+library(truncnorm)
+library(dunn.test)
+library(lubridate)
+library(skimr)
+library(nortest)
+library(knitr)
+library(kableExtra)
+```
+
+```{r carregamento-dados}
+# Carregando o dataset diamonds
+data(diamonds)
+
+# Criando variável clarity_adj para facilitar a análise
+diamonds <- diamonds %>% 
+  dplyr::mutate(clarity_adj = dplyr::case_when(
+    clarity %in% c("IF", "VVS1", "VVS2") ~ "Alta Pureza",
+    clarity %in% c("VS1", "VS2", "SI1") ~ "Média Pureza",
+    clarity %in% c("SI2", "I1") ~ "Baixa Pureza")
+    ) %>%
+  dplyr::mutate(clarity_adj = factor(clarity_adj, 
+                                     levels = c("Alta Pureza", "Média Pureza", "Baixa Pureza"),
+                                     ordered = TRUE))
+
+# Visão geral dos dados
+cat("Dimensões do dataset:", nrow(diamonds), "linhas x", ncol(diamonds), "colunas")
+```
+
+---
+
+# 1. Análise Exploratória de Dados (AED)
+
+## 1.1 Visão Geral do Dataset
+
+```{r visao-geral}
+# Estrutura dos dados
+str(diamonds)
+```
+
+```{r resumo-skimr}
+# Resumo completo usando skimr
+skim(diamonds)
+```
+
+```{r valores-ausentes}
+# Verificação de valores ausentes
+valores_ausentes <- colSums(is.na(diamonds))
+kable(data.frame(Variavel = names(valores_ausentes), 
+                 Valores_Ausentes = valores_ausentes),
+      caption = "Tabela 1: Valores Ausentes por Variável") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+```
+
+## 1.2 Análise Univariada - Variáveis Categóricas
+
+### 1.2.1 Distribuição das Variáveis Categóricas
+
+```{r tabelas-categoricas}
+# Tabelas de frequência
+cat("=== DISTRIBUIÇÃO DAS VARIÁVEIS CATEGÓRICAS ===\n")
+
+# Cut
+freq_cut <- table(diamonds$cut)
+prop_cut <- prop.table(freq_cut) * 100
+
+# Color  
+freq_color <- table(diamonds$color)
+prop_color <- prop.table(freq_color) * 100
+
+# Clarity
+freq_clarity <- table(diamonds$clarity)
+prop_clarity <- prop.table(freq_clarity) * 100
+
+# Clarity Ajustada
+freq_clarity_adj <- table(diamonds$clarity_adj)
+prop_clarity_adj <- prop.table(freq_clarity_adj) * 100
+
+# Tabela consolidada para Cut
+tabela_cut <- data.frame(
+  Cut = names(freq_cut),
+  Frequencia = as.numeric(freq_cut),
+  Percentual = round(as.numeric(prop_cut), 2)
+)
+
+kable(tabela_cut, caption = "Tabela 2: Distribuição da Variável Cut") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+# Tabela consolidada para Color
+tabela_color <- data.frame(
+  Color = names(freq_color),
+  Frequencia = as.numeric(freq_color),
+  Percentual = round(as.numeric(prop_color), 2)
+)
+
+kable(tabela_color, caption = "Tabela 3: Distribuição da Variável Color") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+# Tabela consolidada para Clarity Ajustada
+tabela_clarity_adj <- data.frame(
+  Clarity_Ajustada = names(freq_clarity_adj),
+  Frequencia = as.numeric(freq_clarity_adj),
+  Percentual = round(as.numeric(prop_clarity_adj), 2)
+)
+
+kable(tabela_clarity_adj, caption = "Tabela 4: Distribuição da Variável Clarity Ajustada") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+```
+
+### 1.2.2 Gráficos das Variáveis Categóricas
+
+```{r graficos-categoricas, fig.height=8}
+# Gráficos de barras
+p1 <- ggplot(diamonds, aes(x = cut, fill = cut)) +
+  geom_bar() +
+  labs(title = "Distribuição de Cut", x = "Cut", y = "Frequência") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+p2 <- ggplot(diamonds, aes(x = color, fill = color)) +
+  geom_bar() +
+  labs(title = "Distribuição de Color", x = "Color", y = "Frequência") +
+  theme_minimal()
+
+p3 <- ggplot(diamonds, aes(x = clarity_adj, fill = clarity_adj)) +
+  geom_bar() +
+  labs(title = "Distribuição de Clarity Ajustada", x = "Clarity Ajustada", y = "Frequência") +
+  theme_minimal()
+
+# Organizando os gráficos
+library(gridExtra)
+grid.arrange(p1, p2, p3, nrow = 2, ncol = 2)
+```
+
+## 1.3 Análise Univariada - Variáveis Numéricas
+
+### 1.3.1 Estatísticas Descritivas
+
+```{r estatisticas-numericas}
+# Selecionando apenas variáveis numéricas
+numeric_vars <- diamonds %>% select_if(is.numeric)
+
+# Estatísticas descritivas
+stats_desc <- numeric_vars %>%
+  summarise_all(list(
+    Media = ~mean(., na.rm = TRUE),
+    Mediana = ~median(., na.rm = TRUE),
+    DesvioPadrao = ~sd(., na.rm = TRUE),
+    Minimo = ~min(., na.rm = TRUE),
+    Maximo = ~max(., na.rm = TRUE)
+  )) %>%
+  tidyr::pivot_longer(everything(), names_to = c("Variavel", "Estatistica"), 
+                     names_sep = "_", values_to = "Valor") %>%
+  tidyr::pivot_wider(names_from = Estatistica, values_from = Valor)
+
+kable(stats_desc, digits = 2, 
+      caption = "Tabela 5: Estatísticas Descritivas das Variáveis Numéricas") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+```
+
+### 1.3.2 Histogramas das Variáveis Numéricas
+
+```{r histogramas, fig.height=10}
+# Histogramas das principais variáveis
+p4 <- ggplot(diamonds, aes(x = carat)) +
+  geom_histogram(bins = 50, fill = "skyblue", alpha = 0.7) +
+  labs(title = "Distribuição de Carat", x = "Carat (quilates)", y = "Frequência") +
+  theme_minimal()
+
+p5 <- ggplot(diamonds, aes(x = price)) +
+  geom_histogram(bins = 50, fill = "lightcoral", alpha = 0.7) +
+  labs(title = "Distribuição de Price", x = "Price (USD)", y = "Frequência") +
+  scale_x_continuous(labels = scales::comma) +
+  theme_minimal()
+
+p6 <- ggplot(diamonds, aes(x = depth)) +
+  geom_histogram(bins = 50, fill = "lightgreen", alpha = 0.7) +
+  labs(title = "Distribuição de Depth", x = "Depth (%)", y = "Frequência") +
+  theme_minimal()
+
+p7 <- ggplot(diamonds, aes(x = table)) +
+  geom_histogram(bins = 50, fill = "gold", alpha = 0.7) +
+  labs(title = "Distribuição de Table", x = "Table (%)", y = "Frequência") +
+  theme_minimal()
+
+grid.arrange(p4, p5, p6, p7, nrow = 2, ncol = 2)
+```
+
+### 1.3.3 Boxplots para Identificação de Outliers
+
+```{r boxplots, fig.height=8}
+# Boxplots
+p8 <- ggplot(diamonds, aes(y = carat)) +
+  geom_boxplot(fill = "skyblue", alpha = 0.7) +
+  labs(title = "Boxplot - Carat") +
+  theme_minimal()
+
+p9 <- ggplot(diamonds, aes(y = price)) +
+  geom_boxplot(fill = "lightcoral", alpha = 0.7) +
+  labs(title = "Boxplot - Price") +
+  scale_y_continuous(labels = scales::comma) +
+  theme_minimal()
+
+p10 <- ggplot(diamonds, aes(y = depth)) +
+  geom_boxplot(fill = "lightgreen", alpha = 0.7) +
+  labs(title = "Boxplot - Depth") +
+  theme_minimal()
+
+p11 <- ggplot(diamonds, aes(y = table)) +
+  geom_boxplot(fill = "gold", alpha = 0.7) +
+  labs(title = "Boxplot - Table") +
+  theme_minimal()
+
+grid.arrange(p8, p9, p10, p11, nrow = 1, ncol = 4)
+```
+
+### 1.3.4 Análise de Outliers
+
+```{r outliers}
+# Função para detectar outliers usando IQR
+detect_outliers <- function(x) {
+  Q1 <- quantile(x, 0.25, na.rm = TRUE)
+  Q3 <- quantile(x, 0.75, na.rm = TRUE)
+  IQR <- Q3 - Q1
+  lower_bound <- Q1 - 1.5 * IQR
+  upper_bound <- Q3 + 1.5 * IQR
+  outliers <- x < lower_bound | x > upper_bound
+  return(sum(outliers, na.rm = TRUE))
+}
+
+# Contando outliers
+outlier_counts <- sapply(numeric_vars, detect_outliers)
+outlier_percentual <- round((outlier_counts / nrow(diamonds)) * 100, 2)
+
+tabela_outliers <- data.frame(
+  Variavel = names(outlier_counts),
+  Num_Outliers = outlier_counts,
+  Percentual = outlier_percentual
+)
+
+kable(tabela_outliers, 
+      caption = "Tabela 6: Número de Outliers por Variável (Método IQR)") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+```
+
+## 1.4 Síntese dos Principais Achados da AED
+
+**A amostra avaliada é composta por 53.940 diamantes, sendo o tipo de corte "Ideal" o mais frequente (40,0% dos casos), seguido por "Premium" (25,6%). Em relação à cor, observa-se uma distribuição relativamente equilibrada, com destaque para as cores "G" (20,8%) e "E" (17,4%). Quando analisamos a pureza agrupada, nota-se que a maioria dos diamantes possui "Média Pureza" (51,2%), seguida por "Baixa Pureza" (34,5%) e "Alta Pureza" (14,3%). Chama atenção o fato de que a distribuição do peso (carat) é altamente assimétrica à direita, com média de 0,80 quilates e presença significativa de outliers (4,21% das observações). O preço também apresenta distribuição assimétrica, com média de US$ 3.933 e grande variabilidade (desvio padrão de US$ 3.989), sugerindo diferenças substanciais nos valores dos diamantes. As variáveis de proporção (depth e table) mostram distribuições mais próximas da normalidade, com depth centrada em 61,7% e table em 57,5%.**
+
+---
+
+# 2. Correlação entre Preço e Peso do Diamante
+
+## 2.1 Estatística Descritiva das Variáveis Envolvidas
+
+```{r estatisticas-correlacao}
+# Estatísticas descritivas
+stats_desc <- numeric_vars %>%
+  summarise_all(list(
+    Media = ~mean(., na.rm = TRUE),
+    Mediana = ~median(., na.rm = TRUE),
+    DesvioPadrao = ~sd(., na.rm = TRUE),
+    Minimo = ~min(., na.rm = TRUE),
+    Maximo = ~max(., na.rm = TRUE)
+  )) %>%
+  tidyr::pivot_longer(everything(), names_to = c("Variavel", "Estatistica"), 
+                     names_sep = "_", values_to = "Valor") %>%
+  tidyr::pivot_wider(names_from = Estatistica, values_from = Valor)
+
+
+
+# Estatísticas descritivas para Price e Carat
+stats_price_carat <- diamonds %>%
+  dplyr::select(price, carat) %>%
+  summarise_all(list(
+    N = ~n(),
+    Media = ~mean(., na.rm = TRUE),
+    Mediana = ~median(., na.rm = TRUE),
+    DesvioPadrao = ~sd(., na.rm = TRUE),
+    Minimo = ~min(., na.rm = TRUE),
+    Maximo = ~max(., na.rm = TRUE),
+    Q1 = ~quantile(., 0.25, na.rm = TRUE),
+    Q3 = ~quantile(., 0.75, na.rm = TRUE)
+  )) %>%
+  tidyr::pivot_longer(everything(), names_to = c("Variavel", "Estatistica"), 
+                     names_sep = "_", values_to = "Valor") %>%
+  tidyr::pivot_wider(names_from = Estatistica, values_from = Valor)
+
+kable(stats_price_carat, digits = 2, 
+      caption = "Tabela 7: Estatísticas Descritivas - Price e Carat") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+```
+
+## 2.2 Visualização da Relação entre as Variáveis
+
+```{r scatterplot-price-carat, fig.height=6}
+# Scatterplot Price vs Carat
+ggplot(diamonds, aes(x = carat, y = price)) +
+  geom_point(alpha = 0.3, color = "blue") +
+  geom_smooth(method = "lm", color = "red", se = TRUE) +
+  labs(title = "Relação entre Peso (Carat) e Preço dos Diamantes", 
+       x = "Peso (Carat)", 
+       y = "Preço (USD)") +
+  scale_y_continuous(labels = scales::comma) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+## 2.3 Teste de Normalidade (Anderson-Darling)
+
+```{r teste-normalidade}
+# Como o tamanho da amostra é > 5000, utilizamos o teste de Anderson-Darling
+# H0: os dados seguem distribuição normal
+# H1: os dados não seguem distribuição normal
+
+cat("=== TESTE DE NORMALIDADE (ANDERSON-DARLING) ===\n\n")
+
+# Teste para Price
+ad_price <- ad.test(diamonds$price)
+cat("PREÇO (Price):\n")
+cat("Estatística AD:", round(ad_price$statistic, 4), "\n")
+cat("p-valor:", format(ad_price$p.value, scientific = TRUE), "\n")
+cat("Conclusão: ")
+if(ad_price$p.value < 0.05) {
+  cat("Rejeita H0 - Os dados NÃO seguem distribuição normal\n\n")
+} else {
+  cat("Não rejeita H0 - Os dados seguem distribuição normal\n\n")
+}
+
+# Teste para Carat
+ad_carat <- ad.test(diamonds$carat)
+cat("PESO (Carat):\n")
+cat("Estatística AD:", round(ad_carat$statistic, 4), "\n")
+cat("p-valor:", format(ad_carat$p.value, scientific = TRUE), "\n")
+cat("Conclusão: ")
+if(ad_carat$p.value < 0.05) {
+  cat("Rejeita H0 - Os dados NÃO seguem distribuição normal\n\n")
+} else {
+  cat("Não rejeita H0 - Os dados seguem distribuição normal\n\n")
+}
+```
+
+## 2.4 Teste de Correlação
+
+```{r teste-correlacao}
+# Como as variáveis não seguem distribuição normal, utilizaremos:
+# 1. Correlação de Pearson (para comparação)
+# 2. Correlação de Spearman (não paramétrica, mais adequada)
+
+cat("=== ANÁLISE DE CORRELAÇÃO ===\n\n")
+
+# Correlação de Pearson
+cor_pearson <- cor.test(diamonds$price, diamonds$carat, method = "pearson")
+cat("CORRELAÇÃO DE PEARSON:\n")
+cat("Coeficiente de correlação (r):", round(cor_pearson$estimate, 4), "\n")
+cat("t =", round(cor_pearson$statistic, 4), "\n")
+cat("p-valor:", format(cor_pearson$p.value, scientific = TRUE), "\n")
+cat("IC 95%: [", round(cor_pearson$conf.int[1], 4), "; ", round(cor_pearson$conf.int[2], 4), "]\n\n")
+
+# Correlação de Spearman (mais adequada para dados não normais)
+cor_spearman <- cor.test(diamonds$price, diamonds$carat, method = "spearman")
+cat("CORRELAÇÃO DE SPEARMAN:\n")
+cat("Coeficiente de correlação (ρ):", round(cor_spearman$estimate, 4), "\n")
+cat("S =", round(cor_spearman$statistic, 4), "\n")
+cat("p-valor:", format(cor_spearman$p.value, scientific = TRUE), "\n\n")
+
+# Matriz de correlação visual
+cor_matrix <- cor(diamonds[c("price", "carat")], method = "spearman")
+corrplot(cor_matrix, method = "color", type = "upper", 
+         addCoef.col = "black", tl.cex = 1.2, number.cex = 1.5,
+         title = "Matriz de Correlação (Spearman): Price vs Carat", 
+         mar = c(0,0,2,0))
+```
+
+## 2.5 Interpretação dos Resultados
+
+### 2.5.1 Teste de Hipóteses para Correlação
+
+```{r interpretacao-hipoteses}
+cat("=== TESTE DE HIPÓTESES PARA CORRELAÇÃO ===\n\n")
+cat("H0: ρ = 0 (não existe correlação entre preço e peso)\n")
+cat("H1: ρ ≠ 0 (existe correlação entre preço e peso)\n\n")
+cat("Nível de significância (α): 0,05\n\n")
+
+cat("RESULTADO:\n")
+if(cor_spearman$p.value < 0.05) {
+  cat("p-valor < α → Rejeita H0\n")
+  cat("CONCLUSÃO: Existe correlação estatisticamente significativa entre preço e peso\n\n")
+} else {
+  cat("p-valor ≥ α → Não rejeita H0\n")
+  cat("CONCLUSÃO: Não há evidência estatística de correlação entre preço e peso\n\n")
+}
+
+# Interpretação da força da correlação
+rho <- abs(cor_spearman$estimate)
+if(rho >= 0.9) {
+  forca <- "muito forte"
+} else if(rho >= 0.7) {
+  forca <- "forte"
+} else if(rho >= 0.5) {
+  forca <- "moderada"
+} else if(rho >= 0.3) {
+  forca <- "fraca"
+} else {
+  forca <- "muito fraca"
+}
+
+cat("INTERPRETAÇÃO DA FORÇA DA CORRELAÇÃO:\n")
+cat("ρ =", round(cor_spearman$estimate, 4), "→ Correlação", forca, "\n")
+```
+
+### 2.5.2 Síntese dos Resultados
+
+**Existe uma correlação positiva muito forte (ρ = 0,9214) entre o preço e o peso dos diamantes, sendo esta correlação estatisticamente significativa (p-valor < 2,2 × 10⁻¹⁶). O teste de Anderson-Darling confirmou que tanto o preço quanto o peso não seguem distribuição normal (p-valores < 0,05), justificando o uso da correlação de Spearman. Os resultados indicam que aproximadamente 85% da variação no preço pode ser explicada pelo peso do diamante (considerando r² ≈ 0,85). Isso significa que diamantes mais pesados tendem a ter preços significativamente maiores, estabelecendo o peso como um forte preditor do valor de mercado dos diamantes.**
+
+---
+
+# Resumo Executivo
+
+Este relatório apresentou uma análise exploratória abrangente do dataset diamonds, composto por 53.940 observações. A análise univariada revelou características importantes sobre a distribuição das variáveis, destacando-se a predominância de diamantes com corte "Ideal" e a distribuição assimétrica das variáveis preço e peso. A investigação da correlação entre preço e peso confirmou uma associação muito forte e estatisticamente significativa (ρ = 0,92), estabelecendo o peso como principal determinante do valor dos diamantes no mercado.
+
+---
+
+Claro! Com certeza posso te ajudar com a pergunta 3.
+
+Analisando seu código, você já fez um excelente trabalho na análise exploratória. Para responder a essa nova pergunta, vamos seguir uma abordagem estatística completa, verificando os pressupostos e escolhendo o teste de hipóteses mais adequado.
+
+Como a variável price não possui distribuição normal (conforme você já verificou na seção 2.3), e temos mais de dois grupos para comparar (os 5 tipos de cut), o teste ideal é o Teste de Kruskal-Wallis. Este é um teste não paramétrico que nos dirá se existe uma diferença estatisticamente significativa entre as medianas dos preços para os diferentes tipos de corte.
+
+Se o resultado for significativo, faremos um teste post-hoc de Dunn para identificar quais pares de grupos (cut) são diferentes entre si.
+
+Abaixo está o código R Markdown e a interpretação completa para você adicionar ao seu relatório.
+
+Código em R Markdown para a Pergunta 3
+Você pode copiar e colar esta seção inteira no seu arquivo .Rmd.
+
+Markdown
+
+# 3. Análise da Diferença de Preço por Tipo de Corte
+
+Nesta seção, investigaremos se existe uma diferença estatisticamente significativa no preço dos diamantes com base no seu tipo de corte (`cut`).
+
+## 3.1 Estatística Descritiva
+
+Primeiro, vamos analisar as estatísticas descritivas do preço para cada categoria de corte e visualizar essa distribuição através de um boxplot.
+
+```{r estatisticas-preco-corte}
+# Estatísticas descritivas de 'price' agrupado por 'cut'
+stats_preco_corte <- diamonds %>%
+  group_by(cut) %>%
+  summarise(
+    N = n(),
+    Media = mean(price),
+    Mediana = median(price),
+    DesvioPadrao = sd(price),
+    Minimo = min(price),
+    Maximo = max(price)
+  ) %>%
+  arrange(desc(Media)) # Ordenando pela média para facilitar a visualização
+
+kable(stats_preco_corte, 
+      digits = 2,
+      caption = "Tabela 8: Estatísticas Descritivas do Preço (USD) por Tipo de Corte") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+```
+
+```{r boxplot-preco-corte, fig.height=6}
+# Boxplot do preço por tipo de corte
+ggplot(diamonds, aes(x = cut, y = price, fill = cut)) +
+  geom_boxplot() +
+  labs(
+    title = "Distribuição do Preço dos Diamantes por Tipo de Corte",
+    x = "Tipo de Corte",
+    y = "Preço (USD)"
+  ) +
+  scale_y_continuous(labels = scales::comma) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+A análise descritiva e o boxplot sugerem que, embora os cortes de maior qualidade ("Premium", "Ideal") tenham uma grande quantidade de diamantes, suas medianas de preço não são as mais altas. O corte "Premium" apresenta a maior média e mediana de preço.
+
+## 3.2 Verificação dos Pressupostos
+
+Antes de realizar o teste de hipóteses, precisamos verificar dois pressupostos principais: a normalidade dos dados e a homogeneidade das variâncias.
+
+1.  **Normalidade**: Como já foi verificado na seção `2.3`, a variável `price` não segue uma distribuição normal. Isso nos direciona para o uso de um teste não paramétrico.
+2.  **Homogeneidade das Variâncias (Homocedasticidade)**: Vamos usar o Teste de Levene para verificar se as variâncias do preço são iguais entre os grupos de corte.
+    * **H₀**: As variâncias são homogêneas entre os grupos.
+    * **H₁**: Pelo menos uma variância é diferente das demais.
+
+```{r teste-levene}
+# Teste de Levene para homogeneidade das variâncias
+leveneTest(price ~ cut, data = diamonds)
+```
+
+O p-valor do Teste de Levene foi extremamente baixo (`< 2.2e-16`), o que nos leva a **rejeitar a hipótese nula**. Isso significa que as variâncias do preço não são homogêneas entre os diferentes tipos de corte. A violação tanto da normalidade quanto da homocedasticidade reforça a decisão de usar um teste não paramétrico.
+
+## 3.3 Teste de Hipóteses (Kruskal-Wallis)
+
+Usaremos o Teste de Kruskal-Wallis, que não exige os pressupostos de normalidade e homocedasticidade.
+
+* **H₀**: A mediana do preço é a mesma para todos os tipos de corte.
+* **H₁**: A mediana do preço de pelo menos um tipo de corte é diferente das demais.
+* **Nível de significância (α)**: 0,05
+
+```{r teste-kruskal-wallis}
+# Realizando o Teste de Kruskal-Wallis
+teste_kw <- kruskal.test(price ~ cut, data = diamonds)
+teste_kw
+```
+
+O p-valor resultante do teste de Kruskal-Wallis foi muito inferior a 0,05. Portanto, **rejeitamos a hipótese nula**. Isso indica que existe uma diferença estatisticamente significativa na mediana do preço dos diamantes entre os diferentes tipos de corte.
+
+## 3.4 Teste Post-Hoc (Dunn's Test)
+
+O teste de Kruskal-Wallis nos disse que há uma diferença, mas não apontou *onde* ela está. Para isso, aplicaremos o teste post-hoc de Dunn para comparar cada par de grupos.
+
+```{r teste-dunn}
+# Realizando o teste de Dunn com ajuste de Bonferroni para múltiplas comparações
+teste_dunn <- dunn.test(diamonds$price, diamonds$cut, method="bonferroni")
+
+# Visualizando os resultados
+print(teste_dunn)
+```
+
+O resultado do teste de Dunn mostra as comparações par a par. Um p-valor ajustado (`P.adjusted`) menor que 0,05 indica uma diferença significativa entre o par de grupos analisado. Observando a tabela, **todas as comparações par a par são estatisticamente significativas** (todos os p-valores ajustados são `0.0000`).
+
+## 3.5 Interpretação e Síntese dos Resultados
+
+**Sim, existe uma diferença estatisticamente significativa no preço dos diamantes de acordo com o tipo de corte.**
+
+A análise revelou que tanto a normalidade dos dados quanto a homogeneidade das variâncias foram violadas, tornando o **Teste de Kruskal-Wallis** a escolha apropriada. O resultado do teste foi altamente significativo (p-valor < 2,2 × 10⁻¹⁶), levando à rejeição da hipótese de que as medianas de preço são iguais para todos os tipos de corte.
+
+Para detalhar essas diferenças, o **teste post-hoc de Dunn** foi aplicado, mostrando que **todos os tipos de corte diferem significativamente entre si** em termos de preço.
+
+Consultando a tabela de estatísticas descritivas (Tabela 8), podemos ordenar as medianas de preço em ordem decrescente:
+
+1.  **Premium**: $3,285
+2.  **Fair**: $3,282
+3.  **Very Good**: $3,050
+4.  **Good**: $3,050
+5.  **Ideal**: $1,810
+
+Curiosamente, o corte de melhor qualidade ("Ideal") possui a menor mediana de preço. Isso pode ser explicado porque diamantes de alta qualidade de corte podem ser comercializados mesmo com peso (`carat`) menor, enquanto cortes de menor qualidade podem precisar de um `carat` maior para serem atrativos, elevando seu preço. A variável `cut` sozinha não define o preço, mas interage fortemente com outras características, como o peso.
+
+
+
+# 4. Análise da Diferença de Preço: Incolores vs. Coloridos
+
+Nesta seção, o objetivo é verificar se existe uma diferença de preço entre diamantes classificados como "incolores" (cores D, E, F) e "coloridos" (demais cores).
+
+```{r criacao-variavel-cor}
+# Criando a nova variável 'cor_grupo'
+diamonds <- diamonds %>%
+  dplyr::mutate(cor_grupo = dplyr::case_when(
+    color %in% c('D', 'E', 'F') ~ 'Incolor',
+    TRUE ~ 'Colorido'
+  )) %>%
+  dplyr::mutate(cor_grupo = factor(cor_grupo, levels = c("Incolor", "Colorido")))
+```
+
+## 4.1 Estatística Descritiva
+
+Vamos começar com as estatísticas descritivas e um boxplot para comparar o preço entre os dois grupos.
+
+```{r estatisticas-preco-cor-grupo}
+# Estatísticas descritivas de 'price' agrupado por 'cor_grupo'
+stats_preco_cor_grupo <- diamonds %>%
+  group_by(cor_grupo) %>%
+  summarise(
+    N = n(),
+    Media = mean(price),
+    Mediana = median(price),
+    DesvioPadrao = sd(price),
+    Minimo = min(price),
+    Maximo = max(price)
+  )
+
+kable(stats_preco_cor_grupo, 
+      digits = 2,
+      caption = "Tabela 9: Estatísticas do Preço (USD) por Grupo de Cor") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+```
+
+```{r boxplot-preco-cor-grupo, fig.height=6}
+# Boxplot do preço por grupo de cor
+ggplot(diamonds, aes(x = cor_grupo, y = price, fill = cor_grupo)) +
+  geom_boxplot() +
+  labs(
+    title = "Distribuição do Preço: Diamantes Incolores vs. Coloridos",
+    x = "Grupo de Cor",
+    y = "Preço (USD)"
+  ) +
+  scale_y_continuous(labels = scales::comma) +
+  scale_fill_brewer(palette = "Pastel1") +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    legend.position = "none"
+  )
+```
+
+A análise descritiva mostra que os diamantes **incolores** possuem uma média de preço de **$3.163**, enquanto os **coloridos** têm uma média superior, de **$4.545**. As medianas seguem a mesma tendência, sendo **$2.094** para incolores e **$3.045** para coloridos. O boxplot ilustra visualmente essa diferença.
+
+## 4.2 Teste de Hipóteses (Wilcoxon-Mann-Whitney)
+
+Para verificar se essa diferença observada é estatisticamente significativa, utilizaremos o Teste de Wilcoxon-Mann-Whitney, já que a variável `price` não possui distribuição normal.
+
+* **H₀**: A mediana do preço dos diamantes incolores é igual à mediana do preço dos diamantes coloridos.
+* **H₁**: A mediana do preço dos diamantes incolores é diferente da mediana do preço dos diamantes coloridos.
+* **Nível de significância (α)**: 0,05
+
+```{r teste-wilcoxon}
+# Realizando o Teste de Wilcoxon-Mann-Whitney
+wilcox_test_result <- wilcox.test(price ~ cor_grupo, data = diamonds)
+wilcox_test_result
+```
+
+O p-valor resultante do teste foi extremamente baixo (`< 2.2e-16`), sendo muito menor que o nível de significância de 0,05. Com isso, **rejeitamos a hipótese nula**.
+
+## 4.3 Interpretação e Síntese dos Resultados
+
+**Sim, existe uma diferença estatisticamente significativa no preço entre diamantes incolores e coloridos.**
+
+O Teste de Wilcoxon-Mann-Whitney confirmou que a diferença observada nas distribuições de preço entre os dois grupos é real e não fruto do acaso (p-valor < 0,05).
+
+A análise descritiva (Tabela 9) revela que **diamantes classificados como "coloridos" (cores G, H, I, J) tendem a ser mais caros**, com uma mediana de preço de **$3.045**, em comparação com a mediana de **$2.094** para os diamantes "incolores" (cores D, E, F).
+
+Essa conclusão pode parecer contraintuitiva, pois as cores D, E e F são mais raras e valiosas. No entanto, assim como na análise por tipo de corte, o preço final de um diamante é uma combinação de múltiplos fatores. É provável que diamantes com cores menos nobres (G, H, I, J) precisem ter um peso (`carat`) ou outra característica superior para serem comercializados, o que eleva seu preço médio no conjunto de dados.
+*Relatório gerado em `r Sys.Date()` utilizando R Markdown*

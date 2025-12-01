@@ -1,0 +1,460 @@
+---
+title: "Análise dos Fatores que Impactam o Nível de Estresse dos Colaboradores"
+author: "Vinicius Cebalhos"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    theme: flatly
+    toc: true
+    toc_float: true
+    number_sections: true
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, fig.width = 10, fig.height = 6)
+```
+
+# - Introdução
+
+Este relatório tem como objetivo identificar quais variáveis impactam de maneira significativa o nível de estresse dos colaboradores, utilizando dados sobre qualidade do sono e estilo de vida. Serão analisadas as seguintes variáveis: gênero, ocupação, categoria de IMC, desordem do sono e faixa etária. Para cada variável, será realizada uma análise exploratória, um teste de hipóteses e uma conclusão baseada nos resultados.
+
+# - Carregamento das Bibliotecas e Dados
+
+Nesta seção, carregamos as bibliotecas necessárias para a análise e o conjunto de dados.
+
+```{r libraries}
+# Carregando bibliotecas necessárias
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(knitr)
+library(kableExtra)
+library(gridExtra)
+
+# Carregando os dados (substitua pelo caminho correto do seu ficheiro)
+dados <- read.csv("dados_exercio (1).csv")
+
+# Visualizando a estrutura dos dados
+str(dados)
+head(dados)
+```
+
+# - Preparação dos Dados
+
+Antes de iniciar as análises, os dados foram preparados de acordo com as instruções: agrupamos as ocupações, padronizamos a categoria de IMC, criamos uma variável binária para desordem do sono e agrupamos as idades em faixas etárias.
+
+```{r data_preparation}
+dados_processados <- dados %>%
+  mutate(
+    area_ocupacao = case_when(
+      Occupation %in% c("Doctor", "Nurse") ~ "Área da Saúde",
+      TRUE ~ "Demais Áreas"
+    ),
+    bmi_category_padronizado = case_when(
+      BMI.Category == "Normal Weight" ~ "Normal",
+      TRUE ~ BMI.Category
+    ),
+    possui_desordem = case_when(
+      Sleep.Disorder %in% c("Insomnia", "Sleep Apnea") ~ "Possui",
+      Sleep.Disorder == "None" ~ "Não Possui",
+      TRUE ~ "Não Possui"
+    ),
+    faixa_etaria = case_when(
+      Age < 35 ~ "Menos de 35 anos",
+      Age >= 35 & Age < 45 ~ "Entre 35 e 45 anos",
+      Age >= 45 ~ "45 anos ou mais"
+    ),
+    Gender = as.factor(Gender),
+    area_ocupacao = as.factor(area_ocupacao),
+    bmi_category_padronizado = as.factor(bmi_category_padronizado),
+    possui_desordem = as.factor(possui_desordem),
+    faixa_etaria = as.factor(faixa_etaria)
+  )
+```
+
+# - Análises por Variável
+
+## - Impacto do Gênero no Nível de Estresse
+
+### - Análise Exploratória
+
+A análise exploratória inicial compara a distribuição do nível de estresse entre os gêneros.
+
+```{r gender_analysis}
+stats_gender <- dados_processados %>%
+  group_by(Gender) %>%
+  summarise(
+    n = n(),
+    media = mean(Stress.Level),
+    mediana = median(Stress.Level),
+    desvio_padrao = sd(Stress.Level),
+    .groups = 'drop'
+  )
+
+kable(stats_gender, caption = "Estatísticas do Nível de Estresse por Gênero") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+p1 <- ggplot(dados_processados, aes(x = Gender, y = Stress.Level, fill = Gender)) +
+  geom_boxplot(alpha = 0.7) +
+  labs(title = "Distribuição do Nível de Estresse por Gênero", x = "Gênero", y = "Nível de Estresse") +
+  theme_minimal() + theme(legend.position = "none")
+
+p2 <- ggplot(stats_gender, aes(x = Gender, y = media, fill = Gender)) +
+  geom_bar(stat = "identity", alpha = 0.7) +
+  geom_text(aes(label = round(media, 2)), vjust = -0.5) +
+  labs(title = "Média do Nível de Estresse por Gênero", x = "Gênero", y = "Média do Nível de Estresse") +
+  theme_minimal() + theme(legend.position = "none")
+
+grid.arrange(p1, p2, ncol = 2)
+```
+
+### Teste Estatístico
+
+Para verificar se a diferença observada nas médias de estresse entre homens e mulheres é estatisticamente significativa, realizamos um Teste t para amostras independentes.
+
+**Hipóteses:**
+
+* **H0 (Hipótese Nula):** A média do nível de estresse é a mesma para homens e mulheres (μ_homens = μ_mulheres).
+* **H1 (Hipótese Alternativa):** A média do nível de estresse é diferente entre homens e mulheres (μ_homens ≠ μ_mulheres).
+
+**Nível de Significância:** α = 0,05
+
+```{r gender_test, echo=FALSE}
+# O seu código de teste t está correto. Apenas mostrarei o resultado de forma mais limpa.
+t_test_gender <- t.test(Stress.Level ~ Gender, data = dados_processados, var.equal = TRUE)
+```
+
+O p-valor obtido no Teste t foi de `r round(t_test_gender$p.value, 4)`.
+
+### - Conclusão - Gênero
+
+Com um p-valor de `r round(t_test_gender$p.value, 4)`, que é menor que o nível de significância de 0,05, rejeitamos a hipótese nula. Isso indica que existe uma diferença estatisticamente significativa no nível de estresse entre os gêneros. Observando as médias, nota-se que os homens (`r round(stats_gender$media[2], 2)`) apresentam, em média, um nível de estresse ligeiramente superior ao das mulheres (`r round(stats_gender$media[1], 2)`).
+
+---
+
+## - Impacto da Ocupação no Nível de Estresse
+
+### - Análise Exploratória
+
+Aqui, comparamos o nível de estresse entre colaboradores da "Área da Saúde" e de "Demais Áreas".
+
+```{r occupation_analysis}
+# Estatísticas por área de ocupação
+stats_occupation <- dados_processados %>%
+  group_by(area_ocupacao) %>%
+  summarise(
+    n = n(),
+    media = mean(Stress.Level),
+    mediana = median(Stress.Level),
+    desvio_padrao = sd(Stress.Level),
+    .groups = 'drop'
+  )
+
+kable(stats_occupation, caption = "Estatísticas do Nível de Estresse por Área de Ocupação") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+# Boxplot
+p1 <- ggplot(dados_processados, aes(x = area_ocupacao, y = Stress.Level, fill = area_ocupacao)) +
+  geom_boxplot(alpha = 0.7) +
+  labs(title = "Distribuição do Nível de Estresse por Área de Ocupação",
+       x = "Área de Ocupação",
+       y = "Nível de Estresse") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+# Gráfico de barras das médias
+p2 <- ggplot(stats_occupation, aes(x = area_ocupacao, y = media, fill = area_ocupacao)) +
+  geom_bar(stat = "identity", alpha = 0.7) +
+  geom_text(aes(label = round(media, 2)), vjust = -0.5) +
+  labs(title = "Média do Nível de Estresse por Área de Ocupação",
+       x = "Área de Ocupação",
+       y = "Média do Nível de Estresse") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+grid.arrange(p1, p2, ncol = 2)
+```
+
+### - Teste Estatístico
+
+Será realizado um Teste t para amostras independentes para verificar se existe uma diferença significativa nas médias de estresse entre os dois grupos de ocupação.
+
+**Hipóteses:**
+
+* **H0:** A média do nível de estresse é a mesma para ambos os grupos (μ_saude = μ_demais).
+* **H1:** A média do nível de estresse é diferente entre os grupos (μ_saude ≠ μ_demais).
+
+**Nível de Significância:** α = 0,05
+
+```{r occupation_test, echo=FALSE}
+t_test_occupation <- t.test(Stress.Level ~ area_ocupacao, data = dados_processados)
+```
+
+O p-valor obtido no Teste t foi de `r round(t_test_occupation$p.value, 4)`.
+
+### - Conclusão - Ocupação
+
+O p-valor de `r round(t_test_occupation$p.value, 4)` é menor que 0,05. Portanto, rejeitamos a hipótese nula. Há evidências estatísticas suficientes para afirmar que a área de ocupação impacta de maneira significativa o nível de estresse dos colaboradores nesta amostra.
+
+---
+
+## - Impacto da Categoria de IMC no Nível de Estresse
+
+### - Análise Exploratória
+
+Analisamos como o nível de estresse se distribui entre as diferentes categorias de IMC (Índice de Massa Corporal), que foram agrupadas em "Normal", "Overweight" (Sobrepeso) e "Obese" (Obeso).
+
+```{r bmi_analysis}
+# Estatísticas por categoria de IMC
+stats_bmi <- dados_processados %>%
+  group_by(bmi_category_padronizado) %>%
+  summarise(
+    n = n(),
+    media = mean(Stress.Level),
+    mediana = median(Stress.Level),
+    desvio_padrao = sd(Stress.Level),
+    .groups = 'drop'
+  )
+
+kable(stats_bmi, caption = "Estatísticas do Nível de Estresse por Categoria de IMC") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+# Boxplot
+p1 <- ggplot(dados_processados, aes(x = bmi_category_padronizado, y = Stress.Level, fill = bmi_category_padronizado)) +
+  geom_boxplot(alpha = 0.7) +
+  labs(title = "Distribuição do Nível de Estresse por Categoria de IMC",
+       x = "Categoria de IMC",
+       y = "Nível de Estresse") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+# Gráfico de barras das médias
+p2 <- ggplot(stats_bmi, aes(x = bmi_category_padronizado, y = media, fill = bmi_category_padronizado)) +
+  geom_bar(stat = "identity", alpha = 0.7) +
+  geom_text(aes(label = round(media, 2)), vjust = -0.5) +
+  labs(title = "Média do Nível de Estresse por Categoria de IMC",
+       x = "Categoria de IMC",
+       y = "Média do Nível de Estresse") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+grid.arrange(p1, p2, ncol = 2)
+```
+
+### - Teste Estatístico (ANOVA e Teste de Tukey)
+
+Como temos mais de dois grupos, utilizamos a Análise de Variância (ANOVA) para verificar se existe alguma diferença significativa entre as médias de estresse dos grupos. Como o resultado da ANOVA foi significativo, aplicamos o teste post-hoc de Tukey para identificar quais pares de grupos são diferentes entre si.
+
+**Hipóteses da ANOVA:**
+
+* **H0:** As médias do nível de estresse são iguais para todas as categorias de IMC.
+* **H1:** Pelo menos uma das médias do nível de estresse é diferente das demais.
+
+**Nível de Significância:** $\alpha = 0,05$
+
+```{r bmi_test}
+# ANOVA
+anova_bmi <- aov(Stress.Level ~ bmi_category_padronizado, data = dados_processados)
+p_value_anova_bmi <- summary(anova_bmi)[[1]][["Pr(>F)"]][1]
+
+# Teste de Tukey HSD
+tukey_bmi <- TukeyHSD(anova_bmi)
+```
+
+O p-valor obtido na ANOVA foi de **`r round(p_value_anova_bmi, 4)`**. Como este valor é menor que 0,05, procedemos com o teste de Tukey.
+
+**Resultados do Teste de Tukey HSD:**
+
+```{r tukey_results, echo=FALSE}
+# Formatando o resultado do Tukey para uma melhor visualização
+tukey_df <- as.data.frame(tukey_bmi$bmi_category_padronizado)
+tukey_df$comparison <- rownames(tukey_df)
+tukey_df <- tukey_df[, c("comparison", "diff", "lwr", "upr", "p adj")]
+colnames(tukey_df) <- c("Comparação entre Grupos", "Diferença nas Médias", "Limite Inferior (IC 95%)", "Limite Superior (IC 95%)", "P-valor ajustado")
+
+kable(tukey_df, caption = "Resultados do Teste Post-Hoc de Tukey") %>%
+  kable_styling(bootstrap_options = c("striped", "hover")) %>%
+  row_spec(which(tukey_df$`P-valor ajustado` < 0.05), bold = T, color = "white", background = "#d4edda")
+```
+
+### - Conclusão - Categoria de IMC
+
+Com um p-valor da ANOVA de `r round(p_value_anova_bmi, 4)`, rejeitamos a hipótese nula, confirmando que há uma diferença estatisticamente significativa no nível de estresse entre as diferentes categorias de IMC.
+
+Para detalhar essa diferença, o **teste de Tukey** revelou que:
+
+* A comparação entre **`Obese` e `Normal`** apresentou um p-valor ajustado de `r round(tukey_df[1, 5], 4)`. Como este valor é maior que 0,05, NÃO há evidência de uma diferença estatística significativa entre os níveis de estresse desses dois grupos.
+
+* A comparação entre **`Overweight` e `Normal`** apresentou um p-valor ajustado de `r round(tukey_df[2, 5], 4)`. Como este valor é menor que 0,05, a diferença é estatisticamente significativa. Isso indica que o nível médio de estresse dos colaboradores com "Sobrepeso" (Overweight) é significativamente maior do que o daqueles com peso "Normal".
+
+* A comparação entre **`Overweight` e `Obese`** apresentou um p-valor ajustado de `r round(tukey_df[3, 5], 4)`. Sendo este valor muito maior que 0,05, NÃO há diferença estatística significativa no nível de estresse entre os colaboradores com "Sobrepeso" e os "Obesos".
+
+Em resumo, a análise mais detalhada mostra que o impacto da categoria de IMC no estresse é específico: colaboradores classificados com "Sobrepeso" (Overweight) apresentam um nível de estresse significativamente mais alto do que aqueles com peso "Normal". As demais diferenças entre os grupos não se mostraram estatisticamente significativas nesta amostra.
+
+## - Impacto da Desordem do Sono no Nível de Estresse
+
+### - Análise Exploratória
+
+A análise a seguir verifica a relação entre possuir ou não uma desordem do sono e o nível de estresse.
+
+```{r sleep_disorder_analysis}
+# Estatísticas por desordem do sono
+stats_sleep <- dados_processados %>%
+  group_by(possui_desordem) %>%
+  summarise(
+    n = n(),
+    media = mean(Stress.Level),
+    mediana = median(Stress.Level),
+    desvio_padrao = sd(Stress.Level),
+    .groups = 'drop'
+  )
+
+kable(stats_sleep, caption = "Estatísticas do Nível de Estresse por Desordem do Sono") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+# Boxplot
+p1 <- ggplot(dados_processados, aes(x = possui_desordem, y = Stress.Level, fill = possui_desordem)) +
+  geom_boxplot(alpha = 0.7) +
+  labs(title = "Distribuição do Nível de Estresse por Desordem do Sono",
+       x = "Possui Desordem do Sono",
+       y = "Nível de Estresse") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+# Gráfico de barras das médias
+p2 <- ggplot(stats_sleep, aes(x = possui_desordem, y = media, fill = possui_desordem)) +
+  geom_bar(stat = "identity", alpha = 0.7) +
+  geom_text(aes(label = round(media, 2)), vjust = -0.5) +
+  labs(title = "Média do Nível de Estresse por Desordem do Sono",
+       x = "Possui Desordem do Sono",
+       y = "Média do Nível de Estresse") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+grid.arrange(p1, p2, ncol = 2)
+```
+
+### - Teste Estatístico
+
+Um Teste t para amostras independentes será usado para comparar as médias de estresse entre quem possui e quem não possui desordem do sono.
+
+**Hipóteses:**
+
+* **H0:** A média do nível de estresse é a mesma para ambos os grupos.
+* **H1:** A média do nível de estresse é diferente entre os grupos.
+
+**Nível de Significância:** α = 0,05
+
+```{r sleep_disorder_test, echo=FALSE}
+t_test_disorder <- t.test(Stress.Level ~ possui_desordem, data = dados_processados)
+```
+
+O p-valor obtido no Teste t foi de `r round(t_test_disorder$p.value, 4)`.
+
+### - Conclusão - Desordem do Sono
+
+O p-valor extremamente baixo (`r round(t_test_disorder$p.value, 4)`) nos leva a rejeitar a hipótese nula. Há uma forte evidência estatística de que a presença de uma desordem do sono impacta significativamente o nível de estresse, com colaboradores que possuem alguma desordem apresentando médias de estresse mais elevadas.
+
+---
+
+## - Impacto da Faixa Etária no Nível de Estresse
+
+### - Análise Exploratória
+
+Por fim, analisamos a relação entre a faixa etária (agrupada em "Menos de 35 anos", "Entre 35 e 45 anos" e "45 anos ou mais") e o nível de estresse.
+
+```{r age_analysis}
+# Estatísticas por faixa etária
+stats_age <- dados_processados %>%
+  group_by(faixa_etaria) %>%
+  summarise(
+    n = n(),
+    media = mean(Stress.Level),
+    mediana = median(Stress.Level),
+    desvio_padrao = sd(Stress.Level),
+    .groups = 'drop'
+  )
+
+kable(stats_age, caption = "Estatísticas do Nível de Estresse por Faixa Etária") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+# Boxplot
+p1 <- ggplot(dados_processados, aes(x = faixa_etaria, y = Stress.Level, fill = faixa_etaria)) +
+  geom_boxplot(alpha = 0.7) +
+  labs(title = "Distribuição do Nível de Estresse por Faixa Etária",
+       x = "Faixa Etária",
+       y = "Nível de Estresse") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+# Gráfico de barras das médias
+p2 <- ggplot(stats_age, aes(x = faixa_etaria, y = media, fill = faixa_etaria)) +
+  geom_bar(stat = "identity", alpha = 0.7) +
+  geom_text(aes(label = round(media, 2)), vjust = -0.5) +
+  labs(title = "Média do Nível de Estresse por Faixa Etária",
+       x = "Faixa Etária",
+       y = "Média do Nível de Estresse") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+grid.arrange(p1, p2, ncol = 2)
+```
+
+### - Teste Estatístico (ANOVA e Teste de Tukey)
+
+Utilizamos a Análise de Variância (ANOVA) para comparar as médias de estresse entre as três faixas etárias. Dado que o resultado da ANOVA foi significativo, aplicamos o teste post-hoc de Tukey para identificar quais pares de grupos são diferentes entre si.
+
+**Hipóteses da ANOVA:**
+
+* **H0:** As médias do nível de estresse são iguais para todas as faixas etárias.
+* **H1:** Pelo menos uma das médias do nível de estresse é diferente das demais.
+
+**Nível de Significância:** $\alpha = 0,05$
+
+```{r age_test}
+# ANOVA
+anova_age <- aov(Stress.Level ~ faixa_etaria, data = dados_processados)
+p_value_anova_age <- summary(anova_age)[[1]][["Pr(>F)"]][1]
+
+# Teste de Tukey HSD
+tukey_age <- TukeyHSD(anova_age)
+```
+
+O p-valor obtido na ANOVA foi de **`r round(p_value_anova_age, 4)`**. Como este valor é menor que 0,05, rejeitamos a hipótese nula e procedemos com o teste de Tukey.
+
+**Resultados do Teste de Tukey HSD:**
+
+```{r tukey_age_results, echo=FALSE}
+# Formatando o resultado do Tukey
+tukey_df_age <- as.data.frame(tukey_age$faixa_etaria)
+tukey_df_age$comparison <- rownames(tukey_df_age)
+tukey_df_age <- tukey_df_age[, c("comparison", "diff", "lwr", "upr", "p adj")]
+colnames(tukey_df_age) <- c("Comparação entre Grupos", "Diferença nas Médias", "Limite Inferior (IC 95%)", "Limite Superior (IC 95%)", "P-valor ajustado")
+
+kable(tukey_df_age, caption = "Resultados do Teste Post-Hoc de Tukey para Faixa Etária") %>%
+  kable_styling(bootstrap_options = c("striped", "hover")) %>%
+  row_spec(which(tukey_df_age$`P-valor ajustado` < 0.05), bold = T, color = "white", background = "#d4edda")
+```
+
+### - Conclusão - Faixa Etária
+
+Com um p-valor da ANOVA de `r round(p_value_anova_age, 4)` (menor que 0,05), rejeitamos a hipótese nula. Isso confirma que **existe uma diferença estatisticamente significativa no nível de estresse entre as faixas etárias analisadas.**
+
+O **teste de Tukey** detalha essas diferenças, mostrando que **todas as comparações entre os grupos são estatisticamente significativas** (todos os p-valores ajustados são menores que 0,05). Especificamente:
+
+* A média de estresse do grupo **"Entre 35 e 45 anos"** é significativamente diferente da do grupo **"45 anos ou mais"**.
+* A média de estresse do grupo **"Menos de 35 anos"** é significativamente diferente da do grupo **"45 anos ou mais"**.
+* A média de estresse do grupo **"Menos de 35 anos"** é significativamente diferente da do grupo **"Entre 35 e 45 anos"**.
+
+Observando os gráficos e as médias, podemos concluir que o nível de estresse parece aumentar com a idade nesta amostra, e essa tendência é estatisticamente robusta.
+
+# - Sumário dos Achados
+
+A análise estatística revelou que todos os fatores avaliados — gênero, área de ocupação, categoria de IMC, presença de desordem do sono e faixa etária — impactam de maneira estatisticamente significativa o nível de estresse dos colaboradores (p < 0,05 para todos os testes).
+
+Os resultados indicam que o estresse não é determinado por um fator isolado, mas sim por uma combinação de influências demográficas, de saúde e profissionais. A análise post-hoc com o teste de Tukey permitiu um detalhamento maior, mostrando que o nível de estresse é significativamente maior em colaboradores com "Sobrepeso" quando comparados aos de peso "Normal", e que o estresse tende a aumentar de forma significativa com o avanço da idade entre as faixas analisadas. Além disso, a presença de uma desordem do sono, o gênero e a área de ocupação também se mostraram fatores relevantes, consolidando a visão de que o bem-estar dos colaboradores é um fenômeno multifatorial.
+
+```
+
+---

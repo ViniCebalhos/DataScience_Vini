@@ -1,0 +1,514 @@
+---
+title: "Análise dos Fatores que Impactam o Nível de Estresse dos Colaboradores"
+author: "Vinícius Cebalhos"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    theme: flatly
+    toc: true
+    toc_float: true
+    number_sections: true
+    code_folding: show
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, fig.width = 10, fig.height = 6)
+```
+
+# - Introdução
+
+Este relatório tem como objetivo identificar quais variáveis impactam de maneira significativa no nível de estresse dos colaboradores, utilizando dados sobre qualidade do sono e estilo de vida. Serão analisadas as seguintes variáveis: gênero, ocupação, categoria de IMC, desordem do sono e faixa etária.
+
+# - Carregamento das Bibliotecas e Dados
+
+```{r libraries}
+# Carregando bibliotecas necessárias
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(knitr)
+library(kableExtra)
+library(corrplot)
+library(gridExtra)
+
+# Carregando os dados
+dados <- read.csv("dados_exercio (1).csv")
+
+# Visualizando a estrutura dos dados
+str(dados)
+head(dados)
+```
+
+# - Preparação dos Dados
+
+```{r data_preparation}
+# Criando as variáveis categóricas conforme solicitado
+dados_processados <- dados %>%
+  mutate(
+    # Agrupamento de ocupação: área da saúde vs demais áreas
+    area_ocupacao = case_when(
+      Occupation %in% c("Doctor", "Nurse") ~ "Área da Saúde",
+      TRUE ~ "Demais Áreas"
+    ),
+    
+    # Padronização da categoria IMC (Normal Weight -> Normal)
+    bmi_category_padronizado = case_when(
+      BMI.Category == "Normal Weight" ~ "Normal",
+      TRUE ~ BMI.Category
+    ),
+    
+    # Transformação da desordem do sono em duas categorias
+    possui_desordem = case_when(
+      Sleep.Disorder %in% c("Insomnia", "Sleep Apnea") ~ "Possui",
+      Sleep.Disorder == "None" ~ "Não Possui",
+      TRUE ~ "Não Possui"
+    ),
+    
+    # Criação das faixas etárias
+    faixa_etaria = case_when(
+      Age < 35 ~ "Menos de 35 anos",
+      Age >= 35 & Age < 45 ~ "Entre 35 e 45 anos",
+      Age >= 45 ~ "45 anos ou mais"
+    ),
+    
+    # Garantindo que as variáveis categóricas sejam fatores
+    Gender = as.factor(Gender),
+    area_ocupacao = as.factor(area_ocupacao),
+    bmi_category_padronizado = as.factor(bmi_category_padronizado),
+    possui_desordem = as.factor(possui_desordem),
+    faixa_etaria = as.factor(faixa_etaria)
+  )
+
+# Verificando a transformação
+summary(dados_processados[c("Gender", "area_ocupacao", "bmi_category_padronizado", 
+                           "possui_desordem", "faixa_etaria", "Stress.Level")])
+```
+
+# - Análise Exploratória Geral
+
+```{r exploratory_general}
+# Estatísticas descritivas do nível de estresse
+cat("Estatísticas Descritivas do Nível de Estresse:\n")
+summary(dados_processados$Stress.Level)
+cat("\nDesvio Padrão:", sd(dados_processados$Stress.Level))
+
+# Histograma do nível de estresse
+ggplot(dados_processados, aes(x = Stress.Level)) +
+  geom_histogram(bins = 8, fill = "skyblue", color = "black", alpha = 0.7) +
+  labs(title = "Distribuição do Nível de Estresse",
+       x = "Nível de Estresse",
+       y = "Frequência") +
+  theme_minimal()
+```
+
+# - Análise 1: Impacto do Gênero no Nível de Estresse
+
+## - Análise Exploratória
+
+```{r gender_analysis}
+# Estatísticas por gênero
+stats_gender <- dados_processados %>%
+  group_by(Gender) %>%
+  summarise(
+    n = n(),
+    media = mean(Stress.Level),
+    mediana = median(Stress.Level),
+    desvio_padrao = sd(Stress.Level),
+    .groups = 'drop'
+  )
+
+kable(stats_gender, caption = "Estatísticas do Nível de Estresse por Gênero") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+# Boxplot
+p1 <- ggplot(dados_processados, aes(x = Gender, y = Stress.Level, fill = Gender)) +
+  geom_boxplot(alpha = 0.7) +
+  labs(title = "Distribuição do Nível de Estresse por Gênero",
+       x = "Gênero",
+       y = "Nível de Estresse") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+# Gráfico de barras das médias
+p2 <- ggplot(stats_gender, aes(x = Gender, y = media, fill = Gender)) +
+  geom_bar(stat = "identity", alpha = 0.7) +
+  geom_text(aes(label = round(media, 2)), vjust = -0.5) +
+  labs(title = "Média do Nível de Estresse por Gênero",
+       x = "Gênero",
+       y = "Média do Nível de Estresse") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+grid.arrange(p1, p2, ncol = 2)
+```
+
+## - Teste Estatístico
+
+```{r gender_test}
+# Verificando normalidade
+shapiro_male <- shapiro.test(dados_processados$Stress.Level[dados_processados$Gender == "Male"])
+shapiro_female <- shapiro.test(dados_processados$Stress.Level[dados_processados$Gender == "Female"])
+
+cat("Teste de Normalidade - Homens:", shapiro_male$p.value, "\n")
+cat("Teste de Normalidade - Mulheres:", shapiro_female$p.value, "\n")
+
+# Teste de homogeneidade das variâncias
+levene_test <- car::leveneTest(Stress.Level ~ Gender, data = dados_processados)
+cat("Teste de Levene (homogeneidade das variâncias):", levene_test$`Pr(>F)`[1], "\n")
+
+# Teste t para duas amostras independentes
+t_test_gender <- t.test(Stress.Level ~ Gender, data = dados_processados, var.equal = TRUE)
+t_test_gender
+
+cat("\n### Hipóteses:\n")
+cat("H0: μ_masculino = μ_feminino (não há diferença entre as médias)\n")
+cat("H1: μ_masculino ≠ μ_feminino (há diferença entre as médias)\n")
+cat("Nível de significância: α = 0,05\n")
+```
+
+## - Conclusão - Gênero
+
+```{r gender_conclusion}
+if(t_test_gender$p.value < 0.05) {
+  cat("CONCLUSÃO: Com p-valor =", round(t_test_gender$p.value, 4), 
+      "< 0,05, rejeitamos H0. Há evidência estatística significativa de que o gênero impacta o nível de estresse.")
+} else {
+  cat("CONCLUSÃO: Com p-valor =", round(t_test_gender$p.value, 4), 
+      "> 0,05, não rejeitamos H0. Não há evidência estatística significativa de que o gênero impacta o nível de estresse.")
+}
+```
+
+# - Análise 2: Impacto da Ocupação no Nível de Estresse
+
+## - Análise Exploratória
+
+```{r occupation_analysis}
+# Estatísticas por área de ocupação
+stats_occupation <- dados_processados %>%
+  group_by(area_ocupacao) %>%
+  summarise(
+    n = n(),
+    media = mean(Stress.Level),
+    mediana = median(Stress.Level),
+    desvio_padrao = sd(Stress.Level),
+    .groups = 'drop'
+  )
+
+kable(stats_occupation, caption = "Estatísticas do Nível de Estresse por Área de Ocupação") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+# Boxplot
+p1 <- ggplot(dados_processados, aes(x = area_ocupacao, y = Stress.Level, fill = area_ocupacao)) +
+  geom_boxplot(alpha = 0.7) +
+  labs(title = "Distribuição do Nível de Estresse por Área de Ocupação",
+       x = "Área de Ocupação",
+       y = "Nível de Estresse") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+# Gráfico de barras das médias
+p2 <- ggplot(stats_occupation, aes(x = area_ocupacao, y = media, fill = area_ocupacao)) +
+  geom_bar(stat = "identity", alpha = 0.7) +
+  geom_text(aes(label = round(media, 2)), vjust = -0.5) +
+  labs(title = "Média do Nível de Estresse por Área de Ocupação",
+       x = "Área de Ocupação",
+       y = "Média do Nível de Estresse") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+grid.arrange(p1, p2, ncol = 2)
+```
+
+## - Teste Estatístico
+
+```{r occupation_test}
+# Teste t para duas amostras independentes
+t_test_occupation <- t.test(Stress.Level ~ area_ocupacao, data = dados_processados)
+t_test_occupation
+
+cat("\n### Hipóteses:\n")
+cat("H0: μ_saude = μ_demais (não há diferença entre as médias)\n")
+cat("H1: μ_saude ≠ μ_demais (há diferença entre as médias)\n")
+cat("Nível de significância: α = 0,05\n")
+```
+
+## - Conclusão - Ocupação
+
+```{r occupation_conclusion}
+if(t_test_occupation$p.value < 0.05) {
+  cat("CONCLUSÃO: Com p-valor =", round(t_test_occupation$p.value, 4), 
+      "< 0,05, rejeitamos H0. Há evidência estatística significativa de que a área de ocupação impacta o nível de estresse.")
+} else {
+  cat("CONCLUSÃO: Com p-valor =", round(t_test_occupation$p.value, 4), 
+      "> 0,05, não rejeitamos H0. Não há evidência estatística significativa de que a área de ocupação impacta o nível de estresse.")
+}
+```
+
+# - Análise 3: Impacto da Categoria de IMC no Nível de Estresse
+
+## - Análise Exploratória
+
+```{r bmi_analysis}
+# Estatísticas por categoria de IMC
+stats_bmi <- dados_processados %>%
+  group_by(bmi_category_padronizado) %>%
+  summarise(
+    n = n(),
+    media = mean(Stress.Level),
+    mediana = median(Stress.Level),
+    desvio_padrao = sd(Stress.Level),
+    .groups = 'drop'
+  )
+
+kable(stats_bmi, caption = "Estatísticas do Nível de Estresse por Categoria de IMC") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+# Boxplot
+p1 <- ggplot(dados_processados, aes(x = bmi_category_padronizado, y = Stress.Level, 
+                                   fill = bmi_category_padronizado)) +
+  geom_boxplot(alpha = 0.7) +
+  labs(title = "Distribuição do Nível de Estresse por Categoria de IMC",
+       x = "Categoria de IMC",
+       y = "Nível de Estresse") +
+  theme_minimal() +
+  theme(legend.position = "none", axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Gráfico de barras das médias
+p2 <- ggplot(stats_bmi, aes(x = bmi_category_padronizado, y = media, fill = bmi_category_padronizado)) +
+  geom_bar(stat = "identity", alpha = 0.7) +
+  geom_text(aes(label = round(media, 2)), vjust = -0.5) +
+  labs(title = "Média do Nível de Estresse por Categoria de IMC",
+       x = "Categoria de IMC",
+       y = "Média do Nível de Estresse") +
+  theme_minimal() +
+  theme(legend.position = "none", axis.text.x = element_text(angle = 45, hjust = 1))
+
+grid.arrange(p1, p2, ncol = 2)
+```
+
+## - Teste Estatístico
+
+```{r bmi_test}
+# ANOVA para comparar múltiplos grupos
+anova_bmi <- aov(Stress.Level ~ bmi_category_padronizado, data = dados_processados)
+summary(anova_bmi)
+
+# Teste post-hoc (Tukey) se significativo
+tukey_bmi <- TukeyHSD(anova_bmi)
+tukey_bmi
+
+cat("\n### Hipóteses:\n")
+cat("H0: μ_Normal = μ_Obese = μ_Overweight (todas as médias são iguais)\n")
+cat("H1: Pelo menos uma média é diferente das demais\n")
+cat("Nível de significância: α = 0,05\n")
+```
+
+## - Conclusão - Categoria de IMC
+
+```{r bmi_conclusion}
+p_value_bmi <- summary(anova_bmi)[[1]][["Pr(>F)"]][1]
+if(p_value_bmi < 0.05) {
+  cat("CONCLUSÃO: Com p-valor =", round(p_value_bmi, 4), 
+      "< 0,05, rejeitamos H0. Há evidência estatística significativa de que a categoria de IMC impacta o nível de estresse.")
+} else {
+  cat("CONCLUSÃO: Com p-valor =", round(p_value_bmi, 4), 
+      "> 0,05, não rejeitamos H0. Não há evidência estatística significativa de que a categoria de IMC impacta o nível de estresse.")
+}
+```
+
+# - Análise 4: Impacto da Desordem do Sono no Nível de Estresse
+
+## - Análise Exploratória
+
+```{r sleep_disorder_analysis}
+# Estatísticas por desordem do sono
+stats_sleep <- dados_processados %>%
+  group_by(possui_desordem) %>%
+  summarise(
+    n = n(),
+    media = mean(Stress.Level),
+    mediana = median(Stress.Level),
+    desvio_padrao = sd(Stress.Level),
+    .groups = 'drop'
+  )
+
+kable(stats_sleep, caption = "Estatísticas do Nível de Estresse por Desordem do Sono") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+# Boxplot
+p1 <- ggplot(dados_processados, aes(x = possui_desordem, y = Stress.Level, fill = possui_desordem)) +
+  geom_boxplot(alpha = 0.7) +
+  labs(title = "Distribuição do Nível de Estresse por Desordem do Sono",
+       x = "Possui Desordem do Sono",
+       y = "Nível de Estresse") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+# Gráfico de barras das médias
+p2 <- ggplot(stats_sleep, aes(x = possui_desordem, y = media, fill = possui_desordem)) +
+  geom_bar(stat = "identity", alpha = 0.7) +
+  geom_text(aes(label = round(media, 2)), vjust = -0.5) +
+  labs(title = "Média do Nível de Estresse por Desordem do Sono",
+       x = "Possui Desordem do Sono",
+       y = "Média do Nível de Estresse") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+grid.arrange(p1, p2, ncol = 2)
+```
+
+## - Teste Estatístico
+
+```{r sleep_disorder_test}
+# Teste t para duas amostras independentes
+t_test_sleep <- t.test(Stress.Level ~ possui_desordem, data = dados_processados)
+t_test_sleep
+
+cat("\n### Hipóteses:\n")
+cat("H0: μ_possui = μ_nao_possui (não há diferença entre as médias)\n")
+cat("H1: μ_possui ≠ μ_nao_possui (há diferença entre as médias)\n")
+cat("Nível de significância: α = 0,05\n")
+```
+
+## - Conclusão - Desordem do Sono
+
+```{r sleep_disorder_conclusion}
+if(t_test_sleep$p.value < 0.05) {
+  cat("CONCLUSÃO: Com p-valor =", round(t_test_sleep$p.value, 4), 
+      "< 0,05, rejeitamos H0. Há evidência estatística significativa de que a presença de desordem do sono impacta o nível de estresse.")
+} else {
+  cat("CONCLUSÃO: Com p-valor =", round(t_test_sleep$p.value, 4), 
+      "> 0,05, não rejeitamos H0. Não há evidência estatística significativa de que a presença de desordem do sono impacta o nível de estresse.")
+}
+```
+
+# - Análise 5: Impacto da Faixa Etária no Nível de Estresse
+
+## - Análise Exploratória
+
+```{r age_analysis}
+# Estatísticas por faixa etária
+stats_age <- dados_processados %>%
+  group_by(faixa_etaria) %>%
+  summarise(
+    n = n(),
+    media = mean(Stress.Level),
+    mediana = median(Stress.Level),
+    desvio_padrao = sd(Stress.Level),
+    .groups = 'drop'
+  )
+
+kable(stats_age, caption = "Estatísticas do Nível de Estresse por Faixa Etária") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+# Boxplot
+p1 <- ggplot(dados_processados, aes(x = faixa_etaria, y = Stress.Level, fill = faixa_etaria)) +
+  geom_boxplot(alpha = 0.7) +
+  labs(title = "Distribuição do Nível de Estresse por Faixa Etária",
+       x = "Faixa Etária",
+       y = "Nível de Estresse") +
+  theme_minimal() +
+  theme(legend.position = "none", axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Gráfico de barras das médias
+p2 <- ggplot(stats_age, aes(x = faixa_etaria, y = media, fill = faixa_etaria)) +
+  geom_bar(stat = "identity", alpha = 0.7) +
+  geom_text(aes(label = round(media, 2)), vjust = -0.5) +
+  labs(title = "Média do Nível de Estresse por Faixa Etária",
+       x = "Faixa Etária",
+       y = "Média do Nível de Estresse") +
+  theme_minimal() +
+  theme(legend.position = "none", axis.text.x = element_text(angle = 45, hjust = 1))
+
+grid.arrange(p1, p2, ncol = 2)
+```
+
+## - Teste Estatístico
+
+```{r age_test}
+# ANOVA para comparar múltiplos grupos
+anova_age <- aov(Stress.Level ~ faixa_etaria, data = dados_processados)
+summary(anova_age)
+
+# Teste post-hoc (Tukey) se significativo
+tukey_age <- TukeyHSD(anova_age)
+tukey_age
+
+cat("\n### Hipóteses:\n")
+cat("H0: μ_<35 = μ_35-45 = μ_≥45 (todas as médias são iguais)\n")
+cat("H1: Pelo menos uma média é diferente das demais\n")
+cat("Nível de significância: α = 0,05\n")
+```
+
+## - Conclusão - Faixa Etária
+
+```{r age_conclusion}
+p_value_age <- summary(anova_age)[[1]][["Pr(>F)"]][1]
+if(p_value_age < 0.05) {
+  cat("CONCLUSÃO: Com p-valor =", round(p_value_age, 4), 
+      "< 0,05, rejeitamos H0. Há evidência estatística significativa de que a faixa etária impacta o nível de estresse.")
+} else {
+  cat("CONCLUSÃO: Com p-valor =", round(p_value_age, 4), 
+      "> 0,05, não rejeitamos H0. Não há evidência estatística significativa de que a faixa etária impacta o nível de estresse.")
+}
+```
+
+# - Resumo dos Resultados
+
+```{r summary_results}
+# Criando tabela resumo dos testes
+resultados <- data.frame(
+  Variavel = c("Gênero", "Área de Ocupação", "Categoria de IMC", "Desordem do Sono", "Faixa Etária"),
+  Teste_Utilizado = c("Teste t", "Teste t", "ANOVA", "Teste t", "ANOVA"),
+  P_valor = c(
+    round(t_test_gender$p.value, 4),
+    round(t_test_occupation$p.value, 4),
+    round(summary(anova_bmi)[[1]][["Pr(>F)"]][1], 4),
+    round(t_test_sleep$p.value, 4),
+    round(summary(anova_age)[[1]][["Pr(>F)"]][1], 4)
+  ),
+  Significativo = c(
+    ifelse(t_test_gender$p.value < 0.05, "Sim", "Não"),
+    ifelse(t_test_occupation$p.value < 0.05, "Sim", "Não"),
+    ifelse(summary(anova_bmi)[[1]][["Pr(>F)"]][1] < 0.05, "Sim", "Não"),
+    ifelse(t_test_sleep$p.value < 0.05, "Sim", "Não"),
+    ifelse(summary(anova_age)[[1]][["Pr(>F)"]][1] < 0.05, "Sim", "Não")
+  )
+)
+
+kable(resultados, caption = "Resumo dos Testes Estatísticos") %>%
+  kable_styling(bootstrap_options = c("striped", "hover")) %>%
+  row_spec(which(resultados$Significativo == "Sim"), background = "#d4edda")
+```
+
+# - Conclusões Finais
+
+```{r final_conclusions}
+# Identificando variáveis significativas
+vars_significativas <- resultados$Variavel[resultados$Significativo == "Sim"]
+vars_nao_significativas <- resultados$Variavel[resultados$Significativo == "Não"]
+
+cat("SÍNTESE DOS ACHADOS:\n\n")
+
+if(length(vars_significativas) > 0) {
+  cat("As seguintes variáveis apresentaram impacto estatisticamente significativo no nível de estresse dos colaboradores:\n")
+  for(var in vars_significativas) {
+    cat("- ", var, "\n")
+  }
+  cat("\n")
+}
+
+if(length(vars_nao_significativas) > 0) {
+  cat("As seguintes variáveis NÃO apresentaram impacto estatisticamente significativo no nível de estresse:\n")
+  for(var in vars_nao_significativas) {
+    cat("- ", var, "\n")
+  }
+  cat("\n")
+}
+
+cat("Todos os testes foram realizados com nível de significância de 5% (α = 0,05). ")
+cat("Os resultados fornecem insights importantes para a gestão do bem-estar dos colaboradores, ")
+cat("permitindo focar em intervenções direcionadas às variáveis que efetivamente impactam o nível de estresse.")
+```
+
+---

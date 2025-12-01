@@ -1,0 +1,221 @@
+---
+title: "Grupo_05"
+author: "Emily Seckelmann, Kemilly Franco e Vinícius Cebalhos"
+output: html_document
+---
+
+```{r echo=FALSE, include=FALSE}
+project_root_path <- paste0(getwd(), "")
+source(paste0(project_root_path, "/definitions.R"))
+source(paste0(project_root_path, "/install_load_packages.R"), encoding = encoding)
+```
+
+## Questão 1: Análise exploratória
+
+Para esta análise foram considerados os dados de 53.940 pedras de diamante e suas características principais:
+
+```{r echo=FALSE}
+dados <- diamonds
+freq_abs <- table(dados$cut)
+freq_rel <- round(prop.table(freq_abs) * 100, 1)
+
+gbarras3 <- barplot(
+  freq_rel,
+  xlab = 'Qualidade do corte',
+  ylab = 'Frequência absoluta',
+  main = "Qualidade do corte (%)",
+  col = 'lightblue',
+  ylim = c(0, 42)
+)
+text(x = gbarras3,
+     y = freq_rel + 1,
+     labels = as.character(freq_rel))
+
+sum <- freq_rel[3] + freq_rel[4] + freq_rel[5]
+print(paste0('Acima de Muito bom: ', sum, '%'))
+```
+
+De forma geral, é possível perceber que a  maioria dos diamantes (88%) possui qualidade de corte acima de "muito boa".
+
+```{r echo=FALSE}
+gboxplot3 <- boxplot(
+  dados$price,
+  outline = FALSE,
+  col = "lightblue",
+  border = "darkgrey",
+  boxwex = 0.3
+)
+title("Preço dos diamantes, desconsiderando outliers")
+median_val <- gboxplot3$stats[3, 1]
+mediana_fmt <- paste0("Mediana: $",
+                      formatC(median_val / 1000, format = "f", digits = 2),
+                      "k")
+text(
+  x = 1,
+  y = median_val,
+  labels = mediana_fmt,
+  pos = 4,
+  col = "red"
+)
+```
+
+Além disso, 50% dos diamantes analisados custam até U$2,4mil dólares.
+
+```{r echo=FALSE}
+hist(
+  dados$carat,
+  xlab = 'Peso em quilates',
+  ylab = 'Quantidade de diamantes',
+  main = "Distribuição do peso dos diamantes",
+  col = "lightblue",
+)
+percentage <- dados %>%
+  summarise(percent = mean(dados$carat <= 1) * 100) %>%
+  pull(percent)
+print(paste0(round(percentage, 1), "% dos diamantes têm até 1 quilate"))
+
+percentage <- dados %>%
+  summarise(percent = mean(dados$carat <= 1.5) * 100) %>%
+  pull(percent)
+print(paste0(round(percentage, 1), "% dos diamantes têm até 1 quilate e meio"))
+```
+
+```{r echo=FALSE}
+dados <- diamonds %>%
+  dplyr::mutate(
+    clarity_adj = dplyr::case_when(
+      clarity %in% c("IF", "VVS1", "VVS2") ~ "Alta Pureza",
+      clarity %in% c("VS1", "VS2", "SI1") ~ "Média Pureza",
+      clarity %in% c("SI2", "I1") ~ "Baixa Pureza"
+    )
+  ) %>%
+  dplyr::mutate(clarity_adj = factor(
+    clarity_adj,
+    levels = c("Alta Pureza", "Média Pureza", "Baixa Pureza"),
+    ordered =  TRUE
+  ))
+
+pie(prop.table(table(dados$clarity_adj)), col=rainbow(3))
+
+sort(prop.table(table(dados$clarity)))
+```
+
+Mais da metade dos diamantes podem ser considerados de média pureza.
+As purezas mais comuns sendo SI1, considerado de média-baixa pureza, e VS2, de média pureza.
+
+### Resumo EAD
+* A amostra avaliada é composta por 53.940 diamantes.
+* A variável de qualidade de corte ('cut') mais frequente é a 'Ideal'.
+* As variáveis de preço ('price') e peso ('carat') são assimétricas, com a maioria dos diamantes sendo mais leves e mais baratos.
+Isso nos diz que análises que exigem dados 'normais' (com distribuição em formato de sino) precisarão de cuidado.
+
+## Questão 2: Existe correlação entre o preço e o peso do diamante?
+ 
+```{r echo=FALSE}
+print(paste("Price tem distribuição normal?", ifelse(round(nortest::ad.test(dados$price)$p.value, 2) > 0.05, "SIM", "NÃO")))
+print(paste("Carat tem distribuição normal?", ifelse(round(nortest::ad.test(dados$carat)$p.value, 2) > 0.05, "SIM", "NÃO")))
+```
+
+Usamos o teste para coeficiente de correlação entre as duas variáveis, especificamente o método Spearman, já que a amostra analisada não possui uma distribuição normal. 
+
+```{r echo=FALSE, warning=FALSE}
+cor.test(dados$price, dados$carat, method = "spearman")
+```
+Como indicado acima, o resultado do teste apontou forte correlação entre as duas variáveis, além de ser uma correlação estatisticamente significativa.
+
+## Questão 3: Existe diferença no preço do diamante de acordo com o tipo de corte?
+
+Testaremos a normalidade dos conjuntos de corte
+
+```{r echo=FALSE}
+print(paste("Fair tem distribuição normal?", ifelse(round(nortest::ad.test(dados$price[dados$cut == 'Fair'])$p.value, 2) > 0.05, "SIM", "NÃO")))
+print(paste("Good tem distribuição normal?", ifelse(round(nortest::ad.test(dados$price[dados$cut == 'Good'])$p.value, 2) > 0.05, "SIM", "NÃO")))
+print(paste("Very Good tem distribuição normal?", ifelse(round(nortest::ad.test(dados$price[dados$cut == 'Very Good'])$p.value, 2) > 0.05, "SIM", "NÃO")))
+print(paste("Premium tem distribuição normal?", ifelse(round(nortest::ad.test(dados$price[dados$cut == 'Premium'])$p.value, 2) > 0.05, "SIM", "NÃO")))
+print(paste("Ideal tem distribuição normal?", ifelse(round(nortest::ad.test(dados$price[dados$cut == 'Ideal'])$p.value, 2) > 0.05, "SIM", "NÃO")))
+```
+Como a maioria não é normal, então usaremos o teste Kruskal-Wallis por ser um teste não paramétrico.
+
+```{r echo=FALSE}
+kruskal.test(dados$price ~ dados$cut, data = dados)
+```
+Como resultado, obtivemos que p foi muito inferior a 0,05 (2.2e-16), e isso indica que existe uma diferença estatisticamente significativa na mediana do preço dos diamantes entre os diferentes tipos de corte, portanto rejeitamos a hipótese nula para este teste.
+
+Adicionalmente faremos o teste de Dunn
+
+```{r echo=FALSE}
+dunn.test(dados$price, dados$cut, method = "bonferroni")
+```
+
+Com este resultado, rejeitaremos H0, pois há diferença significativa entre todos os pares.
+
+Desta forma, **sim, existe diferença no preço do diamante de acordo com o tipo de corte.** O teste de Kruskal-Wallis confirmou que a diferença é estatisticamente significativa. O teste de Dunn detalhou que as medianas de preço de todos os tipos de corte são diferentes entre si. O corte de maior qualidade ("Ideal") apresenta uma das menores medianas de preço, sugerindo que outras variáveis (como o peso) têm forte influência no preço final.
+
+
+## Questão 4: Existe diferença no preço do diamantes coloridos e incolores?
+  
+```{r echo=FALSE}
+dados <- diamonds %>%
+  mutate(cor = case_when(color %in% c('D', 'E', 'F') ~ 'Incolor', TRUE ~ 'Colorido'))
+```
+
+```{r echo=FALSE, include=FALSE}
+dados %>%
+  group_by(cor) %>%
+  summarise(
+    media = mean(price),
+    mediana = median(price),
+    desvio_padrao = sd(price),
+    n = n()
+  )
+```
+
+Hipótese nula (H0): Não há diferença de preço entre diamantes coloridos e incolores.
+Hipótese alternativa (H1): Há diferença de preço entre os grupos.
+
+```{r echo=FALSE}
+print(paste("Colorido tem distribuição normal?", ifelse(round(nortest::ad.test(dados$price[dados$cor == 'Colorido'])$p.value, 2) > 0.05, "SIM", "NÃO")))
+print(paste("Incolor tem distribuição normal?", ifelse(round(nortest::ad.test(dados$price[dados$cor == 'Incolor'])$p.value, 2) > 0.05, "SIM", "NÃO")))
+```
+
+Como nenhuma das distribuições é normal, usaremos o teste não paramétrico Wilcoxon ou Mann-Whitney.
+
+```{r echo=FALSE}
+wilcox.test(price ~ cor, data = dados)
+```
+
+
+```{r echo=FALSE}
+price_cor_boxplot <- boxplot(
+  dados$price ~ dados$cor,
+  col = "lightblue",
+  border = "darkgrey",
+  boxwex = 0.3
+)
+title("Preço dos diamantes")
+median_cor_val <- price_cor_boxplot$stats[3, 1]
+median_cor_fmt <- paste0("Mediana: $",
+                         formatC(median_cor_val / 1000, format = "f", digits = 2),
+                         "k")
+text(
+  x = 1,
+  y = median_cor_val,
+  labels = median_cor_fmt,
+  pos = 4,
+  col = "red"
+)
+median_incor_val <- price_cor_boxplot$stats[3, 2]
+median_incor_fmt <- paste0("Mediana: $",
+                           formatC(median_incor_val / 1000, format = "f", digits = 2),
+                           "k")
+text(
+  x = 2,
+  y = median_incor_val,
+  labels = median_incor_fmt,
+  pos = 4,
+  col = "red"
+)
+```
+
+Analisamos o resultado apresentado e rejeitamos a hipótese nula.
+Consideramos que há **uma diferença estatisticamente significativa no preço entre diamantes incolores e coloridos.** O teste de Wilcoxon confirmou essa diferença. Olhando o boxplot, vemos que **diamantes classificados como "Coloridos" (cores G, H, I, J) tendem a ter um preço mediano mais alto** do que os "Incolores" (D, E, F). Já que as cores D-F são mais valiosas, mas, novamente (questão 3), isso provavelmente ocorre porque diamantes com cores inferiores podem ser maiores em `carat` para compensar, elevando seu preço final.

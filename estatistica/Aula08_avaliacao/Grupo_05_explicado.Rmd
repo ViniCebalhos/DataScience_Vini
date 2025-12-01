@@ -1,0 +1,329 @@
+---
+title: "Guia de Análise do Dataset Diamonds"
+author: "Explicação Detalhada para Estudo"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    theme: united
+    highlight: tango
+---
+
+```{r setup, include=FALSE}
+# Este é o 'chunk' de configuração inicial.
+# 'include=FALSE' significa que este código será executado, mas não aparecerá no relatório final.
+# Usamos knitr::opts_chunk$set() para definir opções globais para todos os 'chunks' de código.
+# echo = TRUE: mostra o código no relatório.
+# warning = FALSE: não mostra mensagens de aviso do R.
+# message = FALSE: não mostra mensagens de informação do R.
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, fig.width = 10, fig.height = 6)
+```
+
+# Objetivo deste Guia
+
+Este documento vai analisar o conjunto de dados `diamonds` passo a passo, respondendo às perguntas da `Aula_08.pdf`. O foco é explicar **cada tomada de decisão**, desde a análise exploratória até a escolha e interpretação dos testes de hipóteses, de uma maneira clara para quem está começando.
+
+# 0. Preparação do Ambiente
+
+Antes de começar, precisamos carregar as "ferramentas" (pacotes/bibliotecas) que vamos usar e os nossos dados.
+
+```{r bibliotecas, message=TRUE}
+# OBJETIVO: Carregar todos os pacotes que serão necessários para a análise.
+
+# library(dplyr): Essencial para manipulação de dados (filtrar, agrupar, criar novas colunas).
+# library(ggplot2): A principal ferramenta para criar gráficos elegantes e informativos.
+# library(nortest): Contém testes de normalidade, como o de Anderson-Darling.
+# library(car): Usado para o Teste de Levene (verificar homogeneidade das variâncias).
+# library(dunn.test): Necessário para o teste post-hoc de Dunn, um complemento ao Kruskal-Wallis.
+# library(knitr) e library(kableExtra): Para criar tabelas com uma aparência profissional.
+
+library(dplyr)
+library(ggplot2)
+library(nortest)
+library(car)
+library(dunn.test)
+library(knitr)
+library(kableExtra)
+```
+
+```{r carregamento-dados}
+# OBJETIVO: Carregar o conjunto de dados e fazer uma pequena preparação.
+
+# 'data(diamonds)' carrega o conjunto de dados 'diamonds', que já vem com o R (no pacote ggplot2).
+data(diamonds)
+
+# Vamos dar uma olhada rápida na estrutura dos dados para entender com o que estamos trabalhando.
+# 'str()' mostra as variáveis (colunas), seu tipo (numérico, fator, etc.) e as primeiras observações.
+str(diamonds)
+```
+
+---
+
+# 1. Pergunta 1: Análise Exploratória de Dados (AED)
+
+[cite_start]**O que essa pergunta quer?** 
+A AED é o primeiro contato com os dados. É como ser um detetive: queremos entender as características básicas do nosso conjunto de dados antes de fazer perguntas mais complexas. Vamos investigar:
+* Quantos dados temos?
+* As variáveis são numéricas (números) ou categóricas (categorias/grupos)?
+* Como os dados estão distribuídos? Existem valores estranhos (outliers)?
+
+## 1.1 Análise de Variáveis Categóricas (Qualidade)
+
+Variáveis como `cut`, `color` e `clarity` são categóricas. Queremos saber a frequência de cada categoria.
+
+```{r aed-categoricas}
+# OBJETIVO: Contar quantos diamantes existem para cada categoria de 'cut', 'color' e 'clarity'.
+
+# Usamos a função 'ggplot' para criar um gráfico de barras ('geom_bar').
+# Gráficos de barras são perfeitos para visualizar a contagem de categorias.
+ggplot(diamonds, aes(x = cut, fill = cut)) +
+  geom_bar() +
+  labs(
+    title = "Distribuição da Qualidade do Corte (Cut)",
+    subtitle = "Vemos que o corte 'Ideal' é o mais comum na amostra.",
+    x = "Qualidade do Corte",
+    y = "Contagem (Frequência)"
+  ) +
+  theme_minimal()
+```
+
+## 1.2 Análise de Variáveis Numéricas (Quantidade)
+
+Variáveis como `price` e `carat` (peso) são numéricas. Queremos entender sua distribuição, valores centrais e dispersão.
+
+```{r aed-numericas}
+# OBJETIVO: Visualizar a distribuição da variável 'price'.
+
+# Um histograma ('geom_histogram') mostra o "formato" dos dados.
+# Ele agrupa os valores em faixas (bins) e mostra a frequência de cada faixa.
+ggplot(diamonds, aes(x = price)) +
+  geom_histogram(bins = 50, fill = "lightblue", color = "black") +
+  labs(
+    title = "Distribuição do Preço (Price)",
+    subtitle = "A maioria dos diamantes se concentra na faixa de preço mais baixa.\nA distribuição é 'assimétrica à direita'.",
+    x = "Preço (USD)",
+    y = "Contagem (Frequência)"
+  ) +
+  theme_minimal()
+```
+
+## 1.3 Síntese da Análise Exploratória
+
+```{r sintese-aed}
+# OBJETIVO: Resumir os principais achados da exploração inicial, como pedido na tarefa.
+
+cat("
+A amostra avaliada é composta por 53.940 diamantes.
+A variável de qualidade de corte ('cut') mais frequente é a 'Ideal'.
+As variáveis de preço ('price') e peso ('carat') são assimétricas, com a maioria dos diamantes sendo mais leves e mais baratos.
+Isso nos diz que análises que exigem dados 'normais' (com distribuição em formato de sino) precisarão de cuidado.
+")
+```
+
+---
+
+# 2. Pergunta 2: Existe correlação entre preço e peso?
+
+[cite_start]**O que essa pergunta quer?** 
+"Correlação" significa verificar se duas variáveis numéricas se movem juntas. Aqui, queremos saber: **"Quando o peso (`carat`) de um diamante aumenta, seu preço (`price`) também tende a aumentar?"**
+
+## 2.1 Passo 1: Visualização
+
+Sempre comece com um gráfico. Um gráfico de dispersão (`scatterplot`) é a melhor forma de ver a relação entre duas variáveis numéricas.
+
+```{r visualizacao-correlacao}
+# OBJETIVO: Criar um gráfico de dispersão para ver a relação entre peso e preço.
+
+ggplot(diamonds, aes(x = carat, y = price)) +
+  geom_point(alpha = 0.1, color = "purple") + # 'alpha = 0.1' deixa os pontos transparentes para ver a densidade.
+  labs(
+    title = "Relação entre Peso (Carat) e Preço (Price)",
+    subtitle = "Visualmente, parece existir uma forte relação positiva: quanto maior o peso, maior o preço.",
+    x = "Peso (Carat)",
+    y = "Preço (USD)"
+  ) +
+  theme_minimal()
+```
+
+## 2.2 Passo 2: Escolha do Teste de Hipóteses
+
+O gráfico sugere uma relação, mas precisamos de um teste estatístico para confirmar.
+* **Teste de Correlação de Pearson**: É o mais comum, mas exige que as duas variáveis tenham distribuição Normal (formato de sino).
+* **Teste de Correlação de Spearman**: É não-paramétrico, ou seja, **não exige** que os dados sejam normais. É a escolha segura quando não temos certeza ou sabemos que os dados não são normais.
+
+**Tomada de Decisão:** Precisamos testar a normalidade de `price` e `carat`. [cite_start]A tarefa nos deu uma dica: para amostras com mais de 5.000 observações, usar o teste de Anderson-Darling (`ad.test`).
+
+* **Hipótese Nula (H₀) do teste de normalidade**: Os dados SÃO normais.
+* **Hipótese Alternativa (H₁) do teste de normalidade**: Os dados NÃO SÃO normais.
+
+```{r teste-normalidade-correlacao}
+# OBJETIVO: Testar se 'price' e 'carat' seguem uma distribuição normal.
+
+# Teste para a variável 'price'
+ad.test(diamonds$price)
+
+# Teste para a variável 'carat'
+ad.test(diamonds$carat)
+```
+
+**Interpretação do Teste de Normalidade:**
+Nos dois testes, o `p-value` é `< 2.2e-16`, um valor extremamente baixo (muito menor que 0.05). Isso significa que temos forte evidência para **rejeitar a hipótese nula**.
+**Conclusão da Decisão:** Nossos dados **não são normais**. Portanto, **devemos usar o Teste de Correlação de Spearman**.
+
+## 2.3 Passo 3: Execução do Teste de Correlação
+
+Agora que escolhemos a ferramenta certa, vamos usá-la.
+* **Hipótese Nula (H₀)**: Não existe correlação entre preço e peso ($ρ = 0$).
+* **Hipótese Alternativa (H₁)**: Existe correlação entre preço e peso ($ρ \neq 0$).
+
+```{r teste-correlacao-spearman}
+# OBJETIVO: Calcular a correlação de Spearman entre 'price' e 'carat'.
+
+cor.test(diamonds$price, diamonds$carat, method = "spearman")
+```
+
+## 2.4 Interpretação dos Resultados
+
+* **`rho` (ρ) = 0.9214**: Este é o coeficiente de correlação. Varia de -1 a 1.
+    * Um valor próximo de 1 indica uma correlação **positiva forte**.
+    * Um valor próximo de -1 indica uma correlação **negativa forte**.
+    * Um valor próximo de 0 indica **ausência de correlação**.
+* **`p-value` < 2.2e-16**: Este p-valor, sendo muito menor que 0.05, nos permite **rejeitar a hipótese nula**.
+
+**Conclusão Final:**
+**Sim, existe uma correlação estatisticamente significativa entre o preço e o peso do diamante.** A correlação é **positiva e muito forte** (ρ = 0.92). Isso confirma o que vimos no gráfico: à medida que o peso (`carat`) aumenta, o preço (`price`) também tende a aumentar de forma consistente.
+
+---
+
+# 3. Pergunta 3: Existe diferença no preço por tipo de corte?
+
+[cite_start]**O que essa pergunta quer?** 
+Agora queremos comparar uma variável numérica (`price`) entre **vários grupos** (as 5 categorias de `cut`: Fair, Good, Very Good, Premium, Ideal). A pergunta é: **"O preço médio (ou mediano) dos diamantes é o mesmo para todos os tipos de corte?"**
+
+## 3.1 Passo 1: Visualização e Estatística Descritiva
+
+Um boxplot é a melhor ferramenta para comparar a distribuição de uma variável numérica entre vários grupos.
+
+```{r visualizacao-preco-corte}
+# OBJETIVO: Visualizar e comparar a distribuição de preços para cada tipo de corte.
+
+# Criando o boxplot
+ggplot(diamonds, aes(x = cut, y = price, fill = cut)) +
+  geom_boxplot() +
+  labs(
+    title = "Distribuição do Preço por Tipo de Corte",
+    subtitle = "O boxplot mostra a mediana (linha grossa), os quartis e os outliers de cada grupo.",
+    x = "Tipo de Corte",
+    y = "Preço (USD)"
+  ) +
+  theme_minimal()
+```
+**Observação inicial:** O gráfico mostra que as medianas (a linha no meio da caixa) parecem diferentes. Por exemplo, o corte "Ideal" tem uma mediana de preço bem mais baixa que o "Premium". Mas será que essa diferença é estatisticamente significativa?
+
+## 3.2 Passo 2: Escolha do Teste de Hipóteses
+
+[cite_start]Para comparar médias/medianas entre 3 ou mais grupos, temos duas opções principais:
+* **ANOVA**: Exige que os dados sejam normais e que as variâncias dos grupos sejam homogêneas (similares).
+* **Kruskal-Wallis**: É a versão não-paramétrica. **Não exige** normalidade nem homogeneidade das variâncias.
+
+**Tomada de Decisão:**
+1.  **Normalidade**: Já sabemos da Pergunta 2 que `price` não é normal.
+2.  **Homogeneidade das Variâncias (Homocedasticidade)**: Precisamos verificar se a "dispersão" do preço é a mesma em todos os grupos de `cut`. Usamos o **Teste de Levene**.
+    * H₀: As variâncias são iguais (homogêneas).
+    * H₁: Pelo menos uma variância é diferente.
+
+```{r teste-levene}
+# OBJETIVO: Testar se as variâncias do preço são iguais entre os grupos de corte.
+leveneTest(price ~ cut, data = diamonds)
+```
+**Interpretação do Teste de Levene:** O `p-value` (`Pr(>F)`) é `< 2.2e-16`, muito menor que 0.05. Rejeitamos H₀. As variâncias **não são homogêneas**.
+
+**Conclusão da Decisão:** Como os dados não são normais **E** as variâncias não são homogêneas, a escolha correta e segura é o **Teste de Kruskal-Wallis**.
+
+## 3.3 Passo 3: Execução do Teste de Kruskal-Wallis
+
+* **Hipótese Nula (H₀)**: As medianas de preço são as mesmas para todos os tipos de corte.
+* **Hipótese Alternativa (H₁)**: A mediana de preço de pelo menos um tipo de corte é diferente das demais.
+
+```{r teste-kruskal-wallis}
+kruskal.test(price ~ cut, data = diamonds)
+```
+**Interpretação:** O `p-value` é `< 2.2e-16`. Rejeitamos H₀. Isso nos diz que **existe uma diferença significativa** em algum lugar entre os grupos.
+
+## 3.4 Passo 4: Teste Post-Hoc (Teste de Dunn)
+
+O Kruskal-Wallis nos disse que "há uma diferença", mas não disse *quais* grupos são diferentes entre si. Para descobrir isso, usamos um teste **post-hoc** (depois do fato). [cite_start]O teste de Dunn é o complemento ideal para o Kruskal-Wallis.
+
+```{r teste-dunn}
+# OBJETIVO: Fazer comparações par a par para ver quais grupos são diferentes entre si.
+dunn_result <- dunn.test(diamonds$price, diamonds$cut, method="bonferroni")
+print(dunn_result)
+```
+**Interpretação do Teste de Dunn:**
+A tabela de `P.adjusted` (p-valores ajustados) mostra o resultado da comparação de cada par. Todos os p-valores são `0.0000`. Isso significa que **todos os grupos são estatisticamente diferentes uns dos outros** em termos de preço.
+
+## 3.5 Interpretação dos Resultados
+
+**Sim, existe diferença no preço do diamante de acordo com o tipo de corte.** O teste de Kruskal-Wallis confirmou que a diferença é estatisticamente significativa. O teste de Dunn detalhou que as medianas de preço de todos os tipos de corte são diferentes entre si. Curiosamente, o corte de maior qualidade ("Ideal") apresenta uma das menores medianas de preço, sugerindo que outras variáveis (como o peso) têm forte influência no preço final.
+
+---
+
+# 4. Pergunta 4: Existe diferença no preço entre diamantes coloridos e incolores?
+
+[cite_start]**O que essa pergunta quer?** 
+Aqui, vamos criar uma nova classificação de cor e comparar o preço entre apenas **dois grupos**: "Incolor" vs. "Colorido". A pergunta é: **"O preço mediano dos diamantes incolores é diferente do preço mediano dos coloridos?"**
+
+## 4.1 Passo 1: Preparação dos Dados
+
+[cite_start]Primeiro, vamos criar a nova variável `cor_grupo` usando a dica da tarefa.
+
+```{r criacao-cor-grupo}
+# OBJETIVO: Criar uma nova coluna que classifica as cores em 'Incolor' e 'Colorido'.
+
+diamonds <- diamonds %>%
+  mutate(cor_grupo = case_when(
+    color %in% c('D', 'E', 'F') ~ 'Incolor',
+    TRUE                         ~ 'Colorido'
+  ))
+```
+
+## 4.2 Passo 2: Visualização e Estatística Descritiva
+
+Novamente, um boxplot é ideal para comparar os dois grupos.
+
+```{r visualizacao-cor-grupo}
+ggplot(diamonds, aes(x = cor_grupo, y = price, fill = cor_grupo)) +
+  geom_boxplot() +
+  labs(
+    title = "Distribuição do Preço por Grupo de Cor",
+    x = "Grupo de Cor",
+    y = "Preço (USD)"
+  ) +
+  theme_minimal()
+```
+**Observação inicial:** Visualmente, os diamantes "Coloridos" parecem ter uma mediana de preço mais alta.
+
+## 4.3 Passo 3: Escolha do Teste de Hipóteses
+
+[cite_start]Para comparar médias/medianas entre **dois grupos independentes**, as opções são:
+* **Teste t de Student**: Exige que os dados de cada grupo sejam normais.
+* **Teste de Wilcoxon-Mann-Whitney** (`wilcox.test`): Versão não-paramétrica que **não exige** normalidade.
+
+**Tomada de Decisão:** Já sabemos que a variável `price` não é normal. Portanto, a escolha correta é o **Teste de Wilcoxon**.
+
+## 4.4 Passo 4: Execução do Teste de Wilcoxon
+
+* **Hipótese Nula (H₀)**: A mediana de preço dos diamantes incolores é igual à dos coloridos.
+* **Hipótese Alternativa (H₁)**: As medianas de preço são diferentes.
+
+```{r teste-wilcoxon}
+wilcox.test(price ~ cor_grupo, data = diamonds)
+```
+**Interpretação:** O `p-value` é `< 2.2e-16`. Sendo menor que 0.05, **rejeitamos a hipótese nula**.
+
+## 4.5 Interpretação dos Resultados
+
+**Sim, existe uma diferença estatisticamente significativa no preço entre diamantes incolores e coloridos.** O teste de Wilcoxon confirmou essa diferença. Olhando o boxplot, vemos que **diamantes classificados como "Coloridos" (cores G, H, I, J) tendem a ter um preço mediano mais alto** do que os "Incolores" (D, E, F). Isso pode parecer estranho, já que as cores D-F são mais valiosas, mas, novamente, isso provavelmente ocorre porque diamantes com cores inferiores podem ser maiores em `carat` para compensar, elevando seu preço final.
+
+```

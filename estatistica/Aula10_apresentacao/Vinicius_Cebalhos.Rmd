@@ -1,0 +1,350 @@
+---
+title: "Análise de Vinhos: A Relação Entre Preço e Qualidade"
+author: "Vinícius Cebalhos"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: united
+    code_folding: hide
+---
+
+```{r setup, include=FALSE}
+# Configurações iniciais do R Markdown
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, fig.width = 10, fig.height = 6)
+
+# Carregar bibliotecas necessárias
+library(tidyverse)
+library(knitr)
+library(scales)
+library(gridExtra)
+```
+
+## Introdução
+
+Este relatório apresenta uma análise exploratória da relação entre preço e qualidade de vinhos, utilizando um conjunto de dados com mais de 130.000 avaliações de vinhos.
+
+## Carregamento e Limpeza dos Dados
+
+```{r data-loading}
+# Carregar os dados (assumindo que o CSV está na mesma pasta do seu arquivo .Rmd)
+wine_data <- read_csv("winemag-data-130k-v2.csv")
+
+# Limpeza inicial: remover linhas onde preço ou pontuação são nulos
+wine_data_clean <- wine_data %>%
+  filter(!is.na(price), !is.na(points))
+
+# Estatísticas descritivas básicas
+cat("Dados originais:", nrow(wine_data), "observações\n")
+cat("Dados após limpeza:", nrow(wine_data_clean), "observações\n")
+cat("Observações removidas:", nrow(wine_data) - nrow(wine_data_clean), "\n")
+```
+
+```{r data-preview}
+# Mostrar as primeiras linhas dos dados limpos
+kable(head(wine_data_clean %>% select(title, country, variety, points, price)), 
+      caption = "Amostra do Conjunto de Dados de Vinhos")
+```
+
+## Análise da Relação Preço vs Qualidade
+
+### Visualização da Correlação
+
+```{r price-points-scatter}
+# Gráfico de Dispersão: Pontos vs. Preço (com escala logarítmica)
+ggplot(wine_data_clean, aes(x = price, y = points)) +
+  geom_point(alpha = 0.2, color = "darkblue") +
+  geom_smooth(method = "lm", color = "red", se = TRUE) +
+  scale_x_log10(labels = dollar_format()) +
+  labs(title = "Relação entre Preço e Pontuação do Vinho",
+       subtitle = "Escala logarítmica do preço para melhor visualização",
+       x = "Preço (USD, escala log)",
+       y = "Pontuação (1-100)") +
+  theme_minimal() +
+  theme(plot.title = element_text(size = 16, face = "bold"),
+        plot.subtitle = element_text(size = 12))
+```
+
+### Teste de Correlação de Pearson
+
+**O QUE É:** A correlação de Pearson mede se existe uma relação LINEAR entre duas variáveis numéricas (preço e pontuação).
+
+**POR QUE USAR:** Queremos saber se vinhos mais caros tendem a ter pontuações mais altas de forma consistente.
+
+**COMO INTERPRETAR:**
+- Valor entre -1 e +1
+- Próximo de +1: correlação positiva forte (quando uma aumenta, a outra também)
+- Próximo de 0: sem correlação linear
+- Próximo de -1: correlação negativa forte
+
+```{r correlation-test}
+# Teste de Correlação
+cor_test <- cor.test(wine_data_clean$price, wine_data_clean$points)
+cor_coef <- round(cor_test$estimate, 3)
+p_value <- round(cor_test$p.value, 10)
+
+cat("RESULTADO DA CORRELAÇÃO DE PEARSON:\n")
+cat("Coeficiente de Correlação:", cor_coef, "\n")
+cat("Valor p:", format(p_value, scientific = TRUE), "\n")
+
+# Interpretação didática
+interpretacao <- case_when(
+  abs(cor_coef) >= 0.7 ~ "forte",
+  abs(cor_coef) >= 0.5 ~ "moderada",
+  abs(cor_coef) >= 0.3 ~ "fraca",
+  TRUE ~ "muito fraca"
+)
+
+direcao <- ifelse(cor_coef > 0, "positiva", "negativa")
+
+cat("Interpretação: Correlação", direcao, interpretacao, "\n")
+cat("Significância:", ifelse(p_value < 0.05, "SIGNIFICATIVA (p < 0.05)", "NÃO significativa"), "\n")
+cat("\nO QUE ISSO SIGNIFICA:\n")
+if(cor_coef > 0.3) {
+  cat("- Existe uma tendência: vinhos mais caros tendem a ter pontuações mais altas\n")
+  cat("- Mas a relação não é perfeita - preço não é o único fator da qualidade\n")
+} else {
+  cat("- A relação entre preço e pontuação é muito fraca\n")
+  cat("- Preço não é um bom preditor da qualidade neste conjunto de dados\n")
+}
+```
+
+## Análise por Categorias de Preço e Qualidade
+
+### Definindo as Categorias
+
+Para facilitar a análise, vamos criar duas categorizações diferentes:
+
+**CATEGORIAS DE PREÇO (baseadas no valor em USD):**
+- **Econômico**: até $15 - vinhos acessíveis para consumo diário
+- **Médio**: $15 a $50 - vinhos para ocasiões especiais
+- **Caro**: acima de $50 - vinhos premium e de coleção
+
+**CATEGORIAS DE QUALIDADE (baseadas na pontuação):**
+- **Boa**: 80-87 pontos - vinhos de qualidade aceitável
+- **Muito Boa**: 88-94 pontos - vinhos de alta qualidade
+- **Excepcional**: 95-100 pontos - vinhos extraordinários
+
+```{r price-categories}
+# Criar categorias de PREÇO
+wine_data_groups <- wine_data_clean %>%
+  mutate(categoria_preco = case_when(
+    price <= 15 ~ "Econômico",
+    price > 15 & price <= 50 ~ "Médio",
+    price > 50 ~ "Caro"
+  )) %>%
+  # Criar categorias de QUALIDADE
+  mutate(categoria_qualidade = case_when(
+    points >= 80 & points <= 87 ~ "Boa",
+    points >= 88 & points <= 94 ~ "Muito Boa",
+    points >= 95 ~ "Excepcional"
+  )) %>%
+  # Reordenar para os gráficos ficarem na ordem correta
+  mutate(categoria_preco = factor(categoria_preco, levels = c("Econômico", "Médio", "Caro"))) %>%
+  mutate(categoria_qualidade = factor(categoria_qualidade, levels = c("Boa", "Muito Boa", "Excepcional")))
+
+# Mostrar distribuição das categorias de PREÇO
+cat("DISTRIBUIÇÃO POR CATEGORIA DE PREÇO:\n")
+wine_data_groups %>%
+  count(categoria_preco) %>%
+  mutate(percentual = round(n/sum(n)*100, 1)) %>%
+  kable(caption = "Distribuição de Vinhos por Categoria de Preço")
+
+cat("\nDISTRIBUIÇÃO POR CATEGORIA DE QUALIDADE:\n")
+wine_data_groups %>%
+  count(categoria_qualidade) %>%
+  mutate(percentual = round(n/sum(n)*100, 1)) %>%
+  kable(caption = "Distribuição de Vinhos por Categoria de Qualidade")
+```
+
+```{r boxplot-categories}
+# Visualizar com Boxplot - PONTUAÇÃO por CATEGORIA DE PREÇO
+ggplot(wine_data_groups, aes(x = categoria_preco, y = points, fill = categoria_preco)) +
+  geom_boxplot(alpha = 0.7) +
+  geom_jitter(width = 0.2, alpha = 0.1, size = 0.5) +
+  scale_fill_brewer(type = "qual", palette = "Set2") +
+  labs(title = "Distribuição da PONTUAÇÃO por CATEGORIA DE PREÇO",
+       subtitle = "Como a qualidade (pontos) varia conforme o preço",
+       x = "Categoria de Preço",
+       y = "Pontuação") +
+  theme_minimal() +
+  theme(legend.position = "none",
+        plot.title = element_text(size = 16, face = "bold"))
+```
+
+### Teste ANOVA (Análise de Variância)
+
+**O QUE É:** ANOVA testa se existem diferenças significativas nas MÉDIAS de pontuação entre os 3 grupos de preço.
+
+**POR QUE USAR:** A correlação nos diz se existe relação linear, mas ANOVA nos diz se os grupos realmente têm médias diferentes.
+
+**COMO INTERPRETAR:**
+- **Valor F**: quanto maior, maior a diferença entre grupos
+- **Valor p**: se < 0.05, as diferenças são estatisticamente significativas
+- Se significativo: pelo menos um grupo tem média diferente dos outros
+
+```{r anova-test}
+# Realizar o teste ANOVA
+anova_test <- aov(points ~ categoria_preco, data = wine_data_groups)
+anova_summary <- summary(anova_test)
+
+cat("RESULTADO DO TESTE ANOVA:\n")
+print(anova_summary)
+
+# Extrair valores importantes
+f_value <- round(anova_summary[[1]][["F value"]][1], 2)
+p_value_anova <- anova_summary[[1]][["Pr(>F)"]][1]
+
+cat("\nINTERPRETAÇÃO SIMPLIFICADA:\n")
+cat("Valor F:", f_value, "\n")
+cat("Valor p:", format(p_value_anova, scientific = TRUE), "\n")
+cat("Resultado:", ifelse(p_value_anova < 0.05, 
+                        "EXISTEM diferenças significativas entre os grupos", 
+                        "NÃO existem diferenças significativas"), "\n")
+
+# Médias por categoria de PREÇO
+means_by_price <- wine_data_groups %>%
+  group_by(categoria_preco) %>%
+  summarise(
+    media_pontos = round(mean(points, na.rm = TRUE), 2),
+    mediana_pontos = round(median(points, na.rm = TRUE), 2),
+    desvio_padrao = round(sd(points, na.rm = TRUE), 2),
+    n = n(),
+    .groups = 'drop'
+  )
+
+cat("\nMÉDIAS POR CATEGORIA DE PREÇO:\n")
+kable(means_by_price, 
+      caption = "Estatísticas Descritivas por Categoria de Preço")
+
+# Diferenças entre médias
+diff_economico_medio <- means_by_price$media_pontos[2] - means_by_price$media_pontos[1]
+diff_medio_caro <- means_by_price$media_pontos[3] - means_by_price$media_pontos[2]
+
+cat("\nDIFERENÇAS ENTRE MÉDIAS:\n")
+cat("Médio vs Econômico:", round(diff_economico_medio, 2), "pontos a mais\n")
+cat("Caro vs Médio:", round(diff_medio_caro, 2), "pontos a mais\n")
+```
+
+## Análise de Vinhos Excepcionais (≥ 95 pontos)
+
+**POR QUE ANALISAR VINHOS EXCEPCIONAIS:**
+- Representam o "top 1%" da qualidade
+- Nos ajudam a identificar padrões de excelência
+- Mostram quais países/variedades dominam o mercado premium
+
+```{r elite-wines}
+# Filtrar vinhos excepcionais (nota >= 95)
+vinhos_excepcionais <- wine_data_clean %>%
+  filter(points >= 95)
+
+total_vinhos <- nrow(wine_data_clean)
+total_excepcionais <- nrow(vinhos_excepcionais)
+percentual_excepcionais <- round(total_excepcionais/total_vinhos*100, 2)
+
+cat("VINHOS EXCEPCIONAIS (≥ 95 pontos):\n")
+cat("Total:", total_excepcionais, "de", total_vinhos, "vinhos\n")
+cat("Percentual:", percentual_excepcionais, "%\n")
+cat("Interpretação: Apenas", percentual_excepcionais, "% dos vinhos atingem excelência máxima\n")
+```
+
+```{r elite-analysis, fig.height=8}
+# Top 10 Países com vinhos excepcionais
+top_countries_plot <- vinhos_excepcionais %>%
+  count(country, sort = TRUE) %>%
+  top_n(10, n) %>%
+  ggplot(aes(x = reorder(country, n), y = n, fill = country)) +
+  geom_col(alpha = 0.8) +
+  coord_flip() +
+  scale_fill_viridis_d() +
+  labs(title = "Top 10 Países com Vinhos Excepcionais (≥ 95 pontos)", 
+       x = "País", y = "Quantidade de Vinhos Excepcionais") +
+  theme_minimal() +
+  theme(legend.position = "none",
+        plot.title = element_text(size = 12, face = "bold"))
+
+# Top 10 Variedades de Uva em vinhos excepcionais
+top_varieties_plot <- vinhos_excepcionais %>%
+  count(variety, sort = TRUE) %>%
+  top_n(10, n) %>%
+  ggplot(aes(x = reorder(variety, n), y = n, fill = variety)) +
+  geom_col(alpha = 0.8) +
+  coord_flip() +
+  scale_fill_viridis_d(option = "plasma") +
+  labs(title = "Top 10 Variedades em Vinhos Excepcionais (≥ 95 pontos)", 
+       x = "Variedade de Uva", y = "Quantidade de Vinhos Excepcionais") +
+  theme_minimal() +
+  theme(legend.position = "none",
+        plot.title = element_text(size = 12, face = "bold"))
+
+# Mostrar gráficos lado a lado
+grid.arrange(top_countries_plot, top_varieties_plot, ncol = 2)
+
+# Mostrar os dados dos tops em formato de tabela também
+cat("\nTOP 5 PAÍSES COM VINHOS EXCEPCIONAIS:\n")
+vinhos_excepcionais %>%
+  count(country, sort = TRUE) %>%
+  top_n(5, n) %>%
+  kable()
+
+cat("\nTOP 5 VARIEDADES EM VINHOS EXCEPCIONAIS:\n")
+vinhos_excepcionais %>%
+  count(variety, sort = TRUE) %>%
+  top_n(5, n) %>%
+  kable()
+```
+
+## Conclusões
+
+```{r conclusions}
+# Resumo das principais descobertas
+cat("PRINCIPAIS DESCOBERTAS DA ANÁLISE:\n\n")
+
+cat("1. CORRELAÇÃO PREÇO-QUALIDADE:\n")
+cat("   - Coeficiente:", cor_coef, "\n")
+cat("   - Interpretação:", direcao, interpretacao, "\n\n")
+
+cat("2. MÉDIAS POR CATEGORIA DE PREÇO:\n")
+cat("   - Econômico (≤$15):", means_by_price$media_pontos[1], "pontos\n")
+cat("   - Médio ($15-50):", means_by_price$media_pontos[2], "pontos\n") 
+cat("   - Caro (>$50):", means_by_price$media_pontos[3], "pontos\n\n")
+
+cat("3. DIFERENÇAS ENTRE CATEGORIAS:\n")
+cat("   - Médio vs Econômico: +", round(diff_economico_medio, 1), "pontos\n")
+cat("   - Caro vs Médio: +", round(diff_medio_caro, 1), "pontos\n\n")
+
+cat("4. VINHOS EXCEPCIONAIS:\n")
+cat("   - Apenas", percentual_excepcionais, "% atingem 95+ pontos\n")
+cat("   - Concentrados em países tradicionais\n\n")
+
+cat("5. TESTE ESTATÍSTICO (ANOVA):\n")
+cat("   - Valor F:", f_value, "\n")
+cat("   - Resultado:", ifelse(p_value_anova < 0.05, "Diferenças SIGNIFICATIVAS", "Diferenças NÃO significativas"), "\n")
+```
+
+### Interpretação Final dos Resultados
+
+**SOBRE A RELAÇÃO PREÇO-QUALIDADE:**
+- Existe uma correlação positiva entre preço e qualidade, mas ela é **moderada/fraca**
+- Isso significa que vinhos mais caros **tendem** a ser melhores, mas não sempre
+- Preço explica apenas parte da qualidade - outros fatores são importantes
+
+**SOBRE AS DIFERENÇAS ENTRE CATEGORIAS:**
+- O teste ANOVA confirma que as três categorias de preço têm médias **estatisticamente diferentes**
+- Vinhos caros têm, em média, pontuações mais altas que vinhos econômicos
+- Mas a diferença não é dramática (poucos pontos)
+
+**SOBRE VINHOS EXCEPCIONAIS:**
+- A excelência é rara: menos de 3% dos vinhos atingem 95+ pontos  
+- Vinhos excepcionais concentram-se em países/regiões tradicionais
+- Sugere que tradição, terroir e expertise são fatores importantes
+
+**IMPLICAÇÃO PRÁTICA:**
+- **Para consumidores**: Preço é um indicador útil, mas não definitivo da qualidade
+- **Para produtores**: Qualidade envolve mais que preço - técnica, terroir, variedade importam
+- **Para investidores**: Vinhos excepcionais são raros e podem ter valor diferenciado
+
+---
+
+*Análise realizada com dados do Wine Magazine contendo mais de 130.000 avaliações de vinhos.*

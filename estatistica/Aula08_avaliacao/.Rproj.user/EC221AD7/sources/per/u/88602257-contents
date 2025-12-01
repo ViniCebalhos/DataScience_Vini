@@ -1,0 +1,173 @@
+# 2. Correlação entre Preço e Peso do Diamante
+
+## 2.1 Estatística Descritiva das Variáveis Envolvidas
+
+```{r estatisticas-correlacao}
+# Estatísticas descritivas
+stats_desc <- numeric_vars %>%
+  summarise_all(list(
+    Media = ~mean(., na.rm = TRUE),
+    Mediana = ~median(., na.rm = TRUE),
+    DesvioPadrao = ~sd(., na.rm = TRUE),
+    Minimo = ~min(., na.rm = TRUE),
+    Maximo = ~max(., na.rm = TRUE)
+  )) %>%
+  tidyr::pivot_longer(everything(), names_to = c("Variavel", "Estatistica"), 
+                     names_sep = "_", values_to = "Valor") %>%
+  tidyr::pivot_wider(names_from = Estatistica, values_from = Valor)
+
+
+
+# Estatísticas descritivas para Price e Carat
+stats_price_carat <- diamonds %>%
+  select(price, carat) %>%
+  summarise_all(list(
+    N = ~n(),
+    Media = ~mean(., na.rm = TRUE),
+    Mediana = ~median(., na.rm = TRUE),
+    DesvioPadrao = ~sd(., na.rm = TRUE),
+    Minimo = ~min(., na.rm = TRUE),
+    Maximo = ~max(., na.rm = TRUE),
+    Q1 = ~quantile(., 0.25, na.rm = TRUE),
+    Q3 = ~quantile(., 0.75, na.rm = TRUE)
+  )) %>%
+  tidyr::pivot_longer(everything(), names_to = c("Variavel", "Estatistica"), 
+                     names_sep = "_", values_to = "Valor") %>%
+  tidyr::pivot_wider(names_from = Estatistica, values_from = Valor)
+
+kable(stats_price_carat, digits = 2, 
+      caption = "Tabela 7: Estatísticas Descritivas - Price e Carat") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+```
+
+## 2.2 Visualização da Relação entre as Variáveis
+
+```{r scatterplot-price-carat, fig.height=6}
+# Scatterplot Price vs Carat
+ggplot(diamonds, aes(x = carat, y = price)) +
+  geom_point(alpha = 0.3, color = "blue") +
+  geom_smooth(method = "lm", color = "red", se = TRUE) +
+  labs(title = "Relação entre Peso (Carat) e Preço dos Diamantes", 
+       x = "Peso (Carat)", 
+       y = "Preço (USD)") +
+  scale_y_continuous(labels = scales::comma) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+## 2.3 Teste de Normalidade (Anderson-Darling)
+
+```{r teste-normalidade}
+# Como o tamanho da amostra é > 5000, utilizamos o teste de Anderson-Darling
+# H0: os dados seguem distribuição normal
+# H1: os dados não seguem distribuição normal
+
+cat("=== TESTE DE NORMALIDADE (ANDERSON-DARLING) ===\n\n")
+
+# Teste para Price
+ad_price <- ad.test(diamonds$price)
+cat("PREÇO (Price):\n")
+cat("Estatística AD:", round(ad_price$statistic, 4), "\n")
+cat("p-valor:", format(ad_price$p.value, scientific = TRUE), "\n")
+cat("Conclusão: ")
+if(ad_price$p.value < 0.05) {
+  cat("Rejeita H0 - Os dados NÃO seguem distribuição normal\n\n")
+} else {
+  cat("Não rejeita H0 - Os dados seguem distribuição normal\n\n")
+}
+
+# Teste para Carat
+ad_carat <- ad.test(diamonds$carat)
+cat("PESO (Carat):\n")
+cat("Estatística AD:", round(ad_carat$statistic, 4), "\n")
+cat("p-valor:", format(ad_carat$p.value, scientific = TRUE), "\n")
+cat("Conclusão: ")
+if(ad_carat$p.value < 0.05) {
+  cat("Rejeita H0 - Os dados NÃO seguem distribuição normal\n\n")
+} else {
+  cat("Não rejeita H0 - Os dados seguem distribuição normal\n\n")
+}
+```
+
+## 2.4 Teste de Correlação
+
+```{r teste-correlacao}
+# Como as variáveis não seguem distribuição normal, utilizaremos:
+# 1. Correlação de Pearson (para comparação)
+# 2. Correlação de Spearman (não paramétrica, mais adequada)
+
+cat("=== ANÁLISE DE CORRELAÇÃO ===\n\n")
+
+# Correlação de Pearson
+cor_pearson <- cor.test(diamonds$price, diamonds$carat, method = "pearson")
+cat("CORRELAÇÃO DE PEARSON:\n")
+cat("Coeficiente de correlação (r):", round(cor_pearson$estimate, 4), "\n")
+cat("t =", round(cor_pearson$statistic, 4), "\n")
+cat("p-valor:", format(cor_pearson$p.value, scientific = TRUE), "\n")
+cat("IC 95%: [", round(cor_pearson$conf.int[1], 4), "; ", round(cor_pearson$conf.int[2], 4), "]\n\n")
+
+# Correlação de Spearman (mais adequada para dados não normais)
+cor_spearman <- cor.test(diamonds$price, diamonds$carat, method = "spearman")
+cat("CORRELAÇÃO DE SPEARMAN:\n")
+cat("Coeficiente de correlação (ρ):", round(cor_spearman$estimate, 4), "\n")
+cat("S =", round(cor_spearman$statistic, 4), "\n")
+cat("p-valor:", format(cor_spearman$p.value, scientific = TRUE), "\n\n")
+
+# Matriz de correlação visual
+cor_matrix <- cor(diamonds[c("price", "carat")], method = "spearman")
+corrplot(cor_matrix, method = "color", type = "upper", 
+         addCoef.col = "black", tl.cex = 1.2, number.cex = 1.5,
+         title = "Matriz de Correlação (Spearman): Price vs Carat", 
+         mar = c(0,0,2,0))
+```
+
+## 2.5 Interpretação dos Resultados
+
+### 2.5.1 Teste de Hipóteses para Correlação
+
+```{r interpretacao-hipoteses}
+cat("=== TESTE DE HIPÓTESES PARA CORRELAÇÃO ===\n\n")
+cat("H0: ρ = 0 (não existe correlação entre preço e peso)\n")
+cat("H1: ρ ≠ 0 (existe correlação entre preço e peso)\n\n")
+cat("Nível de significância (α): 0,05\n\n")
+
+cat("RESULTADO:\n")
+if(cor_spearman$p.value < 0.05) {
+  cat("p-valor < α → Rejeita H0\n")
+  cat("CONCLUSÃO: Existe correlação estatisticamente significativa entre preço e peso\n\n")
+} else {
+  cat("p-valor ≥ α → Não rejeita H0\n")
+  cat("CONCLUSÃO: Não há evidência estatística de correlação entre preço e peso\n\n")
+}
+
+# Interpretação da força da correlação
+rho <- abs(cor_spearman$estimate)
+if(rho >= 0.9) {
+  forca <- "muito forte"
+} else if(rho >= 0.7) {
+  forca <- "forte"
+} else if(rho >= 0.5) {
+  forca <- "moderada"
+} else if(rho >= 0.3) {
+  forca <- "fraca"
+} else {
+  forca <- "muito fraca"
+}
+
+cat("INTERPRETAÇÃO DA FORÇA DA CORRELAÇÃO:\n")
+cat("ρ =", round(cor_spearman$estimate, 4), "→ Correlação", forca, "\n")
+```
+
+### 2.5.2 Síntese dos Resultados
+
+**Existe uma correlação positiva muito forte (ρ = 0,9214) entre o preço e o peso dos diamantes, sendo esta correlação estatisticamente significativa (p-valor < 2,2 × 10⁻¹⁶). O teste de Anderson-Darling confirmou que tanto o preço quanto o peso não seguem distribuição normal (p-valores < 0,05), justificando o uso da correlação de Spearman. Os resultados indicam que aproximadamente 85% da variação no preço pode ser explicada pelo peso do diamante (considerando r² ≈ 0,85). Isso significa que diamantes mais pesados tendem a ter preços significativamente maiores, estabelecendo o peso como um forte preditor do valor de mercado dos diamantes.**
+
+---
+
+# Resumo Executivo
+
+Este relatório apresentou uma análise exploratória abrangente do dataset diamonds, composto por 53.940 observações. A análise univariada revelou características importantes sobre a distribuição das variáveis, destacando-se a predominância de diamantes com corte "Ideal" e a distribuição assimétrica das variáveis preço e peso. A investigação da correlação entre preço e peso confirmou uma associação muito forte e estatisticamente significativa (ρ = 0,92), estabelecendo o peso como principal determinante do valor dos diamantes no mercado.
+
+---
+
+*Relatório gerado em `r Sys.Date()` utilizando R Markdown*

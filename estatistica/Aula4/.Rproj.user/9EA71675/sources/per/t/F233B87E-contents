@@ -1,0 +1,70 @@
+
+---
+title: "AED - Qualidade de Vida dos Colaboradores"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Leitura dos Dados
+
+```{r}
+dados <- read.csv("dados_exercio.csv")
+str(dados)
+```
+
+## Análise de Variável Qualitativa - Categoria de IMC
+
+```{r}
+bmi_freq <- table(dados$BMI.Category)
+barplot(bmi_freq, main = "Distribuição por Categoria de IMC", col = "lightblue", ylab = "Frequência")
+bmi_freq
+```
+
+## Análise de Variável Quantitativa - Frequência Cardíaca
+
+```{r}
+summary(dados$Heart.Rate)
+hist(dados$Heart.Rate, col = "lightgreen", main = "Distribuição da Frequência Cardíaca", xlab = "BPM")
+```
+
+## Análise de Variável Quantitativa - Passos Diários
+
+```{r}
+summary(dados$Daily.Steps)
+hist(dados$Daily.Steps, col = "orange", main = "Distribuição dos Passos Diários", xlab = "Passos")
+```
+
+## Análise Qualitativa x Qualitativa - Categoria de IMC x Distúrbio do Sono
+
+```{r}
+tab_bmi_sono <- table(dados$BMI.Category, dados$Sleep.Disorder)
+tab_bmi_sono
+barplot(tab_bmi_sono, beside = TRUE, legend = TRUE, col = rainbow(3), main = "IMC x Distúrbio do Sono")
+```
+
+## Análise Qualitativa x Quantitativa - Categoria de IMC x Frequência Cardíaca
+
+```{r}
+boxplot(Heart.Rate ~ BMI.Category, data = dados, main = "Frequência Cardíaca por Categoria de IMC",
+        col = c("lightblue", "lightgreen", "pink"), ylab = "BPM")
+aggregate(Heart.Rate ~ BMI.Category, data = dados, FUN = mean)
+```
+
+## Análise Qualitativa x Quantitativa - Categoria de IMC x Passos Diários
+
+```{r}
+boxplot(Daily.Steps ~ BMI.Category, data = dados, main = "Passos Diários por Categoria de IMC",
+        col = c("lightblue", "lightgreen", "pink"), ylab = "Passos")
+aggregate(Daily.Steps ~ BMI.Category, data = dados, FUN = mean)
+```
+
+## Considerações Finais
+
+Das 374 pessoas avaliadas, observa-se que a maioria apresenta IMC classificado como **acima do peso** ou **obesidade** (Gráfico 1). A frequência cardíaca média varia entre 65 e 85 BPM (Gráfico 2), enquanto os passos diários apresentam média de aproximadamente 6.800 passos (Gráfico 3), abaixo da recomendação de 10.000.
+
+Além disso, há **associação entre obesidade e distúrbios do sono** como apneia (Gráfico 4), indicando impacto do excesso de peso sobre a qualidade do descanso. Observa-se ainda que **pessoas com maior IMC têm, em média, menor quantidade de passos diários e maior frequência cardíaca** (Gráficos 5 e 6), o que pode indicar menor condicionamento físico.
+
+Recomenda-se, portanto, que a empresa promova **programas de incentivo à atividade física** e **educação para hábitos saudáveis**, com atenção especial a profissionais da saúde como médicos e enfermeiros, que foram identificados em análises anteriores como os mais estressados. Essas ações podem impactar positivamente na saúde cardiovascular, no sono e no bem-estar geral dos colaboradores.
