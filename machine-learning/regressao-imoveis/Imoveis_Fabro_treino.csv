@@ -1,0 +1,221 @@
+Índice;Bairro;Tamanho;N° de Quartos;Tipo;Vagas de Garagem;Valor de Venda
+1;Batel;220;4;Casa;4;3168000
+2;Batel;140;3;Apartamento;2;1680000
+3;Batel;180;3;Sobrado;3;2376000
+4;Batel;95;2;Apartamento;1;1140000
+5;Batel;300;5;Casa;4;4320000
+6;Batel;155;3;Apartamento;2;1860000
+7;Batel;250;4;Casa;3;3600000
+8;Batel;120;3;Sobrado;2;1584000
+9;Batel;85;2;Apartamento;1;1020000
+10;Batel;280;4;Casa;4;4032000
+11;Batel;130;3;Apartamento;2;1560000
+12;Batel;165;3;Sobrado;2;2178000
+13;Batel;78;2;Apartamento;1;936000
+14;Batel;260;4;Casa;3;3744000
+15;Batel;105;3;Apartamento;2;1260000
+16;Batel;210;4;Casa;3;3024000
+17;Batel;115;3;Sobrado;2;1518000
+18;Batel;65;1;Apartamento;1;780000
+19;Batel;240;4;Casa;4;3456000
+20;Batel;80;2;Apartamento;1;960000
+21;Bigorrilho;180;3;Casa;3;2160000
+22;Bigorrilho;100;2;Apartamento;2;1000000
+23;Bigorrilho;150;3;Sobrado;2;1650000
+24;Bigorrilho;75;2;Apartamento;1;750000
+25;Bigorrilho;250;4;Casa;4;3000000
+26;Bigorrilho;130;3;Apartamento;2;1300000
+27;Bigorrilho;200;4;Casa;3;2400000
+28;Bigorrilho;110;3;Sobrado;2;1210000
+29;Bigorrilho;60;1;Apartamento;1;600000
+30;Bigorrilho;220;4;Casa;4;2640000
+31;Bigorrilho;115;3;Apartamento;2;1150000
+32;Bigorrilho;145;3;Sobrado;2;1595000
+33;Bigorrilho;82;2;Apartamento;1;820000
+34;Bigorrilho;280;5;Casa;4;3360000
+35;Bigorrilho;98;2;Apartamento;2;980000
+36;Bigorrilho;170;3;Casa;3;2040000
+37;Bigorrilho;135;3;Sobrado;2;1485000
+38;Bigorrilho;70;2;Apartamento;1;700000
+39;Bigorrilho;230;4;Casa;3;2760000
+40;Bigorrilho;125;3;Apartamento;2;1250000
+41;Juvevê;160;3;Casa;3;1728000
+42;Juvevê;90;2;Apartamento;1;810000
+43;Juvevê;130;3;Sobrado;2;1287000
+44;Juvevê;70;2;Apartamento;1;630000
+45;Juvevê;200;4;Casa;4;2160000
+46;Juvevê;85;2;Apartamento;2;765000
+47;Juvevê;180;4;Casa;3;1944000
+48;Juvevê;105;3;Sobrado;2;1039500
+49;Juvevê;65;1;Apartamento;1;585000
+50;Juvevê;230;4;Casa;4;2484000
+51;Juvevê;110;3;Apartamento;2;990000
+52;Juvevê;140;3;Sobrado;2;1386000
+53;Juvevê;78;2;Apartamento;1;702000
+54;Juvevê;210;4;Casa;3;2268000
+55;Juvevê;92;2;Apartamento;2;828000
+56;Juvevê;170;3;Casa;3;1836000
+57;Juvevê;125;3;Sobrado;2;1237500
+58;Juvevê;60;1;Apartamento;1;540000
+59;Juvevê;240;4;Casa;4;2592000
+60;Juvevê;98;3;Apartamento;2;882000
+61;Cabral;170;3;Casa;3;1836000
+62;Cabral;80;2;Apartamento;1;720000
+63;Cabral;145;3;Sobrado;2;1435500
+64;Cabral;68;2;Apartamento;1;612000
+65;Cabral;215;4;Casa;4;2322000
+66;Cabral;95;2;Apartamento;2;855000
+67;Cabral;190;4;Casa;3;2052000
+68;Cabral;115;3;Sobrado;2;1138500
+69;Cabral;72;2;Apartamento;1;648000
+70;Cabral;250;4;Casa;4;2700000
+71;Cabral;105;3;Apartamento;2;945000
+72;Cabral;130;3;Sobrado;2;1287000
+73;Cabral;55;1;Apartamento;1;495000
+74;Cabral;200;4;Casa;3;2160000
+75;Cabral;88;2;Apartamento;2;792000
+76;Cabral;160;3;Casa;3;1728000
+77;Cabral;150;4;Sobrado;2;1485000
+78;Cabral;75;2;Apartamento;1;675000
+79;Cabral;235;4;Casa;4;2538000
+80;Cabral;110;3;Apartamento;2;990000
+81;Ahú;155;3;Casa;3;1674000
+82;Ahú;85;2;Apartamento;1;765000
+83;Ahú;120;3;Sobrado;2;1188000
+84;Ahú;70;2;Apartamento;1;630000
+85;Ahú;205;4;Casa;4;2214000
+86;Ahú;90;2;Apartamento;2;810000
+87;Ahú;175;3;Casa;3;1890000
+88;Ahú;135;3;Sobrado;2;1336500
+89;Ahú;60;1;Apartamento;1;540000
+90;Ahú;245;4;Casa;4;2646000
+91;Ahú;100;3;Apartamento;2;900000
+92;Ahú;140;3;Sobrado;2;1386000
+93;Ahú;75;2;Apartamento;1;675000
+94;Ahú;225;4;Casa;3;2430000
+95;Ahú;88;2;Apartamento;2;792000
+96;Ahú;185;4;Casa;3;1998000
+97;Ahú;110;3;Sobrado;2;1089000
+98;Ahú;65;1;Apartamento;1;585000
+99;Ahú;230;4;Casa;4;2484000
+100;Ahú;95;3;Apartamento;2;855000
+101;Água Verde;150;3;Casa;3;1530000
+102;Água Verde;75;2;Apartamento;1;637500
+103;Água Verde;125;3;Sobrado;2;1168750
+104;Água Verde;60;1;Apartamento;1;510000
+105;Água Verde;200;4;Casa;4;2040000
+106;Água Verde;90;2;Apartamento;2;765000
+107;Água Verde;180;4;Casa;3;1836000
+108;Água Verde;110;3;Sobrado;2;1028500
+109;Água Verde;70;2;Apartamento;1;595000
+110;Água Verde;220;4;Casa;4;2244000
+111;Água Verde;100;3;Apartamento;2;850000
+112;Água Verde;140;3;Sobrado;2;1309000
+113;Água Verde;82;2;Apartamento;1;697000
+114;Água Verde;190;4;Casa;3;1938000
+115;Água Verde;95;2;Apartamento;2;807500
+116;Água Verde;165;3;Casa;3;1683000
+117;Água Verde;135;3;Sobrado;2;1262250
+118;Água Verde;55;1;Apartamento;1;467500
+119;Água Verde;210;4;Casa;4;2142000
+120;Água Verde;88;2;Apartamento;1;748000
+121;Centro;140;3;Casa;2;1260000
+122;Centro;65;1;Apartamento;1;487500
+123;Centro;110;3;Sobrado;2;907500
+124;Centro;55;1;Apartamento;1;412500
+125;Centro;180;4;Casa;3;1620000
+126;Centro;75;2;Apartamento;1;562500
+127;Centro;160;3;Casa;2;1440000
+128;Centro;100;2;Sobrado;1;825000
+129;Centro;80;2;Apartamento;1;600000
+130;Centro;200;4;Casa;3;1800000
+131;Centro;90;2;Apartamento;2;675000
+132;Centro;130;3;Sobrado;2;1072500
+133;Centro;70;2;Apartamento;1;525000
+134;Centro;170;3;Casa;2;1530000
+135;Centro;95;3;Apartamento;2;712500
+136;Centro;155;3;Casa;2;1395000
+137;Centro;120;3;Sobrado;2;990000
+138;Centro;60;1;Apartamento;1;450000
+139;Centro;190;4;Casa;3;1710000
+140;Centro;85;2;Apartamento;1;637500
+141;Portão;135;3;Casa;2;1174500
+142;Portão;70;2;Apartamento;1;507500
+143;Portão;105;3;Sobrado;2;837375
+144;Portão;60;1;Apartamento;1;435000
+145;Portão;175;4;Casa;3;1522500
+146;Portão;80;2;Apartamento;1;580000
+147;Portão;150;3;Casa;2;1305000
+148;Portão;120;3;Sobrado;2;957000
+149;Portão;90;2;Apartamento;2;652500
+150;Portão;195;4;Casa;3;1696500
+151;Portão;85;2;Apartamento;1;616250
+152;Portão;130;3;Sobrado;2;1036750
+153;Portão;65;2;Apartamento;1;471250
+154;Portão;160;3;Casa;2;1392000
+155;Portão;75;2;Apartamento;1;543750
+156;Portão;145;3;Casa;2;1261500
+157;Portão;115;3;Sobrado;2;917125
+158;Portão;55;1;Apartamento;1;398750
+159;Portão;185;4;Casa;3;1609500
+160;Portão;98;3;Apartamento;2;710500
+161;Campo Comprido;130;3;Casa;2;1092000
+162;Campo Comprido;65;1;Apartamento;1;455000
+163;Campo Comprido;100;3;Sobrado;1;770000
+164;Campo Comprido;75;2;Apartamento;1;525000
+165;Campo Comprido;160;3;Casa;3;1344000
+166;Campo Comprido;85;2;Apartamento;2;595000
+167;Campo Comprido;180;4;Casa;3;1512000
+168;Campo Comprido;115;3;Sobrado;2;885500
+169;Campo Comprido;60;1;Apartamento;1;420000
+170;Campo Comprido;200;4;Casa;4;1680000
+171;Campo Comprido;90;2;Apartamento;2;630000
+172;Campo Comprido;125;3;Sobrado;2;962500
+173;Campo Comprido;70;2;Apartamento;1;490000
+174;Campo Comprido;150;3;Casa;2;1260000
+175;Campo Comprido;95;3;Apartamento;2;665000
+176;Campo Comprido;170;3;Casa;3;1428000
+177;Campo Comprido;110;3;Sobrado;2;847000
+178;Campo Comprido;55;1;Apartamento;1;385000
+179;Campo Comprido;190;4;Casa;4;1596000
+180;Campo Comprido;80;2;Apartamento;1;560000
+181;CIC;120;3;Casa;2;864000
+182;CIC;60;1;Apartamento;1;360000
+183;CIC;95;2;Sobrado;1;627000
+184;CIC;70;2;Apartamento;1;420000
+185;CIC;150;3;Casa;3;1080000
+186;CIC;80;2;Apartamento;1;480000
+187;CIC;140;3;Casa;2;1008000
+188;CIC;105;3;Sobrado;2;693000
+189;CIC;55;1;Apartamento;1;330000
+190;CIC;170;4;Casa;3;1224000
+191;CIC;90;2;Apartamento;2;540000
+192;CIC;125;3;Sobrado;2;825000
+193;CIC;75;2;Apartamento;1;450000
+194;CIC;160;3;Casa;3;1152000
+195;CIC;88;2;Apartamento;2;528000
+196;CIC;135;3;Casa;2;972000
+197;CIC;115;3;Sobrado;2;759000
+198;CIC;65;2;Apartamento;1;390000
+199;CIC;180;4;Casa;3;1296000
+200;CIC;92;2;Apartamento;1;552000
+201;Pilarzinho;75;2;Apartamento;1;487500
+202;Pilarzinho;185;3;Casa;3;1443000
+203;Pilarzinho;110;3;Sobrado;2;786500
+204;Pilarzinho;68;2;Apartamento;1;442000
+205;Pilarzinho;220;4;Casa;4;1716000
+206;Pilarzinho;92;3;Sobrado;2;657800
+207;Pilarzinho;55;1;Apartamento;1;357500
+208;Pilarzinho;250;4;Casa;4;1950000
+209;Pilarzinho;135;3;Sobrado;2;965250
+210;Pilarzinho;80;2;Apartamento;2;520000
+211;Pilarzinho;195;3;Casa;3;1521000
+212;Pilarzinho;100;3;Sobrado;1;715000
+213;Pilarzinho;62;2;Apartamento;1;403000
+214;Pilarzinho;210;4;Casa;3;1638000
+215;Pilarzinho;150;4;Sobrado;2;1072500
+216;Pilarzinho;70;2;Apartamento;2;455000
+217;Pilarzinho;230;4;Casa;4;1794000
+218;Pilarzinho;125;3;Sobrado;1;893750
+219;Pilarzinho;88;3;Apartamento;2;572000
+220;Pilarzinho;170;3;Casa;3;1326000

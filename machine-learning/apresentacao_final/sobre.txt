@@ -1,0 +1,23 @@
+Projeto: Apresentação sobre Transformers para Machine Learning
+
+OBJETIVO:
+- Criar vídeo de 5 a 10 minutos sobre transformers
+- Demonstrar com código prático de análise de sentimento
+- Comparar métodos tradicionais (TextBlob) vs Transformers
+
+ARQUIVOS CRIADOS:
+- transformers_sentiment_analysis.py: Script Python completo
+- transformers_sentiment_analysis.ipynb: Notebook Jupyter interativo
+- requirements.txt: Dependências do projeto
+- README.md: Documentação do projeto
+- GUIA_APRESENTACAO.md: Roteiro detalhado para o vídeo
+
+EXEMPLO ESCOLHIDO:
+- Análise de sentimento em tweets (baseado no trabalho anterior de data mining)
+- Comparação TextBlob vs Transformers
+- Demonstração com tweets reais e exemplo de sarcasmo
+
+PRÓXIMOS PASSOS:
+1. Instalar dependências: pip install -r requirements.txt
+2. Executar o código para testar
+3. Seguir o GUIA_APRESENTACAO.md para gravar o vídeo 

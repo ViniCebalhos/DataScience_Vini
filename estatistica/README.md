@@ -3,32 +3,180 @@
 Esta pasta contém todos os trabalhos desenvolvidos na disciplina de **Estatística** da pós-graduação em Ciência de Dados.
 
 **Linguagem:** R  
-**Ambiente:** RStudio
+**Ambiente:** RStudio  
+**Formato:** Scripts R (.R) e R Markdown (.Rmd)
 
 ---
 
-## 📚 Trabalhos Desenvolvidos
+## 🎯 Sobre a Disciplina
 
-Esta disciplina foi desenvolvida em R, focando em análise estatística e visualização de dados.
-
-### 📋 Estrutura das Aulas
-
-- **Aula 1:** Análise Exploratória de Dados (AED) - Uma Variável
-- **Aula 3:** Análise Exploratória de Dados
-- **Aula 4:** Análise Exploratória de Dados (AED) - Múltiplas Variáveis
-- **Aula 5:** Análise Estatística
-- **Aula 7:** Análise de Dados de Bike Sharing
-- **Aula 8:** Avaliação e Apresentação de Trabalhos
-- **Aula 10:** Apresentação Final
+A disciplina de Estatística aborda análise exploratória de dados, testes estatísticos e criação de relatórios reprodutíveis usando R. Os alunos aprendem desde conceitos básicos de estatística descritiva até aplicação de testes estatísticos em problemas reais.
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## 📚 Estrutura das Aulas
 
-- **R** (linguagem de programação estatística)
-- **RStudio** (ambiente de desenvolvimento)
-- **R Markdown** (.Rmd) para relatórios reproduzíveis
-- **Bibliotecas R:** dplyr, ggplot2, tidyr, lubridate, entre outras
+### 📖 [Aula 01 - Análise Exploratória de Dados (Uma Variável)](./Aula01/)
+**Conceitos:** Estatística descritiva, variáveis qualitativas e quantitativas, gráficos descritivos
+
+**Conteúdo:**
+- Análise de variáveis qualitativas (frequências, gráficos de barras, pizza)
+- Análise de variáveis quantitativas (medidas de tendência central, dispersão, histogramas, boxplots)
+- Dataset: `diamonds` (pacote ggplot2)
+
+[📖 Ver Aula](./Aula01/)
+
+---
+
+### 📖 [Aula 03 - Análise Exploratória de Dados (Duas Variáveis)](./Aula03/)
+**Conceitos:** Análise bivariada, tabelas de contingência, correlação, comparação de grupos
+
+**Conteúdo:**
+- Análise qualitativa × qualitativa (tabelas de contingência)
+- Análise quantitativa × quantitativa (correlação, gráficos de dispersão)
+- Análise qualitativa × quantitativa (boxplots por grupo)
+- Análise de múltiplas variáveis (gráficos de pares, matriz de correlação)
+- Dataset: `diamonds` e `veiculos.xls`
+
+[📖 Ver Aula](./Aula03/)
+
+---
+
+### 📖 [Aula 04 - Análise Exploratória com R Markdown](./Aula04/)
+**Conceitos:** R Markdown, relatórios reprodutíveis, análise completa de dataset real
+
+**Conteúdo:**
+- Criação de documentos R Markdown
+- Análise exploratória completa de dataset de colaboradores
+- Visualizações profissionais
+- Interpretação de resultados
+- Dataset: `dados_exercio.csv` (374 colaboradores)
+
+[📖 Ver Aula](./Aula04/)
+
+---
+
+### 📖 [Aula 05 - Transformações de Variáveis e Tamanho de Amostra](./Aula05/)
+**Conceitos:** Normalidade, Q-Q plots, transformações, padronização, normalização, cálculo de tamanho de amostra
+
+**Conteúdo:**
+- Q-Q plots para verificar normalidade
+- Transformações matemáticas (log, raiz, inversa)
+- Padronização (Z-score)
+- Normalização (Min-Max)
+- Cálculo de tamanho de amostra para média e proporção
+- Dataset: `birthwt` (pacote MASS)
+
+[📖 Ver Aula](./Aula05/)
+
+---
+
+### 📖 [Aula 07 - Análise de Dados de Bike Sharing](./Aula07/)
+**Conceitos:** Análise temporal, testes estatísticos, comparação de grupos, testes não-paramétricos
+
+**Conteúdo:**
+- Análise exploratória de dados temporais
+- Testes de normalidade (Shapiro-Wilk, Anderson-Darling)
+- Testes de comparação (Wilcoxon, Kruskal-Wallis, Dunn)
+- Testes de correlação (Spearman)
+- Dataset: `yulu_bike_sharing_dataset.csv`
+
+[📖 Ver Aula](./Aula07/)
+
+---
+
+### 📖 [Aula 08 - Avaliação e Trabalhos em Grupo](./Aula08_avaliacao/)
+**Conceitos:** Aplicação completa de análise exploratória, trabalho em equipe, apresentação de resultados
+
+**Conteúdo:**
+- Trabalho em grupo de análise exploratória completa
+- Criação de relatório profissional com R Markdown
+- Análise do dataset diamonds
+- Dataset: `diamonds` (pacote ggplot2)
+
+[📖 Ver Aula](./Aula08_avaliacao/)
+
+---
+
+### 📖 [Aula 10 - Apresentação Final](./Aula10_apresentacao/)
+**Conceitos:** Apresentação final, análise completa de dataset escolhido, comunicação de resultados
+
+**Conteúdo:**
+- Análise exploratória completa de dataset de vinhos
+- Relação entre preço e qualidade
+- Testes de correlação
+- Visualizações profissionais
+- Dataset: `winemag-data-130k-v2.csv` (130.000+ avaliações de vinhos)
+
+[📖 Ver Aula](./Aula10_apresentacao/)
+
+---
+
+### 📖 [Recuperação](./recuperacao/)
+Trabalho de recuperação da disciplina.
+
+[📖 Ver Recuperação](./recuperacao/)
+
+---
+
+## 🛠️ Tecnologias e Bibliotecas Utilizadas
+
+### Principais
+- **R** - Linguagem de programação estatística
+- **RStudio** - Ambiente de desenvolvimento
+- **R Markdown** - Documentos reprodutíveis
+
+### Bibliotecas R Principais
+- **dplyr** - Manipulação de dados
+- **ggplot2** - Visualização de dados
+- **tidyr** - Organização de dados
+- **lubridate** - Manipulação de datas
+- **skimr** - Resumo estatístico moderno
+- **knitr** - Renderização de R Markdown
+- **kableExtra** - Tabelas formatadas
+
+### Bibliotecas para Testes Estatísticos
+- **car** - Testes estatísticos e Q-Q plots melhorados
+- **nortest** - Testes de normalidade (Anderson-Darling)
+- **dunn.test** - Teste de Dunn (post-hoc)
+- **samplingbook** - Cálculo de tamanho de amostra
+
+### Bibliotecas para Visualização
+- **corrplot** - Matriz de correlação
+- **graphics** - Gráficos base do R
+- **scales** - Formatação de eixos
+
+---
+
+## 📊 Competências Demonstradas
+
+### Técnicas Estatísticas
+- ✅ Estatística Descritiva (média, mediana, desvio padrão, quartis)
+- ✅ Análise Exploratória de Dados (AED)
+- ✅ Análise Univariada (uma variável)
+- ✅ Análise Bivariada (duas variáveis)
+- ✅ Análise Multivariada (múltiplas variáveis)
+- ✅ Verificação de Normalidade (Q-Q plots, testes)
+- ✅ Transformações de Variáveis (log, raiz, padronização, normalização)
+- ✅ Cálculo de Tamanho de Amostra
+
+### Testes Estatísticos
+- ✅ Testes de Normalidade (Shapiro-Wilk, Anderson-Darling)
+- ✅ Testes de Homogeneidade de Variâncias (Levene)
+- ✅ Testes de Comparação de Médias/Medianas:
+  - Teste t de Student (2 grupos, paramétrico)
+  - Teste de Wilcoxon (2 grupos, não-paramétrico)
+  - ANOVA (3+ grupos, paramétrico)
+  - Kruskal-Wallis (3+ grupos, não-paramétrico)
+  - Teste de Dunn (post-hoc)
+- ✅ Testes de Correlação (Pearson, Spearman)
+
+### Programação e Documentação
+- ✅ Programação em R
+- ✅ Uso de tidyverse (dplyr, ggplot2, tidyr)
+- ✅ Criação de documentos R Markdown
+- ✅ Visualização profissional de dados
+- ✅ Relatórios reprodutíveis
 
 ---
 
@@ -37,123 +185,37 @@ Esta disciplina foi desenvolvida em R, focando em análise estatística e visual
 ```
 estatistica/
 ├── README.md                    # Este arquivo
-├── Aula01/                      # Análise Exploratória de Dados - 1 variável
-├── Aula03/                      # Análise Exploratória de Dados - múltiplas variáveis
-├── Aula04/                      # Análise Exploratória de Dados - R Markdown
-├── Aula05/                      # Análise Exploratória de Dados avançada
-├── Aula07/                      # Análise Estatística
-├── Aula08_avaliacao/            # Avaliação - Trabalho em grupo
-├── Aula10_apresentacao/         # Apresentação final
-└── recuperacao/                 # Trabalho de recuperação
+├── Aula01/                      # AED - Uma Variável
+│   ├── README.md
+│   ├── aed_1var.R
+│   └── ...
+├── Aula03/                      # AED - Duas Variáveis
+│   ├── README.md
+│   ├── aula_03.R
+│   └── ...
+├── Aula04/                      # R Markdown
+│   ├── README.md
+│   ├── Aula04_AED.Rmd
+│   └── ...
+├── Aula05/                      # Transformações e Tamanho de Amostra
+│   ├── README.md
+│   ├── aula_05.R
+│   └── ...
+├── Aula07/                      # Bike Sharing
+│   ├── README.md
+│   └── ...
+├── Aula08_avaliacao/            # Trabalhos em Grupo
+│   ├── README.md
+│   ├── Grupo_05.Rmd
+│   └── ...
+├── Aula10_apresentacao/         # Apresentação Final
+│   ├── README.md
+│   ├── Vinicius_Cebalhos.Rmd
+│   └── ...
+├── recuperacao/                 # Trabalho de Recuperação
+│   └── README.md
+└── template/                    # Template de aula
 ```
-
----
-
-## 📚 Trabalhos Desenvolvidos
-
-### Aula 01 - Análise Exploratória de Dados (1 variável)
-**Objetivo:** Introdução à análise exploratória de dados com foco em uma variável.
-
-**Conteúdo:**
-- Estatísticas descritivas
-- Visualizações univariadas
-- Distribuições de frequência
-
-**Arquivos principais:**
-- `aed_1var.R` - Script R principal
-
----
-
-### Aula 03 - Análise Exploratória de Dados (múltiplas variáveis)
-**Objetivo:** Análise exploratória de dados com múltiplas variáveis.
-
-**Conteúdo:**
-- Análise bivariada
-- Correlações
-- Visualizações multivariadas
-
-**Arquivos principais:**
-- `aula_03.R` - Script R principal
-
----
-
-### Aula 04 - R Markdown
-**Objetivo:** Criar relatórios reproduzíveis com R Markdown.
-
-**Conteúdo:**
-- Estrutura de documentos R Markdown
-- Integração de código R e texto
-- Geração de relatórios em PDF/HTML
-
-**Arquivos principais:**
-- `Aula04_AED.Rmd` - Documento R Markdown
-- `ViniciusCebalhos_atividade1.Rmd` - Atividade do aluno
-
----
-
-### Aula 05 - Análise Exploratória Avançada
-**Objetivo:** Técnicas avançadas de análise exploratória de dados.
-
-**Conteúdo:**
-- Análise de séries temporais
-- Análise de grupos
-- Técnicas avançadas de visualização
-
-**Arquivos principais:**
-- `aula_05.R` - Script R principal
-
----
-
-### Aula 07 - Análise Estatística
-**Objetivo:** Aplicação de técnicas estatísticas inferenciais.
-
-**Conteúdo:**
-- Testes de hipóteses
-- Intervalos de confiança
-- Análise de variância (ANOVA)
-
-**Arquivos principais:**
-- Scripts R da aula
-
----
-
-### Aula 08 - Avaliação (Trabalho em Grupo)
-**Objetivo:** Trabalho em grupo aplicando técnicas de análise estatística.
-
-**Conteúdo:**
-- Análise completa de um dataset
-- Aplicação de técnicas aprendidas
-- Relatório final em R Markdown
-
-**Arquivos principais:**
-- `Final_Grupo_05.Rmd` - Relatório final do grupo
-- `Grupo_05.Rmd` - Versão do trabalho
-- `Grupo_05_explicado.Rmd` - Versão explicada
-
----
-
-### Aula 10 - Apresentação Final
-**Objetivo:** Apresentação de projeto final de análise estatística.
-
-**Conteúdo:**
-- Análise completa de dataset escolhido
-- Visualizações profissionais
-- Relatório final
-
-**Arquivos principais:**
-- `Vinicius_Cebalhos.Rmd` - Apresentação do aluno
-- `ViniciusCebalhos_Atividade3.Rmd` - Atividade 3
-
-**Dataset utilizado:**
-- `winemag-data-130k-v2.json` - Dataset de vinhos (Yelp)
-
----
-
-### Recuperação
-**Objetivo:** Trabalho de recuperação da disciplina.
-
-**Arquivos principais:**
-- `ViniciusCebalhos_Recuperacao.Rmd` - Trabalho de recuperação
 
 ---
 
@@ -161,69 +223,79 @@ estatistica/
 
 ### Pré-requisitos
 
-1. **Instalar R:**
+1. **Instale o R:**
 ```bash
-# Ubuntu/Debian
-sudo apt-get install r-base r-base-dev
-
-# Ou baixar de: https://cran.r-project.org/
+sudo apt-get install r-base
 ```
 
-2. **Instalar RStudio (opcional, mas recomendado):**
+2. **Instale o RStudio (opcional, mas recomendado):**
 ```bash
-# Baixar de: https://www.rstudio.com/products/rstudio/download/
+# Baixe do site oficial: https://www.rstudio.com/products/rstudio/download/
 ```
 
-3. **Instalar pacotes R necessários:**
+3. **Abra o projeto RStudio:**
+```bash
+# Cada pasta contém um arquivo .Rproj
+# Abra no RStudio: File > Open Project
+```
+
+### Executar Scripts R
+
 ```r
-# Abrir R ou RStudio e executar:
-install.packages(c("dplyr", "ggplot2", "tidyr", "lubridate", "knitr", "rmarkdown"))
+# No RStudio ou R console
+source("aula_03.R")
 ```
 
-### Executar um Trabalho
+### Compilar R Markdown
 
-1. **Para scripts .R:**
-```bash
-Rscript Aula01/aed_1var.R
-```
-
-2. **Para documentos R Markdown (.Rmd):**
 ```r
-# No RStudio: Abrir o arquivo .Rmd e clicar em "Knit"
-# Ou via linha de comando:
-Rscript -e "rmarkdown::render('Aula04/Aula04_AED.Rmd')"
+# No RStudio
+rmarkdown::render("arquivo.Rmd")
+
+# Ou use o botão "Knit" no RStudio
 ```
 
 ---
 
-## 📊 Competências Demonstradas
+## 📝 Notas Importantes
 
-- ✅ Análise Exploratória de Dados (EDA)
-- ✅ Estatísticas descritivas
-- ✅ Visualização de dados com ggplot2
-- ✅ Manipulação de dados com dplyr
-- ✅ Relatórios reproduzíveis com R Markdown
-- ✅ Análise estatística inferencial
-- ✅ Testes de hipóteses
-- ✅ Análise de séries temporais
-
----
-
-## 📝 Notas
-
-- Os trabalhos foram desenvolvidos em **R**, diferente dos outros projetos do portfólio que usam Python
+- Os projetos estão organizados por aula
+- Cada pasta contém um arquivo `.Rproj` para abrir no RStudio
 - Alguns datasets podem precisar ser baixados separadamente
-- Os arquivos `.Rproj` são projetos do RStudio e podem ser abertos diretamente no RStudio
-- Os templates (`template_aula.R`, `definitions.R`) são arquivos auxiliares fornecidos pelo professor
+- Os arquivos `.Rproj.user/` são configurações locais do RStudio e não devem ser versionados
+- Arquivos grandes (CSV >10MB) não estão versionados (verificar `.gitignore`)
 
 ---
 
-## 🔗 Recursos Adicionais
+## 📚 Recursos para Aprender R
 
-- [Documentação do R](https://www.r-project.org/)
-- [R Markdown Guide](https://rmarkdown.rstudio.com/)
-- [ggplot2 Documentation](https://ggplot2.tidyverse.org/)
-- [dplyr Documentation](https://dplyr.tidyverse.org/)
+- **R para Data Science:** https://r4ds.had.co.nz/
+- **Curso-R:** https://livro.curso-r.com/
+- **Estatística Básica:** https://rpubs.com/EstatBasica
+- **R Markdown:** https://bookdown.org/yihui/rmarkdown/
+
+---
+
+## 🎓 Progressão do Curso
+
+1. **Aula 01:** Introdução à AED (uma variável)
+2. **Aula 03:** AED avançada (duas variáveis)
+3. **Aula 04:** R Markdown e relatórios
+4. **Aula 05:** Transformações e tamanho de amostra
+5. **Aula 07:** Testes estatísticos aplicados
+6. **Aula 08:** Trabalho em grupo
+7. **Aula 10:** Apresentação final
+
+---
+
+## 📊 Datasets Utilizados
+
+- **diamonds** - Pacote ggplot2 (~54.000 diamantes)
+- **birthwt** - Pacote MASS (peso ao nascer)
+- **veiculos.xls** - Dataset de veículos
+- **dados_exercio.csv** - Dataset de colaboradores (374 observações)
+- **yulu_bike_sharing_dataset.csv** - Dataset de bike sharing
+- **winemag-data-130k-v2.csv** - Dataset de vinhos (130.000+ observações)
 
 ---
 
