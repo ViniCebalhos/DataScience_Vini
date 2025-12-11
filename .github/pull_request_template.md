@@ -1,6 +1,6 @@
 ## 📋 Descrição
 
-Breve descrição das mudanças realizadas neste PR.
+Breve descrição das mudanças realizadas.
 
 ## 🎯 Tipo de Mudança
 
@@ -9,25 +9,21 @@ Breve descrição das mudanças realizadas neste PR.
 - [ ] Documentação
 - [ ] Refatoração
 - [ ] Reorganização de estrutura
-- [ ] Limpeza de código
 
 ## 📁 Arquivos Modificados
 
-Liste os principais arquivos modificados:
 - Arquivo 1
 - Arquivo 2
 
 ## ✅ Checklist
 
 - [ ] Código testado localmente
-- [ ] README atualizado (se aplicável)
-- [ ] Dependências atualizadas (requirements.txt, se necessário)
-- [ ] Sem dados sensíveis (API keys, senhas, etc.)
-- [ ] Notebooks limpos (outputs removidos ou versão *_clean.ipynb)
-- [ ] Seeds definidos para reprodutibilidade (notebooks)
-- [ ] Docstrings adicionadas em funções Python (estilo NumPy)
+- [ ] README atualizado
+- [ ] Dependências atualizadas (requirements.txt)
+- [ ] Sem dados sensíveis
+- [ ] Notebooks limpos (outputs removidos)
+- [ ] Seeds definidos para reprodutibilidade
 - [ ] Caminhos relativos (sem caminhos absolutos locais)
-- [ ] Visualizações salvas em figures/ (não embutidas nos notebooks)
 
 ## 📸 Screenshots/Resultados
 
@@ -36,8 +32,3 @@ Liste os principais arquivos modificados:
 ## 🔗 Issues Relacionadas
 
 Fixes #(número da issue)
-
-## 📝 Notas Adicionais
-
-Qualquer informação adicional relevante.
-
