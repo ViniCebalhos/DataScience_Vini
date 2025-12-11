@@ -282,8 +282,7 @@ datascience/
 
 Para dúvidas, sugestões ou oportunidades de trabalho:
 
-- **LinkedIn:** [Perfil LinkedIn](https://www.linkedin.com/in/viniciuscebalhos/)
-- **Email:** contato sob demanda
+- **LinkedIn:** [Vinícius Cebalhos](https://www.linkedin.com/in/viniciuscebalhos/)
 - **GitHub:** [@ViniCebalhos](https://github.com/ViniCebalhos)
 
 ---
