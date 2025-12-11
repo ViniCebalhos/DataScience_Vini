@@ -192,12 +192,12 @@ Trabalhos desenvolvidos em R sobre análise estatística e visualização de dad
 - ✅ SQL avançado e consultas complexas
 
 ### Domínios
-- ✅ Saúde Pública
-- ✅ Segurança Viária
 - ✅ Análise Geoespacial
 - ✅ Análise Temporal
-- ✅ Indicadores Sociais
 - ✅ Dados Governamentais
+- ✅ Indicadores Sociais
+- ✅ Saúde Pública
+- ✅ Segurança Viária
 
 ---
 
