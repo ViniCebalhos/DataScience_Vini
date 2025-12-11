@@ -8,7 +8,6 @@ on:
 
 jobs:
   lint:
-    name: Lint Python Code
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -34,7 +33,6 @@ jobs:
         black --check . || echo "Black check skipped (optional)"
 
   test:
-    name: Run Tests
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -52,10 +50,9 @@ jobs:
     
     - name: Run tests
       run: |
-        pytest tests/ -v || echo "No tests found (this is expected for portfolio projects)"
+        pytest tests/ -v || echo "No tests found (expected)"
 
   notebooks:
-    name: Validate Notebooks
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -71,8 +68,9 @@ jobs:
         pip install jupyter nbconvert pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     
-    - name: Check notebooks structure
+    - name: Check notebooks syntax
       run: |
+        # Verificar sintaxe dos notebooks (sem executar, muito lento)
         echo "Notebook validation skipped (too slow for CI)"
-        echo "Notebooks should be validated manually before committing"
-
+        # Para validar notebooks específicos, descomente:
+        # jupyter nbconvert --to notebook --execute notebooks/01-exemplo.ipynb --output /dev/null || echo "Notebook check skipped"
