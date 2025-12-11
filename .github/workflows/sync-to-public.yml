@@ -1,0 +1,37 @@
+name: Sincronizar para Repositório Público
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '**.md'
+      - '.github/**'
+  workflow_dispatch:  # Permite execução manual
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    if: github.repository == 'ViniCebalhos/ciencia_de_dados'
+    
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.PUBLIC_REPO_TOKEN }}
+      
+      - name: Configurar Git
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+      
+      - name: Adicionar remote público
+        run: |
+          git remote add public https://${{ secrets.PUBLIC_REPO_TOKEN }}@github.com/ViniCebalhos/DataScience_Vini.git
+      
+      - name: Fazer push para repositório público
+        run: |
+          git push public main:main --force
+        env:
+          GITHUB_TOKEN: ${{ secrets.PUBLIC_REPO_TOKEN }}
