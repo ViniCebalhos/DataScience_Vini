@@ -282,25 +282,11 @@ datascience/
 
 Para dúvidas, sugestões ou oportunidades de trabalho:
 
-- **LinkedIn:** [Perfil LinkedIn](https://linkedin.com/in/seu-perfil) *(atualizar com link real)*
-- **Email:** contato sob demanda
-- **GitHub:** [@seu-usuario](https://github.com/seu-usuario) *(atualizar com usuário real)*
+- **LinkedIn:** [Vinícius Cebalhos](https://www.linkedin.com/in/viniciuscebalhos/)
+- **GitHub:** [@ViniCebalhos](https://github.com/ViniCebalhos)
 
 ---
 
-## 📄 Licença
 
-Este portfólio é de uso educacional e acadêmico. Os dados utilizados são públicos ou foram fornecidos para fins acadêmicos.
-
----
-
-## 📚 Documentação Adicional
-
-- [Análise e Reestruturação](./ANALISE_E_REESTRUTURACAO.md) - Documento completo de análise e recomendações
-- [Guia do GitHub](./GUIA_GITHUB.md) - Como publicar e organizar no GitHub
-- [Passo a Passo GitHub](./PASSO_A_PASSO_GITHUB.md) - Tutorial detalhado de configuração
-
----
-
-**Última atualização:** Janeiro 2025
+**Última atualização:** Dezembro 2025
 

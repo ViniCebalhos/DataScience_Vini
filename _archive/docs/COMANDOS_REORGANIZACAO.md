@@ -1,315 +1,335 @@
 # 🔧 Comandos de Reorganização do Repositório
 
-Este documento contém todos os comandos sugeridos para reorganizar o repositório conforme a nova estrutura proposta.
-
-**⚠️ IMPORTANTE:** Execute estes comandos em ordem e faça commits intermediários para facilitar rollback se necessário.
+**Autor:** Vinícius de Souza Cebalhos  
+**Data:** Janeiro 2025  
+**Objetivo:** Comandos práticos para reorganizar o repositório
 
 ---
 
-## 📋 Pré-requisitos
+## ⚠️ IMPORTANTE: Antes de Executar
 
+1. **Faça backup do repositório:**
 ```bash
-# Certifique-se de estar na raiz do repositório
-cd /home/vinicius/Projects/datascience
-
-# Verifique o status do Git
+cd /home/vinicius/Projects/11111/ciencia_de_dados
 git status
-
-# Faça backup (opcional, mas recomendado)
 git branch backup-antes-reorganizacao
 ```
 
----
-
-## 1️⃣ Criar Nova Estrutura de Pastas
-
+2. **Verifique se está em um branch limpo:**
 ```bash
-# Criar pastas principais
-mkdir -p projects
-mkdir -p _archive/tutoriais-python
-mkdir -p _archive/exercicios
-mkdir -p estatistica
-
-# Criar estrutura de projetos principais
-mkdir -p projects/analise-espacial-acidentes
-mkdir -p projects/competicao-kaggle-venues
-mkdir -p projects/analise-acidentes-rodovias
-mkdir -p projects/analise-esaude-curitiba
-mkdir -p projects/classificacao-sinais-vitais
+git status
+# Se houver mudanças não commitadas, faça commit ou stash
 ```
 
----
-
-## 2️⃣ Mover Projetos para Destaque
-
-```bash
-# Work 8 - Análise Espacial (DESTAQUE)
-git mv databank/Work8 projects/analise-espacial-acidentes
-
-# Challenge Kaggle (DESTAQUE)
-git mv data_mining/challenge projects/competicao-kaggle-venues
-
-# Work 6 - Artigo Acidentes (DESTAQUE)
-git mv databank/Work6 projects/analise-acidentes-rodovias
-
-# Trabalho E-Saúde (DESTAQUE)
-git mv python_ds/Trabalho projects/analise-esaude-curitiba
-
-# ML Work 3 - Sinais Vitais (DESTAQUE)
-git mv ML/Work3 projects/classificacao-sinais-vitais
-
-# Commit intermediário
-git commit -m "refactor(estrutura): mover projetos em destaque para pasta projects/"
-```
+3. **Execute os comandos em ordem**
 
 ---
 
-## 3️⃣ Reorganizar Data Mining
+## 📋 1. REMOVER SUBPASTAS DESNECESSÁRIAS EM projects/
+
+### 1.1 Analise Acidentes Rodovias
 
 ```bash
-# Renomear pasta principal
-git mv data_mining data-mining
+cd /home/vinicius/Projects/11111/ciencia_de_dados/projects/analise-acidentes-rodovias
 
-# Reorganizar works
-cd data-mining
-git mv work1 web-scraping-youtube
-git mv work2 regressao-linear
-git mv work3 clustering-titanic
-git mv work4 regras-associacao-texto
+# Verificar conteúdo de Work6
+ls -la Work6/
+
+# Mover conteúdo para raiz
+cd Work6
+git mv * ../
+git mv .* .. 2>/dev/null || true
 cd ..
 
-# Commit intermediário
-git commit -m "refactor(data-mining): reorganizar estrutura e renomear works"
+# Remover pasta vazia
+rmdir Work6
+
+# Verificar resultado
+ls -la
 ```
 
----
-
-## 4️⃣ Reorganizar Machine Learning
+### 1.2 Analise Espacial Acidentes
 
 ```bash
-# Renomear pasta principal
-git mv ML machine-learning
+cd /home/vinicius/Projects/11111/ciencia_de_dados/projects/analise-espacial-acidentes
 
-# Reorganizar works
-cd machine-learning
-git mv Work1 regressao-imoveis
-git mv Work2 classificacao-indicadores
+# Verificar conteúdo de Work8
+ls -la Work8/
+
+# Mover conteúdo para raiz
+cd Work8
+git mv * ../
+git mv .* .. 2>/dev/null || true
 cd ..
 
-# Commit intermediário
-git commit -m "refactor(machine-learning): reorganizar estrutura e renomear works"
+# Remover pasta vazia
+rmdir Work8
+
+# Verificar resultado
+ls -la
 ```
 
----
-
-## 5️⃣ Reorganizar Banco de Dados
+### 1.3 Classificacao Sinais Vitais
 
 ```bash
-# Renomear pasta principal
-git mv databank banco-dados
+cd /home/vinicius/Projects/11111/ciencia_de_dados/projects/classificacao-sinais-vitais
 
-# Reorganizar works
-cd banco-dados
-git mv Work1 analise-alvaras
-git mv Work2 analise-acidentes-eda
-git mv Work3 consultas-sql-avancadas
+# Verificar conteúdo de Work3
+ls -la Work3/
+
+# Mover conteúdo para raiz
+cd Work3
+git mv * ../
+git mv .* .. 2>/dev/null || true
 cd ..
 
-# Commit intermediário
-git commit -m "refactor(banco-dados): reorganizar estrutura e renomear works"
+# Remover pasta vazia
+rmdir Work3
+
+# Verificar resultado
+ls -la
+```
+
+### 1.4 Competicao Kaggle
+
+```bash
+cd /home/vinicius/Projects/11111/ciencia_de_dados/projects/competicao-kaggle-venues
+
+# Verificar conteúdo de challenge
+ls -la challenge/
+
+# Mover conteúdo para raiz
+cd challenge
+git mv * ../
+git mv .* .. 2>/dev/null || true
+cd ..
+
+# Remover pasta vazia
+rmdir challenge
+
+# Verificar resultado
+ls -la
 ```
 
 ---
 
-## 6️⃣ Mover Material de Estudo
+## 🧹 2. LIMPAR NOTEBOOKS DUPLICADOS
+
+### 2.1 Analise E-Saude Curitiba
 
 ```bash
-# Tutoriais
-git mv python_ds/tutoriais _archive/tutoriais-python
+cd /home/vinicius/Projects/11111/ciencia_de_dados/projects/analise-esaude-curitiba
 
-# Exercícios
-git mv exercicios _archive/exercicios
+# Verificar notebooks e datas de modificação
+ls -lt *.ipynb
 
-# Estatística (R)
-git mv Aulas_estatistica estatistica
+# Decisão: Manter analise_completa_temporal.ipynb como principal
+# Se analise_completa_temporal2.ipynb for mais recente e completo:
+# git mv analise_completa_temporal2.ipynb analise_completa_temporal.ipynb
 
-# Remover pasta downloads se vazia
-rmdir downloads 2>/dev/null || echo "Downloads não está vazia - verificar manualmente"
+# Remover notebooks de teste/duplicados
+git rm teste.ipynb Teste2.ipynb final.ipynb limpeza_dados2.ipynb 2>/dev/null || echo "Alguns arquivos podem não existir"
 
-# Commit intermediário
-git commit -m "refactor(estrutura): mover material de estudo para _archive/"
+# Verificar resultado
+ls -la *.ipynb
+```
+
+### 2.2 Competicao Kaggle
+
+```bash
+cd /home/vinicius/Projects/11111/ciencia_de_dados/projects/competicao-kaggle-venues
+
+# Verificar notebooks e datas de modificação
+ls -lt *.ipynb
+
+# Decisão: Manter challenge_final.ipynb como principal (ou o mais completo)
+# Se houver múltiplos, verificar qual é o mais completo:
+# jupyter nbconvert --to script challenge_final.ipynb --stdout | wc -l
+# jupyter nbconvert --to script challenge.ipynb --stdout | wc -l
+
+# Remover notebooks duplicados (após verificação)
+# git rm challenge.ipynb final.ipynb final2.ipynb 2>/dev/null || echo "Alguns arquivos podem não existir"
+
+# Verificar resultado
+ls -la *.ipynb
 ```
 
 ---
 
-## 7️⃣ Limpar Arquivos Temporários
+## 📁 3. REORGANIZAR DATA MINING
 
 ```bash
-# Remover checkpoints do Jupyter (já no .gitignore, mas limpar localmente)
+cd /home/vinicius/Projects/11111/ciencia_de_dados/data-mining
+
+# Renomear Aula3 para nome mais descritivo
+if [ -d "Aula3" ]; then
+    git mv Aula3 conceitos-fundamentais
+    echo "Aula3 renomeado para conceitos-fundamentais"
+fi
+
+# Verificar resultado
+ls -la
+```
+
+---
+
+## 🧹 4. LIMPAR MACHINE LEARNING
+
+```bash
+cd /home/vinicius/Projects/11111/ciencia_de_dados/machine-learning
+
+# Verificar se Work2 é duplicado de classificacao-indicadores
+if [ -d "Work2" ] && [ -d "classificacao-indicadores" ]; then
+    echo "Work2 encontrado. Verificar se é duplicado antes de remover:"
+    echo "Conteúdo de Work2:"
+    ls -la Work2/
+    echo ""
+    echo "Conteúdo de classificacao-indicadores:"
+    ls -la classificacao-indicadores/
+    echo ""
+    echo "Se Work2 for duplicado, execute:"
+    echo "git rm -r Work2"
+fi
+```
+
+---
+
+## 🗑️ 5. LIMPAR ARQUIVOS TEMPORÁRIOS
+
+```bash
+cd /home/vinicius/Projects/11111/ciencia_de_dados
+
+# Remover checkpoints do Jupyter
 find . -type d -name ".ipynb_checkpoints" -exec rm -rf {} + 2>/dev/null
+echo "Checkpoints do Jupyter removidos"
 
-# Remover arquivos LaTeX temporários (já no .gitignore)
+# Remover arquivos LaTeX temporários
 find . -name "*.aux" -delete
 find . -name "*.log" -delete
 find . -name "*.out" -delete
 find . -name "*.synctex.gz" -delete
-
-# Commit (se houver mudanças)
-git add -A
-git commit -m "chore: remover arquivos temporários" || echo "Nenhum arquivo temporário para remover"
+find . -name "*.fdb_latexmk" -delete
+find . -name "*.fls" -delete
+echo "Arquivos LaTeX temporários removidos"
 ```
 
 ---
 
-## 8️⃣ Atualizar .gitignore
+## 🔒 6. VERIFICAR DADOS SENSÍVEIS
 
 ```bash
-# Verificar se .gitignore está atualizado
-# Adicionar se necessário:
-cat >> .gitignore << 'EOF'
+cd /home/vinicius/Projects/11111/ciencia_de_dados
 
-# Dados grandes (adicionar se ainda não estiver)
-data/raw/
-data/processed/
-*.csv
-*.xlsx
-*.parquet
-!data/sample/*.csv
-!data/README.md
+# Verificar arquivos com possíveis API keys
+echo "=== Verificando possíveis API keys ==="
+grep -r "api_key\|API_KEY\|secret\|SECRET" --include="*.txt" --include="*.py" --include="*.ipynb" . | grep -v ".git" | grep -v "placeholder\|exemplo\|example" || echo "Nenhum arquivo com API keys encontrado"
 
-# Mapas HTML grandes
-*.html
-!README*.html
-!reports/*.html
-EOF
+# Verificar arquivos .env
+echo ""
+echo "=== Verificando arquivos .env ==="
+find . -name ".env" -o -name "*.env" | grep -v ".git" || echo "Nenhum arquivo .env encontrado"
 
-git add .gitignore
-git commit -m "chore(gitignore): atualizar para ignorar dados grandes e arquivos temporários"
+# Verificar preparar_postos_prf_banco.py
+echo ""
+echo "=== Verificando preparar_postos_prf_banco.py ==="
+grep -n "password\|senha" projects/analise-espacial-acidentes/preparar_postos_prf_banco.py || echo "Arquivo não encontrado"
 ```
 
 ---
 
-## 9️⃣ Criar Estrutura Padrão nos Projetos
+## 📝 7. COMMITS SUGERIDOS
 
-Para cada projeto em `projects/`, criar estrutura padrão:
-
-```bash
-# Exemplo para um projeto
-cd projects/analise-espacial-acidentes
-
-# Criar estrutura padrão
-mkdir -p data/raw data/processed data/sample figures reports
-
-# Criar data/README.md
-cat > data/README.md << 'EOF'
-# Dados do Projeto
-
-## Como Obter os Dados
-
-[Instruções para obter os dados]
-
-## Estrutura
-
-- `raw/` - Dados brutos (não versionados)
-- `processed/` - Dados processados (não versionados)
-- `sample/` - Amostra pequena para testes
-EOF
-
-cd ../..
-```
-
----
-
-## 🔟 Renomear Notebooks (Opcional, mas Recomendado)
+Após executar cada seção, faça commits descritivos:
 
 ```bash
-# Exemplo: renomear notebooks em um projeto
-cd projects/analise-espacial-acidentes
+# Commit 1: Remover subpastas
+git add projects/
+git commit -m "refactor(estrutura): remover subpastas desnecessárias em projects/
 
-# Renomear notebooks descritivamente
-# (Ajustar nomes conforme necessário)
-# git mv "notebook_antigo.ipynb" "01-exploracao.ipynb"
-# git mv "outro_notebook.ipynb" "02-modelagem.ipynb"
+- Remover Work6/ de analise-acidentes-rodovias
+- Remover Work8/ de analise-espacial-acidentes
+- Remover Work3/ de classificacao-sinais-vitais
+- Remover challenge/ de competicao-kaggle-venues"
 
-cd ../..
-```
+# Commit 2: Limpar notebooks duplicados
+git add projects/
+git commit -m "chore(notebooks): limpar notebooks duplicados
 
----
+- Consolidar notebooks em analise-esaude-curitiba
+- Remover versões de teste e duplicadas
+- Manter apenas versões principais e completas"
 
-## 1️⃣1️⃣ Atualizar README Principal
+# Commit 3: Reorganizar data-mining
+git add data-mining/
+git commit -m "refactor(data-mining): renomear Aula3 para conceitos-fundamentais
 
-```bash
-# Substituir README.md atual pelo novo
-git mv README.md README_OLD.md
-cp README_PRINCIPAL.md README.md
+- Melhorar nomenclatura descritiva
+- Padronizar nomes de pastas"
 
-git add README.md
-git commit -m "docs(readme): atualizar README principal com nova estrutura"
-```
-
----
-
-## 1️⃣2️⃣ Commit Final
-
-```bash
-# Verificar status
-git status
-
-# Adicionar todos os arquivos novos
+# Commit 4: Limpar arquivos temporários
 git add .
+git commit -m "chore(limpeza): remover arquivos temporários
 
-# Commit final
-git commit -m "refactor(estrutura): reorganização completa do portfólio
-
-- Mover projetos em destaque para pasta projects/
-- Reorganizar disciplinas com nomes consistentes
-- Mover material de estudo para _archive/
-- Atualizar estrutura de pastas
-- Limpar arquivos temporários
-- Atualizar documentação"
-
-# Push (quando estiver pronto)
-# git push origin main
+- Remover .ipynb_checkpoints
+- Remover arquivos LaTeX temporários (*.aux, *.log, *.out)"
 ```
 
 ---
 
-## ⚠️ Notas Importantes
-
-1. **Faça commits intermediários** após cada seção para facilitar rollback
-2. **Teste localmente** antes de fazer push
-3. **Verifique links** nos READMEs após reorganização
-4. **Atualize caminhos** em notebooks que referenciam outros arquivos
-5. **Verifique .gitignore** para garantir que dados grandes não sejam commitados
-
----
-
-## 🔄 Rollback (Se Necessário)
-
-Se precisar reverter as mudanças:
+## ✅ 8. VERIFICAÇÃO FINAL
 
 ```bash
-# Voltar para o branch de backup
-git checkout backup-antes-reorganizacao
+cd /home/vinicius/Projects/11111/ciencia_de_dados
 
-# Ou reverter commits específicos
-git revert HEAD
-```
+# Verificar estrutura final
+echo "=== Estrutura de projects/ ==="
+tree -L 2 projects/ || find projects/ -maxdepth 2 -type d
 
----
+# Verificar se há subpastas desnecessárias
+echo ""
+echo "=== Verificando subpastas desnecessárias ==="
+find projects/ -type d -name "Work*" -o -name "challenge" | grep -v ".git" || echo "Nenhuma subpasta desnecessária encontrada"
 
-## ✅ Verificação Final
+# Verificar notebooks duplicados
+echo ""
+echo "=== Verificando notebooks duplicados ==="
+find projects/ -name "*teste*.ipynb" -o -name "*Teste*.ipynb" -o -name "*final*.ipynb" | grep -v ".git" || echo "Nenhum notebook duplicado encontrado"
 
-Após reorganização, verificar:
-
-```bash
-# Estrutura de pastas
-tree -L 2 -d
-
-# Arquivos não rastreados
+# Verificar status do git
+echo ""
+echo "=== Status do Git ==="
 git status
+```
 
-# Links quebrados (verificar manualmente nos READMEs)
+---
+
+## 🚨 TROUBLESHOOTING
+
+### Erro: "fatal: not a git repository"
+```bash
+cd /home/vinicius/Projects/11111/ciencia_de_dados
+git init  # Apenas se não for um repositório git ainda
+```
+
+### Erro: "fatal: pathspec did not match any files"
+- O arquivo pode não existir ou já ter sido removido
+- Verifique com `ls -la` antes de executar `git mv` ou `git rm`
+
+### Erro ao remover pasta não vazia
+```bash
+# Se rmdir falhar, verifique se há arquivos ocultos
+ls -la pasta/
+# Remova manualmente arquivos restantes
+```
+
+### Reverter mudanças
+```bash
+# Se precisar reverter um commit
+git log --oneline -5
+git revert <hash-do-commit>
+
+# Se precisar voltar ao estado anterior
+git reset --hard backup-antes-reorganizacao
 ```
 
 ---
