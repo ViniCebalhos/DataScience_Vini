@@ -8,15 +8,13 @@
 ![Status](https://img.shields.io/badge/status-active-success.svg)
 
 **Autor:** Vinícius de Souza Cebalhos  
-**Formação:** Meteorologista e Cientista de Dados  
-**Instituição:** Universidade Tecnológica Federal do Paraná (UTFPR)  
-**Área:** Especialização em Ciência de Dados
+**Formação:** Meteorologista e Cientista de Dados
 
 ---
 
 ## 👨‍💼 Sobre
 
-Meteorologista com especialização em Ciência de Dados, com experiência em análise de dados, modelagem preditiva, análise geoespacial e visualização de dados. Este portfólio apresenta projetos desenvolvidos durante a pós-graduação, demonstrando competências técnicas em Python, SQL, Machine Learning e análise estatística aplicada a problemas reais.
+Portfólio profissional demonstrando competências técnicas em análise de dados, modelagem preditiva, análise geoespacial e visualização de dados. Projetos aplicados a problemas reais utilizando Python, SQL, Machine Learning e análise estatística.
 
 ---
 
@@ -134,10 +132,6 @@ Projetos de aprendizado de máquina, incluindo regressão, classificação e oti
 
 ---
 
-### 📊 [Estatística](./estatistica/)
-Trabalhos desenvolvidos em R sobre análise estatística e visualização de dados.
-
-[📖 Ver Disciplina](./estatistica/)
 
 ---
 

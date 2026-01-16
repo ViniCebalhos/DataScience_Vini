@@ -1,6 +1,6 @@
-# 🤖 Machine Learning - Trabalhos e Projetos
+# 🤖 Machine Learning Projects
 
-Esta pasta contém todos os trabalhos desenvolvidos na disciplina de **Machine Learning** da pós-graduação em Ciência de Dados.
+Projetos de aprendizado de máquina demonstrando competências em regressão, classificação multiclasse, otimização de modelos e análise comparativa de algoritmos.
 
 ---
 

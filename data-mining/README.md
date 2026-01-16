@@ -1,6 +1,6 @@
-# 📊 Data Mining - Trabalhos e Projetos
+# 📊 Data Mining Projects
 
-Esta pasta contém todos os trabalhos desenvolvidos na disciplina de **Data Mining** da pós-graduação em Ciência de Dados.
+Projetos de mineração de dados demonstrando competências em web scraping, análise exploratória, regressão, clustering e mineração de texto.
 
 ---
 

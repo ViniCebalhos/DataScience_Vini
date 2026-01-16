@@ -1,6 +1,6 @@
-# 🗄️ Banco de Dados - Trabalhos e Projetos
+# 🗄️ Database & SQL Projects
 
-Esta pasta contém todos os trabalhos desenvolvidos na disciplina de **Banco de Dados** da pós-graduação em Ciência de Dados.
+Projetos demonstrando competências em PostgreSQL, PostGIS, SQL avançado, análise geoespacial e processamento de dados em larga escala.
 
 ---
 
@@ -221,7 +221,5 @@ Ambos estão formatados conforme padrão SBC e prontos para submissão.
 
 ---
 
-**Disciplina:** Banco de Dados  
-**Autor:** Vinícius de Souza Cebalhos  
-**Instituição:** UTFPR
+**Autor:** Vinícius de Souza Cebalhos
 
