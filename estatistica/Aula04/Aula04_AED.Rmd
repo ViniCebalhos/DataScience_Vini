@@ -1,0 +1,76 @@
+---
+title: "AED - Qualidade de sono e nível de strees"
+output: html_document
+---
+
+# Leitura dos dados
+
+```{r}
+# Diretório do projeto, de onde serão salvos e lidos os arquivos
+project_root_path <- paste0(getwd())
+
+###
+# Variáveis e definições
+###
+source(paste0(project_root_path, "/definitions.R"))
+
+###
+# Instalando e carregando pacotes 
+###
+source(paste0(project_root_path, "/install_load_packages.R"), encoding = encoding)
+
+dados <- read.csv("dados_exercio.csv")
+head(dados)
+str(dados)
+```
+
+# Alterações variáveis
+
+```{r}
+dados <- dados %>%
+  dplyr::mutate(sexo = factor(Gender),
+                prof = factor(Occupation),
+                imc_cat = factor(BMI.Category),
+                desordem_sono = factor(Sleep.Disorder)
+                )
+str(dados)
+table(dados$imc_cat)
+
+dados <- dados %>%
+  dplyr::mutate(imc_cat_adj = factor(dplyr::case_when(imc_cat == 'Normal Weight' ~ 'Normal',
+                                           TRUE ~imc_cat),
+                                     level = c('Normal', 'Overweight', 'Obese'),
+                                     ordered = TRUE),
+                prof_adj = factor(dplyr::case_when(prof %in% c('Salesperson', 'Sales Representative') ~ 'Sales',
+                                            prof %in% c('Scientist', 'Software Engineer', 'Manager') ~ 'Other',
+                                            TRUE ~ prof)),
+                qualidade_sono = factor(dplyr::case_when(Quality.of.Sleep <= 3 ~ 'Ruim',
+                                                  Quality.of.Sleep <= 6 ~ 'Médio',
+                                                  Quality.of.Sleep <= 9 ~ 'Bom',
+                                                  TRUE ~ 'Excelente'),
+                                        levels = c('Ruim', 'Médio', 'Bom', 'Excelente'),
+                                        ordered = TRUE),
+                nivel_estresse = factor(dplyr::case_when(Stress.Level < 3 ~ 'Baixo',
+                                                  Stress.Level < 6 ~ 'Médio',
+                                                  TRUE ~ 'Alto'),
+                                        levels = c('Baixo', 'Médio', 'Alto'),
+                                        ordered = TRUE),
+                
+)
+summary(dados)
+sort(table(dados$prof), decreasing = TRUE)
+
+```
+
+### Conclusão:
+
+-   Avaliei 374 colaboradores, maioria enfermeiros, médicos, engenhheiros. Qtde importante de colaboradores com sobrepeso/obesidade.
+-   Em relação a duas escalas: qualidade sono ok, porém % importante de colaboradores stress alto.
+
+# Explorando stress
+
+```{r}
+
+table(dados$nivel_estresse, dados$prof_adj)
+round(prop.table(table(dados$nivel_estresse, dados$prof_adj), margin=1)*100,0)
+```

@@ -1,0 +1,153 @@
+###
+# Definição caminho, definições e pacotes
+###
+
+# Diretório do projeto, de onde serão salvos e lidos os arquivos
+project_root_path <- paste0(getwd(), "/.")
+
+###
+# Variáveis e definições
+###
+source(paste0(project_root_path, "/definitions.R"))
+
+###
+# Instalando e carregando pacotes 
+###
+source(paste0(project_root_path, "/install_load_packages.R"), encoding = encoding)
+
+
+############## Análise duas variáveis
+### Quali vs Quali
+
+data(diamonds)
+help(diamonds)
+diamonds
+dim(diamonds)
+str(diamonds)
+
+### Tab de freq
+tab_n <- table(diamonds$cut, diamonds$clarity) ## freq absolutas
+round(prop.table(tab_n)*100, 2)
+tab_freq_linha <- round(prop.table(tab_n, margin=1)*100, 2)
+sum(tab_freq_linha[1,])
+
+tab_freq_col <- round(prop.table(tab_n, margin=2)*100, 2)
+tab_freq_col
+sum(tab_freq_col[,4])
+
+diamonds <- diamonds %>%
+  dplyr::mutate(clareza_adj = dplyr::case_when(clarity %in% c('I1', 'SI2') ~ 'Baixa pureza',
+                                               clarity %in% c('SI1', 'VS2', 'VS1') ~ 'Média pureza',
+                                               TRUE ~ 'Alta pureza'))
+str(diamonds)
+table(diamonds$clarity, diamonds$clareza_adj)
+
+diamonds <- diamonds %>%
+  dplyr::mutate(clareza_adj2 = factor(clareza_adj,
+                                      levels = c("Alta pureza", "Média pureza", "Baixa pureza"),
+                                      ordered = TRUE))
+
+ex1 <- diamonds %>% 
+  dplyr::group_by(cut, clareza_adj2) %>%
+  dplyr::summarise(n = dplyr::n()) %>%
+  dplyr::group_by(cut) %>%
+  dplyr::mutate(total = sum(n),
+                pct = round((n/total)*100,2)
+                ) %>%
+  dplyr::ungroup()
+
+ex1 %>%
+  dplyr::select(cut, clareza_adj2, pct) %>%
+  tidyr::pivot_wider(
+    names_from = clareza_adj2, 
+    values_from = pct
+  )
+  
+### Gráfico de barras
+tab_n <- table(diamonds$cut, diamonds$clarity) ## freq absolutas
+tab_freq_linha <- round(prop.table(tab_n, margin=1)*100, 2)
+tab_freq_col <- round(prop.table(tab_n, margin=2)*100, 2)
+
+barplot(tab_n, 
+        beside = FALSE,
+        col = rainbow(nrow(tab_n)), 
+        legend.text = rownames(tab_n), 
+        args.legend = list(title = "Clareza", x = "topright"),
+        xlab = "Qualidade do corte", 
+        ylab = "n",
+        main = "Distribuição de frequência qualidade corte x pureza diamantes"
+        )
+
+###########################
+# ANÁLISE 2 VAR QUANTI
+###########################
+veiculos <- read_excel("veiculos.xls")
+dim(veiculos)
+str(veiculos)
+
+veiculos <- veiculos %>%
+  dplyr::mutate(veiculo_adj = factor(veiculo),
+                proc_adj = factor(proc))
+head(veiculos)
+str(veiculos)
+summary(veiculos)
+
+plot(x = veiculos$preco,
+     y = veiculos$motor, 
+     xlab = "Preço", 
+     ylab = "Pot. Motor", 
+     main = "Gráfico dispersão preço potência")
+
+cor(veiculos$preco, veiculos$motor, method = "pearson")
+cor(veiculos$preco, veiculos$motor, method = "spearman")
+
+############################
+# Quanti e quali
+############################
+
+mr1 <- tapply(veiculos$motor, veiculos$proc_adj, summary)
+mr2 <- tapply(veiculos$motor, veiculos$proc_adj, sd)
+
+boxplot(veiculos$motor ~ veiculos$proc_adj, 
+        col = "lightblue",
+        border = "gray",
+        boxwex = 0.3,
+        xlab = "Procedência",
+        ylab = "Pot Motor", 
+        main = "Boxplot pot X procedência")
+
+###############################
+# Mais do que duas variáveis
+###############################
+
+# Gráfico do desenhista
+g1 <- graphics::pairs(~preco + comp + motor, data = veiculos)
+
+### Disp de dispersão simbólico
+plot(x = veiculos$comp, 
+     y = veiculos$preco, 
+     pch = as.numeric(veiculos$proc_adj),
+     col = veiculos$proc_adj, 
+     ylab = "Preço", 
+     xlab = "Comp", 
+     main = "Dispersão entre preço e comp por procedência", 
+     )
+legend("topleft", 
+       legend = c("Importado", "Nacional"),
+       pch = c(1, 2),
+       col = c("black", "red"),
+       bty = "n"
+       )
+
+### Gráfico particao
+ggplot2::ggplot(data = veiculos,
+                aes(x = motor, y = comp)) +geom_point() + facet_wrap(~proc)
+tapply(veiculos$comp, veiculos$proc, summary)
+tapply(veiculos$motos, veiculos$proc, summary)
+
+tab_corr <- round(cor(veiculos[,c("preco", "comp", "motor")]), 1)
+corrplot::corrplot(tab_corr)
+
+#### Mais que 2 var quali
+t1 <- stats::ftable(diamonds$cut, diamonds$clareza_adj2, diamonds$color)
+round(prop.table(t1)*100,1)
