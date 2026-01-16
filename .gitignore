@@ -167,6 +167,7 @@ downloads/
 
 # Archive folder (material de estudo interno)
 _archive/
+python-for-ds/
 
 # Template files
 *template_aula.R
