@@ -164,3 +164,6 @@ downloads/
 # Scripts temporários de conversão
 *_converter*.py
 *_convert*.py
+
+# Archive folder (material de estudo interno)
+_archive/
