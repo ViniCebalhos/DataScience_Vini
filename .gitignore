@@ -171,3 +171,6 @@ python-for-ds/
 
 # Template files
 *template_aula.R
+
+# Scripts de sincronização (uso interno)
+sync-to-public.sh
