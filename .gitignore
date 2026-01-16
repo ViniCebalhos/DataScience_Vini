@@ -167,3 +167,6 @@ downloads/
 
 # Archive folder (material de estudo interno)
 _archive/
+
+# Template files
+*template_aula.R
