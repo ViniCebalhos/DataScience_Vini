@@ -1,13 +1,6 @@
 # 📊 Consultas SQL Avançadas
 
-**Disciplina:** Banco de Dados  
-**Trabalho:** Work 3
-
----
-
-## 🎯 Objetivo
-
-Aplicar consultas SQL avançadas em dados de acidentes de trânsito.
+**Descrição:** Aplicação de consultas SQL avançadas em dados de acidentes de trânsito.
 
 ---
 

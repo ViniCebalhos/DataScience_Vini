@@ -1,13 +1,6 @@
 # 🚗 Análise Exploratória de Acidentes de Trânsito
 
-**Disciplina:** Banco de Dados  
-**Trabalho:** Work 2
-
----
-
-## 🎯 Objetivo
-
-Realizar análise exploratória de dados de acidentes de trânsito da Polícia Rodoviária Federal (PRF).
+**Descrição:** Análise exploratória de dados de acidentes de trânsito da Polícia Rodoviária Federal (PRF).
 
 ---
 
