@@ -153,3 +153,26 @@ downloads/
 # datasets/
 # raw_data/
 
+# Arquivos gerados por IA e scripts auxiliares
+*convert_to_pdf.py
+*texto.txt
+*Trabalho*.txt
+*_gerado*.md
+*_gerado*.txt
+*_ai*.md
+*_ai*.txt
+# Scripts temporários de conversão
+*_converter*.py
+*_convert*.py
+
+# Arquivos gerados por IA e scripts auxiliares
+*convert_to_pdf.py
+*texto.txt
+*Trabalho*.txt
+*_gerado*.md
+*_gerado*.txt
+*_ai*.md
+*_ai*.txt
+# Scripts temporários de conversão
+*_converter*.py
+*_convert*.py
