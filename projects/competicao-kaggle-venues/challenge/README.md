@@ -1,14 +1,14 @@
 # 🏆 Challenge: Previsão de Locais Altamente Avaliados
 
-**Competição:** Predict Highly Rated Venues CDA UTFPR 2024  
+**Competição:** Predict Highly Rated Venues (2024)  
 **Plataforma:** Kaggle-style Competition  
 **Dataset:** Yelp Toronto Reviews
 
 ---
 
-## 🎯 Objetivo
+## 📊 Sobre o Projeto
 
-Prever se um local será altamente avaliado (1) ou não (0) na cidade de Toronto, ON, Canadá, utilizando dados do Yelp.
+Previsão de locais altamente avaliados na cidade de Toronto, ON, Canadá, utilizando dados do Yelp.
 
 ---
 
@@ -135,5 +135,5 @@ jupyter notebook challenge_final.ipynb
 
 **Autor:** Vinícius de Souza Cebalhos  
 **Data:** 2024  
-**Competição:** CDA UTFPR 2024
+**Competição:** 2024
 

@@ -125,5 +125,4 @@ Para aumentar a quota, solicite no Google Cloud Console.
 ---
 
 **Autor:** Vinícius de Souza Cebalhos  
-**Disciplina:** Data Mining
 

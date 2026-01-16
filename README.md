@@ -105,7 +105,7 @@ Trabalhos de mineração de dados, incluindo web scraping, regressão linear, cl
 - Classificação e Agrupamento (Clustering)
 - Regras de Associação e Mineração de Texto
 
-[📖 Ver Disciplina](./data-mining/)
+[📖 Ver Projetos](./data-mining/)
 
 ---
 
@@ -117,7 +117,7 @@ Projetos envolvendo SQL, PostgreSQL, PostGIS e análise de dados.
 - Análise Exploratória de Acidentes de Trânsito
 - Consultas SQL Avançadas
 
-[📖 Ver Disciplina](./banco-dados/)
+[📖 Ver Projetos](./banco-dados/)
 
 ---
 
@@ -128,7 +128,7 @@ Projetos de aprendizado de máquina, incluindo regressão, classificação e oti
 - Regressão Linear - Previsão de Preços de Imóveis
 - Classificação Multiclasse - Indicadores Sociais Globais
 
-[📖 Ver Disciplina](./machine-learning/)
+[📖 Ver Projetos](./machine-learning/)
 
 ---
 

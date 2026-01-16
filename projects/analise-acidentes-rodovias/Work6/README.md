@@ -1,12 +1,12 @@
-# 📄 Work 6: Artigo Científico - Análise de Acidentes em Rodovias Federais
+# 📄 Artigo Científico - Análise de Acidentes em Rodovias Federais
 
 **Título:** Análise de Acidentes em Rodovias Federais Brasileiras com Dados da PRF: Um Estudo Exploratório
 
 ---
 
-## 🎯 Objetivo
+## 📊 Sobre o Projeto
 
-Desenvolver artigo científico completo sobre análise de acidentes de trânsito em rodovias federais brasileiras, utilizando dados da Polícia Rodoviária Federal (PRF).
+Artigo científico completo sobre análise de acidentes de trânsito em rodovias federais brasileiras, utilizando dados da Polícia Rodoviária Federal (PRF).
 
 ---
 

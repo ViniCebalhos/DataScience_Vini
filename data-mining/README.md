@@ -95,7 +95,7 @@ Projetos de mineração de dados demonstrando competências em web scraping, an�
 ### 🏆 [Competição Kaggle - Previsão de Locais](../projects/competicao-kaggle-venues/)
 **Descrição:** Previsão de locais altamente avaliados em Toronto usando dados do Yelp.
 
-**Competição:** Predict Highly Rated Venues CDA UTFPR 2024
+**Competição:** Predict Highly Rated Venues (2024)
 
 **Resultados:**
 - **Melhor Modelo:** Random Forest
