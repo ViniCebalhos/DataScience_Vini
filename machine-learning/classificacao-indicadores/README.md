@@ -1,13 +1,6 @@
 # 🌍 Classificação Multiclasse - Indicadores Sociais Globais
 
-**Disciplina:** Machine Learning  
-**Trabalho:** Work 2
-
----
-
-## 🎯 Objetivo
-
-Classificar países em categorias baseadas em indicadores sociais globais.
+**Descrição:** Classificação de países em categorias baseadas em indicadores sociais globais.
 
 ---
 
@@ -37,7 +30,6 @@ Classificar países em categorias baseadas em indicadores sociais globais.
 ## 📁 Arquivos
 
 - `Vinicius_Cebalhos_classificacao.ipynb` - Notebook completo (47 células)
-- `VERIFICACAO_COMPLETA.md` - Checklist de implementação
 - Visualizações: boxplots, histogramas, heatmaps, matrizes de confusão, ROC curves, feature importance
 
 ---

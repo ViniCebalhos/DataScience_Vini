@@ -1,13 +1,6 @@
 # 🔗 Regras de Associação e Mineração de Texto
 
-**Disciplina:** Data Mining  
-**Trabalho:** Work 4
-
----
-
-## 🎯 Objetivo
-
-Aplicar técnicas de regras de associação e análise de texto.
+**Descrição:** Aplicação de técnicas de regras de associação e análise de texto.
 
 ---
 

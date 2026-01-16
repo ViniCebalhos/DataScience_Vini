@@ -1,13 +1,6 @@
 # 📈 Regressão Linear e Análise de Dados
 
-**Disciplina:** Data Mining  
-**Trabalho:** Work 2
-
----
-
-## 🎯 Objetivo
-
-Aplicar conceitos fundamentais de dados e regressão linear em datasets reais.
+**Descrição:** Aplicação de regressão linear e análise exploratória em datasets reais.
 
 ---
 

@@ -1,13 +1,6 @@
 # 🎯 Classificação e Agrupamento (Clustering)
 
-**Disciplina:** Data Mining  
-**Trabalho:** Work 3
-
----
-
-## 🎯 Objetivo
-
-Aplicar técnicas de classificação e clustering em dados do Titanic.
+**Descrição:** Aplicação de técnicas de classificação e clustering em dados do Titanic.
 
 ---
 

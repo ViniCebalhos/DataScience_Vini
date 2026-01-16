@@ -1,12 +1,12 @@
-# 🔍 Work 1: Web Scraping e Análise de Dados do YouTube
+# 🔍 Web Scraping e Análise de Dados do YouTube
 
-**Objetivo:** Extrair e analisar dados do YouTube usando a API oficial do Google.
+**Descrição:** Extração e análise de dados do YouTube usando a API oficial do Google.
 
 ---
 
 ## 📋 Descrição
 
-Este trabalho demonstra como:
+Este projeto demonstra como:
 - Utilizar a YouTube Data API v3
 - Extrair dados de vídeos do YouTube
 - Analisar estatísticas de vídeos

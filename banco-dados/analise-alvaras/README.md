@@ -1,13 +1,6 @@
 # 📋 Análise de Alvarás de Construção
 
-**Disciplina:** Banco de Dados  
-**Trabalho:** Work 1
-
----
-
-## 🎯 Objetivo
-
-Realizar análise exploratória de dados de alvarás de construção usando SQL e Python.
+**Descrição:** Análise exploratória de dados de alvarás de construção usando SQL e Python.
 
 ---
 

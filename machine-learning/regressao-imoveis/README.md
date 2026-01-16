@@ -1,13 +1,6 @@
 # 🏠 Regressão Linear - Previsão de Preços de Imóveis
 
-**Disciplina:** Machine Learning  
-**Trabalho:** Work 1
-
----
-
-## 🎯 Objetivo
-
-Ajustar um modelo de regressão linear para prever preços de imóveis.
+**Descrição:** Modelo de regressão linear para previsão de preços de imóveis.
 
 ---
 
