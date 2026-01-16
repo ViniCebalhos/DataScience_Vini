@@ -1,0 +1,35 @@
+Estudo de caso 1: A demissão em massa do banco Itaú
+
+No mês de setembro de 2025 o Banco Itaú demitiu cerca de mil funcionários em regime de trabalho remoto ou híbrido. Segundo o Sindicato dos Bancários, as demissões não tiveram aviso prévio e o monitoramento realizado pela empresa não tinha o consentimento dos funcionários. Considere que a tomada de decisão sobre as demissões foi oriunda de um modelo de recomendação. Você é um cientista de dados especializado e foi contratado por uma auditoria externa para sugerir melhorias no modelo de monitoramento de funcionários em regime híbrido ou remoto considerando os princípios ESG. A partir do que discutimos na aula 1 “Fundamentos de Ética para Cientistas de Dados”, faça uma análise do caso, utilizando a metodologia CRISP como suporte. Leia o link do estudo de caso abaixo:
+
+https://www.bbc.com/portuguese/articles/c8xrqj2492wo
+
+OBS:
+
+Sua avaliação deve ter no máximo 3 laudas. 
+
+Entrega Individual.
+
+Data de Entrega: 11/12/2025
+
+MODELO CRISP APLICADO ÉTICA PARA CIENTISTAS DE DADOS
+
+Entendimento do Negócio (O problema é ético? Justifique)
+
+ 
+Entendimento dos Dados (Os dados são representativos? Quais variáveis foram utilizadas para este modelo? A privacidade foi respeitada?)
+
+ 
+Preparação dos Dados (Os dados foram anonimizados de forma adequada?)
+
+ 
+Modelagem (A modelagem dos dados foi transparente? Em sua avaliação, algum princípio estatístico pode ter sido violado no processo de modelagem? Por quê?)
+
+ 
+Avaliação (Sugira entre 1 e 3 KPI`s para tornar o processo de avaliação de produtividade funcionários em formato híbrido ou remoto mais transparente)
+
+ 
+Implantação (A partir da sua experiência pessoal, quais os principais desafios você identifica para o monitoramento contínuo do modelo?)
+
+ 
+Modelo disponível para entrega: https://docs.google.com/document/d/1YJXgSfFHJlRLLbeR-hEvzEi38jSv4jH5hcv4B_JcyCU/edit?usp=sharing
