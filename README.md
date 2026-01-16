@@ -215,7 +215,7 @@ Cada projeto contém:
 # Instalar dependências Python
 pip install -r requirements.txt
 
-# Para trabalhos com PostgreSQL
+# Para projetos com PostgreSQL
 sudo apt-get install postgresql postgresql-contrib postgis
 
 # Para compilar artigos LaTeX
@@ -260,10 +260,10 @@ datascience/
 │   ├── analise-esaude-curitiba/
 │   └── classificacao-sinais-vitais/
 │
-├── data-mining/                 # Trabalhos de Data Mining
-├── banco-dados/                 # Trabalhos de Banco de Dados
-├── machine-learning/            # Trabalhos de Machine Learning
-├── estatistica/                 # Trabalhos de Estatística (R)
+├── data-mining/                 # Projetos de Data Mining
+├── banco-dados/                 # Projetos de Banco de Dados
+├── machine-learning/            # Projetos de Machine Learning
+├── estatistica/                 # Projetos de Estatística (R)
 │
 └── _archive/                    # Material de estudo/tutoriais
     ├── tutoriais-python/

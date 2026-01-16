@@ -4,10 +4,10 @@ Projetos de mineração de dados demonstrando competências em web scraping, an�
 
 ---
 
-## 📚 Trabalhos Desenvolvidos
+## 📚 Projetos
 
 ### 🔍 [Web Scraping e Análise de Dados do YouTube](./web-scraping-youtube/)
-**Objetivo:** Extrair e analisar dados do YouTube usando a API oficial do Google.
+**Descrição:** Extração e análise de dados do YouTube usando a API oficial do Google.
 
 **Tecnologias:**
 - Python (googleapiclient)
@@ -26,7 +26,7 @@ Projetos de mineração de dados demonstrando competências em web scraping, an�
 ---
 
 ### 📈 [Regressão Linear e Análise de Dados](./regressao-linear/)
-**Objetivo:** Aplicar conceitos fundamentais de dados e regressão linear em datasets reais.
+**Descrição:** Aplicação de regressão linear e análise exploratória em datasets reais.
 
 **Tecnologias:**
 - Python (pandas, numpy, scikit-learn)
@@ -51,7 +51,7 @@ Projetos de mineração de dados demonstrando competências em web scraping, an�
 ---
 
 ### 🎯 [Classificação e Agrupamento (Clustering)](./clustering-titanic/)
-**Objetivo:** Aplicar técnicas de classificação e clustering em dados do Titanic.
+**Descrição:** Aplicação de técnicas de classificação e clustering em dados do Titanic.
 
 **Tecnologias:**
 - Python (scikit-learn)
@@ -65,12 +65,12 @@ Projetos de mineração de dados demonstrando competências em web scraping, an�
 
 **Arquivos principais:**
 - `exercicio_titanic_clustering.ipynb`
-- `ExercicioClassificacao_e_Agrupamento.pdf` - Enunciado do trabalho
+- `ExercicioClassificacao_e_Agrupamento.pdf` - Documentação do projeto
 
 ---
 
 ### 🔗 [Regras de Associação e Mineração de Texto](./regras-associacao-texto/)
-**Objetivo:** Aplicar técnicas de regras de associação e análise de texto.
+**Descrição:** Aplicação de técnicas de regras de associação e análise de texto.
 
 **Tecnologias:**
 - Python (mlxtend, nltk)
@@ -93,7 +93,7 @@ Projetos de mineração de dados demonstrando competências em web scraping, an�
 ---
 
 ### 🏆 [Competição Kaggle - Previsão de Locais](../projects/competicao-kaggle-venues/)
-**Objetivo:** Prever locais altamente avaliados em Toronto usando dados do Yelp.
+**Descrição:** Previsão de locais altamente avaliados em Toronto usando dados do Yelp.
 
 **Competição:** Predict Highly Rated Venues CDA UTFPR 2024
 
@@ -156,7 +156,6 @@ Projetos de mineração de dados demonstrando competências em web scraping, an�
 ```
 data-mining/
 ├── README.md                    # Este arquivo
-├── Aula3/                       # Exercícios de aula
 ├── web-scraping-youtube/        # Web Scraping YouTube
 ├── regressao-linear/            # Regressão Linear
 ├── clustering-titanic/           # Classificação e Clustering
@@ -170,7 +169,7 @@ Nota: O projeto challenge foi movido para projects/ como projeto em destaque.
 
 ## 🚀 Como Executar
 
-Cada trabalho possui seus próprios notebooks Jupyter. Para executar:
+Cada projeto possui seus próprios notebooks Jupyter. Para executar:
 
 1. Instale as dependências:
 ```bash
@@ -195,7 +194,5 @@ jupyter notebook [nome-do-projeto]/[nome_do_notebook].ipynb
 
 ---
 
-**Disciplina:** Data Mining  
-**Autor:** Vinícius de Souza Cebalhos  
-**Instituição:** UTFPR
+**Autor:** Vinícius de Souza Cebalhos
 

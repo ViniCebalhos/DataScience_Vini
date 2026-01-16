@@ -4,10 +4,10 @@ Projetos demonstrando competências em PostgreSQL, PostGIS, SQL avançado, anál
 
 ---
 
-## 📚 Trabalhos Desenvolvidos
+## 📚 Projetos
 
 ### 📋 [Análise de Alvarás de Construção](./analise-alvaras/)
-**Objetivo:** Análise exploratória de dados de alvarás de construção usando SQL e Python.
+**Descrição:** Análise exploratória de dados de alvarás de construção usando SQL e Python.
 
 **Tecnologias:**
 - PostgreSQL
@@ -27,7 +27,7 @@ Projetos demonstrando competências em PostgreSQL, PostGIS, SQL avançado, anál
 ---
 
 ### 🚗 [Análise Exploratória de Acidentes de Trânsito](./analise-acidentes-eda/)
-**Objetivo:** Análise exploratória de dados de acidentes de trânsito da PRF.
+**Descrição:** Análise exploratória de dados de acidentes de trânsito da PRF.
 
 **Tecnologias:**
 - PostgreSQL
@@ -49,7 +49,7 @@ Projetos demonstrando competências em PostgreSQL, PostGIS, SQL avançado, anál
 ---
 
 ### 📊 [Consultas SQL Avançadas](./consultas-sql-avancadas/)
-**Objetivo:** Aplicar consultas SQL avançadas em dados de acidentes.
+**Descrição:** Aplicação de consultas SQL avançadas em dados de acidentes.
 
 **Tecnologias:**
 - PostgreSQL
@@ -66,7 +66,7 @@ Projetos demonstrando competências em PostgreSQL, PostGIS, SQL avançado, anál
 ---
 
 ### 📄 [Artigo Científico - Análise de Acidentes em Rodovias Federais](../projects/analise-acidentes-rodovias/)
-**Objetivo:** Desenvolver artigo científico completo sobre análise de acidentes de trânsito.
+**Descrição:** Artigo científico completo sobre análise de acidentes de trânsito.
 
 **Resultado:** Artigo científico completo publicado em formato SBC.
 
@@ -93,7 +93,7 @@ Projetos demonstrando competências em PostgreSQL, PostGIS, SQL avançado, anál
 ---
 
 ### 🗺️ [Análise Espacial de Acidentes com PostGIS](../projects/analise-espacial-acidentes/)
-**Objetivo:** Análise geoespacial de acidentes de trânsito usando PostGIS.
+**Descrição:** Análise geoespacial de acidentes de trânsito usando PostGIS.
 
 **Resultado:** Artigo científico completo com análise espacial.
 
@@ -165,7 +165,7 @@ Nota: Os projetos Work6 e Work8 foram movidos para projects/ como projetos em de
 
 ## 🚀 Como Executar
 
-### Para trabalhos com PostgreSQL:
+### Para projetos com PostgreSQL:
 
 1. Instale o PostgreSQL e PostGIS:
 ```bash
@@ -204,7 +204,7 @@ pdflatex artigo_sbc*.tex
 ## 📝 Notas
 
 - Os datasets podem ser grandes e não estão incluídos no repositório
-- Alguns trabalhos requerem configuração de banco de dados PostgreSQL
+- Alguns projetos requerem configuração de banco de dados PostgreSQL
 - Os artigos científicos estão em formato LaTeX (padrão SBC)
 - Mapas interativos são gerados em HTML e podem ser visualizados no navegador
 
@@ -214,8 +214,8 @@ pdflatex artigo_sbc*.tex
 
 Este repositório contém dois artigos científicos completos:
 
-1. **Work 6:** Análise de Acidentes em Rodovias Federais Brasileiras
-2. **Work 8:** Análise Espacial de Acidentes com PostGIS
+1. **Análise de Acidentes em Rodovias Federais:** Artigo científico completo
+2. **Análise Espacial de Acidentes:** Artigo científico com PostGIS
 
 Ambos estão formatados conforme padrão SBC e prontos para submissão.
 

@@ -4,10 +4,10 @@ Projetos de aprendizado de máquina demonstrando competências em regressão, cl
 
 ---
 
-## 📚 Trabalhos Desenvolvidos
+## 📚 Projetos
 
 ### 🏠 [Regressão Linear - Previsão de Preços de Imóveis](./regressao-imoveis/)
-**Objetivo:** Ajustar um modelo de regressão linear para prever preços de imóveis.
+**Descrição:** Modelo de regressão linear para previsão de preços de imóveis.
 
 **Tecnologias:**
 - Python (scikit-learn, pandas, numpy)
@@ -26,7 +26,7 @@ Projetos de aprendizado de máquina demonstrando competências em regressão, cl
 
 **Arquivos principais:**
 - `regressao_linear_imoveis.py` - Script Python completo
-- `tarefa1.txt` - Enunciado do trabalho
+- `tarefa1.txt` - Documentação do projeto
 
 **Métricas:**
 - RMSE otimizado no conjunto de teste
@@ -35,7 +35,7 @@ Projetos de aprendizado de máquina demonstrando competências em regressão, cl
 ---
 
 ### 🌍 [Classificação Multiclasse - Indicadores Sociais Globais](./classificacao-indicadores/)
-**Objetivo:** Classificar países em categorias baseadas em indicadores sociais globais.
+**Descrição:** Classificação de países em categorias baseadas em indicadores sociais globais.
 
 **Tecnologias:**
 - Python (scikit-learn, pandas, numpy, matplotlib, seaborn)
@@ -87,7 +87,7 @@ Projetos de aprendizado de máquina demonstrando competências em regressão, cl
 ---
 
 ### 💓 [Classificação de Sinais Vitais](../projects/classificacao-sinais-vitais/)
-**Objetivo:** Classificar sinais vitais em diferentes categorias usando machine learning.
+**Descrição:** Classificação de sinais vitais em diferentes categorias usando machine learning.
 
 **Tecnologias:**
 - Python (scikit-learn, pandas, numpy, matplotlib, seaborn)
@@ -111,7 +111,7 @@ Projetos de aprendizado de máquina demonstrando competências em regressão, cl
 
 **Arquivos principais:**
 - `Vinicius_Cebalhos_classificacao_sinais_vitais.ipynb` - Notebook completo
-- `Enunciado_Sinais_Vitais_CDA2025.pdf` - Enunciado do trabalho
+- `Enunciado_Sinais_Vitais_CDA2025.pdf` - Documentação do projeto
 - Visualizações: `comparacao_metricas.png`, `correlacao_features.png`, `distribuicoes_por_classe.png`, `matrizes_confusao_comparacao.png`
 
 **📍 Este projeto está em destaque em [`projects/classificacao-sinais-vitais/`](../projects/classificacao-sinais-vitais/)**
@@ -183,17 +183,17 @@ jupyter notebook classificacao-indicadores/Vinicius_Cebalhos_classificacao.ipynb
 
 ## 📊 Resultados e Métricas
 
-### Work 1
+### Regressão Linear - Imóveis
 - Modelo de regressão linear otimizado
 - RMSE calculado no conjunto de teste
 
-### Work 2
+### Classificação - Indicadores Globais
 - Comparação de 3 algoritmos (Logistic Regression, Random Forest, XGBoost)
 - Validação cruzada estratificada (k=5)
 - Análise completa de métricas
 - Feature importance detalhada
 
-### Work 3
+### Classificação - Sinais Vitais
 - Classificação de sinais vitais
 - Comparação de múltiplas métricas
 - Análise de distribuições por classe
@@ -204,7 +204,7 @@ jupyter notebook classificacao-indicadores/Vinicius_Cebalhos_classificacao.ipynb
 ## 📝 Notas
 
 - Os datasets podem precisar ser baixados separadamente
-- Alguns trabalhos requerem dados específicos fornecidos pelo professor
+- Alguns projetos requerem datasets específicos
 - Os notebooks estão completamente documentados
 - Visualizações são geradas automaticamente e salvas em PNG
 
@@ -212,14 +212,13 @@ jupyter notebook classificacao-indicadores/Vinicius_Cebalhos_classificacao.ipynb
 
 ## 🎯 Destaques
 
-### Work 2 - Classificação Multiclasse
+### Classificação - Indicadores Globais
 - **Notebook completo** com 47 células
-- **Checklist de implementação** completo
-- **Metodologia defensável** e justificada
+- **Metodologia completa** e justificada
 - **Visualizações profissionais** (300 DPI)
 - **Análise comparativa** detalhada de modelos
 
-### Work 3 - Sinais Vitais
+### Classificação - Sinais Vitais
 - **Análise comparativa** de múltiplos modelos
 - **Visualizações comparativas** profissionais
 - **Análise de correlações** entre features
@@ -227,7 +226,5 @@ jupyter notebook classificacao-indicadores/Vinicius_Cebalhos_classificacao.ipynb
 
 ---
 
-**Disciplina:** Machine Learning  
-**Autor:** Vinícius de Souza Cebalhos  
-**Instituição:** UTFPR
+**Autor:** Vinícius de Souza Cebalhos
 
