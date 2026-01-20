@@ -1,6 +1,6 @@
 # Transformações de Variáveis e Cálculo de Tamanho de Amostra
 
-**Linguagem:** R  
+**Linguagem:** R
 **Técnicas:** Transformações estatísticas, normalização, padronização, cálculo de tamanho de amostra
 
 ---

@@ -8,11 +8,11 @@
 
 - **Arquivo:** `gdp-and-homicides-vs-happiness-vs-hdi_FabroClassification2025OK_4classes.csv`
 - **Indicadores:**
-  - GDP (Produto Interno Bruto)
-  - Homicides (Taxa de homicídios)
-  - Happiness (Índice de felicidade)
-  - HDI (Índice de Desenvolvimento Humano)
-  - Cantrill Ladder
+ - GDP (Produto Interno Bruto)
+ - Homicides (Taxa de homicídios)
+ - Happiness (Índice de felicidade)
+ - HDI (Índice de Desenvolvimento Humano)
+ - Cantrill Ladder
 
 ---
 

@@ -4,7 +4,7 @@ theme: default
 paginate: true
 ---
 
-# 🤖 Transformers
+#  Transformers
 ## Como as máquinas aprendem a entender linguagem
 
 Uma explicação simples para leigos
@@ -55,7 +55,7 @@ Google publicou uma nova arquitetura revolucionária
 - **Solução:** Processar TODAS as palavras ao mesmo tempo!
 - **Inovação:** Mecanismo de Atenção
 
-> **Antes:** Ler um livro palavra por palavra  
+> **Antes:** Ler um livro palavra por palavra
 > **Agora:** Ver o livro inteiro de uma vez e entender tudo!
 
 ---
@@ -72,7 +72,7 @@ Cada palavra vira um **vetor** (lista de números)
 "animal" → [0.25, -0.45, 0.75, 0.15, ...]
 ```
 
-> **Analogia:** É como criar um "mapa" onde palavras similares ficam próximas.  
+> **Analogia:** É como criar um "mapa" onde palavras similares ficam próximas.
 > "Gato" e "cachorro" têm números parecidos porque são ambos animais!
 
 ---
@@ -108,16 +108,16 @@ O modelo "presta atenção" em todas as palavras ao mesmo tempo
 ## Arquitetura: Encoder e Decoder
 
 ### Encoder (Codificador)
-- 📥 Recebe o texto de entrada
-- 🔍 Processa e entende o texto
-- 💾 Cria uma representação interna
+-  Recebe o texto de entrada
+-  Processa e entende o texto
+-  Cria uma representação interna
 
 ### Decoder (Decodificador)
-- 📤 Pega a representação do encoder
-- 🎯 Gera a saída (tradução, resposta, etc.)
-- ✨ Produz o resultado final
+-  Pega a representação do encoder
+-  Gera a saída (tradução, resposta, etc.)
+-  Produz o resultado final
 
-> **Analogia:** Encoder = tradutor que entende português  
+> **Analogia:** Encoder = tradutor que entende português
 > Decoder = tradutor que fala inglês e produz a tradução
 
 ---
@@ -125,41 +125,41 @@ O modelo "presta atenção" em todas as palavras ao mesmo tempo
 ## Fluxo Completo: Do Texto ao Resultado
 
 1. **Word Embedding**
-   - "Olá mundo" → [números, números, ...]
+ - "Olá mundo" → [números, números, ...]
 
 2. **Encoder**
-   - Processa com Attention → Entende contexto
+ - Processa com Attention → Entende contexto
 
 3. **Decoder**
-   - Gera resposta → "Hello world"
+ - Gera resposta → "Hello world"
 
-> **Tudo isso acontece simultaneamente!**  
+> **Tudo isso acontece simultaneamente!**
 > Não precisa processar palavra por palavra
 
 ---
 
 ## Por que Transformers são Melhores?
 
-- ⚡ **Mais Rápido:** Processa tudo ao mesmo tempo
-- 🧠 **Entende Contexto:** Vê o texto completo
-- 📚 **Aprende Melhor:** Treinado em milhões de textos
-- 🔄 **Reutilizável:** Um modelo serve para várias tarefas
+-  **Mais Rápido:** Processa tudo ao mesmo tempo
+-  **Entende Contexto:** Vê o texto completo
+-  **Aprende Melhor:** Treinado em milhões de textos
+-  **Reutilizável:** Um modelo serve para várias tarefas
 
-> **Comparação:**  
-> **Antes:** Como ler um livro página por página  
+> **Comparação:**
+> **Antes:** Como ler um livro página por página
 > **Agora:** Como ter uma visão aérea de todo o livro de uma vez!
 
 ---
 
 ## Onde Você Já Viu Transformers?
 
-- 💬 **ChatGPT:** Conversa com você
-- 🌐 **Google Translate:** Traduz textos
-- 🔍 **Busca Google:** Entende o que você procura
-- 📱 **Assistentes Virtuais:** Siri, Alexa, etc.
-- 📊 **Análise de Sentimento:** Entende se texto é positivo/negativo
+-  **ChatGPT:** Conversa com você
+-  **Google Translate:** Traduz textos
+-  **Busca Google:** Entende o que você procura
+-  **Assistentes Virtuais:** Siri, Alexa, etc.
+-  **Análise de Sentimento:** Entende se texto é positivo/negativo
 
-> **Transformers estão em todo lugar!**  
+> **Transformers estão em todo lugar!**
 > Você provavelmente já usou sem saber!
 
 ---

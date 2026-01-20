@@ -1,16 +1,16 @@
 # Guia de Visualização Padronizada - Artigo SBC
 
-## 🎨 Tema Visual Unificado
+##  Tema Visual Unificado
 
 Todos os gráficos foram criados com um **tema visual padronizado** para garantir consistência e profissionalismo:
 
-### 🎯 Paleta de Cores
+###  Paleta de Cores
 - **Cor Principal**: `#2E86AB` (Azul profissional)
 - **Cor de Destaque**: `#A23B72` (Rosa para elementos importantes)
 - **Cor Secundária**: `#F18F01` (Laranja para linhas de referência)
 - **Cor de Fundo**: `#F8F9FA` (Cinza claro)
 
-### 📊 Características dos Gráficos
+###  Características dos Gráficos
 
 #### **Gráfico 1: Acidentes por Mês**
 - **Tipo**: Gráfico de barras verticais
@@ -33,7 +33,7 @@ Todos os gráficos foram criados com um **tema visual padronizado** para garanti
 - **Destaque**: Área sombreada rosa para período de pico (17h-19h)
 - **Elementos**: Anotações com caixas de texto para valores de pico
 
-### 🔧 Configurações Técnicas
+###  Configurações Técnicas
 
 #### **Estilo Global**
 - **Fonte**: DejaVu Sans (compatível com português)
@@ -52,13 +52,13 @@ Todos os gráficos foram criados com um **tema visual padronizado** para garanti
 - **Decimais**: Apropriados para cada contexto
 - **Posicionamento**: Otimizado para legibilidade
 
-### 📐 Dimensões Padronizadas
+###  Dimensões Padronizadas
 
 - **Gráfico de Barras (Mês)**: 12x6 polegadas
-- **Gráfico de Barras (Causas)**: 12x8 polegadas  
+- **Gráfico de Barras (Causas)**: 12x8 polegadas
 - **Gráfico de Linha (Hora)**: 14x6 polegadas
 
-### 🎯 Benefícios do Tema Padronizado
+###  Benefícios do Tema Padronizado
 
 1. **Consistência Visual**: Todos os gráficos seguem o mesmo padrão
 2. **Profissionalismo**: Cores e estilos adequados para publicação acadêmica
@@ -66,7 +66,7 @@ Todos os gráficos foram criados com um **tema visual padronizado** para garanti
 4. **Acessibilidade**: Cores que funcionam bem em impressão e tela
 5. **Branding**: Identidade visual coesa para o artigo
 
-### 📝 Como Usar
+###  Como Usar
 
 Os gráficos estão prontos para inclusão no artigo SBC. Cada um possui:
 - **Alta resolução** (300 DPI) para impressão
@@ -74,7 +74,7 @@ Os gráficos estão prontos para inclusão no artigo SBC. Cada um possui:
 - **Formatação consistente** de títulos e rótulos
 - **Destaques visuais** para elementos importantes
 
-### 🔄 Reproduzibilidade
+###  Reproduzibilidade
 
 Para gerar novos gráficos com o mesmo tema, execute:
 ```bash

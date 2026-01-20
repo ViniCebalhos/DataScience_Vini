@@ -77,9 +77,9 @@ Este dataset contém informações sobre atendimentos realizados por profissiona
 
 1. **Profissionais Abrangidos**: Inclui fisioterapeutas, psicólogos, nutricionistas, educadores físicos e outros profissionais de nível superior, exceto médicos.
 
-2. **Tipos de Unidades**: 
-   - BASICO: Unidades básicas de saúde
-   - SIACE: Centros de especialidades médicas
+2. **Tipos de Unidades**:
+ - BASICO: Unidades básicas de saúde
+ - SIACE: Centros de especialidades médicas
 
 3. **Atenção Primária e Especializada**: O dataset cobre tanto atendimentos na atenção primária quanto na especializada.
 
@@ -96,4 +96,4 @@ Este dataset permite análises em diversas áreas:
 - Caracterização socioeconômica dos usuários
 - Padrões de encaminhamento e especialização
 - Análise temporal dos atendimentos
-- Perfil dos profissionais e suas áreas de atuação 
+- Perfil dos profissionais e suas áreas de atuação

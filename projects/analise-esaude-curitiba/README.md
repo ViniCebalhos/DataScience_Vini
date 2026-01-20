@@ -8,23 +8,23 @@ Este projeto de pós-graduação analisa dados do Sistema E-Saúde de Curitiba, 
 
 ```
 Trabalho/
-├── Dados/                                    # Arquivos de dados
-│   ├── *.csv                                # Datasets mensais (Dez/2024 - Jul/2025)
-│   ├── *_Dicionario_de_Dados.csv           # Dicionário de dados
-│   ├── dataset_consolidado_completo.csv    # Dataset consolidado (gerado)
-│   ├── dataset_consolidado_completo.parquet # Dataset consolidado (formato eficiente)
-│   ├── dataset_limpo_completo.csv          # Dataset limpo (gerado)
-│   ├── dataset_limpo_completo.pkl          # Dataset limpo (formato eficiente)
-│   ├── relatorio_limpeza.md                # Relatório de limpeza (gerado)
-│   └── documentacao_limpeza.md             # Documentação de limpeza (gerado)
-├── descricao_dataset.md                     # Descrição detalhada do dataset
-├── carregar_dados_completos.py             # Script para carregar todos os datasets
-├── limpar_dados.py                         # Script para limpeza automatizada
-├── limpeza_dados.ipynb                     # Notebook de limpeza detalhada
-├── analise_completa_temporal.ipynb         # Notebook de análise temporal completa
-├── exemplo_uso_completo.ipynb              # Exemplo de uso do script
-├── requirements.txt                         # Dependências do projeto
-└── README.md                               # Este arquivo
+ Dados/                                    # Arquivos de dados
+ *.csv                                # Datasets mensais (Dez/2024 - Jul/2025)
+ *_Dicionario_de_Dados.csv           # Dicionário de dados
+ dataset_consolidado_completo.csv    # Dataset consolidado (gerado)
+ dataset_consolidado_completo.parquet # Dataset consolidado (formato eficiente)
+ dataset_limpo_completo.csv          # Dataset limpo (gerado)
+ dataset_limpo_completo.pkl          # Dataset limpo (formato eficiente)
+ relatorio_limpeza.md                # Relatório de limpeza (gerado)
+ documentacao_limpeza.md             # Documentação de limpeza (gerado)
+ descricao_dataset.md                     # Descrição detalhada do dataset
+ carregar_dados_completos.py             # Script para carregar todos os datasets
+ limpar_dados.py                         # Script para limpeza automatizada
+ limpeza_dados.ipynb                     # Notebook de limpeza detalhada
+ analise_completa_temporal.ipynb         # Notebook de análise temporal completa
+ exemplo_uso_completo.ipynb              # Exemplo de uso do script
+ requirements.txt                         # Dependências do projeto
+ README.md                               # Este arquivo
 ```
 
 ## Dataset
@@ -50,33 +50,33 @@ Trabalho/
 
 1. **Clone ou baixe o projeto**
 2. **Instale as dependências**:
-   ```bash
-   pip install -r requirements.txt
-   ```
+ ```bash
+ pip install -r requirements.txt
+ ```
 
 3. **Opções de execução**:
 
-   **Opção A - Script Python:**
-   ```bash
-   python3 carregar_dados_completos.py
-   ```
+ **Opção A - Script Python:**
+ ```bash
+ python3 carregar_dados_completos.py
+ ```
 
-   **Opção B - Jupyter Notebook:**
-   ```bash
-   jupyter notebook exemplo_uso_completo.ipynb
-   ```
+ **Opção B - Jupyter Notebook:**
+ ```bash
+ jupyter notebook exemplo_uso_completo.ipynb
+ ```
 
-   **Opção C - Limpeza de dados:**
-   ```bash
-   python3 limpar_dados.py
-   # ou
-   jupyter notebook limpeza_dados.ipynb
-   ```
+ **Opção C - Limpeza de dados:**
+ ```bash
+ python3 limpar_dados.py
+ # ou
+ jupyter notebook limpeza_dados.ipynb
+ ```
 
-   **Opção D - Análise temporal completa:**
-   ```bash
-   jupyter notebook analise_completa_temporal.ipynb
-   ```
+ **Opção D - Análise temporal completa:**
+ ```bash
+ jupyter notebook analise_completa_temporal.ipynb
+ ```
 
 ## Análises Realizadas
 
@@ -205,4 +205,4 @@ Para dúvidas ou sugestões sobre o projeto, entre em contato através do reposi
 ---
 
 **Projeto de Pós-Graduação em Ciência de Dados**
-*Análise de Dados em Saúde Pública* 
+*Análise de Dados em Saúde Pública*

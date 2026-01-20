@@ -1,6 +1,6 @@
 # Análise Exploratória Bivariada em R
 
-**Linguagem:** R  
+**Linguagem:** R
 **Técnicas:** Análise exploratória de dados, correlação, visualização estatística
 
 ---
@@ -77,12 +77,12 @@ cor(diamonds$carat, diamonds$price, method = "spearman")
 **Comparação de Grupos:**
 ```r
 diamonds %>%
-  group_by(cut) %>%
-  summarise(
-    media = mean(price),
-    mediana = median(price),
-    desvio = sd(price)
-  )
+ group_by(cut) %>%
+ summarise(
+ media = mean(price),
+ mediana = median(price),
+ desvio = sd(price)
+ )
 ```
 
 **Técnicas:**

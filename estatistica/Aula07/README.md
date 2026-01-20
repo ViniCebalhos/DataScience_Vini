@@ -1,6 +1,6 @@
 # Análise Estatística com Testes Não-Paramétricos
 
-**Linguagem:** R  
+**Linguagem:** R
 **Técnicas:** Testes estatísticos, análise temporal, comparação de grupos, testes não-paramétricos
 
 ---
@@ -17,11 +17,11 @@ Este projeto demonstra competências em análise estatística aplicada a dados r
 - **Testes de Normalidade:** Shapiro-Wilk, Anderson-Darling
 - **Testes de Homogeneidade:** Levene
 - **Testes de Comparação:**
-  - Teste t de Student (2 grupos, paramétrico)
-  - Teste de Wilcoxon (2 grupos, não-paramétrico)
-  - ANOVA (3+ grupos, paramétrico)
-  - Kruskal-Wallis (3+ grupos, não-paramétrico)
-  - Teste de Dunn (post-hoc)
+ - Teste t de Student (2 grupos, paramétrico)
+ - Teste de Wilcoxon (2 grupos, não-paramétrico)
+ - ANOVA (3+ grupos, paramétrico)
+ - Kruskal-Wallis (3+ grupos, não-paramétrico)
+ - Teste de Dunn (post-hoc)
 - **Testes de Correlação:** Spearman
 
 ### Análise de Dados
@@ -40,10 +40,10 @@ Este projeto demonstra competências em análise estatística aplicada a dados r
 
 ### Dataset Utilizado
 - **`yulu_bike_sharing_dataset.csv`** - Dataset de bike sharing com:
-  - Dados temporais (data, hora)
-  - Variáveis climáticas (temperatura, umidade, vento)
-  - Variáveis categóricas (estação, feriado, dia útil, clima)
-  - Variável resposta: número de aluguéis (count)
+ - Dados temporais (data, hora)
+ - Variáveis climáticas (temperatura, umidade, vento)
+ - Variáveis categóricas (estação, feriado, dia útil, clima)
+ - Variável resposta: número de aluguéis (count)
 
 ---
 

@@ -6,7 +6,7 @@ Projetos de mineração de dados demonstrando competências em web scraping, an�
 
 ## Projetos
 
-### 🔍 [Web Scraping e Análise de Dados do YouTube](./web-scraping-youtube/)
+###  [Web Scraping e Análise de Dados do YouTube](./web-scraping-youtube/)
 **Descrição:** Extração e análise de dados do YouTube usando a API oficial do Google.
 
 **Tecnologias:**
@@ -120,7 +120,7 @@ Projetos de mineração de dados demonstrando competências em web scraping, an�
 
 ---
 
-## 🛠️ Tecnologias e Bibliotecas Utilizadas
+##  Tecnologias e Bibliotecas Utilizadas
 
 ### Principais
 - **Python 3.x**
@@ -155,12 +155,12 @@ Projetos de mineração de dados demonstrando competências em web scraping, an�
 
 ```
 data-mining/
-├── README.md                    # Este arquivo
-├── web-scraping-youtube/        # Web Scraping YouTube
-├── regressao-linear/            # Regressão Linear
-├── clustering-titanic/           # Classificação e Clustering
-├── regras-associacao-texto/     # Regras de Associação e Texto
-└── lib/                         # Bibliotecas auxiliares
+ README.md                    # Este arquivo
+ web-scraping-youtube/        # Web Scraping YouTube
+ regressao-linear/            # Regressão Linear
+ clustering-titanic/           # Classificação e Clustering
+ regras-associacao-texto/     # Regras de Associação e Texto
+ lib/                         # Bibliotecas auxiliares
 
 Nota: O projeto challenge foi movido para projects/ como projeto em destaque.
 ```

@@ -7,7 +7,7 @@
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-1.2+-green.svg)
 ![Status](https://img.shields.io/badge/status-active-success.svg)
 
-**Autor:** Vinícius de Souza Cebalhos  
+**Autor:** Vinícius de Souza Cebalhos
 **Formação:** Meteorologista e Cientista de Dados
 
 ---
@@ -21,9 +21,9 @@ Portfólio profissional demonstrando competências técnicas em análise de dado
 ## Projetos em Destaque
 
 ### 1. [Análise Espacial de Acidentes com PostGIS](./projects/analise-espacial-acidentes/)
-**Tecnologias:** PostgreSQL, PostGIS, Python, GeoPandas, Folium  
-**Resultado:** Artigo científico completo publicado  
-**Destaque:** 
+**Tecnologias:** PostgreSQL, PostGIS, Python, GeoPandas, Folium
+**Resultado:** Artigo científico completo publicado
+**Destaque:**
 - Análise de **73.156 acidentes** em rodovias federais brasileiras
 - Mapeamento de **169 postos da PRF** com análise de proximidade espacial
 - Mapas interativos profissionais com Folium
@@ -36,8 +36,8 @@ Portfólio profissional demonstrando competências técnicas em análise de dado
 ---
 
 ### 2. [Competição Kaggle - Previsão de Locais Altamente Avaliados](./projects/competicao-kaggle-venues/)
-**Tecnologias:** Python, scikit-learn, Random Forest, XGBoost, Grid Search  
-**Resultado:** **F1-Score de 0.9991** (Top performance)  
+**Tecnologias:** Python, scikit-learn, Random Forest, XGBoost, Grid Search
+**Resultado:** **F1-Score de 0.9991** (Top performance)
 **Destaque:**
 - Random Forest otimizado com Grid Search e validação cruzada estratificada (5-fold)
 - Feature engineering completo e análise comparativa de múltiplos algoritmos
@@ -50,8 +50,8 @@ Portfólio profissional demonstrando competências técnicas em análise de dado
 ---
 
 ### 3. [Análise de Acidentes em Rodovias Federais](./projects/analise-acidentes-rodovias/)
-**Tecnologias:** PostgreSQL, Python, SQL, LaTeX, Pandas, Matplotlib  
-**Resultado:** Artigo científico completo (padrão SBC)  
+**Tecnologias:** PostgreSQL, Python, SQL, LaTeX, Pandas, Matplotlib
+**Resultado:** Artigo científico completo (padrão SBC)
 **Destaque:**
 - Análise de **67.794 acidentes** em rodovias federais
 - Identificação de padrões temporais (picos em dezembro, outubro, julho)
@@ -65,8 +65,8 @@ Portfólio profissional demonstrando competências técnicas em análise de dado
 ---
 
 ### 4. [Análise do Sistema E-Saúde de Curitiba](./projects/analise-esaude-curitiba/)
-**Tecnologias:** Python, Pandas, Análise Temporal, Visualização, Limpeza de Dados  
-**Resultado:** Projeto completo de análise em saúde pública  
+**Tecnologias:** Python, Pandas, Análise Temporal, Visualização, Limpeza de Dados
+**Resultado:** Projeto completo de análise em saúde pública
 **Destaque:**
 - Processamento de **~46.000 registros mensais** de atendimentos
 - Análise temporal completa (Dez/2024 - Jul/2025)
@@ -80,8 +80,8 @@ Portfólio profissional demonstrando competências técnicas em análise de dado
 ---
 
 ### 5. [Classificação de Sinais Vitais](./projects/classificacao-sinais-vitais/)
-**Tecnologias:** Python, scikit-learn, Classificação Multiclasse, Análise Comparativa  
-**Resultado:** Análise comparativa de múltiplos modelos de classificação  
+**Tecnologias:** Python, scikit-learn, Classificação Multiclasse, Análise Comparativa
+**Resultado:** Análise comparativa de múltiplos modelos de classificação
 **Destaque:**
 - Comparação detalhada de métricas entre modelos
 - Análise de distribuições por classe
@@ -186,10 +186,10 @@ Projetos de aprendizado de máquina, incluindo regressão, classificação e oti
 - SQL avançado e consultas complexas
 
 ### Domínios
-- ✅ Análise Geoespacial
-- ✅ Análise Temporal
-- ✅ Dados Governamentais
-- ✅ Indicadores Sociais
+-  Análise Geoespacial
+-  Análise Temporal
+-  Dados Governamentais
+-  Indicadores Sociais
 
 ---
 
@@ -247,25 +247,25 @@ python src/main.py
 
 ```
 datascience/
-├── README.md                    # Este arquivo
-├── .gitignore                   # Arquivos a ignorar
-├── requirements.txt             # Dependências Python gerais
-│
-├── projects/                    # Projetos em destaque
-│   ├── analise-espacial-acidentes/
-│   ├── competicao-kaggle-venues/
-│   ├── analise-acidentes-rodovias/
-│   ├── analise-esaude-curitiba/
-│   └── classificacao-sinais-vitais/
-│
-├── data-mining/                 # Projetos de Data Mining
-├── banco-dados/                 # Projetos de Banco de Dados
-├── machine-learning/            # Projetos de Machine Learning
-├── estatistica/                 # Projetos de Estatística (R)
-│
-└── _archive/                    # Material de estudo/tutoriais
-    ├── tutoriais-python/
-    └── exercicios/
+ README.md                    # Este arquivo
+ .gitignore                   # Arquivos a ignorar
+ requirements.txt             # Dependências Python gerais
+
+ projects/                    # Projetos em destaque
+ analise-espacial-acidentes/
+ competicao-kaggle-venues/
+ analise-acidentes-rodovias/
+ analise-esaude-curitiba/
+ classificacao-sinais-vitais/
+
+ data-mining/                 # Projetos de Data Mining
+ banco-dados/                 # Projetos de Banco de Dados
+ machine-learning/            # Projetos de Machine Learning
+ estatistica/                 # Projetos de Estatística (R)
+
+ _archive/                    # Material de estudo/tutoriais
+ tutoriais-python/
+ exercicios/
 ```
 
 ---

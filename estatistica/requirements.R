@@ -80,10 +80,10 @@ loaded_packages <- sapply(required_packages, function(pkg) {
 })
 
 if (all(loaded_packages)) {
-  message("✅ Todos os pacotes foram carregados com sucesso!")
+  message("Todos os pacotes foram carregados com sucesso!")
 } else {
   missing <- names(loaded_packages)[!loaded_packages]
-  warning("⚠️ Os seguintes pacotes não puderam ser carregados: ", 
+  warning("Os seguintes pacotes não puderam ser carregados: ", 
           paste(missing, collapse = ", "))
 }
 

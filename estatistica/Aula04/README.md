@@ -1,6 +1,6 @@
 # Relatórios Reprodutíveis com R Markdown
 
-**Linguagem:** R (R Markdown)  
+**Linguagem:** R (R Markdown)
 **Técnicas:** Relatórios reprodutíveis, análise exploratória, documentação técnica
 
 ---
@@ -40,9 +40,9 @@ Este projeto demonstra competências em criação de relatórios reprodutíveis 
 
 ### Dataset Utilizado
 - **`dados_exercio.csv`** - Dataset com informações de 374 colaboradores:
-  - Variáveis demográficas (sexo, profissão)
-  - Variáveis de saúde (IMC, frequência cardíaca, passos diários)
-  - Variáveis de qualidade de vida (qualidade do sono, nível de estresse)
+ - Variáveis demográficas (sexo, profissão)
+ - Variáveis de saúde (IMC, frequência cardíaca, passos diários)
+ - Variáveis de qualidade de vida (qualidade do sono, nível de estresse)
 
 ---
 

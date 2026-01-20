@@ -28,17 +28,17 @@ python transformers_sentiment_analysis.py
 O código demonstra:
 
 1. **Análise com TextBlob** (método tradicional)
-   - Baseado em regras e dicionários
-   - Limitações em contexto e nuances
+ - Baseado em regras e dicionários
+ - Limitações em contexto e nuances
 
 2. **Análise com Transformers** (método moderno)
-   - Modelo pré-treinado: `cardiffnlp/twitter-roberta-base-sentiment-latest`
-   - Entende contexto profundo
-   - Melhor para sarcasmo e ironia
+ - Modelo pré-treinado: `cardiffnlp/twitter-roberta-base-sentiment-latest`
+ - Entende contexto profundo
+ - Melhor para sarcasmo e ironia
 
 3. **Comparação dos Resultados**
-   - Mostra diferenças entre os métodos
-   - Demonstra vantagens dos transformers
+ - Mostra diferenças entre os métodos
+ - Demonstra vantagens dos transformers
 
 ## Pontos para a Apresentação
 

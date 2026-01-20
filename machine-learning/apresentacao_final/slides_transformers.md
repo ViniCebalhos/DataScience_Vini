@@ -42,30 +42,30 @@ paginate: true
 ## Comparação: Métodos Tradicionais vs Transformers
 
 ### Métodos Tradicionais (ex: TextBlob)
-- ❌ Baseados em **dicionários** de palavras
-- ❌ Não entendem **contexto profundo**
-- ❌ Dificuldade com **sarcasmo** e **ironia**
-- ❌ Processam palavras **isoladamente**
+-  Baseados em **dicionários** de palavras
+-  Não entendem **contexto profundo**
+-  Dificuldade com **sarcasmo** e **ironia**
+-  Processam palavras **isoladamente**
 
 ### Transformers
-- ✅ Entendem **contexto completo**
-- ✅ Treinados em **milhões de exemplos**
-- ✅ Capturam **nuances** linguísticas
-- ✅ Processam **todo o texto** simultaneamente
+-  Entendem **contexto completo**
+-  Treinados em **milhões de exemplos**
+-  Capturam **nuances** linguísticas
+-  Processam **todo o texto** simultaneamente
 
 ---
 
 ## Exemplo Prático: Análise de Sentimento
 
-### Tweet: 
+### Tweet:
 > "Great! My flight was cancelled and I'm stuck at the airport."
 
 ### TextBlob (Tradicional):
-- Vê "Great!" → **Positivo** ❌
+- Vê "Great!" → **Positivo**
 - Ignora o contexto negativo
 
 ### Transformers:
-- Analisa todo o texto → **Negativo** ✅
+- Analisa todo o texto → **Negativo**
 - Entende o sarcasmo
 
 ---
@@ -73,16 +73,16 @@ paginate: true
 ## Vantagens dos Transformers
 
 1. **Contexto Profundo**
-   - Entendem significado completo, não apenas palavras isoladas
+ - Entendem significado completo, não apenas palavras isoladas
 
 2. **Aprendizado**
-   - Treinados em milhões de exemplos de dados reais
+ - Treinados em milhões de exemplos de dados reais
 
 3. **Nuances**
-   - Capturam sarcasmo, ironia e contexto cultural
+ - Capturam sarcasmo, ironia e contexto cultural
 
 4. **Confiança**
-   - Fornecem scores de confiança para cada predição
+ - Fornecem scores de confiança para cada predição
 
 ---
 
@@ -114,12 +114,12 @@ paginate: true
 
 ## Aplicações dos Transformers
 
-- 📱 **Análise de Sentimento** em redes sociais
-- 📝 **Tradução Automática**
-- 💬 **Chatbots** e assistentes virtuais
-- 📊 **Análise de Reviews** de produtos
-- 🔍 **Busca Semântica**
-- 📰 **Resumo Automático** de textos
+-  **Análise de Sentimento** em redes sociais
+-  **Tradução Automática**
+-  **Chatbots** e assistentes virtuais
+-  **Análise de Reviews** de produtos
+-  **Busca Semântica**
+-  **Resumo Automático** de textos
 
 ---
 
@@ -132,8 +132,8 @@ from transformers import pipeline
 
 # Carregar modelo pré-treinado
 sentiment_analyzer = pipeline(
-    "sentiment-analysis",
-    model="cardiffnlp/twitter-roberta-base-sentiment-latest"
+ "sentiment-analysis",
+ model="cardiffnlp/twitter-roberta-base-sentiment-latest"
 )
 
 # Usar o modelo
@@ -152,9 +152,9 @@ resultado = sentiment_analyzer("I love this product!")
 ### Casos de Discordância:
 
 - Transformers são **superiores** em:
-  - Sarcasmo e ironia
-  - Contexto negativo com palavras positivas
-  - Construções linguísticas complexas
+ - Sarcasmo e ironia
+ - Contexto negativo com palavras positivas
+ - Construções linguísticas complexas
 
 ---
 
@@ -164,11 +164,11 @@ resultado = sentiment_analyzer("I love this product!")
 > "This is the worst service I've ever experienced"
 
 ### TextBlob:
-- **Neutro** (polaridade -0.1) ❌
+- **Neutro** (polaridade -0.1)
 - Não detecta sentimento negativo forte
 
 ### Transformers:
-- **Negativo** (confiança 0.95) ✅
+- **Negativo** (confiança 0.95)
 - Entende corretamente o sentimento
 
 ---
@@ -189,10 +189,10 @@ resultado = sentiment_analyzer("I love this product!")
 
 ## Limitações dos Transformers
 
-- ⚠️ Requerem **muito poder computacional** para treinar
-- ⚠️ Modelos grandes podem ser **lentos** para inferência
-- ⚠️ Sarcasmo muito sutil ainda é **desafiador**
-- ⚠️ Dependem da **qualidade dos dados** de treinamento
+-  Requerem **muito poder computacional** para treinar
+-  Modelos grandes podem ser **lentos** para inferência
+-  Sarcasmo muito sutil ainda é **desafiador**
+-  Dependem da **qualidade dos dados** de treinamento
 
 ---
 
@@ -215,10 +215,10 @@ resultado = sentiment_analyzer("I love this product!")
 
 ### Transformers são:
 
-✅ **Superiores** a métodos tradicionais  
-✅ **Entendem contexto** profundo  
-✅ **Capturam nuances** linguísticas  
-✅ **Fáceis de usar** com bibliotecas modernas  
+ **Superiores** a métodos tradicionais
+ **Entendem contexto** profundo
+ **Capturam nuances** linguísticas
+ **Fáceis de usar** com bibliotecas modernas
 
 ### Para análise de sentimento:
 - Transformers são a **melhor escolha** atual

@@ -91,7 +91,7 @@ Utilizando a função ST_Within, foram identificados os acidentes que ocorreram 
 
 ```sql
 -- Acidentes dentro do raio de 10 km de um posto PRF
-SELECT COUNT(*) 
+SELECT COUNT(*)
 FROM acidentes a, postos_prf p
 WHERE ST_DWithin(a.geom, p.geom, 10000);
 ```
@@ -165,17 +165,17 @@ Como trabalhos futuros, sugere-se:
 ```sql
 -- Criação da tabela de acidentes com geometria
 CREATE TABLE especializacao_vinicius_acidentes (
-    id SERIAL PRIMARY KEY,
-    data_inversa DATE,
-    horario TIME,
-    causa_acidente VARCHAR(255),
-    uf VARCHAR(2),
-    km DECIMAL(10,2),
-    uop VARCHAR(50),
-    tracado_via VARCHAR(100),
-    latitude DECIMAL(10,8),
-    longitude DECIMAL(11,8),
-    geom GEOMETRY(POINT, 4674)
+ id SERIAL PRIMARY KEY,
+ data_inversa DATE,
+ horario TIME,
+ causa_acidente VARCHAR(255),
+ uf VARCHAR(2),
+ km DECIMAL(10,2),
+ uop VARCHAR(50),
+ tracado_via VARCHAR(100),
+ latitude DECIMAL(10,8),
+ longitude DECIMAL(11,8),
+ geom GEOMETRY(POINT, 4674)
 );
 
 -- Índice espacial para otimização
@@ -196,29 +196,29 @@ WHERE latitude IS NOT NULL AND longitude IS NOT NULL;
 ```sql
 -- Distância até o posto PRF mais próximo
 WITH distancias AS (
-    SELECT 
-        a.id,
-        a.uf,
-        a.causa_acidente,
-        p.nome_posto,
-        ST_Distance(a.geom, p.geom) AS distancia_metros
-    FROM especializacao_vinicius_acidentes a
-    CROSS JOIN postos_prf p
-    WHERE a.geom IS NOT NULL AND p.geom IS NOT NULL
+ SELECT
+ a.id,
+ a.uf,
+ a.causa_acidente,
+ p.nome_posto,
+ ST_Distance(a.geom, p.geom) AS distancia_metros
+ FROM especializacao_vinicius_acidentes a
+ CROSS JOIN postos_prf p
+ WHERE a.geom IS NOT NULL AND p.geom IS NOT NULL
 ),
 min_distancias AS (
-    SELECT 
-        id,
-        MIN(distancia_metros) AS min_distancia
-    FROM distancias
-    GROUP BY id
+ SELECT
+ id,
+ MIN(distancia_metros) AS min_distancia
+ FROM distancias
+ GROUP BY id
 )
-SELECT 
-    d.id,
-    d.uf,
-    d.causa_acidente,
-    d.nome_posto,
-    ROUND(d.distancia_metros/1000, 2) AS distancia_km
+SELECT
+ d.id,
+ d.uf,
+ d.causa_acidente,
+ d.nome_posto,
+ ROUND(d.distancia_metros/1000, 2) AS distancia_km
 FROM distancias d
 JOIN min_distancias m ON d.id = m.id AND d.distancia_metros = m.min_distancia;
 ```
@@ -228,11 +228,11 @@ JOIN min_distancias m ON d.id = m.id AND d.distancia_metros = m.min_distancia;
 ```sql
 -- Criação de buffers de 10 km ao redor dos postos PRF
 CREATE TABLE buffers_postos_prf AS
-SELECT 
-    p.id,
-    p.nome_posto,
-    p.uf,
-    ST_Buffer(p.geom, 10000) AS buffer_geom
+SELECT
+ p.id,
+ p.nome_posto,
+ p.uf,
+ ST_Buffer(p.geom, 10000) AS buffer_geom
 FROM postos_prf p;
 
 -- Índice espacial para buffers
@@ -243,13 +243,13 @@ CREATE INDEX idx_buffers_geom ON buffers_postos_prf USING GIST (buffer_geom);
 
 ```sql
 -- Contagem de acidentes dentro dos buffers
-SELECT 
-    b.nome_posto,
-    b.uf,
-    COUNT(a.id) AS acidentes_dentro_buffer
+SELECT
+ b.nome_posto,
+ b.uf,
+ COUNT(a.id) AS acidentes_dentro_buffer
 FROM buffers_postos_prf b
-LEFT JOIN especializacao_vinicius_acidentes a 
-    ON ST_Within(a.geom, b.buffer_geom)
+LEFT JOIN especializacao_vinicius_acidentes a
+ ON ST_Within(a.geom, b.buffer_geom)
 GROUP BY b.id, b.nome_posto, b.uf
 ORDER BY acidentes_dentro_buffer DESC;
 
@@ -257,8 +257,8 @@ ORDER BY acidentes_dentro_buffer DESC;
 SELECT COUNT(*) AS acidentes_fora_buffers
 FROM especializacao_vinicius_acidentes a
 WHERE NOT EXISTS (
-    SELECT 1 FROM buffers_postos_prf b 
-    WHERE ST_Within(a.geom, b.buffer_geom)
+ SELECT 1 FROM buffers_postos_prf b
+ WHERE ST_Within(a.geom, b.buffer_geom)
 );
 ```
 
@@ -266,19 +266,19 @@ WHERE NOT EXISTS (
 
 ```sql
 -- Análise de acidentes por UF e proximidade aos postos
-SELECT 
-    a.uf,
-    COUNT(*) AS total_acidentes,
-    COUNT(CASE WHEN EXISTS (
-        SELECT 1 FROM buffers_postos_prf b 
-        WHERE ST_Within(a.geom, b.buffer_geom)
-    ) THEN 1 END) AS acidentes_proximos_postos,
-    ROUND(
-        COUNT(CASE WHEN EXISTS (
-            SELECT 1 FROM buffers_postos_prf b 
-            WHERE ST_Within(a.geom, b.buffer_geom)
-        ) THEN 1 END) * 100.0 / COUNT(*), 2
-    ) AS percentual_proximos_postos
+SELECT
+ a.uf,
+ COUNT(*) AS total_acidentes,
+ COUNT(CASE WHEN EXISTS (
+ SELECT 1 FROM buffers_postos_prf b
+ WHERE ST_Within(a.geom, b.buffer_geom)
+ ) THEN 1 END) AS acidentes_proximos_postos,
+ ROUND(
+ COUNT(CASE WHEN EXISTS (
+ SELECT 1 FROM buffers_postos_prf b
+ WHERE ST_Within(a.geom, b.buffer_geom)
+ ) THEN 1 END) * 100.0 / COUNT(*), 2
+ ) AS percentual_proximos_postos
 FROM especializacao_vinicius_acidentes a
 GROUP BY a.uf
 ORDER BY total_acidentes DESC;
@@ -288,18 +288,18 @@ ORDER BY total_acidentes DESC;
 
 ```sql
 -- Análise de acidentes por período do dia e proximidade aos postos
-SELECT 
-    CASE 
-        WHEN EXTRACT(HOUR FROM horario) BETWEEN 6 AND 11 THEN 'Manhã'
-        WHEN EXTRACT(HOUR FROM horario) BETWEEN 12 AND 17 THEN 'Tarde'
-        WHEN EXTRACT(HOUR FROM horario) BETWEEN 18 AND 23 THEN 'Noite'
-        ELSE 'Madrugada'
-    END AS periodo_dia,
-    COUNT(*) AS total_acidentes,
-    COUNT(CASE WHEN EXISTS (
-        SELECT 1 FROM buffers_postos_prf b 
-        WHERE ST_Within(a.geom, b.buffer_geom)
-    ) THEN 1 END) AS acidentes_proximos_postos
+SELECT
+ CASE
+ WHEN EXTRACT(HOUR FROM horario) BETWEEN 6 AND 11 THEN 'Manhã'
+ WHEN EXTRACT(HOUR FROM horario) BETWEEN 12 AND 17 THEN 'Tarde'
+ WHEN EXTRACT(HOUR FROM horario) BETWEEN 18 AND 23 THEN 'Noite'
+ ELSE 'Madrugada'
+ END AS periodo_dia,
+ COUNT(*) AS total_acidentes,
+ COUNT(CASE WHEN EXISTS (
+ SELECT 1 FROM buffers_postos_prf b
+ WHERE ST_Within(a.geom, b.buffer_geom)
+ ) THEN 1 END) AS acidentes_proximos_postos
 FROM especializacao_vinicius_acidentes a
 GROUP BY periodo_dia
 ORDER BY total_acidentes DESC;

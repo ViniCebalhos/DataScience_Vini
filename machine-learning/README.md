@@ -153,9 +153,9 @@ Projetos de aprendizado de máquina demonstrando competências em regressão, cl
 
 ```
 machine-learning/
-├── README.md                    # Este arquivo
-├── regressao-imoveis/           # Regressão Linear - Imóveis
-└── classificacao-indicadores/   # Classificação - Indicadores Globais
+ README.md                    # Este arquivo
+ regressao-imoveis/           # Regressão Linear - Imóveis
+ classificacao-indicadores/   # Classificação - Indicadores Globais
 
 Nota: O projeto Work3 foi movido para projects/ como projeto em destaque.
 ```

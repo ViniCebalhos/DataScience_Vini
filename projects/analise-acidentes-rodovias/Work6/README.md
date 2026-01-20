@@ -1,16 +1,16 @@
-# 📄 Artigo Científico - Análise de Acidentes em Rodovias Federais
+#  Artigo Científico - Análise de Acidentes em Rodovias Federais
 
 **Título:** Análise de Acidentes em Rodovias Federais Brasileiras com Dados da PRF: Um Estudo Exploratório
 
 ---
 
-## 📊 Sobre o Projeto
+##  Sobre o Projeto
 
 Artigo científico completo sobre análise de acidentes de trânsito em rodovias federais brasileiras, utilizando dados da Polícia Rodoviária Federal (PRF).
 
 ---
 
-## 📊 Resultados Principais
+##  Resultados Principais
 
 ### Estatísticas
 - **Total de Acidentes Analisados:** 67.794
@@ -19,9 +19,9 @@ Artigo científico completo sobre análise de acidentes de trânsito em rodovias
 
 ### Padrões Temporais
 - **Picos Mensais:**
-  - Dezembro: 6.587 acidentes
-  - Outubro: 6.406 acidentes
-  - Julho: 6.401 acidentes
+ - Dezembro: 6.587 acidentes
+ - Outubro: 6.406 acidentes
+ - Julho: 6.401 acidentes
 
 - **Horário Crítico:** 17h-19h (coincide com horários de pico de tráfego)
 
@@ -34,7 +34,7 @@ Artigo científico completo sobre análise de acidentes de trânsito em rodovias
 
 ---
 
-## 🛠️ Metodologia
+##  Metodologia
 
 ### 1. Fonte dos Dados
 - Dados da Polícia Rodoviária Federal (PRF)
@@ -54,7 +54,7 @@ Artigo científico completo sobre análise de acidentes de trânsito em rodovias
 
 ---
 
-## 📁 Arquivos
+##  Arquivos
 
 ### Artigo
 - `artigo_sbc_simples.tex` - Código LaTeX do artigo
@@ -83,7 +83,7 @@ Artigo científico completo sobre análise de acidentes de trânsito em rodovias
 
 ---
 
-## 🚀 Como Compilar o Artigo
+##  Como Compilar o Artigo
 
 ### Opção 1: Compilação Automática (Recomendada)
 ```bash
@@ -105,22 +105,22 @@ sudo apt-get install texlive-latex-extra texlive-fonts-recommended texlive-lang-
 
 ---
 
-## 📊 Estrutura do Artigo
+##  Estrutura do Artigo
 
 1. **Resumo** - Objetivo, metodologia e principais achados
 2. **Introdução** - Contextualização do problema
 3. **Trabalhos Relacionados** - 4 referências acadêmicas
 4. **Descrição e Análise dos Dados**
-   - Fonte dos dados
-   - Estrutura da tabela
-   - Qualidade dos dados
-   - Análises realizadas
+ - Fonte dos dados
+ - Estrutura da tabela
+ - Qualidade dos dados
+ - Análises realizadas
 5. **Conclusão** - Síntese e recomendações
 6. **Referências** - Bibliografia formatada
 
 ---
 
-## 📈 Visualizações
+##  Visualizações
 
 ### Gráfico 1: Acidentes por Mês
 - Tipo: Gráfico de barras
@@ -139,7 +139,7 @@ sudo apt-get install texlive-latex-extra texlive-fonts-recommended texlive-lang-
 
 ---
 
-## 💡 Principais Descobertas
+##  Principais Descobertas
 
 1. **Sazonalidade:** Picos em meses de férias e feriados prolongados
 2. **Horário Crítico:** Concentração no horário de pico (17h-19h)
@@ -148,7 +148,7 @@ sudo apt-get install texlive-latex-extra texlive-fonts-recommended texlive-lang-
 
 ---
 
-## 🔧 Gerar Visualizações
+##  Gerar Visualizações
 
 Para gerar as visualizações novamente:
 
@@ -163,7 +163,7 @@ O script gera automaticamente:
 
 ---
 
-## 📝 Notas
+##  Notas
 
 - O dataset completo não está incluído (tamanho)
 - As visualizações foram geradas com matplotlib/seaborn
@@ -172,7 +172,7 @@ O script gera automaticamente:
 
 ---
 
-## 📚 Referências do Artigo
+##  Referências do Artigo
 
 1. Chuerubim et al. (2019) - Limitação de modelos de árvore de decisão
 2. Dias et al. (2023) - Evolução da frota e legislação brasileira
@@ -181,8 +181,8 @@ O script gera automaticamente:
 
 ---
 
-**Autor:** Vinícius de Souza Cebalhos  
-**Instituição:** UTFPR  
-**Formato:** Artigo Científico (SBC)  
+**Autor:** Vinícius de Souza Cebalhos
+**Instituição:** UTFPR
+**Formato:** Artigo Científico (SBC)
 **Status:** Completo e pronto para submissão
 

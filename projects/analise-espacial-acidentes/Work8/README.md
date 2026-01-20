@@ -1,63 +1,63 @@
-# 📊 Resultados da Análise Espacial de Acidentes em Rodovias Federais
+#  Resultados da Análise Espacial de Acidentes em Rodovias Federais
 
 ## Arquivos Gerados
 
-### 📄 Documentos Acadêmicos
+###  Documentos Acadêmicos
 1. **`artigo_sbc_analise_espacial.pdf`** (748 KB)
-   - Artigo completo no formato SBC
-   - 12 páginas com análise espacial completa
-   - Inclui metodologia PostGIS, resultados e conclusões
+ - Artigo completo no formato SBC
+ - 12 páginas com análise espacial completa
+ - Inclui metodologia PostGIS, resultados e conclusões
 
 2. **`artigo_analise_espacial_acidentes_sbc.md`** (Markdown)
-   - Versão em Markdown do artigo
-   - Inclui todos os SQLs utilizados no anexo
+ - Versão em Markdown do artigo
+ - Inclui todos os SQLs utilizados no anexo
 
 ### Visualizações
 
 1. **`mapa_densidade_acidentes.png`** (595 KB)
-   - Mapa estático da distribuição de acidentes
-   - 73.156 pontos de acidentes georreferenciados
-   - Coordenadas: SIRGAS 2000 (EPSG:4674)
+ - Mapa estático da distribuição de acidentes
+ - 73.156 pontos de acidentes georreferenciados
+ - Coordenadas: SIRGAS 2000 (EPSG:4674)
 
 2. **`mapa_acidentes_interativo.html`** (4.3 MB)
-   - Mapa interativo com heatmap
-   - Visualização Folium com clusters
-   - Pode ser aberto em qualquer navegador
+ - Mapa interativo com heatmap
+ - Visualização Folium com clusters
+ - Pode ser aberto em qualquer navegador
 
 3. **`mapa_completo_postos_prf.html`** (6.2 MB)
-   - Mapa completo com acidentes, postos PRF e buffers de 10 km
-   - Inclui 169 postos da PRF georreferenciados
-   - 169 buffers de 10 km ao redor de cada posto
-   - Camada de satélite incluída
+ - Mapa completo com acidentes, postos PRF e buffers de 10 km
+ - Inclui 169 postos da PRF georreferenciados
+ - 169 buffers de 10 km ao redor de cada posto
+ - Camada de satélite incluída
 
 4. **`acidentes_por_estado.png`** (186 KB)
-   - Gráfico de barras horizontal
-   - Top 10 estados por número de acidentes
-   - MG em 1º lugar (9.296 acidentes)
+ - Gráfico de barras horizontal
+ - Top 10 estados por número de acidentes
+ - MG em 1º lugar (9.296 acidentes)
 
 ### Análises e Estatísticas
 
 1. **`estatisticas_acidentes.txt`**
-   - Estatísticas descritivas completas
-   - Top 10 estados e principais causas
+ - Estatísticas descritivas completas
+ - Top 10 estados e principais causas
 
 2. **`resultados_analise_postos_prf.txt`**
-   - Resultados da análise de proximidade
-   - Estatísticas dos postos PRF
-   - Interpretação dos resultados
+ - Resultados da análise de proximidade
+ - Estatísticas dos postos PRF
+ - Interpretação dos resultados
 
-### 💻 Scripts Python
+###  Scripts Python
 
 1. **`gerar_mapa_analise_espacial.py`**
-   - Geração de mapas de densidade
-   - Análise estatística por estado
-   - Visualizações com GeoPandas e Folium
+ - Geração de mapas de densidade
+ - Análise estatística por estado
+ - Visualizações com GeoPandas e Folium
 
 2. **`analise_postos_prf.py`**
-   - Download automático de dados dos postos PRF (ANTT)
-   - Cálculo de buffers de 10 km
-   - Análise de proximidade acidentes-postos
-   - Geração de mapa completo interativo
+ - Download automático de dados dos postos PRF (ANTT)
+ - Cálculo de buffers de 10 km
+ - Análise de proximidade acidentes-postos
+ - Geração de mapa completo interativo
 
 ## Principais Descobertas
 
@@ -128,8 +128,8 @@
 - **Análise Espacial**: PostGIS (ST_Buffer, ST_Distance, ST_Within)
 - **Visualização**: Python (GeoPandas, Folium, Matplotlib)
 - **Fontes de Dados**:
-  - Acidentes: Polícia Rodoviária Federal (PRF)
-  - Postos: Agência Nacional de Transportes Terrestres (ANTT)
+ - Acidentes: Polícia Rodoviária Federal (PRF)
+ - Postos: Agência Nacional de Transportes Terrestres (ANTT)
 
 ### Funções PostGIS Utilizadas
 1. **ST_MakePoint**: Conversão de coordenadas em geometrias POINT
@@ -172,11 +172,11 @@ python analise_postos_prf.py
 1. **Introdução**: Contextualização do problema
 2. **Trabalhos Relacionados**: 4 artigos relevantes citados
 3. **Metodologia**: 5 etapas de análise espacial
-4. **Resultados**: 
-   - Distribuição geográfica
-   - Análise de proximidade (20% dentro, 80% fora)
-   - Principais causas
-   - Estatísticas dos postos PRF
+4. **Resultados**:
+ - Distribuição geográfica
+ - Análise de proximidade (20% dentro, 80% fora)
+ - Principais causas
+ - Estatísticas dos postos PRF
 5. **Conclusão**: Achados e trabalhos futuros
 6. **Referências**: 8 trabalhos citados
 7. **Anexos**: Códigos SQL utilizados
@@ -201,7 +201,7 @@ python analise_postos_prf.py
 7. Melo (2020) - Revisão bibliométrica
 8. Velazquez et al. (2021) - Percepção de segurança
 
-## 🚀 Trabalhos Futuros Sugeridos
+##  Trabalhos Futuros Sugeridos
 
 1. **Clusterização Espacial (DBSCAN)**: Identificação automática de hotspots
 2. **Modelos Preditivos**: Machine learning para predição de acidentes
@@ -217,24 +217,24 @@ python analise_postos_prf.py
 
 ```
 Work8/
-├── artigo_sbc_analise_espacial.pdf          # Artigo PDF (748 KB)
-├── artigo_analise_espacial_acidentes_sbc.md # Artigo Markdown
-├── artigo_sbc_analise_espacial.tex          # Código LaTeX
-├── mapa_densidade_acidentes.png             # Mapa estático
-├── mapa_acidentes_interativo.html           # Mapa interativo (4.3 MB)
-├── mapa_completo_postos_prf.html           # Mapa com buffers (6.2 MB)
-├── acidentes_por_estado.png                 # Gráfico por estado
-├── estatisticas_acidentes.txt               # Estatísticas
-├── resultados_analise_postos_prf.txt        # Análise de proximidade
-├── datatran2024.csv                         # Dados originais (73K registros)
-├── gerar_mapa_analise_espacial.py          # Script de análise 1
-├── analise_postos_prf.py                    # Script de análise 2
-└── README_RESULTADOS.md                     # Este arquivo
+ artigo_sbc_analise_espacial.pdf          # Artigo PDF (748 KB)
+ artigo_analise_espacial_acidentes_sbc.md # Artigo Markdown
+ artigo_sbc_analise_espacial.tex          # Código LaTeX
+ mapa_densidade_acidentes.png             # Mapa estático
+ mapa_acidentes_interativo.html           # Mapa interativo (4.3 MB)
+ mapa_completo_postos_prf.html           # Mapa com buffers (6.2 MB)
+ acidentes_por_estado.png                 # Gráfico por estado
+ estatisticas_acidentes.txt               # Estatísticas
+ resultados_analise_postos_prf.txt        # Análise de proximidade
+ datatran2024.csv                         # Dados originais (73K registros)
+ gerar_mapa_analise_espacial.py          # Script de análise 1
+ analise_postos_prf.py                    # Script de análise 2
+ README_RESULTADOS.md                     # Este arquivo
 ```
 
 ---
 
-**Desenvolvido com Python, PostGIS e LaTeX** 
+**Desenvolvido com Python, PostGIS e LaTeX**
 
 
 

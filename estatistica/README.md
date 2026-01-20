@@ -1,6 +1,6 @@
 # Statistical Analysis Projects in R
 
-**Linguagem:** R  
+**Linguagem:** R
 **Foco:** Análise estatística, visualização de dados, testes estatísticos, relatórios reprodutíveis
 
 ---

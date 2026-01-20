@@ -1,4 +1,4 @@
-# 📄 Compilação do Artigo SBC - LaTeX
+#  Compilação do Artigo SBC - LaTeX
 
 ## Arquivos Gerados
 
@@ -10,7 +10,7 @@ Este diretório contém todos os arquivos necessários para gerar o PDF do artig
 
 ### Figuras e Tabelas
 - **`acidentes_por_mes.png`** - Gráfico de acidentes por mês
-- **`causas_acidentes.png`** - Gráfico de causas de acidentes  
+- **`causas_acidentes.png`** - Gráfico de causas de acidentes
 - **`acidentes_por_hora.png`** - Gráfico de acidentes por hora
 - **`tabela_acidentes_por_mes.csv`** - Dados mensais
 - **`tabela_causas_acidentes.csv`** - Dados de causas

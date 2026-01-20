@@ -153,10 +153,10 @@ Projetos demonstrando competências em PostgreSQL, PostGIS, SQL avançado, anál
 
 ```
 banco-dados/
-├── README.md                    # Este arquivo
-├── analise-alvaras/             # Análise de Alvarás
-├── analise-acidentes-eda/       # Análise Exploratória Acidentes
-└── consultas-sql-avancadas/     # Consultas SQL Avançadas
+ README.md                    # Este arquivo
+ analise-alvaras/             # Análise de Alvarás
+ analise-acidentes-eda/       # Análise Exploratória Acidentes
+ consultas-sql-avancadas/     # Consultas SQL Avançadas
 
 Nota: Os projetos Work6 e Work8 foram movidos para projects/ como projetos em destaque.
 ```

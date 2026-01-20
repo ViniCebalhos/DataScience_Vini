@@ -1,7 +1,7 @@
 # Challenge: Previsão de Locais Altamente Avaliados
 
-**Competição:** Predict Highly Rated Venues (2024)  
-**Plataforma:** Kaggle-style Competition  
+**Competição:** Predict Highly Rated Venues (2024)
+**Plataforma:** Kaggle-style Competition
 **Dataset:** Yelp Toronto Reviews
 
 ---
@@ -22,7 +22,7 @@ Previsão de locais altamente avaliados na cidade de Toronto, ON, Canadá, utili
 
 ### Modelos Testados
 1. **Logistic Regression** - Baseline
-2. **Random Forest** - Melhor performance ⭐
+2. **Random Forest** - Melhor performance
 3. **Gradient Boosting** - Alternativa testada
 
 ---
@@ -91,8 +91,8 @@ jupyter notebook challenge_final.ipynb
 3. **Execute as células sequencialmente**
 
 4. **Para gerar submissão:**
-   - Execute todas as células
-   - O arquivo `submission_best_model.csv` será gerado automaticamente
+ - Execute todas as células
+ - O arquivo `submission_best_model.csv` será gerado automaticamente
 
 ---
 
@@ -132,4 +132,3 @@ jupyter notebook challenge_final.ipynb
 - O modelo final foi escolhido baseado em validação cruzada
 
 ---
-

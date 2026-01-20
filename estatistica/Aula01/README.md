@@ -1,6 +1,6 @@
 # Análise Exploratória Univariada em R
 
-**Linguagem:** R  
+**Linguagem:** R
 **Técnicas:** Estatística descritiva, visualização de dados, análise de distribuições
 
 ---

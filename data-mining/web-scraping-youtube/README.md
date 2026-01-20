@@ -117,10 +117,10 @@ Para aumentar a quota, solicite no Google Cloud Console.
 
 ## Segurança
 
-- ✅ Uso de variáveis de ambiente
-- ✅ Instruções claras de configuração
+-  Uso de variáveis de ambiente
+-  Instruções claras de configuração
 
 ---
 
-**Autor:** Vinícius de Souza Cebalhos  
+**Autor:** Vinícius de Souza Cebalhos
 
