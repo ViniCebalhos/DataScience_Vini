@@ -168,6 +168,7 @@ downloads/
 # Archive folder (material de estudo interno)
 _archive/
 python-for-ds/
+Etica/
 
 # Template files
 *template_aula.R
