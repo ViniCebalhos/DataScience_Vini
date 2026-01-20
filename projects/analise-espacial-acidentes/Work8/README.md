@@ -1,6 +1,6 @@
 # 📊 Resultados da Análise Espacial de Acidentes em Rodovias Federais
 
-## ✅ Arquivos Gerados
+## Arquivos Gerados
 
 ### 📄 Documentos Acadêmicos
 1. **`artigo_sbc_analise_espacial.pdf`** (748 KB)
@@ -12,7 +12,7 @@
    - Versão em Markdown do artigo
    - Inclui todos os SQLs utilizados no anexo
 
-### 🗺️ Visualizações
+### Visualizações
 
 1. **`mapa_densidade_acidentes.png`** (595 KB)
    - Mapa estático da distribuição de acidentes
@@ -35,7 +35,7 @@
    - Top 10 estados por número de acidentes
    - MG em 1º lugar (9.296 acidentes)
 
-### 📊 Análises e Estatísticas
+### Análises e Estatísticas
 
 1. **`estatisticas_acidentes.txt`**
    - Estatísticas descritivas completas
@@ -59,14 +59,14 @@
    - Análise de proximidade acidentes-postos
    - Geração de mapa completo interativo
 
-## 🎯 Principais Descobertas
+## Principais Descobertas
 
-### 📈 Dados Gerais
+### Dados Gerais
 - **Total de acidentes analisados**: 73.156
 - **Período**: Ano de 2024
 - **Acidentes com vítimas fatais**: 5.222 (7,14%)
 
-### 🏆 Top 10 Estados (por número de acidentes)
+### Top 10 Estados (por número de acidentes)
 1. **Minas Gerais (MG)**: 9.296 acidentes (12,7%)
 2. **Santa Catarina (SC)**: 8.381 acidentes (11,5%)
 3. **Paraná (PR)**: 7.576 acidentes (10,4%)
@@ -78,7 +78,7 @@
 9. **Pernambuco (PE)**: 3.230 acidentes (4,4%)
 10. **Mato Grosso (MT)**: 2.554 acidentes (3,5%)
 
-### 🚨 Top 10 Causas de Acidentes
+### Top 10 Causas de Acidentes
 1. **Reação tardia ou ineficiente**: 10.920 acidentes (14,9%)
 2. **Ausência de reação**: 10.664 acidentes (14,6%)
 3. **Acesso indevido à via**: 6.958 acidentes (9,5%)
@@ -90,7 +90,7 @@
 9. **Contramão**: 2.461 acidentes (3,4%)
 10. **Condutor Dormindo**: 2.136 acidentes (2,9%)
 
-### 🚓 Análise de Proximidade aos Postos PRF
+### Análise de Proximidade aos Postos PRF
 
 **Resultados da Análise de Amostra (10.000 acidentes):**
 - **Acidentes dentro dos buffers (10 km)**: 2.019 (20,19%)
@@ -101,7 +101,7 @@
 - Apenas ~20% dos acidentes estão dentro do raio de 10 km dos postos
 - **Recomendação**: Estratégias complementares são necessárias (patrulhamento móvel, monitoramento remoto)
 
-### 📍 Postos PRF Mapeados
+### Postos PRF Mapeados
 - **Total de postos ativos**: 169
 - **Área coberta pelos buffers**: ~53.000 km²
 - **Cobertura do território nacional**: 0,62%
@@ -120,7 +120,7 @@
 4. **BR-153**: 15 postos
 5. **BR-381**: 9 postos
 
-## 🔬 Metodologia Utilizada
+## Metodologia Utilizada
 
 ### Ferramentas
 - **Banco de Dados**: PostgreSQL com extensão PostGIS
@@ -138,7 +138,7 @@
 4. **ST_Distance**: Cálculo de distância entre acidentes e postos
 5. **ST_Within**: Verificação de acidentes dentro dos buffers
 
-## 📋 Como Usar
+## Como Usar
 
 ### 1. Visualizar os Mapas
 ```bash
@@ -167,7 +167,7 @@ python gerar_mapa_analise_espacial.py
 python analise_postos_prf.py
 ```
 
-## 📝 Estrutura do Artigo
+## Estrutura do Artigo
 
 1. **Introdução**: Contextualização do problema
 2. **Trabalhos Relacionados**: 4 artigos relevantes citados
@@ -181,16 +181,16 @@ python analise_postos_prf.py
 6. **Referências**: 8 trabalhos citados
 7. **Anexos**: Códigos SQL utilizados
 
-## 🎯 Principais Contribuições
+## Principais Contribuições
 
-1. ✅ Mapeamento completo de 73.156 acidentes em rodovias federais
-2. ✅ Análise espacial de proximidade aos postos PRF
-3. ✅ Identificação de que 80% dos acidentes ocorrem fora da cobertura direta
-4. ✅ Mapeamento de 169 postos ativos da PRF
-5. ✅ Geração de visualizações interativas com Folium
-6. ✅ Metodologia replicável com PostGIS
+1. Mapeamento completo de 73.156 acidentes em rodovias federais
+2. Análise espacial de proximidade aos postos PRF
+3. Identificação de que 80% dos acidentes ocorrem fora da cobertura direta
+4. Mapeamento de 169 postos ativos da PRF
+5. Geração de visualizações interativas com Folium
+6. Metodologia replicável com PostGIS
 
-## 📚 Referências Utilizadas
+## Referências Utilizadas
 
 1. OMS (2018) - Global status report on road safety
 2. Silva et al. (2018) - Análise espacial com SIG
@@ -210,15 +210,10 @@ python analise_postos_prf.py
 5. **Integração com Dados Climáticos**: Fatores ambientais
 6. **Otimização da Cobertura**: Modelos para posicionamento de novos postos
 
-## 📧 Contato
-
-**Autor**: Vinícius de Souza Cebalhos  
-**Instituição**: Universidade Tecnológica Federal do Paraná  
-**Data**: Outubro de 2024
 
 ---
 
-## 📂 Estrutura de Arquivos
+## Estrutura de Arquivos
 
 ```
 Work8/
@@ -239,7 +234,7 @@ Work8/
 
 ---
 
-**Desenvolvido com Python, PostGIS e LaTeX** 🐍🗄️📄
+**Desenvolvido com Python, PostGIS e LaTeX** 
 
 
 

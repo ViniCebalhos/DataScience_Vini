@@ -1,12 +1,12 @@
-# 🤖 Machine Learning Projects
+# Machine Learning Projects
 
 Projetos de aprendizado de máquina demonstrando competências em regressão, classificação multiclasse, otimização de modelos e análise comparativa de algoritmos.
 
 ---
 
-## 📚 Projetos
+## Projetos
 
-### 🏠 [Regressão Linear - Previsão de Preços de Imóveis](./regressao-imoveis/)
+### [Regressão Linear - Previsão de Preços de Imóveis](./regressao-imoveis/)
 **Descrição:** Modelo de regressão linear para previsão de preços de imóveis.
 
 **Tecnologias:**
@@ -34,7 +34,7 @@ Projetos de aprendizado de máquina demonstrando competências em regressão, cl
 
 ---
 
-### 🌍 [Classificação Multiclasse - Indicadores Sociais Globais](./classificacao-indicadores/)
+### [Classificação Multiclasse - Indicadores Sociais Globais](./classificacao-indicadores/)
 **Descrição:** Classificação de países em categorias baseadas em indicadores sociais globais.
 
 **Tecnologias:**
@@ -86,7 +86,7 @@ Projetos de aprendizado de máquina demonstrando competências em regressão, cl
 
 ---
 
-### 💓 [Classificação de Sinais Vitais](../projects/classificacao-sinais-vitais/)
+### [Classificação de Sinais Vitais](../projects/classificacao-sinais-vitais/)
 **Descrição:** Classificação de sinais vitais em diferentes categorias usando machine learning.
 
 **Tecnologias:**
@@ -114,11 +114,11 @@ Projetos de aprendizado de máquina demonstrando competências em regressão, cl
 - `Enunciado_Sinais_Vitais_CDA2025.pdf` - Documentação do projeto
 - Visualizações: `comparacao_metricas.png`, `correlacao_features.png`, `distribuicoes_por_classe.png`, `matrizes_confusao_comparacao.png`
 
-**📍 Este projeto está em destaque em [`projects/classificacao-sinais-vitais/`](../projects/classificacao-sinais-vitais/)**
+**Este projeto está em destaque em [`projects/classificacao-sinais-vitais/`](../projects/classificacao-sinais-vitais/)**
 
 ---
 
-## 🛠️ Tecnologias e Bibliotecas Utilizadas
+## Tecnologias e Bibliotecas Utilizadas
 
 ### Principais
 - **Python 3.x**
@@ -134,22 +134,22 @@ Projetos de aprendizado de máquina demonstrando competências em regressão, cl
 
 ---
 
-## 📊 Competências Demonstradas
+## Competências Demonstradas
 
-- ✅ Regressão Linear
-- ✅ Classificação (binária e multiclasse)
-- ✅ Pré-processamento de dados
-- ✅ Feature Engineering
-- ✅ Validação Cruzada
-- ✅ Otimização de Hiperparâmetros
-- ✅ Análise de Feature Importance
-- ✅ Avaliação de Modelos (múltiplas métricas)
-- ✅ Tratamento de Dados Desbalanceados
-- ✅ Visualização de Resultados
+- Regressão Linear
+- Classificação (binária e multiclasse)
+- Pré-processamento de dados
+- Feature Engineering
+- Validação Cruzada
+- Otimização de Hiperparâmetros
+- Análise de Feature Importance
+- Avaliação de Modelos (múltiplas métricas)
+- Tratamento de Dados Desbalanceados
+- Visualização de Resultados
 
 ---
 
-## 📁 Estrutura de Pastas
+## Estrutura de Pastas
 
 ```
 machine-learning/
@@ -162,7 +162,7 @@ Nota: O projeto Work3 foi movido para projects/ como projeto em destaque.
 
 ---
 
-## 🚀 Como Executar
+## Como Executar
 
 ### Para Regressão Linear:
 ```bash
@@ -181,7 +181,7 @@ jupyter notebook classificacao-indicadores/Vinicius_Cebalhos_classificacao.ipynb
 
 ---
 
-## 📊 Resultados e Métricas
+## Resultados e Métricas
 
 ### Regressão Linear - Imóveis
 - Modelo de regressão linear otimizado
@@ -201,7 +201,7 @@ jupyter notebook classificacao-indicadores/Vinicius_Cebalhos_classificacao.ipynb
 
 ---
 
-## 📝 Notas
+## Notas
 
 - Os datasets podem precisar ser baixados separadamente
 - Alguns projetos requerem datasets específicos
@@ -210,7 +210,7 @@ jupyter notebook classificacao-indicadores/Vinicius_Cebalhos_classificacao.ipynb
 
 ---
 
-## 🎯 Destaques
+## Destaques
 
 ### Classificação - Indicadores Globais
 - **Notebook completo** com 47 células

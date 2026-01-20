@@ -1,10 +1,10 @@
-# 📈 Regressão Linear e Análise de Dados
+# Regressão Linear e Análise de Dados
 
 **Descrição:** Aplicação de regressão linear e análise exploratória em datasets reais.
 
 ---
 
-## 📊 Datasets Utilizados
+## Datasets Utilizados
 
 - **Iris:** `Iris.csv` - Dataset clássico de classificação
 - **Titanic:** `titanic.csv` - Dados de passageiros do Titanic
@@ -12,7 +12,7 @@
 
 ---
 
-## 🛠️ Tecnologias
+## Tecnologias
 
 - Python (pandas, numpy, scikit-learn)
 - Regressão Linear
@@ -20,14 +20,14 @@
 
 ---
 
-## 📁 Arquivos
+## Arquivos
 
 - `Exercicio_Conceitos_fundamentais_de_dados_e_Regressão_Linear.ipynb` - Notebook principal
 - `Exercicio_Conceitos_fundamentais_de_dados_e_Regressão_Linear2.ipynb` - Versão alternativa
 
 ---
 
-## 🚀 Como Executar
+## Como Executar
 
 1. Instale as dependências:
 ```bash
@@ -41,7 +41,7 @@ jupyter notebook Exercicio_Conceitos_fundamentais_de_dados_e_Regressão_Linear.i
 
 ---
 
-## 📝 Conteúdo
+## Conteúdo
 
 - Análise do dataset Iris
 - Análise do dataset Titanic
@@ -51,7 +51,7 @@ jupyter notebook Exercicio_Conceitos_fundamentais_de_dados_e_Regressão_Linear.i
 
 ---
 
-## 📊 Principais Análises
+## Principais Análises
 
 - Análise exploratória de dados (EDA)
 - Estatísticas descritivas

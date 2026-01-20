@@ -2,14 +2,14 @@
 
 Este projeto demonstra o uso de Transformers para análise de sentimento, comparando com métodos tradicionais como TextBlob.
 
-## 📋 Sobre o Projeto
+## Sobre o Projeto
 
 Este trabalho foi desenvolvido para a disciplina de Machine Learning, apresentando:
 - Conceitos de Transformers
 - Comparação entre abordagens tradicionais e modernas
 - Exemplo prático de análise de sentimento em tweets
 
-## 🚀 Como Usar
+## Como Usar
 
 ### 1. Instalar Dependências
 
@@ -23,7 +23,7 @@ pip install -r requirements.txt
 python transformers_sentiment_analysis.py
 ```
 
-## 📊 Estrutura do Código
+## Estrutura do Código
 
 O código demonstra:
 
@@ -40,7 +40,7 @@ O código demonstra:
    - Mostra diferenças entre os métodos
    - Demonstra vantagens dos transformers
 
-## 🎯 Pontos para a Apresentação
+## Pontos para a Apresentação
 
 ### Por que Transformers são melhores?
 
@@ -56,14 +56,8 @@ O exemplo usa análise de sentimento em tweets, demonstrando:
 - Aplicação prática em dados reais
 - Facilidade de uso com bibliotecas modernas
 
-## 📝 Notas para o Vídeo
 
-1. **Introdução (1-2 min)**: O que são transformers e por que são importantes
-2. **Comparação (3-4 min)**: Mostrar código e resultados lado a lado
-3. **Exemplo Prático (2-3 min)**: Executar o código e explicar resultados
-4. **Conclusão (1 min)**: Resumir vantagens e aplicações
-
-## 🔧 Modelos Disponíveis
+## Modelos Disponíveis
 
 O código usa `cardiffnlp/twitter-roberta-base-sentiment-latest` que é:
 - Especializado em tweets
@@ -74,7 +68,7 @@ Alternativas:
 - `nlptown/bert-base-multilingual-uncased-sentiment` (multilíngue)
 - `distilbert-base-uncased-finetuned-sst-2-english` (mais leve)
 
-## 📚 Referências
+## Referências
 
 - Hugging Face Transformers: https://huggingface.co/transformers/
 - Paper original: "Attention Is All You Need" (Vaswani et al., 2017)

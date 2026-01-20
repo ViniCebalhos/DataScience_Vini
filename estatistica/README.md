@@ -5,13 +5,13 @@
 
 ---
 
-## 📊 Sobre
+## Sobre
 
 Esta seção contém projetos demonstrando competências em análise estatística utilizando R. Os projetos cobrem desde análise exploratória básica até testes estatísticos avançados e criação de relatórios reprodutíveis.
 
 ---
 
-## 🎯 Competências Demonstradas
+## Competências Demonstradas
 
 ### Análise Exploratória de Dados
 - Análise univariada e bivariada
@@ -38,7 +38,7 @@ Esta seção contém projetos demonstrando competências em análise estatístic
 
 ---
 
-## 📁 Projetos
+## Projetos
 
 ### [Análise Exploratória Univariada](./Aula01/)
 Análise descritiva de variáveis individuais, incluindo estatísticas descritivas e visualizações de distribuições.
@@ -67,7 +67,7 @@ Aplicação de testes estatísticos paramétricos e não-paramétricos em dados 
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 ### Bibliotecas R Principais
 - **dplyr** - Manipulação de dados
@@ -79,7 +79,7 @@ Aplicação de testes estatísticos paramétricos e não-paramétricos em dados 
 
 ---
 
-## 📈 Métricas e Resultados
+## Métricas e Resultados
 
 ### Análises Realizadas
 - Análise exploratória completa de múltiplos datasets
@@ -95,7 +95,7 @@ Aplicação de testes estatísticos paramétricos e não-paramétricos em dados 
 
 ---
 
-## 🚀 Como Navegar
+## Como Navegar
 
 Cada projeto contém:
 - **README.md** com descrição detalhada

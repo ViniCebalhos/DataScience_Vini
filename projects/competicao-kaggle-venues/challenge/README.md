@@ -1,4 +1,4 @@
-# 🏆 Challenge: Previsão de Locais Altamente Avaliados
+# Challenge: Previsão de Locais Altamente Avaliados
 
 **Competição:** Predict Highly Rated Venues (2024)  
 **Plataforma:** Kaggle-style Competition  
@@ -6,13 +6,13 @@
 
 ---
 
-## 📊 Sobre o Projeto
+## Sobre o Projeto
 
 Previsão de locais altamente avaliados na cidade de Toronto, ON, Canadá, utilizando dados do Yelp.
 
 ---
 
-## 📊 Resultados
+## Resultados
 
 ### Melhor Modelo
 - **Algoritmo:** Random Forest
@@ -27,7 +27,7 @@ Previsão de locais altamente avaliados na cidade de Toronto, ON, Canadá, utili
 
 ---
 
-## 🛠️ Metodologia
+## Metodologia
 
 ### 1. Análise Exploratória de Dados (EDA)
 - Carregamento e mesclagem de datasets
@@ -54,7 +54,7 @@ Previsão de locais altamente avaliados na cidade de Toronto, ON, Canadá, utili
 
 ---
 
-## 📁 Arquivos
+## Arquivos
 
 ### Notebooks
 - `challenge_final.ipynb` - Notebook final com melhor modelo
@@ -76,7 +76,7 @@ Previsão de locais altamente avaliados na cidade de Toronto, ON, Canadá, utili
 
 ---
 
-## 🚀 Como Executar
+## Como Executar
 
 1. **Instale as dependências:**
 ```bash
@@ -96,7 +96,7 @@ jupyter notebook challenge_final.ipynb
 
 ---
 
-## 📈 Métricas Avaliadas
+## Métricas Avaliadas
 
 - **F1-Score** (métrica principal)
 - **Accuracy**
@@ -106,7 +106,7 @@ jupyter notebook challenge_final.ipynb
 
 ---
 
-## 💡 Insights e Decisões
+## Insights e Decisões
 
 ### Feature Engineering
 - Combinação de features de reviews e características dos locais
@@ -125,15 +125,11 @@ jupyter notebook challenge_final.ipynb
 
 ---
 
-## 📝 Notas
+## Notas
 
 - O dataset não está incluído no repositório (tamanho)
 - As submissões foram testadas na plataforma da competição
 - O modelo final foi escolhido baseado em validação cruzada
 
 ---
-
-**Autor:** Vinícius de Souza Cebalhos  
-**Data:** 2024  
-**Competição:** 2024
 

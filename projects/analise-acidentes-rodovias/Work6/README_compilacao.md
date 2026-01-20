@@ -1,26 +1,26 @@
 # 📄 Compilação do Artigo SBC - LaTeX
 
-## 🎯 Arquivos Gerados
+## Arquivos Gerados
 
 Este diretório contém todos os arquivos necessários para gerar o PDF do artigo SBC:
 
-### 📝 Documentos LaTeX
+### Documentos LaTeX
 - **`artigo_sbc.tex`** - Arquivo principal do artigo em LaTeX
 - **`compilar_artigo.sh`** - Script para compilação automática
 
-### 📊 Figuras e Tabelas
+### Figuras e Tabelas
 - **`acidentes_por_mes.png`** - Gráfico de acidentes por mês
 - **`causas_acidentes.png`** - Gráfico de causas de acidentes  
 - **`acidentes_por_hora.png`** - Gráfico de acidentes por hora
 - **`tabela_acidentes_por_mes.csv`** - Dados mensais
 - **`tabela_causas_acidentes.csv`** - Dados de causas
 
-### 📋 Documentos de Apoio
+### Documentos de Apoio
 - **`artigo_sbc_acidentes_rodovias.md`** - Artigo em Markdown
 - **`tabelas_artigo.md`** - Tabelas formatadas
 - **`guia_visualizacao.md`** - Guia do tema visual
 
-## 🚀 Como Compilar
+## Como Compilar
 
 ### Opção 1: Compilação Automática (Recomendada)
 ```bash
@@ -40,7 +40,7 @@ pdflatex artigo_sbc.tex
 pdflatex artigo_sbc.tex
 ```
 
-## 📦 Pré-requisitos
+## Pré-requisitos
 
 ### Instalação do LaTeX (Ubuntu/Debian)
 ```bash
@@ -63,7 +63,7 @@ brew install --cask mactex
 2. Instale o pacote completo
 3. Use o TeXworks ou editor similar
 
-## 📊 Estrutura do Artigo
+## Estrutura do Artigo
 
 O artigo LaTeX inclui:
 
@@ -76,7 +76,7 @@ O artigo LaTeX inclui:
 7. **Conclusão** - Síntese e recomendações
 8. **Referências** - Bibliografia formatada
 
-## 🎨 Características Visuais
+## Características Visuais
 
 - **Formatação SBC** - Padrão acadêmico brasileiro
 - **Figuras Profissionais** - Gráficos com tema unificado
@@ -84,7 +84,7 @@ O artigo LaTeX inclui:
 - **Tipografia** - Fonte adequada para impressão
 - **Cores** - Paleta profissional (azul, rosa, laranja)
 
-## 📈 Dados Incluídos
+## Dados Incluídos
 
 ### Estatísticas Principais
 - **Total de Acidentes**: 67.794
@@ -98,7 +98,7 @@ O artigo LaTeX inclui:
 2. **Gráfico Horizontal** - Principais causas
 3. **Gráfico de Linha** - Distribuição por hora
 
-## 🔧 Solução de Problemas
+## Solução de Problemas
 
 ### Erro: "pdflatex não encontrado"
 ```bash
@@ -119,7 +119,7 @@ sudo apt-get install texlive-lang-portuguese
 sudo apt-get install texlive-fonts-recommended
 ```
 
-## 📄 Resultado Final
+## Resultado Final
 
 Após a compilação bem-sucedida, você terá:
 - **`artigo_sbc.pdf`** - Artigo completo em PDF
@@ -127,25 +127,15 @@ Após a compilação bem-sucedida, você terá:
 - **Alta qualidade** - Pronto para submissão
 - **Formatação profissional** - Padrão acadêmico
 
-## 🎯 Próximos Passos
+## Próximos Passos
 
 1. **Revisar o PDF** - Verificar formatação e conteúdo
 2. **Ajustar se necessário** - Modificar o arquivo .tex
 3. **Recompilar** - Executar novamente o script
 4. **Submeter** - Enviar para conferência/revista
 
-## 📞 Suporte
 
-Para dúvidas ou problemas:
-- Verifique os logs de compilação
-- Consulte a documentação do LaTeX
-- Execute o script de diagnóstico
 
----
-
-**Desenvolvido por**: Vinícius de Souza Cebalhos  
-**Data**: Outubro 2025  
-**Versão**: 1.0
 
 
 

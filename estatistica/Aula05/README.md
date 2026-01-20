@@ -5,13 +5,13 @@
 
 ---
 
-## 📊 Sobre o Projeto
+## Sobre o Projeto
 
 Este projeto demonstra competências em transformações de variáveis para normalização de dados e cálculo de tamanho de amostra para estudos estatísticos. Inclui verificação de normalidade, aplicação de transformações matemáticas e determinação de tamanhos amostrais adequados.
 
 ---
 
-## 🎯 Competências Demonstradas
+## Competências Demonstradas
 
 ### Transformações de Variáveis
 - **Padronização (Z-score):** Normalização para média 0 e desvio padrão 1
@@ -26,7 +26,7 @@ Este projeto demonstra competências em transformações de variáveis para norm
 
 ---
 
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
 ### Scripts Principais
 - **`aula_05.R`** - Script principal com todas as análises
@@ -38,7 +38,7 @@ Este projeto demonstra competências em transformações de variáveis para norm
 
 ---
 
-## 🔍 Análise Implementada
+## Análise Implementada
 
 ### 1. Verificação de Normalidade
 
@@ -84,7 +84,7 @@ n <- (Z^2 * p * (1-p)) / e^2
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 ### Bibliotecas R
 - **MASS** - Dataset birthwt
@@ -94,7 +94,7 @@ n <- (Z^2 * p * (1-p)) / e^2
 
 ---
 
-## 📈 Resultados Principais
+## Resultados Principais
 
 ### Transformações Aplicadas
 - Análise de distribuições antes e depois das transformações
@@ -108,7 +108,7 @@ n <- (Z^2 * p * (1-p)) / e^2
 
 ---
 
-## 🚀 Como Executar
+## Como Executar
 
 ### Pré-requisitos
 ```r
@@ -124,7 +124,7 @@ source("aula_05.R")
 
 ---
 
-## 📊 Métricas e Visualizações
+## Métricas e Visualizações
 
 - Q-Q plots para verificação de normalidade
 - Histogramas antes e depois das transformações

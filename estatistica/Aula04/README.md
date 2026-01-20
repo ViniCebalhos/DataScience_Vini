@@ -5,13 +5,13 @@
 
 ---
 
-## 📊 Sobre o Projeto
+## Sobre o Projeto
 
 Este projeto demonstra competências em criação de relatórios reprodutíveis e profissionais usando R Markdown. Combina análise exploratória de dados, visualizações e documentação técnica em um único documento HTML gerado automaticamente.
 
 ---
 
-## 🎯 Competências Demonstradas
+## Competências Demonstradas
 
 ### R Markdown
 - Criação de documentos reprodutíveis (.Rmd)
@@ -32,7 +32,7 @@ Este projeto demonstra competências em criação de relatórios reprodutíveis 
 
 ---
 
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
 ### Scripts Principais
 - **`Aula04_AED.Rmd`** - R Markdown principal (análise de qualidade de sono e estresse)
@@ -46,7 +46,7 @@ Este projeto demonstra competências em criação de relatórios reprodutíveis 
 
 ---
 
-## 🔍 Análise Implementada
+## Análise Implementada
 
 ### 1. Estrutura do R Markdown
 
@@ -84,7 +84,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 ### Bibliotecas R
 - **rmarkdown** - Criação de documentos
@@ -95,7 +95,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
 
 ---
 
-## 📈 Resultados Principais
+## Resultados Principais
 
 ### Relatórios Gerados
 - Documentos HTML profissionais
@@ -105,7 +105,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
 
 ---
 
-## 🚀 Como Executar
+## Como Executar
 
 ### Pré-requisitos
 ```r
@@ -122,7 +122,7 @@ rmarkdown::render("Aula04_AED.Rmd")
 
 ---
 
-## 📊 Métricas e Visualizações
+## Métricas e Visualizações
 
 - Relatórios HTML completos
 - Tabelas de frequência formatadas

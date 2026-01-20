@@ -1,10 +1,10 @@
-# 📊 Consultas SQL Avançadas
+# Consultas SQL Avançadas
 
 **Descrição:** Aplicação de consultas SQL avançadas em dados de acidentes de trânsito.
 
 ---
 
-## 📊 Dataset
+## Dataset
 
 - **Fonte:** Polícia Rodoviária Federal (PRF)
 - **Arquivo:** `datatran2024.csv`
@@ -12,20 +12,20 @@
 
 ---
 
-## 🛠️ Tecnologias
+## Tecnologias
 
 - PostgreSQL
 - SQL (JOINs, agregações, subconsultas)
 
 ---
 
-## 📁 Arquivos
+## Arquivos
 
 - `datatran2024.csv` - Dados de acidentes (não versionado - arquivo grande)
 
 ---
 
-## 🚀 Como Executar
+## Como Executar
 
 1. Configure o banco PostgreSQL
 2. Carregue os dados no banco
@@ -33,7 +33,7 @@
 
 ---
 
-## 📝 Conteúdo
+## Conteúdo
 
 - Consultas SQL complexas
 - JOINs entre tabelas
@@ -43,7 +43,7 @@
 
 ---
 
-## 💡 Técnicas SQL Utilizadas
+## Técnicas SQL Utilizadas
 
 - **JOINs:** INNER JOIN, LEFT JOIN, RIGHT JOIN
 - **Agregações:** COUNT, SUM, AVG, MAX, MIN

@@ -1,10 +1,10 @@
-# 🌍 Classificação Multiclasse - Indicadores Sociais Globais
+# Classificação Multiclasse - Indicadores Sociais Globais
 
 **Descrição:** Classificação de países em categorias baseadas em indicadores sociais globais.
 
 ---
 
-## 📊 Dataset
+## Dataset
 
 - **Arquivo:** `gdp-and-homicides-vs-happiness-vs-hdi_FabroClassification2025OK_4classes.csv`
 - **Indicadores:**
@@ -16,7 +16,7 @@
 
 ---
 
-## 🛠️ Tecnologias
+## Tecnologias
 
 - Python (scikit-learn, pandas, numpy, matplotlib, seaborn)
 - Logistic Regression
@@ -27,14 +27,14 @@
 
 ---
 
-## 📁 Arquivos
+## Arquivos
 
 - `Vinicius_Cebalhos_classificacao.ipynb` - Notebook completo (47 células)
 - Visualizações: boxplots, histogramas, heatmaps, matrizes de confusão, ROC curves, feature importance
 
 ---
 
-## 🚀 Como Executar
+## Como Executar
 
 1. Instale as dependências:
 ```bash
@@ -48,7 +48,7 @@ jupyter notebook Vinicius_Cebalhos_classificacao.ipynb
 
 ---
 
-## 📝 Metodologia
+## Metodologia
 
 1. **Carregamento e Auditoria:** Verificação de qualidade dos dados
 2. **EDA Completa:** Estatísticas descritivas, distribuições, correlações
@@ -58,7 +58,7 @@ jupyter notebook Vinicius_Cebalhos_classificacao.ipynb
 
 ---
 
-## 📊 Métricas Avaliadas
+## Métricas Avaliadas
 
 - Accuracy
 - Precision
@@ -69,7 +69,7 @@ jupyter notebook Vinicius_Cebalhos_classificacao.ipynb
 
 ---
 
-## 🎯 Destaques
+## Destaques
 
 - **Notebook completo** com 47 células
 - **Checklist de implementação** completo

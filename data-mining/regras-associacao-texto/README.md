@@ -1,17 +1,17 @@
-# 🔗 Regras de Associação e Mineração de Texto
+# Regras de Associação e Mineração de Texto
 
 **Descrição:** Aplicação de técnicas de regras de associação e análise de texto.
 
 ---
 
-## 📊 Datasets Utilizados
+## Datasets Utilizados
 
 - **Supermercado:** `supermercado.csv` - Dados de transações de supermercado
 - **Tweets:** `tweets_trump.csv` - Tweets para análise de sentimento
 
 ---
 
-## 🛠️ Tecnologias
+## Tecnologias
 
 - Python (mlxtend, nltk)
 - Apriori Algorithm
@@ -19,7 +19,7 @@
 
 ---
 
-## 📁 Arquivos
+## Arquivos
 
 - `work4.ipynb` - Notebook principal
 - `work4.html` - Versão HTML exportada
@@ -27,7 +27,7 @@
 
 ---
 
-## 🚀 Como Executar
+## Como Executar
 
 1. Instale as dependências:
 ```bash
@@ -48,7 +48,7 @@ jupyter notebook work4.ipynb
 
 ---
 
-## 📝 Conteúdo
+## Conteúdo
 
 - Regras de associação em dados de supermercado
 - Análise de sentimento em tweets
@@ -57,7 +57,7 @@ jupyter notebook work4.ipynb
 
 ---
 
-## 📊 Técnicas Utilizadas
+## Técnicas Utilizadas
 
 - **Apriori Algorithm:** Descoberta de regras de associação
 - **Análise de Sentimento:** Classificação de sentimentos em texto

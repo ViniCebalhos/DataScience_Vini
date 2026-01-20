@@ -5,13 +5,13 @@
 
 ---
 
-## 📊 Sobre o Projeto
+## Sobre o Projeto
 
 Este projeto demonstra competências em análise estatística aplicada a dados reais de bike sharing, utilizando testes estatísticos paramétricos e não-paramétricos para comparar grupos e testar hipóteses. Inclui análise temporal, comparação de grupos e interpretação de resultados estatísticos.
 
 ---
 
-## 🎯 Competências Demonstradas
+## Competências Demonstradas
 
 ### Testes Estatísticos
 - **Testes de Normalidade:** Shapiro-Wilk, Anderson-Darling
@@ -32,7 +32,7 @@ Este projeto demonstra competências em análise estatística aplicada a dados r
 
 ---
 
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
 ### Scripts Principais
 - **`definitions.R`** - Definições e configurações
@@ -47,7 +47,7 @@ Este projeto demonstra competências em análise estatística aplicada a dados r
 
 ---
 
-## 🔍 Análise Implementada
+## Análise Implementada
 
 ### 1. Testes de Normalidade
 
@@ -93,7 +93,7 @@ dunn.test(dados$variavel, dados$grupo)
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 ### Bibliotecas R
 - **dplyr** - Manipulação de dados
@@ -104,7 +104,7 @@ dunn.test(dados$variavel, dados$grupo)
 
 ---
 
-## 📈 Resultados Principais
+## Resultados Principais
 
 ### Testes Estatísticos Aplicados
 - Verificação de normalidade das distribuições
@@ -120,7 +120,7 @@ dunn.test(dados$variavel, dados$grupo)
 
 ---
 
-## 🚀 Como Executar
+## Como Executar
 
 ### Pré-requisitos
 ```r
@@ -135,7 +135,7 @@ source("install_load_packages.R")
 
 ---
 
-## 📊 Métricas e Visualizações
+## Métricas e Visualizações
 
 - Resultados de testes estatísticos (p-valores, estatísticas)
 - Gráficos de comparação de grupos (boxplots)

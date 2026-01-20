@@ -5,13 +5,13 @@
 
 ---
 
-## 📊 Sobre o Projeto
+## Sobre o Projeto
 
 Este projeto demonstra competências em análise exploratória de dados univariada, focando na descrição e visualização de variáveis individuais. A análise cobre tanto variáveis qualitativas (categóricas) quanto quantitativas (numéricas), utilizando técnicas estatísticas descritivas e visualizações profissionais.
 
 ---
 
-## 🎯 Competências Demonstradas
+## Competências Demonstradas
 
 ### Estatística Descritiva
 - **Medidas de Tendência Central:** Média, mediana, moda, quartis
@@ -30,7 +30,7 @@ Este projeto demonstra competências em análise exploratória de dados univaria
 
 ---
 
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
 ### Scripts Principais
 - **`aed_1var.R`** - Script principal com todas as análises
@@ -42,7 +42,7 @@ Este projeto demonstra competências em análise exploratória de dados univaria
 
 ---
 
-## 🔍 Análise Implementada
+## Análise Implementada
 
 ### 1. Análise de Variáveis Qualitativas
 
@@ -83,7 +83,7 @@ quantile(diamonds$price, probs = c(0.25, 0.5, 0.75))  # Quartis
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 ### Bibliotecas R
 - **dplyr** - Manipulação de dados
@@ -92,7 +92,7 @@ quantile(diamonds$price, probs = c(0.25, 0.5, 0.75))  # Quartis
 
 ---
 
-## 📈 Resultados Principais
+## Resultados Principais
 
 ### Insights Identificados
 - Distribuição de características de diamantes (cut, color, clarity)
@@ -102,7 +102,7 @@ quantile(diamonds$price, probs = c(0.25, 0.5, 0.75))  # Quartis
 
 ---
 
-## 🚀 Como Executar
+## Como Executar
 
 ### Pré-requisitos
 ```r
@@ -118,7 +118,7 @@ source("aed_1var.R")
 
 ---
 
-## 📊 Métricas e Visualizações
+## Métricas e Visualizações
 
 - Tabelas de frequência para variáveis categóricas
 - Estatísticas descritivas completas (média, mediana, desvio padrão, quartis)

@@ -1,17 +1,17 @@
-# 🎯 Classificação e Agrupamento (Clustering)
+# Classificação e Agrupamento (Clustering)
 
 **Descrição:** Aplicação de técnicas de classificação e clustering em dados do Titanic.
 
 ---
 
-## 📊 Dataset
+## Dataset
 
 - **Titanic:** `titanic.csv` - Dados de passageiros do Titanic
 - **Toronto:** `X_trainToronto.csv`, `X_testToronto.csv` - Dados de treino e teste
 
 ---
 
-## 🛠️ Tecnologias
+## Tecnologias
 
 - Python (scikit-learn)
 - K-Means Clustering
@@ -19,14 +19,14 @@
 
 ---
 
-## 📁 Arquivos
+## Arquivos
 
 - `exercicio_titanic_clustering.ipynb` - Notebook principal
 - `ExercicioClassificacao_e_Agrupamento.pdf` - Enunciado do trabalho
 
 ---
 
-## 🚀 Como Executar
+## Como Executar
 
 1. Instale as dependências:
 ```bash
@@ -40,7 +40,7 @@ jupyter notebook exercicio_titanic_clustering.ipynb
 
 ---
 
-## 📝 Conteúdo
+## Conteúdo
 
 - Clustering de passageiros do Titanic
 - Análise de grupos identificados
@@ -49,7 +49,7 @@ jupyter notebook exercicio_titanic_clustering.ipynb
 
 ---
 
-## 📊 Técnicas Utilizadas
+## Técnicas Utilizadas
 
 - **K-Means Clustering:** Agrupamento não supervisionado
 - **Classificação:** Algoritmos de classificação supervisionada

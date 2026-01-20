@@ -1,10 +1,10 @@
-# 📊 Data Mining Projects
+# Data Mining Projects
 
 Projetos de mineração de dados demonstrando competências em web scraping, análise exploratória, regressão, clustering e mineração de texto.
 
 ---
 
-## 📚 Projetos
+## Projetos
 
 ### 🔍 [Web Scraping e Análise de Dados do YouTube](./web-scraping-youtube/)
 **Descrição:** Extração e análise de dados do YouTube usando a API oficial do Google.
@@ -25,7 +25,7 @@ Projetos de mineração de dados demonstrando competências em web scraping, an�
 
 ---
 
-### 📈 [Regressão Linear e Análise de Dados](./regressao-linear/)
+### [Regressão Linear e Análise de Dados](./regressao-linear/)
 **Descrição:** Aplicação de regressão linear e análise exploratória em datasets reais.
 
 **Tecnologias:**
@@ -50,7 +50,7 @@ Projetos de mineração de dados demonstrando competências em web scraping, an�
 
 ---
 
-### 🎯 [Classificação e Agrupamento (Clustering)](./clustering-titanic/)
+### [Classificação e Agrupamento (Clustering)](./clustering-titanic/)
 **Descrição:** Aplicação de técnicas de classificação e clustering em dados do Titanic.
 
 **Tecnologias:**
@@ -69,7 +69,7 @@ Projetos de mineração de dados demonstrando competências em web scraping, an�
 
 ---
 
-### 🔗 [Regras de Associação e Mineração de Texto](./regras-associacao-texto/)
+### [Regras de Associação e Mineração de Texto](./regras-associacao-texto/)
 **Descrição:** Aplicação de técnicas de regras de associação e análise de texto.
 
 **Tecnologias:**
@@ -92,7 +92,7 @@ Projetos de mineração de dados demonstrando competências em web scraping, an�
 
 ---
 
-### 🏆 [Competição Kaggle - Previsão de Locais](../projects/competicao-kaggle-venues/)
+### [Competição Kaggle - Previsão de Locais](../projects/competicao-kaggle-venues/)
 **Descrição:** Previsão de locais altamente avaliados em Toronto usando dados do Yelp.
 
 **Competição:** Predict Highly Rated Venues (2024)
@@ -116,7 +116,7 @@ Projetos de mineração de dados demonstrando competências em web scraping, an�
 4. Otimização de hiperparâmetros
 5. Validação cruzada
 
-**📍 Este projeto está em destaque em [`projects/competicao-kaggle-venues/`](../projects/competicao-kaggle-venues/)**
+**Este projeto está em destaque em [`projects/competicao-kaggle-venues/`](../projects/competicao-kaggle-venues/)**
 
 ---
 
@@ -137,21 +137,21 @@ Projetos de mineração de dados demonstrando competências em web scraping, an�
 
 ---
 
-## 📊 Competências Demonstradas
+## Competências Demonstradas
 
-- ✅ Web Scraping e APIs
-- ✅ Análise Exploratória de Dados (EDA)
-- ✅ Regressão Linear
-- ✅ Classificação e Clustering
-- ✅ Regras de Associação
-- ✅ Mineração de Texto
-- ✅ Feature Engineering
-- ✅ Otimização de Modelos
-- ✅ Validação Cruzada
+- Web Scraping e APIs
+- Análise Exploratória de Dados (EDA)
+- Regressão Linear
+- Classificação e Clustering
+- Regras de Associação
+- Mineração de Texto
+- Feature Engineering
+- Otimização de Modelos
+- Validação Cruzada
 
 ---
 
-## 📁 Estrutura de Pastas
+## Estrutura de Pastas
 
 ```
 data-mining/
@@ -167,7 +167,7 @@ Nota: O projeto challenge foi movido para projects/ como projeto em destaque.
 
 ---
 
-## 🚀 Como Executar
+## Como Executar
 
 Cada projeto possui seus próprios notebooks Jupyter. Para executar:
 
@@ -185,12 +185,10 @@ jupyter notebook [nome-do-projeto]/[nome_do_notebook].ipynb
 
 ---
 
-## 📝 Notas
+## Notas
 
 - Alguns datasets podem precisar ser baixados separadamente
 - APIs podem requerer chaves de acesso (YouTube API)
-- Os notebooks estão documentados em português
-- Resultados e visualizações são gerados automaticamente
 
 ---
 

@@ -1,12 +1,12 @@
-# 🗄️ Database & SQL Projects
+# Database & SQL Projects
 
 Projetos demonstrando competências em PostgreSQL, PostGIS, SQL avançado, análise geoespacial e processamento de dados em larga escala.
 
 ---
 
-## 📚 Projetos
+## Projetos
 
-### 📋 [Análise de Alvarás de Construção](./analise-alvaras/)
+### [Análise de Alvarás de Construção](./analise-alvaras/)
 **Descrição:** Análise exploratória de dados de alvarás de construção usando SQL e Python.
 
 **Tecnologias:**
@@ -26,7 +26,7 @@ Projetos demonstrando competências em PostgreSQL, PostGIS, SQL avançado, anál
 
 ---
 
-### 🚗 [Análise Exploratória de Acidentes de Trânsito](./analise-acidentes-eda/)
+### [Análise Exploratória de Acidentes de Trânsito](./analise-acidentes-eda/)
 **Descrição:** Análise exploratória de dados de acidentes de trânsito da PRF.
 
 **Tecnologias:**
@@ -48,7 +48,7 @@ Projetos demonstrando competências em PostgreSQL, PostGIS, SQL avançado, anál
 
 ---
 
-### 📊 [Consultas SQL Avançadas](./consultas-sql-avancadas/)
+### [Consultas SQL Avançadas](./consultas-sql-avancadas/)
 **Descrição:** Aplicação de consultas SQL avançadas em dados de acidentes.
 
 **Tecnologias:**
@@ -65,7 +65,7 @@ Projetos demonstrando competências em PostgreSQL, PostGIS, SQL avançado, anál
 
 ---
 
-### 📄 [Artigo Científico - Análise de Acidentes em Rodovias Federais](../projects/analise-acidentes-rodovias/)
+### [Artigo Científico - Análise de Acidentes em Rodovias Federais](../projects/analise-acidentes-rodovias/)
 **Descrição:** Artigo científico completo sobre análise de acidentes de trânsito.
 
 **Resultado:** Artigo científico completo publicado em formato SBC.
@@ -88,11 +88,11 @@ Projetos demonstrando competências em PostgreSQL, PostGIS, SQL avançado, anál
 - Horário crítico: 17h-19h
 - Principais causas: Reação tardia (27,3%), Ausência de reação (22,4%), Desatenção (18,9%)
 
-**📍 Este projeto está em destaque em [`projects/analise-acidentes-rodovias/`](../projects/analise-acidentes-rodovias/)**
+** Este projeto está em destaque em [`projects/analise-acidentes-rodovias/`](../projects/analise-acidentes-rodovias/)**
 
 ---
 
-### 🗺️ [Análise Espacial de Acidentes com PostGIS](../projects/analise-espacial-acidentes/)
+### [Análise Espacial de Acidentes com PostGIS](../projects/analise-espacial-acidentes/)
 **Descrição:** Análise geoespacial de acidentes de trânsito usando PostGIS.
 
 **Resultado:** Artigo científico completo com análise espacial.
@@ -115,11 +115,11 @@ Projetos demonstrando competências em PostgreSQL, PostGIS, SQL avançado, anál
 - Identificação de hotspots de acidentes
 - Análise de eficiência da distribuição de postos
 
-**📍 Este projeto está em destaque em [`projects/analise-espacial-acidentes/`](../projects/analise-espacial-acidentes/)**
+** Este projeto está em destaque em [`projects/analise-espacial-acidentes/`](../projects/analise-espacial-acidentes/)**
 
 ---
 
-## 🛠️ Tecnologias e Bibliotecas Utilizadas
+## Tecnologias e Bibliotecas Utilizadas
 
 ### Principais
 - **PostgreSQL** - Banco de dados relacional
@@ -136,20 +136,20 @@ Projetos demonstrando competências em PostgreSQL, PostGIS, SQL avançado, anál
 
 ---
 
-## 📊 Competências Demonstradas
+## Competências Demonstradas
 
-- ✅ Modelagem de Banco de Dados
-- ✅ Consultas SQL (básicas e avançadas)
-- ✅ SQL Espacial (PostGIS)
-- ✅ Análise Exploratória de Dados
-- ✅ Análise Geoespacial
-- ✅ Visualização de Dados
-- ✅ Redação Científica (LaTeX)
-- ✅ Análise Estatística
+- Modelagem de Banco de Dados
+- Consultas SQL (básicas e avançadas)
+- SQL Espacial (PostGIS)
+- Análise Exploratória de Dados
+- Análise Geoespacial
+- Visualização de Dados
+- Redação Científica (LaTeX)
+- Análise Estatística
 
 ---
 
-## 📁 Estrutura de Pastas
+## Estrutura de Pastas
 
 ```
 banco-dados/
@@ -163,7 +163,7 @@ Nota: Os projetos Work6 e Work8 foram movidos para projects/ como projetos em de
 
 ---
 
-## 🚀 Como Executar
+## Como Executar
 
 ### Para projetos com PostgreSQL:
 
@@ -201,7 +201,7 @@ pdflatex artigo_sbc*.tex
 
 ---
 
-## 📝 Notas
+## Notas
 
 - Os datasets podem ser grandes e não estão incluídos no repositório
 - Alguns projetos requerem configuração de banco de dados PostgreSQL
@@ -210,7 +210,7 @@ pdflatex artigo_sbc*.tex
 
 ---
 
-## 📄 Artigos Científicos
+## Artigos Científicos
 
 Este repositório contém dois artigos científicos completos:
 

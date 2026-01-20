@@ -1,10 +1,10 @@
-# 🔍 Web Scraping e Análise de Dados do YouTube
+# Web Scraping e Análise de Dados do YouTube
 
 **Descrição:** Extração e análise de dados do YouTube usando a API oficial do Google.
 
 ---
 
-## 📋 Descrição
+## Descrição
 
 Este projeto demonstra como:
 - Utilizar a YouTube Data API v3
@@ -14,7 +14,7 @@ Este projeto demonstra como:
 
 ---
 
-## 🛠️ Tecnologias
+## Tecnologias
 
 - **Python 3.x**
 - **Google API Client** (`google-api-python-client`)
@@ -23,7 +23,7 @@ Este projeto demonstra como:
 
 ---
 
-## 🔑 Configuração da API
+## Configuração da API
 
 ### 1. Obter Chave de API do YouTube
 
@@ -57,7 +57,7 @@ pip install google-api-python-client pandas python-dotenv
 
 ---
 
-## 📁 Arquivos
+## Arquivos
 
 - `first.ipynb` - Notebook principal de extração de dados
 - `third.ipynb` - Análise dos dados extraídos
@@ -66,7 +66,7 @@ pip install google-api-python-client pandas python-dotenv
 
 ---
 
-## 🚀 Como Executar
+## Como Executar
 
 1. **Configure a chave de API** (veja seção acima)
 
@@ -79,7 +79,7 @@ jupyter notebook first.ipynb
 
 ---
 
-## 📊 Exemplo de Uso
+## Exemplo de Uso
 
 O notebook demonstra como:
 - Buscar vídeos por palavra-chave
@@ -95,7 +95,7 @@ O notebook demonstra como:
 
 ---
 
-## ⚠️ Importante
+## Importante
 
 - **NUNCA** commite sua chave de API no repositório
 - Use variáveis de ambiente ou arquivo `.env`
@@ -104,7 +104,7 @@ O notebook demonstra como:
 
 ---
 
-## 📝 Limites da API
+## Limites da API
 
 A YouTube Data API tem limites de quota:
 - **Quota padrão:** 10.000 unidades por dia
@@ -115,11 +115,9 @@ Para aumentar a quota, solicite no Google Cloud Console.
 
 ---
 
-## 🔒 Segurança
+## Segurança
 
-- ✅ Chave de API removida do código
 - ✅ Uso de variáveis de ambiente
-- ✅ `.env` no `.gitignore`
 - ✅ Instruções claras de configuração
 
 ---

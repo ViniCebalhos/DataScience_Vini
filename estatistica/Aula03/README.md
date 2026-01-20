@@ -5,13 +5,13 @@
 
 ---
 
-## 📊 Sobre o Projeto
+## Sobre o Projeto
 
 Este projeto demonstra competências em análise exploratória de dados bivariada, identificando relações, associações e padrões entre variáveis. A análise cobre diferentes tipos de relações: qualitativa × qualitativa, quantitativa × quantitativa, e qualitativa × quantitativa.
 
 ---
 
-## 🎯 Competências Demonstradas
+## Competências Demonstradas
 
 ### Análise Bivariada
 - **Tabelas de Contingência:** Análise de frequências conjuntas entre variáveis categóricas
@@ -27,7 +27,7 @@ Este projeto demonstra competências em análise exploratória de dados bivariad
 
 ---
 
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
 ### Scripts Principais
 - **`aula_03.R`** - Script principal com todas as análises
@@ -40,7 +40,7 @@ Este projeto demonstra competências em análise exploratória de dados bivariad
 
 ---
 
-## 🔍 Análise Implementada
+## Análise Implementada
 
 ### 1. Análise Qualitativa × Qualitativa
 
@@ -100,7 +100,7 @@ diamonds %>%
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 ### Bibliotecas R
 - **dplyr** - Manipulação de dados
@@ -111,7 +111,7 @@ diamonds %>%
 
 ---
 
-## 📈 Resultados Principais
+## Resultados Principais
 
 ### Insights Identificados
 - Relações entre características de diamantes (cut, clarity, carat, price)
@@ -121,7 +121,7 @@ diamonds %>%
 
 ---
 
-## 🚀 Como Executar
+## Como Executar
 
 ### Pré-requisitos
 ```r
@@ -137,7 +137,7 @@ source("aula_03.R")
 
 ---
 
-## 📊 Métricas e Visualizações
+## Métricas e Visualizações
 
 - Tabelas de contingência para variáveis categóricas
 - Matriz de correlação para variáveis numéricas

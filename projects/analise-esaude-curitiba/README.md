@@ -124,28 +124,28 @@ Trabalho/
 
 ## Funcionalidades Principais
 
-### 🔧 Script de Carregamento (`carregar_dados_completos.py`)
+### Script de Carregamento (`carregar_dados_completos.py`)
 - **Carregamento automático** de todos os datasets mensais
 - **Consolidação inteligente** com identificação de períodos
 - **Preparação de dados temporais** (datas, idades, períodos)
 - **Geração de estatísticas** automáticas
 - **Salvamento em múltiplos formatos** (CSV e Parquet)
 
-### 🧹 Script de Limpeza (`limpar_dados.py`)
+### Script de Limpeza (`limpar_dados.py`)
 - **Limpeza automatizada** de dados inconsistentes
 - **Remoção de valores absurdos** (datas futuras, idades negativas, etc.)
 - **Eliminação de duplicatas** baseada em múltiplas colunas
 - **Validação de integridade** dos dados críticos
 - **Geração de relatórios** detalhados da limpeza
 
-### 📊 Notebooks de Análise
+### Notebooks de Análise
 - **`exemplo_uso_completo.ipynb`**: Tutorial completo de uso
 - **`limpeza_dados.ipynb`**: Limpeza detalhada com visualizações
 - **`analise_completa_temporal.ipynb`**: Análise temporal detalhada
 - **Visualizações interativas** e gráficos informativos
 - **Análises estatísticas** avançadas
 
-### 📈 Análises Disponíveis
+### Análises Disponíveis
 - **Evolução temporal** de atendimentos
 - **Distribuição geográfica** por bairros
 - **Perfil dos profissionais** mais ativos

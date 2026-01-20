@@ -1,4 +1,4 @@
-# 📊 Portfólio de Ciência de Dados
+# Portfólio de Ciência de Dados
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
 ![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange.svg)
@@ -12,15 +12,15 @@
 
 ---
 
-## 👨‍💼 Sobre
+## Sobre
 
 Portfólio profissional demonstrando competências técnicas em análise de dados, modelagem preditiva, análise geoespacial e visualização de dados. Projetos aplicados a problemas reais utilizando Python, SQL, Machine Learning e análise estatística.
 
 ---
 
-## 🏆 Projetos em Destaque
+## Projetos em Destaque
 
-### 1. 🗺️ [Análise Espacial de Acidentes com PostGIS](./projects/analise-espacial-acidentes/)
+### 1. [Análise Espacial de Acidentes com PostGIS](./projects/analise-espacial-acidentes/)
 **Tecnologias:** PostgreSQL, PostGIS, Python, GeoPandas, Folium  
 **Resultado:** Artigo científico completo publicado  
 **Destaque:** 
@@ -31,11 +31,11 @@ Portfólio profissional demonstrando competências técnicas em análise de dado
 
 **Impacto:** Metodologia replicável para análise geoespacial de segurança viária com aplicação em políticas públicas.
 
-[📖 Ver Projeto](./projects/analise-espacial-acidentes/)
+[Ver Projeto](./projects/analise-espacial-acidentes/)
 
 ---
 
-### 2. 🏅 [Competição Kaggle - Previsão de Locais Altamente Avaliados](./projects/competicao-kaggle-venues/)
+### 2. [Competição Kaggle - Previsão de Locais Altamente Avaliados](./projects/competicao-kaggle-venues/)
 **Tecnologias:** Python, scikit-learn, Random Forest, XGBoost, Grid Search  
 **Resultado:** **F1-Score de 0.9991** (Top performance)  
 **Destaque:**
@@ -45,11 +45,11 @@ Portfólio profissional demonstrando competências técnicas em análise de dado
 
 **Impacto:** Demonstração de capacidade de modelagem preditiva avançada em competições de machine learning.
 
-[📖 Ver Projeto](./projects/competicao-kaggle-venues/)
+[Ver Projeto](./projects/competicao-kaggle-venues/)
 
 ---
 
-### 3. 📄 [Análise de Acidentes em Rodovias Federais](./projects/analise-acidentes-rodovias/)
+### 3. [Análise de Acidentes em Rodovias Federais](./projects/analise-acidentes-rodovias/)
 **Tecnologias:** PostgreSQL, Python, SQL, LaTeX, Pandas, Matplotlib  
 **Resultado:** Artigo científico completo (padrão SBC)  
 **Destaque:**
@@ -60,11 +60,11 @@ Portfólio profissional demonstrando competências técnicas em análise de dado
 
 **Impacto:** Insights valiosos para políticas públicas de segurança viária com metodologia científica rigorosa.
 
-[📖 Ver Projeto](./projects/analise-acidentes-rodovias/)
+[Ver Projeto](./projects/analise-acidentes-rodovias/)
 
 ---
 
-### 4. 🏥 [Análise do Sistema E-Saúde de Curitiba](./projects/analise-esaude-curitiba/)
+### 4. [Análise do Sistema E-Saúde de Curitiba](./projects/analise-esaude-curitiba/)
 **Tecnologias:** Python, Pandas, Análise Temporal, Visualização, Limpeza de Dados  
 **Resultado:** Projeto completo de análise em saúde pública  
 **Destaque:**
@@ -75,11 +75,11 @@ Portfólio profissional demonstrando competências técnicas em análise de dado
 
 **Impacto:** Análise completa demonstrando capacidade de trabalhar com dados reais de saúde pública em larga escala.
 
-[📖 Ver Projeto](./projects/analise-esaude-curitiba/)
+[Ver Projeto](./projects/analise-esaude-curitiba/)
 
 ---
 
-### 5. 💓 [Classificação de Sinais Vitais](./projects/classificacao-sinais-vitais/)
+### 5. [Classificação de Sinais Vitais](./projects/classificacao-sinais-vitais/)
 **Tecnologias:** Python, scikit-learn, Classificação Multiclasse, Análise Comparativa  
 **Resultado:** Análise comparativa de múltiplos modelos de classificação  
 **Destaque:**
@@ -90,13 +90,13 @@ Portfólio profissional demonstrando competências técnicas em análise de dado
 
 **Impacto:** Demonstração de capacidade de análise de dados médicos e classificação multiclasse.
 
-[📖 Ver Projeto](./projects/classificacao-sinais-vitais/)
+[Ver Projeto](./projects/classificacao-sinais-vitais/)
 
 ---
 
-## 📚 Estrutura do Portfólio
+## Estrutura do Portfólio
 
-### 🗂️ [Data Mining](./data-mining/)
+### [Data Mining](./data-mining/)
 Trabalhos de mineração de dados, incluindo web scraping, regressão linear, clustering e regras de associação.
 
 **Projetos:**
@@ -105,11 +105,11 @@ Trabalhos de mineração de dados, incluindo web scraping, regressão linear, cl
 - Classificação e Agrupamento (Clustering)
 - Regras de Associação e Mineração de Texto
 
-[📖 Ver Projetos](./data-mining/)
+[Ver Projetos](./data-mining/)
 
 ---
 
-### 🗄️ [Banco de Dados](./banco-dados/)
+### [Banco de Dados](./banco-dados/)
 Projetos envolvendo SQL, PostgreSQL, PostGIS e análise de dados.
 
 **Projetos:**
@@ -117,25 +117,25 @@ Projetos envolvendo SQL, PostgreSQL, PostGIS e análise de dados.
 - Análise Exploratória de Acidentes de Trânsito
 - Consultas SQL Avançadas
 
-[📖 Ver Projetos](./banco-dados/)
+[Ver Projetos](./banco-dados/)
 
 ---
 
-### 🤖 [Machine Learning](./machine-learning/)
+### [Machine Learning](./machine-learning/)
 Projetos de aprendizado de máquina, incluindo regressão, classificação e otimização de modelos.
 
 **Projetos:**
 - Regressão Linear - Previsão de Preços de Imóveis
 - Classificação Multiclasse - Indicadores Sociais Globais
 
-[📖 Ver Projetos](./machine-learning/)
+[Ver Projetos](./machine-learning/)
 
 ---
 
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 ### Linguagens e Frameworks
 - **Python** (pandas, numpy, scikit-learn, matplotlib, seaborn, plotly)
@@ -154,7 +154,7 @@ Projetos de aprendizado de máquina, incluindo regressão, classificação e oti
 
 ---
 
-## 📈 Métricas e Resultados
+## Métricas e Resultados
 
 ### Modelos de Machine Learning
 - **Classificação:** F1-Score de até **0.9991** em competições
@@ -170,32 +170,30 @@ Projetos de aprendizado de máquina, incluindo regressão, classificação e oti
 
 ---
 
-## 🎓 Competências Demonstradas
+## Competências Demonstradas
 
 ### Técnicas
-- ✅ Pré-processamento e limpeza de dados em larga escala
-- ✅ Feature Engineering e seleção de variáveis
-- ✅ Modelagem preditiva (regressão, classificação, clustering)
-- ✅ Validação cruzada e otimização de hiperparâmetros
-- ✅ Análise exploratória de dados (EDA) completa
-- ✅ Visualização de dados profissional
-- ✅ Análise estatística descritiva e inferencial
-- ✅ Análise geoespacial com PostGIS e GeoPandas
-- ✅ Web Scraping e integração com APIs
-- ✅ Redação científica (LaTeX, padrão SBC)
-- ✅ SQL avançado e consultas complexas
+- Pré-processamento e limpeza de dados em larga escala
+- Feature Engineering e seleção de variáveis
+- Modelagem preditiva (regressão, classificação, clustering)
+- Validação cruzada e otimização de hiperparâmetros
+- Análise exploratória de dados (EDA) completa
+- Visualização de dados profissional
+- Análise estatística descritiva e inferencial
+- Análise geoespacial com PostGIS e GeoPandas
+- Web Scraping e integração com APIs
+- Redação científica
+- SQL avançado e consultas complexas
 
 ### Domínios
 - ✅ Análise Geoespacial
 - ✅ Análise Temporal
 - ✅ Dados Governamentais
 - ✅ Indicadores Sociais
-- ✅ Saúde Pública
-- ✅ Segurança Viária
 
 ---
 
-## 🚀 Como Navegar
+## Como Navegar
 
 Cada projeto contém:
 - **README.md** com descrição detalhada do projeto
@@ -207,7 +205,7 @@ Cada projeto contém:
 
 ---
 
-## 📦 Instalação e Uso
+## Instalação e Uso
 
 ### Requisitos Gerais
 
@@ -245,7 +243,7 @@ python src/main.py
 
 ---
 
-## 📝 Estrutura de Pastas
+## Estrutura de Pastas
 
 ```
 datascience/
@@ -272,7 +270,7 @@ datascience/
 
 ---
 
-## 📧 Contato
+## Contato
 
 Para dúvidas, sugestões ou oportunidades de trabalho:
 
@@ -282,5 +280,5 @@ Para dúvidas, sugestões ou oportunidades de trabalho:
 ---
 
 
-**Última atualização:** Dezembro 2025
+**Última atualização:** Janeiro 2026
 

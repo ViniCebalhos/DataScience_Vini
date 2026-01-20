@@ -1,17 +1,17 @@
-# 🏠 Regressão Linear - Previsão de Preços de Imóveis
+# Regressão Linear - Previsão de Preços de Imóveis
 
 **Descrição:** Modelo de regressão linear para previsão de preços de imóveis.
 
 ---
 
-## 📊 Datasets
+## Datasets
 
 - `Imoveis_Fabro_treino.csv` - Dataset de treino
 - `Imoveis_Fabro_teste.csv` - Dataset de teste
 
 ---
 
-## 🛠️ Tecnologias
+## Tecnologias
 
 - Python (scikit-learn, pandas, numpy)
 - Regressão Linear
@@ -19,14 +19,14 @@
 
 ---
 
-## 📁 Arquivos
+## Arquivos
 
 - `regressao_linear_imoveis.py` - Script Python completo
 - `tarefa1.txt` - Enunciado do trabalho
 
 ---
 
-## 🚀 Como Executar
+## Como Executar
 
 1. Instale as dependências:
 ```bash
@@ -40,7 +40,7 @@ python regressao_linear_imoveis.py
 
 ---
 
-## 📝 Conteúdo
+## Conteúdo
 
 - Análise exploratória de dados de imóveis
 - Treinamento de modelo de regressão linear
@@ -49,7 +49,7 @@ python regressao_linear_imoveis.py
 
 ---
 
-## 📊 Métricas
+## Métricas
 
 - **RMSE:** Erro Quadrático Médio Raiz
 - Análise de performance do modelo

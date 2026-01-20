@@ -1,10 +1,10 @@
-# 🚗 Análise Exploratória de Acidentes de Trânsito
+# Análise Exploratória de Acidentes de Trânsito
 
 **Descrição:** Análise exploratória de dados de acidentes de trânsito da Polícia Rodoviária Federal (PRF).
 
 ---
 
-## 📊 Dataset
+## Dataset
 
 - **Fonte:** Polícia Rodoviária Federal (PRF)
 - **Arquivo:** `datatran2025.csv`
@@ -12,7 +12,7 @@
 
 ---
 
-## 🛠️ Tecnologias
+## Tecnologias
 
 - PostgreSQL
 - Python (pandas, matplotlib, seaborn)
@@ -20,14 +20,14 @@
 
 ---
 
-## 📁 Arquivos
+## Arquivos
 
 - `Work2.ipynb` - Notebook com análises completas
 - `datatran2025.csv` - Dados de acidentes (não versionado - arquivo grande)
 
 ---
 
-## 🚀 Como Executar
+## Como Executar
 
 1. Configure o banco PostgreSQL
 2. Carregue os dados no banco
@@ -38,7 +38,7 @@ jupyter notebook Work2.ipynb
 
 ---
 
-## 📝 Conteúdo
+## Conteúdo
 
 - Análise de acidentes em rodovias federais
 - Estatísticas descritivas
@@ -47,7 +47,7 @@ jupyter notebook Work2.ipynb
 
 ---
 
-## 📊 Principais Análises
+## Principais Análises
 
 - Distribuição temporal de acidentes
 - Principais causas de acidentes
