@@ -8,6 +8,7 @@
 ![Status](https://img.shields.io/badge/status-active-success.svg)
 
 **Autor:** Vinícius de Souza Cebalhos
+
 **Formação:** Meteorologista e Cientista de Dados
 
 ---
