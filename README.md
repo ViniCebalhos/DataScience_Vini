@@ -95,6 +95,23 @@ Portfólio profissional demonstrando competências técnicas em análise de dado
 
 ---
 
+## Meteorologia & Dados Ambientais
+
+### 6. [Nowcasting de Precipitação com Satélite GOES](https://github.com/ViniCebalhos/atmosferic-datascience)
+**Tecnologias:** Python, GOES-16/19, pysteps, S3 (NOAA), NetCDF, Cartopy, GeoPandas
+**Resultado:** Pipeline completo de previsão de curtíssimo prazo (nowcasting) de precipitação
+**Destaque:**
+- Download automatizado de dados de satélite GOES direto do bucket público NOAA (S3)
+- Leitura e regrid para domínio geográfico configurável (grade regular ~3,3 km)
+- Motion field por Lucas-Kanade e extrapolação por SPROG para previsão de até 3 horas
+- Saída em NetCDF (CF-1.6) com metadados e geração de mapas por lead time
+
+**Impacto:** Aplicação prática de meteorologia e ciência de dados geoespacial para previsão imediata de chuva, com pipeline testável e integrado a CI.
+
+[Ver Projeto](https://github.com/ViniCebalhos/atmosferic-datascience)
+
+---
+
 ## Estrutura do Portfólio
 
 ### [Data Mining](./data-mining/)
@@ -281,5 +298,5 @@ Para dúvidas, sugestões ou oportunidades de trabalho:
 ---
 
 
-**Última atualização:** Janeiro 2026
+**Última atualização:** Setembro 2026
 
